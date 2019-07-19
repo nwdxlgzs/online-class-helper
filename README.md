@@ -10,9 +10,9 @@
 
 # 软件开发
 <hr/>
-## windows(7+)采用electron，不过目前为了省事，给min浏览器加了个pepperflash和修正的汉化，就弄了一个测试平台。主要用webview嵌入js实现js嵌入测试。
+ windows(7+)   采用electron，不过目前为了省事，给min浏览器加了个pepperflash和修正的汉化，就弄了一个测试平台。主要用webview嵌入js实现js嵌入测试。
 <hr/>
-## Android(4+)采用Fusion App，不过据说马上要出2.0，语言从lua换js，这个更新是问题。而且要考虑换X5内核减少放视频时有错误，这个研发比较恶心。FA提供了js嵌入。不过手机端直播课堂元素获取和debug过于复杂，研发成本太高。
+ Android(4+)   采用Fusion App，不过据说马上要出2.0，语言从lua换js，这个更新是问题。而且要考虑换X5内核减少放视频时有错误，这个研发比较恶心。FA提供了js嵌入。不过手机端直播课堂元素获取和debug过于复杂，研发成本太高。
 <hr/>
 
 # 软件更新
