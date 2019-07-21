@@ -8,7 +8,7 @@
     if (aEle != null || aEle != undefined) {
         var spanbtn = getFirstChildNode(aEle);
         debug.log("程序发现<" + spanbtn.innerHTML + ">按钮。  时间戳：" + h + "点" + m + "分" + s + "秒");
-        if (spanbtn.innerHTML == "请完成签到") {
+        if (spanbtn.innerHTML == "签到") {
             spanbtn.click();
             debug.log("程序进行自动点击签到。  时间戳：" + h + "点" + m + "分" + s + "秒");
         };
