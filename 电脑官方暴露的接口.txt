@@ -1,0 +1,2523 @@
+﻿
+        //获取当前用户信息
+        var userData = userInfo[0],
+        UserType = userData.UserType,
+        CurrentSchoolID = userData.SchoolID,
+        ID = userData.ID;
+        var LiveID, ipUrl, ScheduleID, flshHtml, reallyVideoHtml;//LiveID:直播ID  ipUrl:客户端访问d的ip和port  ScheduleID:课表id
+
+        //加载flash
+        flshHtml = $("#flash_contents").html();
+        $("#flash_contents").remove();
+        flashLoad(flshHtml);//重新渲染新的flash 的html
+        //flash的html
+        function flashLoad(html) {
+            $("#div2").empty();
+            $("#div2").append(html);
+        }
+
+        LiveID = GetQueryString("LiveID");//获取地址栏参数
+        var submitForm = null, DocumentAddForm = null;
+        //获取页面直播信息-同步处理-必须放在最上面
+        var TeacherLists = [], teaList = [], arrStreams = [], arrStreams0 = [], arrStreams1 = [], MaxCommentsID, MaxAsksID, MaxAskTime, MaxCommentsTime;//存放老师列表   arrStreams:存放大、小视频源  MaxCommentsID:评论最大ID  MaxAsksID:问答最大ID,MaxAskTime:问答最大时间，MaxCommentsTime：评论最大时间
+        
+        //判断当前用户是老师还是学生,主讲和助教返回true，学生返回false
+        function isTeacherOrStudents() {
+            var isTeacher = false;
+            for (var i = 0; i < TeacherLists.length; i++) {
+                if (userData.ID == TeacherLists[i].TeacherID && UserType == 1) {
+                    isTeacher = true;
+                    break;
+                };
+            };
+            return isTeacher;
+        }
+
+        function GetLiveInfo() {
+            Ajax.ajax({
+                url: AjaxUrls.MiYun.LiveInfo,
+                data: { LiveID: LiveID },
+                async: false
+            }).done(function (data) {
+                ScheduleID = data.ScheduleID;
+                ipUrl = data.VideoClientInfo;
+                data.MaxCommentsID ? (MaxCommentsID = data.MaxCommentsID) : (MaxCommentsID = 0);
+                data.MaxAsksID ? (MaxAsksID = data.MaxAsksID) : (MaxAsksID = 0);//-1
+                MaxAskTime = data.MaxTimeSpan;
+                MaxCommentsTime = data.MaxTimeSpan;
+                if (data.MainStreams) {
+                    arrStreams0 = [data.MainStreams[0], data.MainStreams[1]];
+                };
+                if (data.SubStreams) {
+                    arrStreams1 = [data.SubStreams[0], data.SubStreams[1]];
+                    //arrStreams1 = ["rtmp://192.168.1.104:1935/live/795_Video1", "rtmp://192.168.1.104:1935/live/795_Video2"];
+                }
+                TeacherLists = data.TeacherList;//存放教师列表
+                if (data.TeacherList.length > 0) {
+                    for (var i = 0; i < data.TeacherList.length; i++) {
+                        if (data.TeacherList[i].IsMajor == true) {
+                            teaList += data.TeacherList[i].TeacherName + "，";
+                        } else {
+                            teaList += "";
+                        }
+                    }
+                    teaList = teaList.slice(0, -1);
+                } else {
+                    teaList = "";
+                }
+                $("#LiveTitle").html("&nbsp;&nbsp;【标题】 " + data.Title + "&nbsp;&nbsp;&nbsp;&nbsp;【主讲】 " + teaList + "");
+                data.Summary != null ? $(".courseIntroduce").html(data.Summary) : $(".courseIntroduce").html("暂无简介");//课程简介
+            })
+        }
+        GetLiveInfo();//调用-获取直播信息
+
+        AddViewRecord();//增加观看记录
+
+        //整合页面定时器
+        var TimerResultTimer, IsEnableComment, IsEnableAsk, IsAutoPublicAsk, IsAutoPublicComment;//IsEnableComment:是否允许评论，IsEnableAsk：是否允许问答，IsAutoPublicAsk：问答是否人工审核，IsAutoPublicComment：评论是否人工审核
+        function TimerResult(ViewRecordID, AskLastID, CommentLastID, TeaTestLastID, start, haveSignIndex) {//ViewRecordID 观看记录ID
+            var AskQueryCondition = { "MinTimeSpan": AskLastID, "Count": 10 };
+            var CommentQueryCondition = { "MinTimeSpan": CommentLastID, "Count": 10 };
+            var IsGetTeacherTestListFlag, IsGetRunningTestFlag;//IsGetTeacherTestListFlag:教师端测验列表 false不获取  true获取 IsGetRunningTestFlag：学生端测验
+            if (isTeacherOrStudents()) {//老师
+                IsGetTeacherTestListFlag = true;
+                IsGetRunningTestFlag = false;
+                ID = null;
+            } else {//学生
+                if (UserType == 2) {
+                    IsGetTeacherTestListFlag = false;
+                    IsGetRunningTestFlag = true;
+                    ID = ID;
+                } else {
+                    IsGetTeacherTestListFlag = true;
+                    IsGetRunningTestFlag = false;
+                    ID = null;
+                }
+            }
+            Ajax.ajax({
+                url: AjaxUrls.LiveInfo.TimerResult,
+                data: { LiveID: LiveID, ViewRecordID: ViewRecordID, ScheduleID: ScheduleID, StudentID: ID, IsGetDisabledTextCommentUser: true, IsGetDisabledAskUser: true, IsGetOnlineUser: false, IsGetAsk: true, AskQueryCondition: JSON.stringify(AskQueryCondition), IsGetBullet: false, BulletQueryCondition: [{}], IsGetComment: true, CommentQueryCondition: JSON.stringify(CommentQueryCondition), IsGetTeacherTestList: IsGetTeacherTestListFlag, IsGetRunningTest: IsGetRunningTestFlag, IsGetStudentTestList: IsGetRunningTestFlag, IsGetTeacherHistorySign: IsGetTeacherTestListFlag, IsGetStudentRunningSign: IsGetRunningTestFlag, IsGetStudentSignInfo: IsGetRunningTestFlag, IsGetDocument: true },
+                notloadingImg: true
+            }).done(function (data) {
+                try {
+                    GetDisabledTextCommentUsers(data.DisabledTextCommentUsers);//禁言评论的列表
+                    GetDisabledAskOrReplyUsers(data.DisabledAskOrReplyUsers);//禁言问答的列表
+                    GetAskAndReplies(data.AskReplies, AskLastID, 0);//问答列表
+                    getVideoComments(data.Comments.Data, CommentLastID, 0);//评论列表
+                    TeacherTestList(data.TeacherTestList, TeaTestLastID);//教师端-测验列表
+                    studentsGetRunningTestAndTestHistory(data.RunningTest, data.StudentTestList);//学生端-正在测验、历史测验
+                    TeacherHistoricalSign(data.TeacherSignList, start);//教师端-历史签到
+                    studentsIsSigningAndStudentsSignedHistory(data.StudentRunningSign, data.StudentSignInfo, haveSignIndex);//学生端-正在签到、历史签到
+                    DocumentList(data.DocumentList);//资料列表
+                    GetLiveState(data.LiveState);//直播状态变化时向flash发命令
+                    IsEnableComment = data.IsEnableComment;//评论开关
+                    IsEnableAsk = data.IsEnableAsk;//问答开关
+                    IsAutoPublicComment = data.IsAutoPublicComment;
+                    IsAutoPublicAsk = data.IsAutoPublicAsk;
+                    if (data.IsEnableComment) {
+                        $("#SetIsEnableComment").prop("checked", true);
+                        $("#SetIsNotEnableComment").prop("checked", false);
+                    } else {
+                        $("#SetIsEnableComment").prop("checked", false);
+                        $("#SetIsNotEnableComment").prop("checked", true);
+                    }
+                    if (data.IsEnableAsk) {
+                        $("#SetIsEnableAsk").prop("checked", true);
+                        $("#SetIsNotEnableAsk").prop("checked", false);
+                    } else {
+                        $("#SetIsEnableAsk").prop("checked", false);
+                        $("#SetIsNotEnableAsk").prop("checked", true);
+                    }
+                    if (IsAutoPublicComment) {//全部公开
+                        $("#SetNotManualCheckComment").prop("checked", true);
+                        $("#SetManualCheckComment").prop("checked", false);
+                    } else {
+                        $("#SetNotManualCheckComment").prop("checked", false);
+                        $("#SetManualCheckComment").prop("checked", true);
+                    }
+                    if (IsAutoPublicAsk) {
+                        $("#SetNotManualCheck").prop("checked", true);
+                        $("#SetManualCheck").prop("checked", false);
+                    } else {
+                        $("#SetNotManualCheck").prop("checked", false);
+                        $("#SetManualCheck").prop("checked", true);
+                    }
+
+                    clearTimeout(TimerResultTimer);
+                    TimerResultTimer = setTimeout(function () {
+                        if (data.AskReplies) {
+                            data.AskReplies.length > 0 ? (AskLastID = data.AskReplies[data.AskReplies.length - 1].TimeSpan) : (AskLastID = AskLastID);//data.AskReplies.length-1
+                        }
+                        if (data.Comments) {
+                            data.Comments.Data.length > 0 ? (CommentLastID = data.Comments.Data[data.Comments.Data.length - 1].TimeSpan) : (CommentLastID = CommentLastID);//data.Comments.Data.length - 1
+                        }
+                        if (data.TeacherTestList) {
+                            TeaTestLastID = data.TeacherTestList.QuestionList.length - 1;
+                        }
+                        if (data.TeacherSignList) {
+                            start = data.TeacherSignList.SignList.length - 1;
+                        }
+                        if (data.StudentTestList) {
+                            haveSignIndex = data.StudentSignInfo.HistoricalSignInfo.length - 1;
+                        }
+                        TimerResult(ViewRecordID, AskLastID, CommentLastID, TeaTestLastID, start, haveSignIndex);
+                    }, 5000);
+                } catch (e) {
+                    clearTimeout(TimerResultTimer);
+                    TimerResultTimer = setTimeout(function () {
+                        TimerResult(ViewRecordID, AskLastID, CommentLastID, TeaTestLastID, start, haveSignIndex);
+                    }, 5000);
+                }
+                if (!(UserType == "1" || UserType=="2")) {
+                    $(".aa p").eq(0).hide();
+                }
+            }).fail(function () {
+                clearTimeout(TimerResultTimer);
+                TimerResultTimer = setTimeout(function () {
+                    TimerResult(ViewRecordID, AskLastID, CommentLastID, TeaTestLastID, start, haveSignIndex);
+                }, 5000);
+            });
+        }
+
+        //获取问答禁言列表
+        function GetDisabledAskOrReplyUsers(data) {
+            var GetDisableAskUsersArr = new Array();//get到的问答禁言id
+            var webAskUsersArr = new Array();//网页上获取到的id
+            if (data.length > 0) {
+                var DisableAskUsersHtml = '';
+                for (var ii = 0; ii < data.length; ii++) {
+                    GetDisableAskUsersArr.push(data[ii].ID);
+                };
+                for (var webAskUsers = 0; webAskUsers < $(".lists").length; webAskUsers++) {
+                    webAskUsersArr.push(parseInt($(".lists").eq(webAskUsers).attr("id").split("_")[1]));
+                }
+                if (webAskUsersArr.length > 0) {
+                    //求get到的id-网页上的id的差集
+                    var web_get = GetDisableAskUsersArr.filter(function (v) {
+                        return webAskUsersArr.indexOf(v) == -1
+                    })
+                    //加进去
+                    for (var m = 0; m < web_get.length; m++) {
+                        DisableAskUsersHtml += ' <li class="lists" id="DisableAsk_' + web_get[m] + '"><label><input class="checkbox" type="checkbox" attr="' + web_get[m] + '" /><span class="name">' + data[GetDisableAskUsersArr.lastIndexOf(web_get[m])].Name + '</span></label></li>'
+                    }
+                    $(".recover_ask_question_wrap").append(DisableAskUsersHtml);
+                    $(".no_banned_list").remove();
+                } else {
+                    for (var ii = 0; ii < data.length; ii++) {
+                        DisableAskUsersHtml += ' <li class="lists" id="DisableAsk_' + data[ii].ID + '"><label><input class="checkbox" type="checkbox" attr="' + data[ii].ID + '" /><span class="name">' + data[ii].Name + '</span></label></li>'
+                    };
+                    $(".recover_ask_question_wrap").append(DisableAskUsersHtml);
+                }
+
+            } else {
+                $(".recover_ask_question_wrap").empty().append("<li class='no_banned_list'>没有被禁止提问的学生</li>");
+            }
+        }
+
+        //获取评论禁言列表
+        function GetDisabledTextCommentUsers(data) {
+            var GetDisableTextCommentUsersArr = new Array();//get到的评论禁言id
+            var webCommentUsersArr = new Array();//网页上获取到的id
+            if (data.length > 0) {
+                var DisableTextCommentUsers = '';
+                for (var ii = 0; ii < data.length; ii++) {
+                    GetDisableTextCommentUsersArr.push(data[ii].ID);
+                };
+                for (var webCommentUsers = 0; webCommentUsers < $(".lists1").length; webCommentUsers++) {
+                    webCommentUsersArr.push(parseInt($(".lists1").eq(webCommentUsers).attr("id").split("_")[1]));
+                }
+                if (webCommentUsersArr.length > 0) {
+                    //求get到的id-网页上的id的差集
+                    var web_get = GetDisableTextCommentUsersArr.filter(function (v) {
+                        return webCommentUsersArr.indexOf(v) == -1
+                    })
+                    //加进去
+                    for (var m = 0; m < web_get.length; m++) {
+                        DisableTextCommentUsers += ' <li class="lists1" id="DisableComment_' + web_get[m] + '"><label><input class="checkbox" type="checkbox" attr="' + web_get[m] + '" /><span class="name">' + data[GetDisableTextCommentUsersArr.lastIndexOf(web_get[m])].Name + '</span></label></li>'
+                    }
+                    $(".recover_comments_wrap").append(DisableTextCommentUsers);
+                    $(".no_banned_list").remove();
+                } else {
+                    for (var ii = 0; ii < data.length; ii++) {
+                        DisableTextCommentUsers += ' <li class="lists1" id="DisableComment_' + data[ii].ID + '"><label><input class="checkbox" type="checkbox" attr="' + data[ii].ID + '" /><span class="name">' + data[ii].Name + '</span></label></li>'
+                    };
+                    $(".recover_comments_wrap").append(DisableTextCommentUsers);
+                }
+
+            } else {
+                $(".recover_comments_wrap").empty().append("<li class='no_banned_list'>没有被禁止提问的学生</li>");
+            }
+
+
+
+            //if (data.length > 0) {
+            //    var DisableTextCommentUsers = '';
+            //    for (var ii = 0; ii < data.length; ii++) {
+            //        DisableTextCommentUsers += ' <li  class="lists1" id="DisableComment_'+data[ii].ID+'"><label><input class="checkbox" type="checkbox" attr="' + data[ii].ID + '" /><span class="name">' + data[ii].Name + '</span></label></li>'
+            //    };
+            //    $(".recover_comments_wrap").empty().append(DisableTextCommentUsers);
+            //} else {
+            //    $(".recover_comments_wrap").empty().append("<li class='no_banned_list'>没有被禁止评论的学生</li>");
+            //};
+        }
+        
+        //获取问答列表
+        var popTeaRep = {
+            "open": function () {
+                Dialogue.Layer({
+                    title: '注意',
+                    btn: ['我知道了'],
+                    btnAlign: 'c',
+                    offset: 'auto',
+                    content: '您有提问需要回复!!!',
+                    yes: function (index) {
+                        layer.close(index);
+                    }
+                })
+
+            }
+        }
+        function GetAskAndReplies(data, AskLastID, webMaxAskTime) {
+            if (data) {
+                //data = data.reverse();
+                for (var i = 0; i < data.length; i++) {
+                    var item = data[i];
+                    var ChildHtml = "";
+                    var html = '';
+                    if (item.IsPublic && $(".ID_" + item.ID)) {
+                        $(".ID_" + item.ID).remove();
+                    }
+                    if (item.RelatedDataID != null) {
+                        var parentName = $(".ID_" + item.RelatedDataID).find(".pic").find("span").html();
+                        if (isTeacherOrStudents()) {//是本节课的老师
+                            //if (item.IsPublic) {
+                            //    ChildHtml += '<div class="replay"><b>' + item.CreatorName + '</b>回复了<b>' + parentName + '</b>：' + item.Content;
+                            //    ChildHtml += "<p answerid='" + item.ID + "'><span  class='del' sub='sub'>删除</span><span class='publish'>不发布</span></p></div>";
+                            //} else {
+                            //    ChildHtml += '<div class="replay"><b>' + item.CreatorName + '</b>回复了<b>' + parentName + '</b>：' + item.Content;
+                            //    ChildHtml += "<p answerid='" + item.ID + "'><span  class='del' sub='sub'>删除</span><span class='publish'>发布</span></p></div>";
+                            //}
+                            ChildHtml += '<div class="replay replayAsk_' + item.ID + '"><b>' + item.CreatorName + '</b>回复了<b>' + parentName + '</b>：' + item.Content;
+                            ChildHtml += "<p answerid='" + item.ID + "'><span  class='del' sub='sub'>删除</span></p></div>";
+                        } else {
+
+                            // 学生自己的Name    item.RelatedDataID =>parent.ID =>parent.Name
+                            if (userData.Name == parentName) {//判断是学生自己
+                                ChildHtml += '<div class="replay replayAsk_' + item.ID + '"><b>' + item.CreatorName + '</b>回复了<b>' + parentName + '</b>：' + item.Content + "</div>";
+                            } else {
+                                if (item.IsPublic) {//公开状态-所有学生可以看
+                                    ChildHtml += '<div class="replay replayAsk_' + item.ID + '"><b>' + item.CreatorName + '</b>回复了<b>' + parentName + '</b>：' + item.Content + "</div>";
+                                } else {
+                                    ChildHtml += '';
+                                }
+                            }
+
+                        };
+                        $(".ID_" + item.RelatedDataID).append(ChildHtml);
+                    } else {
+                        var ImagePath;
+                        if (item.ImagePath != null) {
+                            ImagePath = item.ImagePath;
+                        } else {
+                            if (item.UserType == 1) {
+                                ImagePath = "../Images/broadcastlive_06.png";
+                            } else if (item.UserType == 2) {
+                                ImagePath = "images/manage_students.png";
+                            }
+                        }
+                        if (item.IsPublic || item.CreatorID == userData.UserID || isTeacherOrStudents()) {
+                            html += '<li class="AskAndRepliesLi ID_' + item.ID + '">' +
+                                            '<div class="pic">' +
+                                            '<img src="' + ImagePath + '" />' +
+                                            '<span>' + item.CreatorName + '</span>' +
+                                            '</div>' +
+                                            ' <div class="leftB_ul2_issue">' + item.Content + '</div>' +
+                                            '<div class="leftB_ul2_date">' + item.UpdateTime + '</div>';
+                            if (isTeacherOrStudents()) {//是本节课的老师
+                                //if (AskLastID <= 0) { } else {
+                                // popTeaRep.open();
+                                // }
+                                html += "<input type='text' class='reply'  />"
+                                if (userData.UserID == item.CreatorID) {//老师看自己发表的提问
+                                    html += "<p answerid='" + item.ID + "' userid='" + item.CreatorID + "'><span class='del'>删除</span></p>";
+                                } else {//老师看学生发表的提问
+                                    if (item.IsEnable && item.IsPublic == false) {//未禁言，未发布
+                                        html += "<p answerid='" + item.ID + "' userid='" + item.CreatorID + "'><span class='review review_" + item.ID + "'>发布</span><span class='banned banned_" + item.CreatorID + "'>禁言</span><span class='del'>删除</span><span class='rep' title=" + item.CreatorName + " b=" + item.Content + " class=" + item.ID + ">回复</span><span class='reply_sub hidee'>提交</span></p>";
+                                    } else if (item.IsEnable && item.IsPublic) {//未禁言，已发布
+                                        html += "<p answerid='" + item.ID + "' userid='" + item.CreatorID + "'><span class='banned banned_" + item.CreatorID + "'>禁言</span><span class='del'>删除</span><span class='rep' title=" + item.CreatorName + " b=" + item.Content + " class=" + item.ID + ">回复</span><span class='reply_sub hidee'>提交</span></p>";
+                                    } else if (item.IsEnable == false && item.IsPublic) {//已禁言，未发布
+                                        html += "<p answerid='" + item.ID + "' userid='" + item.CreatorID + "'><span class='review review_" + item.ID + "'>发布</span><span class='banned banned_" + item.CreatorID + "' style='display:none;'>禁言</span><span class='del'>删除</span><span class='rep' title=" + item.CreatorName + " b=" + item.Content + " class=" + item.ID + ">回复</span><span class='reply_sub hidee'>提交</span></p>";
+                                    } else {//已禁言，已发布
+                                        html += "<p answerid='" + item.ID + "' userid='" + item.CreatorID + "'><span class='banned banned_" + item.CreatorID + "' style='display:none;'>禁言</span><span class='del'>删除</span><span class='rep' title=" + item.CreatorName + " b=" + item.Content + " class=" + item.ID + ">回复</span><span class='reply_sub hidee'>提交</span></p>";
+                                    }
+                                }
+                            } else {
+                                if (item.CreatorID == userData.UserID) {//操作自己发表的评论(CreatorID对应的是UserID),学生不能回复问答
+                                    html += "<p answerid='" + item.ID + "'><span class='del'>删除</span></p>";
+                                };
+                            }
+                            html += '</li>';
+                        }
+                        if (webMaxAskTime != 0) {
+                            $(".AskShowMore").before(html);
+                            //$(".leftB_ul2").append("<li class='AskShowMore'>查看更多</li>");
+                        } else {
+                            $(".leftB_ul2 .input_submit_wrap").after(html);
+                        }
+                    }
+                    if (item.IsDeleted) {//该条数据被删除
+                        if (item.RelatedDataID != null) {
+                            $(".replayAsk_" + item.ID).remove();
+                        } else {
+                            $(".ID_" + item.ID).remove();
+                        }
+                    }
+                };
+                if ($(".leftB_ul2 .noaskAndAnswer").length > 0) {
+                    $(".leftB_ul2 .noaskAndAnswer").remove();
+                };
+            } else {
+                if ($(".leftB_ul2 .noaskAndAnswer").length == 0 && $(".leftB_ul2 .AskAndRepliesLi").length == 0) {
+                    $(".leftB_ul2 li").after("<li class='noaskAndAnswer'></li>");
+                };
+            };
+        }
+
+        //获取评论列表
+        function getVideoComments(data, CommentLastID, webMaxCommentTime) {
+            if (data) {
+                //data = data.Data;
+                for (var i = 0; i < data.length; i++) {
+                    var item = data[i];
+                    var html = '';
+                    var CommentsChlidHtml = "";
+                    //将更改过公开状态的数据的原节点删除
+                    if (item.IsPublic && $(".Comments_" + item.ID)) {
+                        $(".Comments_" + item.ID).remove();
+                    }
+                    if (item.RelatedDataID == null) {
+                        if (item.ImagePath != null) {
+                            ImagePath = item.ImagePath;
+                        } else {
+                            if (item.UserType == 1) {
+                                ImagePath = "../Images/broadcastlive_06.png";
+                            } else if (item.UserType == 2) {
+                                ImagePath = "images/manage_students.png";
+                            }
+                        }
+                        if (item.IsPublic || item.CreatorID == userData.UserID || isTeacherOrStudents()) {
+                            html += '<li class="CommentListLi Comments_' + item.ID + '">' +
+                                            '<div class="pic">' +
+                                            '<img src="' + ImagePath + '" />' +
+                                            '<span>' + item.CreatorName + '</span>' +
+                                            '</div>' +
+                                            ' <div class="leftB_ul3_issue">' + item.Content + '</div>' +
+                                            '<div class="leftB_ul3_date">' + item.UpdateTime + '</div>' +
+                                            '</div>';
+                            html += "<input type='text' class='reply'  />"
+                            if (isTeacherOrStudents()) {//是本节课的老师
+
+                                if (item.CreatorID == userData.UserID) {
+                                    html += "<p commentsid='" + item.ID + "'><span class='del'>删除</span><span class='reply_sub hidee'>提交</span></p>";
+                                } else {
+                                    if (item.IsEnable && item.IsPublic == false) {//未禁言，未发布
+                                        html += "<p commentsid='" + item.ID + "' userid='" + item.CreatorID + "'><span class='review'>发布</span><span class='banned CommentsBanned_" + item.CreatorID + "'>禁言</span><span  class='del'>删除</span><span  class='rep'>回复</span><span class='reply_sub hidee'>提交</span></p>";
+                                    } else if (item.IsEnable && item.IsPublic) {//未禁言，已发布
+                                        html += "<p commentsid='" + item.ID + "' userid='" + item.CreatorID + "'><span class='banned CommentsBanned_" + item.CreatorID + "'>禁言</span><span  class='del'>删除</span><span  class='rep'>回复</span><span class='reply_sub hidee'>提交</span></p>";
+                                    } else if (item.IsEnable == false && item.IsPublic) {//已禁言，未发布
+                                        html += "<p commentsid='" + item.ID + "' userid='" + item.CreatorID + "'><span class='review'>发布</span><span class='banned CommentsBanned_" + item.CreatorID + "' style='display:none;'>禁言</span><span  class='del'>删除</span><span  class='rep'>回复</span><span class='reply_sub hidee'>提交</span></p>";
+                                    } else {//已禁言，已发布
+                                        html += "<p commentsid='" + item.ID + "' userid='" + item.CreatorID + "'><span class='banned CommentsBanned_" + item.CreatorID + "' style='display:none;'>禁言</span><span  class='del'>删除</span><span  class='rep'>回复</span><span class='reply_sub hidee'>提交</span></p>";
+                                    }
+                                };
+                            } else {
+                                if (item.CreatorID == userData.UserID) {//操作自己发表的评论(CreatorID对应的是UserID)
+                                    html += "<p commentsid='" + item.ID + "'><span class='del'>删除</span></p>";
+                                } else {
+                                    html += "<p commentsid='" + item.ID + "'><span  class='rep'>回复</span><span class='reply_sub hidee'>提交</span</p>";
+                                };
+                            };
+                            html += '</li>';
+                        }
+                        if (webMaxCommentTime != 0) {
+                            $(".CommentShowMore").before(html);
+                        } else {
+                            $(".leftB_ul3 .input_submit_wrap").after(html);
+                        }
+                    } else {
+                        var parentName = $(".Comments_" + item.RelatedDataID).find(".pic").find("span").html();
+                        CommentsChlidHtml += '<div class="replay replayComment_'+item.ID+'"><b>' + item.CreatorName + '</b>回复了<b>' + parentName + '</b>：' + item.Content;
+                        if (isTeacherOrStudents()) {//是本节课的老师
+                            CommentsChlidHtml += "<p commentsid='" + item.ID + "'><span  class='del' sub='sub'>删除</span></p></div>";
+                        } else {
+                            if (item.CreatorID == userData.UserID) {
+                                CommentsChlidHtml += "<p commentsid='" + item.ID + "'><span class='del' sub='sub'>删除</span></p></div>";
+                            };
+                        };
+                        $(".Comments_" + item.RelatedDataID).append(CommentsChlidHtml);
+                    }
+                    if (item.IsDeleted) {//该条数据被删除
+                        if (item.RelatedDataID != null) {
+                            $(".replayComment_" + item.ID).remove();
+                        } else {
+                            $(".Comments_" + item.ID).remove();
+                        }
+                    }
+                };
+
+                if ($(".leftB_ul3 .nocomments").length > 0) {
+                    $(".leftB_ul3 .nocomments").remove();
+                };
+            } else {
+                if ($(".leftB_ul3 .nocomments").length == 0 && $(".leftB_ul3 .CommentListLi").length == 0) {
+                    $(".leftB_ul3 li").after("<li class='nocomments'></li>");
+                };
+            };
+        }
+
+        //老师端获取历史测验信息
+        var TeacherTestIDArr = [];
+        function TeacherTestList(data, TeaTestLastID) {
+            var tTestHtml = "";
+            if (data) {
+                var TeaTestLastID = $(".aa").length;
+                var TestGetDataArr = new Array();//get到的历史测验
+                var TestWebDataArr = new Array();//wed上历史测验
+                //for (var i = data.QuestionList.length - 1; i >= TeaTestLastID; i--) {
+                for (var i = TeaTestLastID; i < data.QuestionList.length; i++) {
+                    tTestHtml += "<li class='aa' id='ques_" + data.QuestionList[i].QuestionID + "'><div id='" + data.QuestionList[i].QuestionID + "'><input type='checkbox' name='mulSue' id='mul_" + data.QuestionList[i].QuestionID + "' />题目" + (i + 1) + "：" + data.QuestionList[i].QuestionStem + "</div>";
+                    if (data.QuestionList[i].ImageUri) {
+                        tTestHtml += "<div class='test_imgs_wrap'><img title='双击放大图片' src='" + data.QuestionList[i].ImageUri + "'/></div>";
+                    };
+                    var AnswerListNum = 0;
+                    for (var AnswerList = 0; AnswerList < data.QuestionList[i].AnswerList.length; AnswerList++) {//显示选项内容
+                        if (data.QuestionList[i].AnswerList[AnswerList].Content == null) {
+                            AnswerListNum++;
+                        }
+                    }
+                    for (var AnswerList = 0; AnswerList < data.QuestionList[i].AnswerList.length; AnswerList++) {//显示选项内容
+                        if (data.QuestionList[i].AnswerList[AnswerList].Content == null) {
+                            if (AnswerListNum == data.QuestionList[i].AnswerList.length) {
+                                tTestHtml += "";
+                            } else {
+                                if (data.QuestionList[i].AnswerList[AnswerList].IsCorret == true) {//显示正确的选项
+                                    tTestHtml += "<p><span>" + data.QuestionList[i].AnswerList[AnswerList].Title + "<b class='rightFlag'></b></span></p>";
+                                } else {
+                                    tTestHtml += "<p><span>" + data.QuestionList[i].AnswerList[AnswerList].Title + "</span></p>";
+                                }
+                            }
+                        } else {
+                            if (data.QuestionList[i].AnswerList[AnswerList].IsCorret == true) {
+                                tTestHtml += "<p><span>" + data.QuestionList[i].AnswerList[AnswerList].Title + "：" + data.QuestionList[i].AnswerList[AnswerList].Content + "<b class='rightFlag'></b></span></p>";
+                            } else {
+                                tTestHtml += "<p><span>" + data.QuestionList[i].AnswerList[AnswerList].Title + "：" + data.QuestionList[i].AnswerList[AnswerList].Content + "</span></p>";
+                            }
+                        }
+                    }
+                    if (data.QuestionList[i].HaveSend == false) {//如果没有下发
+                        tTestHtml += "<p class='ifSend" + data.QuestionList[i].QuestionID + "'><span class='fr' onclick='IsSue(" + data.QuestionList[i].QuestionID + "," + ScheduleID + ",this)'>下发</span><span class='fr mr10' onclick='QuestionDel(" + data.QuestionList[i].QuestionID + "," + ScheduleID + ",this)'>删除</span></p>";
+                        tTestHtml += "<p class='TotalStatistics_" + i + "'></p>";
+                        tTestHtml += "<p class='Correct_" + i + "'></p>";
+                        tTestHtml += "</li>";
+                    } else {//已经下发
+                        $("#mul_" + data.QuestionList[i].QuestionID).remove();
+                        if (data.QuestionList[i].AnswerInfo[0].Second > 0) {
+                            tTestHtml += "<p class='ifSend" + data.QuestionList[i].QuestionID + "' id='clockTime_" + i + "'><b style='color:red;'>作答状态：00:00:00</b></p>";//changeTime(data.QuestionList[i].AnswerInfo[0].Second)
+
+                        } else {
+                            tTestHtml += "<p class='ifSend" + data.QuestionList[i].QuestionID + "'><b style='color:#15c288;'>作答状态：已完成作答</b></p>";
+                        }
+                        tTestHtml += "<p class='TotalStatistics_" + i + "'>答对人数" + data.QuestionList[i].AnswerInfo[0].RightNumber + "人&nbsp;&nbsp;&nbsp&nbsp;&nbsp;答错" + data.QuestionList[i].AnswerInfo[0].ErrorNumber + "人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;未作答" + data.QuestionList[i].AnswerInfo[0].UnAnswerNumber + "人</p><p class='Correct_" + i + "'>正确率：" + data.QuestionList[i].AnswerInfo[0].Correct + "%</p>";
+                    }
+                    tTestHtml += "</li>";
+                };
+                //更新一些页面参数的状态
+                for (var i = 0; i < data.QuestionList.length; i++) {
+                    TestGetDataArr.push(data.QuestionList[i].QuestionID);//get到的历史测验id
+                    if (data.QuestionList[i].HaveSend == true) {//已经下发
+                        $("#mul_" + data.QuestionList[i].QuestionID).remove();
+                        if (data.QuestionList[i].AnswerInfo[0].Second > 0) {
+                            if (TeacherTestIDArr.indexOf(data.QuestionList[i].QuestionID) < 0) {
+                                TeacherTestIDArr.push(data.QuestionList[i].QuestionID);
+                                teaTestCutDownTime(null, parseInt(data.QuestionList[i].AnswerInfo[0].Second), ".ifSend" + data.QuestionList[i].QuestionID);
+                            }
+                        } else {
+                            $(".ifSend" + data.QuestionList[i].QuestionID).html("<b style='color:#15c288;'>作答状态：已完成作答</b>");
+                        }
+                        $(".TotalStatistics_" + i).html("答对人数" + data.QuestionList[i].AnswerInfo[0].RightNumber + "人&nbsp;&nbsp;&nbsp&nbsp;&nbsp;答错" + data.QuestionList[i].AnswerInfo[0].ErrorNumber + "人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;未作答" + data.QuestionList[i].AnswerInfo[0].UnAnswerNumber + "人");
+                        $(".Correct_" + i).html("正确率：" + data.QuestionList[i].AnswerInfo[0].Correct + "%");
+                    } else {//没有下发
+                        $(".ifSend" + data.QuestionList[i].QuestionID).html("<span class='fr' onclick='IsSue(" + data.QuestionList[i].QuestionID + "," + ScheduleID + ",this)'>下发</span><span class='fr mr10' onclick='QuestionDel(" + data.QuestionList[i].QuestionID + "," + ScheduleID + ",this)'>删除</span>");
+                        $(".TotalStatistics_" + i).html("");
+                        $(".Correct_" + i).html("");
+                    }
+                }
+                for (var i = 0; i < $(".aa").length; i++) {//ques_394
+                    TestWebDataArr.push(parseInt($(".aa").eq(i).attr("id").split("_")[1]));
+                }
+                //求网页.aa标签id-get到的id差集
+                var web_get = TestWebDataArr.filter(function (v) {
+                    return TestGetDataArr.indexOf(v) == -1
+                })
+                //删掉
+                for (var n = 0; n < web_get.length; n++) {
+                    $("#testPlate").find($("#ques_" + web_get[n]).remove());
+                }
+                $(".tTotalTest").remove();
+                var tTotalTest = "<li class='totalTest tTotalTest'><p>总测验统计</p><p><span style='float:left;'>已测验：" + data.TestNumber + "次</span><span  style='width:125px; text-align:right; display:inline-block;' class='fr'>正确率：" + data.Correct + "%</span></p></li>";
+                $("#newTest").after(tTotalTest);
+                //$(".tTotalTest").after(tTestHtml);
+                $("#testPlate").append(tTestHtml);
+                //初始化预览图片
+                for (var m = data.QuestionList.length - 1; m >= 0; m--) {
+                    if (data.QuestionList[m].ImageUri) {
+                        $("#ques_" + data.QuestionList[m].QuestionID).find(".test_imgs_wrap").viewer({
+                            url: data.QuestionList[m].ImageUri,
+                            toolbar: false,
+                            navbar: false
+                        })
+                    }
+                };
+            }
+        }
+
+        //学生端-获取正在测验和历史测验
+        var popStuTestLayer;
+        var popStuTest = {
+            "open": function () {
+                popStuTestLayer = layer.open({
+                    title: '注意',
+                    btn: ['请完成测验'],
+                    btnAlign: 'c',
+                    offset: 'auto',
+                    content: '您有测验需要完成!!!',
+                    yes: function (index) {
+                        layer.close(index);
+                        $(".LiveB_r_b_title li").eq(2).click();
+                    }
+                })
+            }
+        }
+
+        var StuTestIDArr = [],StuTestHisIDArr=[];//StuTestIDArr:测验中题目数组  StuTestHisIDArr:历史测验题目数组
+        function studentsGetRunningTestAndTestHistory(runningData, historyData) {
+            var runningArr = new Array();//get到的当前测验的ID
+            var webRunArr = new Array();//网页上的测验id
+            var ssTestHtml = "";
+            //学生端获取当前测验题目 
+            if (runningData) {
+                if (runningData.length > 0) {
+                    //接口get到的id
+                    for (var m = 0; m < runningData.length; m++) {
+                        runningArr.push(runningData[m].TestID);
+                    };
+                    //网页正在测验的id
+                    for (var n = 0; n < $(".s_new_test").length; n++) {
+                        webRunArr.push(parseInt($(".s_new_test").eq(n).attr("class").split(" s_")[1]));
+                    }
+                    //get到的id--.s_new_test标签差集
+                    var get_web = runningArr.filter(function (v) {
+                        return webRunArr.indexOf(v) == -1
+                    })
+                    //有新的测验题目弹出
+                    if (get_web.length > 0) {
+                        popStuTest.open();
+                    }
+                    if (webRunArr.length > 0) {
+                        //.s_new_test标签--get到的id差集
+                        var web_get = webRunArr.filter(function (v) {
+                            return runningArr.indexOf(v) == -1
+                        })
+                        //get到的id--.s_new_test标签差集
+                        var get_web = runningArr.filter(function (v) {
+                            return webRunArr.indexOf(v) == -1
+                        })
+                        //加进去
+                        for (var i = 0; i < get_web.length ; i++) {
+                            var TimeTest, runningItem = runningData[runningArr.lastIndexOf(get_web[i])];
+                            //var Clock = changeTime(runningItem.RemainingTime);
+                            var itemIndex = runningArr.lastIndexOf(get_web[i]) + 1;
+                            ssTestHtml += "<div class='s_new_test s_" + runningItem.TestID + "' style='border-top:1px dashed #d6d6d6; margin-top:10px; margin-bottom:10px;' id='tests_" + runningItem.QuestionID + "'><p><input class='greenBtnSign1 fl' type='button' value='请作答' /><span class='fr timeaa clock_" + runningItem.TestID + "'></span></p>";//Clock
+                            ssTestHtml += "<p class='mt15'>" + runningItem.QuestionType + "</p><div><input type='checkbox' name='mulSubmit' id='mulSubmit_" + runningItem.TestID + "'/><span>题目：" + runningItem.QuestionStem + "</span></div>";//题目" + itemIndex + "：
+                            if (runningItem.ImageUri) {
+                                ssTestHtml += "<div class='test_imgs_wrap'><img title='双击放大图片' src='" + runningItem.ImageUri + "'/></div>";
+                            };
+                            for (var j = 0; j < runningItem.QuestionContent.length; j++) {
+                                var ItemContent = runningItem.QuestionContent[j].ItemContent;
+                                if (ItemContent == null) {
+                                    ItemContent = "";
+                                } else {
+                                    ItemContent = ":" + runningItem.QuestionContent[j].ItemContent;
+                                }
+                                if (runningItem.QuestionType == "单选题") {
+                                    ssTestHtml += "<input type='radio' name='item" + runningItem.TestID + "' value='" + runningItem.QuestionContent[j].ItemID + "'/>" + runningItem.QuestionContent[j].ItemTitle + ItemContent + "<br />";//单选
+                                } else if (runningItem.QuestionType == "多选题") {
+                                    ssTestHtml += "<input type='checkbox' name='item" + runningItem.TestID + "' value='" + runningItem.QuestionContent[j].ItemID + "'/>" + runningItem.QuestionContent[j].ItemTitle + ItemContent + "<br />";//多选
+                                } else if (runningItem.QuestionType == "判断题") {
+                                    ssTestHtml += "<input type='radio' name='item" + runningItem.TestID + "' value='" + runningItem.QuestionContent[j].ItemID + "'/>" + runningItem.QuestionContent[j].ItemTitle + ItemContent + "<br />";//单选
+                                }
+                            }
+                            ssTestHtml += "<input type='button' class='fr answerSub blinkBg' value='提交' onclick='StudentSubmit(" + runningItem.TestID + ",this)'/></div>";
+                        };
+                        //删掉网页比get到的多出的部分
+                        for (var i = 0; i < web_get.length; i++) {
+                            $(".s_" + web_get[i]).remove();
+                        }
+                        $(".ceshi").append(ssTestHtml);
+                    } else {
+                        for (var i = 0; i < runningData.length ; i++) {
+                            var TimeTest, runningItem = runningData[i];
+                            //var Clock = changeTime(runningItem.RemainingTime);
+                            var itemIndex = runningArr.lastIndexOf(runningItem.TestID) + 1;
+                            ssTestHtml += "<div class='s_new_test s_" + runningItem.TestID + "' style='border-top:1px dashed #d6d6d6; margin-top:10px; margin-bottom:10px;' id='tests_" + runningItem.QuestionID + "'><p><input class='greenBtnSign1 fl' type='button' value='请作答' /><span class='fr timeaa clock_" + runningItem.TestID + "'></span></p>";//Clock
+                            ssTestHtml += "<p class='mt15'>" + runningItem.QuestionType + "</p><div><input type='checkbox' name='mulSubmit' id='mulSubmit_" + runningItem.TestID + "'/><span>题目：" + runningItem.QuestionStem + "</span></div>";//题目" + itemIndex + "：
+                            if (runningItem.ImageUri) {
+                                ssTestHtml += "<div class='test_imgs_wrap'><img title='双击放大图片' src='" + runningItem.ImageUri + "'/></div>";
+                            };
+                            for (var j = 0; j < runningItem.QuestionContent.length; j++) {
+                                var ItemContent = runningItem.QuestionContent[j].ItemContent;
+                                if (ItemContent == null) {
+                                    ItemContent = "";
+                                } else {
+                                    ItemContent = ":" + runningItem.QuestionContent[j].ItemContent;
+                                }
+                                if (runningItem.QuestionType == "单选题") {
+                                    ssTestHtml += "<input type='radio' name='item" + runningItem.TestID + "' value='" + runningItem.QuestionContent[j].ItemID + "'/>" + runningItem.QuestionContent[j].ItemTitle + ItemContent + "<br />";//单选
+                                } else if (runningItem.QuestionType == "多选题") {
+                                    ssTestHtml += "<input type='checkbox' name='item" + runningItem.TestID + "' value='" + runningItem.QuestionContent[j].ItemID + "'/>" + runningItem.QuestionContent[j].ItemTitle + ItemContent + "<br />";//多选
+                                } else if (runningItem.QuestionType == "判断题") {
+                                    ssTestHtml += "<input type='radio' name='item" + runningItem.TestID + "' value='" + runningItem.QuestionContent[j].ItemID + "'/>" + runningItem.QuestionContent[j].ItemTitle + ItemContent + "<br />";//单选
+                                }
+                            }
+                            ssTestHtml += "<input type='button' class='fr answerSub blinkBg' value='提交' onclick='StudentSubmit(" + runningItem.TestID + ",this)'/></div>";
+                        };
+
+                        $(".ceshi").append(ssTestHtml);
+                    }
+                    //更新测验倒计时
+                    for (var i = 0; i < runningData.length; i++) {
+                        if (StuTestIDArr.indexOf(runningData[i].TestID) < 0) {
+                            StuTestIDArr.push(runningData[i].TestID);
+                            stuTestCutDownTime(null, parseInt(runningData[i].RemainingTime), ".clock_" + runningData[i].TestID);
+                        };
+                        //初始化预览图片
+                        for (var m = 0 ; m < runningData.length ; m++) {//+ 1
+                            if (runningData[m].ImageUri) {
+                                $(".s_" + runningData[m].TestID + "").find(".test_imgs_wrap").viewer({
+                                    url: runningData[m].ImageUri,
+                                    toolbar: false,
+                                    navbar: false
+                                })
+                            }
+                        };
+                    }
+                } else {
+                    layer.close(popStuTestLayer);
+                    $(".ceshi").empty();
+                }
+            }
+
+            //学生端获取历史测验
+            var startNum = $("#testPlate .sQuestionLi").length;
+            if (historyData) {
+                if (historyData.TestList.length > 0) {
+                    var sTestHistoryHtml = "";
+                    //遍历数组取id，判断已存在就忽略，不存在就遍历比此id大的最近的id节点，做insert操作。
+                    //for (var i = historyData.TestList.length - 1; i >= 0; i--) {
+                    for (var i = 0; i <historyData.TestList.length; i++) {
+                        var item = historyData.TestList[i];
+                        if (StuTestHisIDArr.indexOf(item.QuestionID) < 0) {
+                            StuTestHisIDArr.push(item.QuestionID);
+                            sTestHistoryHtml += "<li class='sQuestionLi' id='student_que_" + item.QuestionID + "'><div>题目：" + item.QuestionStem + "</div>";//题目" + (i + 1) + "：
+                            if (item.ImageUrl) {
+                                sTestHistoryHtml += "<div class='test_imgs_wrap'><img title='双击放大图片' src='" + item.ImageUrl + "'/></div>";
+                            };
+                            var correctAnswerHtml = '';
+                            if (item.CorrectAnswer == null) {
+                            } else {
+                                for (var j = 0; j < item.CorrectAnswer.length; j++) {
+                                    var CorrectAnswerContent;
+                                    item.CorrectAnswer[j].Content == null ? (CorrectAnswerContent = "") : (CorrectAnswerContent = ":" + item.CorrectAnswer[j].Content);
+                                    correctAnswerHtml += (j == item.CorrectAnswer.length - 1) ? "<span>" + item.CorrectAnswer[j].Title + CorrectAnswerContent + "</span><br/>" : "<span>" + item.CorrectAnswer[j].Title + CorrectAnswerContent + "</span><br/>";
+                                };
+                            }
+                            var myAnswerHtml = '';
+                            if (item.MyAnswer) {
+                                for (var k = 0; k < item.MyAnswer.length; k++) {
+                                    var MyAnswerContent;
+                                    item.MyAnswer[k].Content == null ? (MyAnswerContent = "") : (MyAnswerContent = ":" + item.MyAnswer[k].Content);
+                                    myAnswerHtml += (k == item.MyAnswer.length - 1) ? "<span>" + item.MyAnswer[k].Title + MyAnswerContent + "</span><br/>" : "<span>" + item.MyAnswer[k].Title + MyAnswerContent + "</span><br/>";
+                                }
+                                sTestHistoryHtml += "<p><span style='float:left; display:inline-block;'>我的答案：</span><br/>" + myAnswerHtml + "</p><p><span class='mr10 fl' style=' display:inline-block;'>正确答案：</span><br/>" + correctAnswerHtml + "</p></li>";
+                            } else {
+                                sTestHistoryHtml += "<p><span style='float:left; display:inline-block;'>未作答</span></p></li>";
+                            }
+                        }
+                    };
+                    //$("#newTest").after(sTestHistoryHtml);
+                    $("#testPlate").append(sTestHistoryHtml);
+                    //初始化预览图片
+                    for (var m = historyData.TestList.length - 1; m >= 0; m--) {
+                        $("#student_que_" + historyData.TestList[m].QuestionID).find("div").eq(0).html("题目：" + historyData.TestList[m].QuestionStem);//" + (m + 1) + "
+                        if (historyData.TestList[m].ImageUrl) {
+                            $("#student_que_" + historyData.TestList[m].QuestionID).find(".test_imgs_wrap").viewer({
+                                url: historyData.TestList[m].ImageUrl,
+                                toolbar: false,
+                                navbar: false
+                            })
+                        }
+                    };
+                };
+                var sTotalTest = "<li class='totalTest sTotalTest'><p>总测验统计</p><p><span style='float:left;'>已测验：" + historyData.TestNumber + "次</span><span style='width:125px; text-align:right; display:inline-block;' class='fr'>正确率：" + historyData.Correct + "%</span></p></li>"
+                $(".sTotalTest").remove();
+                $("#newTest").after(sTotalTest);
+            }
+        }
+
+        var TeacherSignTime = [];
+        //教师端获取历史签到
+        function TeacherHistoricalSign(data, start) {
+            if (data) {
+                if (data.SignList.length > 0) {
+                    var start = $("#signPlate .teacher_sign_history_item").length;
+                    var sSginhtml = "";
+                    for (var i = data.SignList.length - 1; i >= start; i--) {
+                        var StartTime = data.SignList[i].StartTime.split(" ")[1];
+                        var StopTime = data.SignList[i].StopTime.split(" ")[1];
+                        sSginhtml += "<li class='teacher_sign_history_item'><p><span class='fl'>第" + (i + 1) + "次签到</span><span class='fr' id='StartStopTime_" + i + "'>" + StartTime + "-" + StopTime + "</span></p>";
+                        sSginhtml += "<p><span class='fl' id='SignedNumber_" + i + "'>已签到：" + data.SignList[i].SignedNumber + "人</span><span class='fr' style='width:135px; display:inline-block; text-align:right;' id='Attendance_" + i + "'>出勤率：" + data.SignList[i].Attendance + "%</span></p></li>";
+                    };
+                    for (var i = 0; i < data.SignList.length; i++) {
+                        var StartTime = data.SignList[i].StartTime.split(" ")[1];
+                        var StopTime = data.SignList[i].StopTime.split(" ")[1];
+                        $("#SignedNumber_" + i).html("已签到：" + data.SignList[i].SignedNumber + "人");
+                        $("#Attendance_" + i).html("出勤率：" + data.SignList[i].Attendance + "%");
+                        $("#StartStopTime_" + i).html(StartTime + "-" + StopTime);
+                        if (data.SignList[data.SignList.length - 1].Status) {//有签到中
+                            $(".t_signing").show().siblings().hide();
+                            if (TeacherSignTime.length == 0) {
+                                TeacherSignTime.push(data.SignList[data.SignList.length - 1].Second);
+                                cutDownTime(parseInt(TeacherSignTime[0]), "#sTime");
+                            }
+                            //$("#sTime").html(changeTime(data.SignList[i].Second));
+                            $("#endTeacherSign").attr({ "signid": data.SignList[i].SignID });
+                        } else if (data.SignList[data.SignList.length - 1].Status == false) {//无签到中
+                            TeacherSignTime = [];
+                            clearTimeout(cutDownTimer);
+                            $(".t_start_sign").show().siblings().hide();
+                            $("#sTime").html('');
+                        };
+                    }
+                    $("#signPlate .totalTest").after(sSginhtml);
+                };
+                $(".totalTest .should_appear_num").html("应到人数：" + data.TotalPeople);//应到人数
+                $(".title_should_appear_num").html("应到人数：" + data.TotalPeople);//应到人数             
+                $(".totalTest .sign_in_num").html("签到次数：" + data.TotalCount + "次");
+                $(".totalTest .average_appear_rate").html("平均出勤率：" + data.TotalAttendance + "%");
+            }
+        }
+        
+        //学生端获取正在签到和历史签到
+        var popStuSignLayer;
+        var popStuSign = {
+            "open": function () {
+                popStuSignLayer = layer.open({
+                    title: '注意',
+                    btn: ['<span class="blinkBg">请完成签到</span>'],
+                    btnAlign: 'c',
+                    offset: 'auto',
+                    content: "<div class='layerSignTime'>00:00:00</div>",
+                    yes: function (index) {
+                        var SignID = $("#SignID").val();
+                        popStuSign.isOpen = false;
+                        popStuSign.closestate = true;
+                        Ajax.ajax({
+                            url: AjaxUrls.SignUrl.StudentSign,
+                            data: { ScheduleID: ScheduleID, StudentID: ID, SignID: SignID }
+                        }).done(function (data) {
+                            Dialogue.Success("您已经完成本次签到!");
+                        })
+                        layer.close(index);
+                        //popStuSign.isOpen = false;
+                        //popStuSign.closestate = true;
+                    }
+                })
+                popStuSign.isOpen = true
+            },
+            "closestate": false,//是否关闭
+            "isOpen": false//是否打开
+        }
+        var studentSignTimeArr=[];
+        function studentsIsSigningAndStudentsSignedHistory(dataSigning, dataSigned, haveSignIndex) {
+            if (dataSigning) {
+                if (popStuSign.isOpen) {
+                    if (popStuSign.closestate) {
+
+                    } else {
+                        popStuSign.open();
+                        popStuSign.isOpen = false;
+                        popStuSign.closestate = true;
+                    }
+                } else {
+                    popStuSign.isOpen = false;
+                }
+                
+                //正在签到
+                if (dataSigning.SignID > 0) {
+                    $(".signCon").hide();
+                    popStuSign.isOpen = true;
+                    $(".LiveB_r_b_title li").eq(1).click();
+                    //$('.layerSignTime').html(changeTime(dataSigning.RemainingTime));
+                    $("#SignID").val(dataSigning.SignID);
+                    if (studentSignTimeArr.length == 0) {
+                        studentSignTimeArr.push(dataSigning.RemainingTime);
+                        cutDownTime(parseInt(studentSignTimeArr[0]), ".layerSignTime");
+                    }
+                } else {
+                    studentSignTimeArr = [];
+                    clearTimeout(cutDownTimer);
+                    popStuSign.isOpen = false;
+                    popStuSign.closestate = false;
+                    layer.close(popStuSignLayer);
+                };
+            }
+            //签到历史
+            if (dataSigned) {
+                var tSignHtml = "";
+                if (dataSigned.HistoricalSignInfo.length > 0) {//有签到记录
+                    var haveSignIndex = $("#signPlate .sSignLi").length;
+                    for (var i = dataSigned.HistoricalSignInfo.length - 1; i >= haveSignIndex; i--) {
+                        var itemSigned = dataSigned.HistoricalSignInfo[i];
+                        tSignHtml += "<li class='sSignLi'><p>第" + (i + 1) + "次签到</p>";
+
+                        if (dataSigned.HistoricalSignInfo[i].HaveSigned) {
+                            var SignTime = dataSigned.HistoricalSignInfo[i].SignTime.split(" ")[1];
+                            tSignHtml += "<p><span class='fl'>状态：已签到</span><span class='fr'>签到时间：" + SignTime + "</span></p></li>";
+                        } else {
+                            tSignHtml += "<p><span class='fl'>状态：未签到</span><span class='fr'></span></p></li>";
+                        };                  
+                    };
+                    $("#signPlate .totalTest").after(tSignHtml);
+                } else {//无签到记录
+                    if (dataSigning.SignID > 0) {
+                        $(".signCon").show();
+                    } else {
+                        $(".signCon").hide();
+                    }
+                };
+
+                //无正在签到就隐藏按钮
+                if (dataSigning.SignID == 0) {
+                    $(".signCon div").hide();
+                };
+
+                //总统计赋值
+                $(".totalTest .should_appear_num").html("应到人数：" + dataSigned.TotalPeople);//应到人数
+                $(".title_should_appear_num").html("应到人数：" + dataSigned.TotalPeople);//应到人数             
+                $(".totalTest .sign_in_num").html("签到次数：" + dataSigned.TotalCount + "次");
+                $(".totalTest .average_appear_rate").html("平均出勤率：" + dataSigned.TotalAttendance + "%");
+            }
+        }
+
+        //获取文档列表
+        function DocumentList(data) {
+            if (data) {
+                var DocumentlistHtml = "";
+                var arrDocGet = new Array();//获取到的id数组
+                var arrDoc = new Array();//网页的li标签的数组
+                if (data.length > 0) {
+
+                    for (var j = 0; j < $(".leftB_ul1 li").length; j++) {
+                        arrDoc.push(parseInt($(".leftB_ul1 li").eq(j).attr("class")));
+                    }
+                    for (var i = 0; i < data.length; i++) {
+                        arrDocGet.push(data[i].ID);
+                    }
+                    if (arrDoc.length > 0) {
+                        //求get到的id-网页li标签id的差集
+                        var get_web = arrDocGet.filter(function (v) {
+                            return arrDoc.indexOf(v) == -1
+                        })
+                        //求网页li标签id-get到的id差集
+                        var web_get1 = arrDoc.filter(function (v) {
+                            return arrDocGet.indexOf(v) == -1
+                        })
+                        //加进去
+                        for (var m = 0; m < get_web.length; m++) {
+                            if (data[arrDocGet.lastIndexOf(get_web[m])].Title.length > 8) {
+                                var Title = data[arrDocGet.lastIndexOf(get_web[m])].Title.slice(0, 8) + "...";
+                            } else {
+                                var Title = data[arrDocGet.lastIndexOf(get_web[m])].Title;
+                            }
+                            //alert(arrDocGet.lastIndexOf(get_web[m]));
+                            if (isTeacherOrStudents()) {
+                                DocumentlistHtml += "<li class='" + get_web[m] + "'><p title='" + data[arrDocGet.lastIndexOf(get_web[m])].Title + "'>" + Title + "</p><span><b onclick='DocumentDel(" + data[arrDocGet.lastIndexOf(get_web[m])].ID + ",this)'>删除</b><a target='_blank' href='" + data[arrDocGet.lastIndexOf(get_web[m])].FileUri + "' download='" + data[arrDocGet.lastIndexOf(get_web[m])].Title + "'>下载</a></span></li>";
+                            } else {
+                                DocumentlistHtml += "<li class='" + get_web[m] + "'><p title='" + data[arrDocGet.lastIndexOf(get_web[m])].Title + "'>" + Title + "</p><span><a target='_blank' href='" + data[arrDocGet.lastIndexOf(get_web[m])].FileUri + "' download='" + data[arrDocGet.lastIndexOf(get_web[m])].Title + "'>下载</a></span></li>";
+                            }
+                        }
+                        //删掉
+                        for (var n = 0; n < web_get1.length; n++) {
+                            $(".leftB_ul1").find($("." + web_get1[n]).remove());
+                        }
+                        $("#container").after(DocumentlistHtml);
+                    } else {
+                        for (var i = data.length - 1; i >= 0; i--) {
+                            arrDocGet.push(data[i].ID);
+                            if (data[i].Title.length > 8) {
+                                var Title = data[i].Title.slice(0, 8) + "...";
+                            } else {
+                                var Title = data[i].Title;
+                            }
+                            if (isTeacherOrStudents()) {
+                                DocumentlistHtml += "<li class='" + data[i].ID + "'><p title='" + data[i].Title + "'>" + Title + "</p><span><b onclick='DocumentDel(" + data[i].ID + ",this)'>删除</b><a target='_blank' href='" + data[i].FileUri + "' download='" + data[i].Title + "'>下载</a></span></li>";
+                            } else {
+                                DocumentlistHtml += "<li class='" + data[i].ID + "'><p title='" + data[i].Title + "'>" + Title + "</p><span><a target='_blank' href='" + data[i].FileUri + "' download='" + data[i].Title + "'>下载</a></span></li>";
+                            }
+                        }
+
+                        $("#container").after(DocumentlistHtml);
+                    }
+
+                    $(".leftB_ul1").removeClass("nomaterial_wrap");
+                } else {
+                    $(".leftB_ul1").addClass("nomaterial_wrap");
+                    $(".leftB_ul1 li").remove();
+                };
+            }
+        }
+
+        //获取直播状态
+        var StuResumeOrPause, StuResumeOrPauseFlag;
+        StuResumeOrPauseFlag = StuResumeOrPause;
+        function GetLiveState(data) {
+            StuResumeOrPauseFlag = StuResumeOrPause;
+            if (data == 1) {
+                StuResumeOrPause = 1;
+            } else if (data == 2) {
+                StuResumeOrPause = 2;
+            } else if (data == 4) {
+                Stop();
+                clearTimeout(GetLiveAndRecordStateTimer);
+            }
+            if (StuResumeOrPauseFlag != StuResumeOrPause && StuResumeOrPause == 1) {
+                Resume();
+            } else if (StuResumeOrPauseFlag != StuResumeOrPause && StuResumeOrPause == 2) {
+                Pause();
+            }
+        }
+
+        //获取历史问答信息
+        var webMaxAskTime;
+        function GetHisAskAndReplies(MaxTimeSpan) {
+            Ajax.ajax({
+                url: AjaxUrls.LiveInfo.GetAskAndReplies,
+                data: { LiveID: LiveID, MaxTimeSpan: MaxTimeSpan, Count: 20 }
+            }).done(function (data) {
+                if (data.length) {
+                    webMaxAskTime = data[0].TimeSpan;
+                    GetAskAndReplies(data.reverse(), 0, webMaxAskTime);
+                } else {
+                    $(".AskShowMore").html("我是有底线的~");
+                }
+            });
+        }
+
+        //获取历史评论信息
+        var webMaxCommentTime;
+        function getHisVideoComments(MaxTimeSpan) {
+            Ajax.ajax({
+                url: AjaxUrls.LiveInfo.GetComments,
+                data: { LiveID: LiveID, MaxTimeSpan: MaxTimeSpan, Count: 20 }
+            }).done(function (data) {
+                if (data.Data.length) {
+                    webMaxCommentTime = data.Data[0].TimeSpan;
+                    getVideoComments(data.Data.reverse(), 0, webMaxCommentTime);
+                } else {
+                    $(".CommentShowMore").html("我是有底线的~");
+                }
+            });
+        }
+
+        $(function () {
+            //直播课堂高亮显示
+            $(".webNavWrap .webNav_2").addClass("choose_nav").parent("li").siblings("li").find(".webNav").removeClass("choose_nav");
+            //判断是主讲助教还是学生
+            if (isTeacherOrStudents()) { //老师
+                $(".input_submit_wrap").eq(0).show();//老师-可提问
+                $(".input_submit_wrap").eq(1).show();//老师-可评论
+                $(".signCon div").eq(2).show().siblings("div").hide();//老师-签到权限
+                $(".LiveB_r_middle").show();//客户端互动
+                $(".t_new_test").show();//显示老师端测验
+                $(".s_new_test").hide();//隐藏学生端测验
+                $(".questionIcon").eq(0).show();//老师-可提问
+                $(".questionIcon").eq(1).show();//老师-可评论
+                $("#container").show();//上传资料
+                $(".leftB_ul1").css({ "padding-top": "40px" });
+                $(".LiveB_l_b_title li").css({ "width": "24%" });
+                if (ipUrl) {
+                    GetLiveAndRecordState();
+                } else {
+                    $(".LiveB_r_middle").hide();
+                };
+                $(".SetIsEnable").show();//可关闭评论，问答
+                if (userData.ImageFileUri != null) {
+                    $(".selfPic img").attr("src", userData.ImageFileUri);
+                } else {
+                    $(".selfPic img").attr("src", "../Images/broadcastlive_06.png");
+                }
+            } else {
+                $(".LiveB_r_middle").hide();
+                $(".t_new_test").hide();//隐藏老师端测验
+                $(".s_new_test").show();//显示学生端测验
+                $("#container").hide();//不能上传资料
+                $(".leftB_ul1").css({ "padding-top": "0" });
+                $(".LiveB_l_b_title li").css({ "width": "33%" });
+                $(".LiveB_l_b_title li").eq(3).hide();
+                $(".SetIsEnable").hide();//不可关闭评论问答
+                if (userData.ImageFileUri != null) {
+                    $(".selfPic img").attr("src", userData.ImageFileUri);
+                } else {
+                    $(".selfPic img").attr("src", "images/manage_students.png");
+                }
+                if (UserType != "2") {
+                    $(".signCon,.mulSueDiv").hide();
+                }
+            };
+
+            $(".questionItem").eq(0).show().siblings(".questionItem").hide();//默认单选  
+            $(".selfPic span").html(userData.Name);
+            //新建测验弹窗
+            var testsAdd = $("#tests-add-html").html();
+            $("#tests-add-html").remove();
+            //新建测验弹框-提交
+            $("#tests-add").click(function () {
+                Dialogue.LayerFullScreen({
+                    title: "新建测验",
+                    area: ['513px', '550px'],
+                    btn: ['保存', '取消'],
+                    btnAlign: 'c',
+                    content: "<div style='padding-left:20px;'>" + testsAdd + "</div>",
+                    success: function () {
+                        //document.forms[0].reset();
+                        var QuestionType = "单选题";
+                        $("#formScheduleID").val(ScheduleID);
+                        $("#itemChoose input").click(function () {
+                            var itemIndex = $(this).index();
+                            $(".questionItem").eq(itemIndex).show().siblings(".questionItem").hide();
+                            $(this).addClass("haschoose").siblings("input").removeClass("haschoose");
+                            QuestionType = $(this).val() + "题";
+                            $("input[name='QuestionType']").val(QuestionType);
+                            if (itemIndex == "2") {
+                                $(".itemABCD").hide();
+                                $(".hide1").hide();
+                            } else {
+                                $(".itemABCD").show();
+                                $(".hide1").show();
+                            }
+                        });
+                        imagesFormatting();
+                        $("input[name='QuestionType']").val(QuestionType);
+                    },
+                    yes: function () {
+                        var arr1 = new Array();
+                        var arr2 = new Array();
+                        var arr3 = new Array();
+                        var num = $(".selectNum option:checked").val();
+                        var itemContent = "", arr2isEmpty = true;
+                        //HasImage参数赋值
+                        $("input[name='Duration']").val(parseInt($("#DurationVlue").val()) * 60);
+                        var files = document.getElementById("plugin_files").value;
+                        (files != '') ? $("input[name='HasImage']").val("true") : $("input[name='HasImage']").val("false");
+
+
+                        if ($("#itemChoose input").eq(2).hasClass("haschoose")) {//判断
+                            arr1 = ["A", "B"];
+
+                            if ($(".questionItem input[name=judge]:checked").length > 0) {
+                                if ($("input[name='judge']")[0].checked) {
+                                    arr2 = ["正确", "错误"];
+                                    arr3 = ["true", "false"];
+
+                                } else {
+                                    arr2 = ["正确", "错误"];
+                                    arr3 = ["false", "true"];
+                                };
+
+                            } else {
+                                arr2isEmpty = false;
+                                Dialogue.Msg("请选择正确答案");
+                                return;
+                            };
+                            var QuestionContent = [];
+                            for (var i = 0; i < arr3.length; i++) {
+                                QuestionContent.push({
+                                    'Title': arr1[i],
+                                    'Content': arr2[i],
+                                    'IsCorret': arr3[i]
+                                })
+                            }
+                            $("input[name='QuestionContent']").val(JSON.stringify(QuestionContent));
+                        } else {
+                            for (var i = 0; i < num; i++) {
+                                arr1.push(TestArr[i].item);
+                                if ($.trim($("#item" + (i + 1) + "").val()).length > 0) {
+                                    arr2.push($("#item" + (i + 1) + "").val());
+                                } else {
+                                    //Dialogue.Msg("请输入选项内容");
+                                    //arr2isEmpty = false;//如果选项没填写，不让其提交
+                                    //break;
+                                    //return;
+                                };
+                                if ($("#itemChoose input").eq(0).hasClass("haschoose")) {//单选
+                                    if ($(".questionItem input[name=single]:checked").length > 0) {
+                                        arr3.push($("input[name='single']")[i].checked);
+                                    } else {
+                                        Dialogue.Msg("请选择正确答案");
+                                        arr2isEmpty = false;//如果选项没填写，不让其提交
+                                        break;
+                                        return;
+                                    };
+                                } else if ($("#itemChoose input").eq(1).hasClass("haschoose")) {//多选
+                                    if ($(".questionItem input[name=multi]:checked").length > 0) {
+                                        arr3.push($("input[name='multi']")[i].checked);
+                                    } else {
+                                        Dialogue.Msg("请选择正确答案");
+                                        arr2isEmpty = false;//如果选项没填写，不让其提交
+                                        break;
+                                        return;
+                                    };
+                                };
+                            };
+
+                            var QuestionContent = [];
+                            for (var i = 0; i < arr3.length; i++) {
+                                QuestionContent.push({
+                                    'Title': arr1[i],
+                                    'Content': arr2[i],
+                                    'IsCorret': arr3[i]
+                                })
+                            }
+
+                            $("input[name='QuestionContent']").val(JSON.stringify(QuestionContent));
+                        };
+
+                        if (!arr2isEmpty) {
+                            return;
+                        };
+                        if (parseInt($("#DurationVlue").val()) > 60 || parseInt($("#DurationVlue").val()) < 1) {
+                            Dialogue.Msg('"测验用时"请输入1-60内的整数');
+                            return;
+                        }
+                        submitForm.Submit({
+                            OnSuccess: function (data) {
+                                if (data.Success) {
+                                    //$(".aa").remove();
+                                    layer.closeAll();
+                                    Dialogue.Success("新建成功！");
+                                } else {
+                                    Dialogue.Error(data.Message);
+                                };
+                            }
+                        });
+                    }
+                })
+                window.setTimeout(function () {
+                    submitForm = InitializeValidatedForm(AjaxUrls.TestUrl.QuestionAdd);
+                }, 0);
+            });
+            //老师端新建签到
+            $("#TeacherSignAdd").click(function () {
+                var Duration = $("input[name='Duration1']").val() * 60;
+                if (!isNaN(Duration) && parseInt(Duration) != 0) {
+                    Ajax.ajax({
+                        url: AjaxUrls.SignUrl.TeacherSignAdd,
+                        data: { ScheduleID: ScheduleID, Duration: Duration }
+                    }).done(function (data) {
+                        Dialogue.Success("新建成功！");
+                        $("#endTeacherSign").attr("signid", data);
+                        $(".t_start_sign input[name=Duration1]").val("");
+                    }).fail(function (data) {
+                        Dialogue.Msg(data);//暂时隐藏
+                    })
+                } else {
+                    Dialogue.Error("请输入签到时长");
+                };
+            });
+            //学生端开始签到
+            $("#StudentSign").click(function () {
+                var SignID = $("#SignID").val();
+                popStuSign.isOpen = false;
+                popStuSign.closestate = true;
+                Ajax.ajax({
+                    url: AjaxUrls.SignUrl.StudentSign,
+                    data: { ScheduleID: ScheduleID, StudentID: ID, SignID: SignID }
+                }).done(function (data) {
+                    Dialogue.Success("您已经完成本次签到!");
+                })
+            });
+            //结束签到
+            $("#endTeacherSign").click(function () {
+                var SignID = $(this).attr("signid");
+                Ajax.ajax({
+                    url: AjaxUrls.SignUrl.TeacherStopSign,
+                    data: { SignID: SignID }
+                }).done(function (data) {
+                    Dialogue.Success("结束成功");
+                    $(".signCon .t_start_sign ").show().siblings().hide();
+                }).fail(function (data) {
+                    Dialogue.Msg(data);
+                })
+            })
+            //分享功能
+            $(".LiveB_c_control_bar").delegate("#share", "click", function () {
+                var $title = $(this).parents(".videoClassSection ").find("h4").text();
+                var urlTxt = window.location.protocol + "//" + window.location.host + "/MiYun/phoneLiveMiYun.aspx?LiveID=" + LiveID;
+                shareTo({
+                    titles: $title,
+                    urls: urlTxt
+                });
+            });
+
+            //提交评论
+            $("#AddTextComment").click(function () {
+                var val = $("#textInput").val();
+                if ($.trim(val).length > 0) {
+                    Ajax.ajax({
+                        url: AjaxUrls.LiveInfo.AddTextComment,
+                        data: { LiveID: LiveID, Name: userData.Name, Content: $.trim(val) }
+                    }).done(function (data) {
+                        $("#textInput").val("");
+                        $(".leftB_ul3 .questionIcon").show();
+                        $(".leftB_ul3 .questionNei").hide();
+                    }).fail(function (data) {
+                        Dialogue.Error(data);
+                    })
+                } else {
+                    Dialogue.Msg("请输入内容");
+                }
+            })
+            //回车评论
+            $("#textInput").keyup(function () {
+                if (event.keyCode == '13') {
+                    $("#AddTextComment").click();
+                };
+            })
+            
+            //显示提问/发送切换
+            $(".leftB_ul2 .questionIcon").click(function () {
+                var _this = $(this);
+                if (IsEnableAsk) {
+                    Ajax.ajax({
+                        url: AjaxUrls.LiveInfo.CheckCanAsk,
+                        data: { LiveID: LiveID }
+                    }).done(function (data) {
+                        if (data) {
+                            _this.hide();
+                            $(".leftB_ul2 .questionNei").show();
+                            // $("#questionNeiSend").html("发送");
+                        } else {
+                            Dialogue.Error("您没有提问的权限");
+                        };
+                    }).fail(function (data) {
+                        Dialogue.Error(data);
+                    })
+                } else {
+                    Dialogue.Error("老师关闭了问答功能");
+                }
+            });
+            //提问
+            $(".replayTitle").hide();
+            $("#questionNeiSend").click(function () {
+                var val = $("#askContent").val();
+                if ($.trim(val).length > 0) {
+                    Ajax.ajax({
+                        url: AjaxUrls.LiveInfo.AskAdd,
+                        data: { LiveID: LiveID, AskID: 0, CreatorName: userData.Name, Content: $.trim(val) }
+                    }).done(function (data) {
+                        $("#askContent").val("");
+                        $(".leftB_ul2 .questionIcon").show();
+                        $(".leftB_ul2 .questionNei").hide();
+                        Dialogue.Success("提问成功！");
+                    }).fail(function (data) {
+                        $("#askContent").val("");
+                        Dialogue.Error(data);
+                    })
+                } else {
+                    Dialogue.Msg("请输入内容")
+                };
+            });
+            //回车提问
+            $("#askContent").keyup(function () {
+                if (event.keyCode == '13') {
+                    $("#questionNeiSend").click();
+                };
+            })
+            //取消提问
+            $("#CanclequestionNei").click(function () {
+                $(".leftB_ul2 .selfPic").show();
+                $(".leftB_ul2 .questionIcon").show();
+                $(".leftB_ul2 .questionNei").hide();
+                $("#askContent").val("");
+            })
+            //取消评论
+            $("#CancleTextComment").click(function () {
+                $(".leftB_ul3 .selfPic").show();
+                $(".leftB_ul3 .questionIcon").show();
+                $(".leftB_ul3 .questionNei").hide();
+                $("#AddTextComment").val("");
+            })
+
+            //显示评论框
+            $(".leftB_ul3 .questionIcon").click(function () {
+                var _this = $(this);
+                if (IsEnableComment) {
+                    Ajax.ajax({
+                        url: AjaxUrls.LiveInfo.CheckCanAddTextComment,
+                        data: { LiveID: LiveID }
+                    }).done(function (data) {
+                        if (data) {
+                            _this.hide();
+                            $(".leftB_ul3 .questionNei").show();
+                        } else {
+                            Dialogue.Error("您没有评论的权限");
+                        };
+                    }).fail(function (data) {
+                        Dialogue.Error(data);
+                    })
+                } else {
+                    Dialogue.Error("老师关闭了评论功能");
+                }
+            });
+
+            //删除评论
+            $(".leftB_ul3").on("click", ".del", function () {
+                var commentsid = $(this).parent().attr("commentsid");
+                var _this = $(this);
+                var sub = _this.attr("sub");
+                Ajax.ajax({
+                    url: AjaxUrls.LiveInfo.DeleteComment,
+                    data: { CommentID: commentsid }
+                }).done(function (data) {
+                    //_this.parents(".replay").remove();
+                    //_this.parents(".CommentListLi").remove();
+                    sub ? _this.parents(".replay").remove() : _this.parents(".CommentListLi").remove();
+                    Dialogue.Success("删除成功");
+                }).fail(function (data) {
+                    Dialogue.Error(data);
+                })
+            })
+
+            //删除问答
+            $(".leftB_ul2").on("click", ".del", function () {
+                var answerid = $(this).parent().attr("answerid");
+                var _this = $(this);
+                var sub = _this.attr("sub");
+                Ajax.ajax({
+                    url: AjaxUrls.LiveInfo.DeleteAsk,
+                    data: { AskID: answerid }
+                }).done(function (data) {
+                    sub ? _this.parents(".replay").remove() : _this.parents(".AskAndRepliesLi").remove();
+                    Dialogue.Success("删除成功");
+                }).fail(function (data) {
+                    Dialogue.Error(data);
+                })
+
+            })
+            //禁言问答      
+            $(".leftB_ul2").on("click", ".banned", function () {
+                var _this = $(this);
+                var UserID = _this.parent().attr("userid");
+                Ajax.ajax({
+                    url: AjaxUrls.LiveInfo.SetCanAsk,
+                    data: { LiveID: LiveID, Enable: false, UserID: UserID }
+                }).done(function (data) {
+                    Dialogue.Success("禁止问答成功");
+                    $(".banned_" + UserID).hide();
+                    //_this.hide();
+                }).fail(function (data) {
+                    Dialogue.Error(data);
+                })
+            })
+            //禁言评论      
+            $(".leftB_ul3").on("click", ".banned", function () {
+                var _this = $(this);
+                var UserID = _this.parent().attr("userid");
+                Ajax.ajax({
+                    url: AjaxUrls.LiveInfo.SetCanAddTextCommetn,
+                    data: { LiveID: LiveID, Enable: false, UserID: UserID }
+                }).done(function (data) {
+                    Dialogue.Success("禁止评论成功");
+                    $(".CommentsBanned_" + UserID).hide();
+                    //_this.hide();
+                }).fail(function (data) {
+                    Dialogue.Error(data);
+                })
+            })
+            //发布 -问答 
+            $(".leftB_ul2").on("click", ".review", function () {
+                var _this = $(this);
+                var answerid = _this.parent().attr("answerid");
+                Ajax.ajax({
+                    url: AjaxUrls.LiveInfo.SetAskIsPublic,
+                    data: { LiveID: LiveID, ReplyID: answerid, IsPublic: true }
+                }).done(function (data) {
+                    Dialogue.Success("发布成功");
+                    _this.hide();
+                }).fail(function (data) {
+                    Dialogue.Error(data);
+                })
+            });
+            //发布 -评论 
+            $(".leftB_ul3").on("click", ".review", function () {
+                var _this = $(this);
+                var commentsid = _this.parent().attr("commentsid");
+                Ajax.ajax({
+                    url: AjaxUrls.LiveInfo.SetIsPublicComment,
+                    data: { LiveID: LiveID, CommentID: commentsid, IsPublic: true }
+                }).done(function (data) {
+                    Dialogue.Success("发布通过");
+                    _this.hide();
+                }).fail(function (data) {
+                    Dialogue.Error(data);
+                })
+            });
+
+            //恢复禁言的问答和评论
+            $(".leftB_ul4 .submit_btn").click(function () {
+                var Index = $(".leftB_ul4 .haschoose").attr("tabindex");
+                var User = $(".leftB_ul4 .recover_wrap").eq(Index).find("input:checked");
+                var userArr = [];
+                $(User).each(function (index, obj) {
+                    userArr.push($(obj).attr("attr"));
+                })
+                var url;
+                if (parseInt(Index) == 0) {
+                    url = AjaxUrls.LiveInfo.SetCanAsk;
+                } else {
+                    url = AjaxUrls.LiveInfo.SetCanAddTextCommetn;
+                };
+                if (userArr.length > 0) {
+                    Ajax.ajax({
+                        url: url,
+                        data: { LiveID: LiveID, Enable: true, UserID: userArr.join(",") }
+                    }).done(function (data) {
+                        Dialogue.Success("恢复成功");
+                            $(User).each(function (index, obj) {
+                                if (parseInt(Index) == 0) {
+                                    $(".banned_" + userArr[index]).show();
+                                    $(obj).parents(".lists").remove();
+                                } else {
+                                    $(".CommentsBanned_" + userArr[index]).show();
+                                    $(obj).parents(".lists1").remove();
+                                }
+                            });
+                    }).fail(function (data) {
+                        Dialogue.Error(data);
+                    });
+                } else {
+                    Dialogue.Error("请选择学生");
+                };
+            })
+
+            //回复问答
+            $(".leftB_ul2").on("click", ".rep", function () {
+                var _this = $(this);
+                var answerid = _this.parent().attr("answerid");
+                _this.hide();
+                _this.siblings(".reply_sub").show();
+                _this.parent().siblings(".reply").show();
+            })
+
+            //回复问答二级
+            $(".leftB_ul2").on("click", ".reply_sub", function () {
+                var _this = $(this);
+                var answerid = $(this).parent().attr("answerid");
+                var val = _this.parent().siblings(".reply").val();
+                if ($.trim(val).length > 0) {
+                    Ajax.ajax({
+                        url: AjaxUrls.LiveInfo.Reply,
+                        data: { LiveID: LiveID, AskID: answerid, CreatorName: userData.Name, Content: $.trim(val) }
+                    }).done(function (data) {
+                        Dialogue.Success("回复成功");
+                        _this.parent().siblings(".reply").hide();
+                        _this.hide();
+                        _this.siblings(".rep").show();
+                        _this.parent().siblings(".reply").val("");
+                        if (_this.parent().siblings(".replay").length > 0) {
+                            //_this.parent().siblings(".replay").eq(_this.parent().siblings(".replay").length - 1).after('<div class="replay"><b>' + userData.Name + '</b>回复了<b>' + _this.parents(".AskAndRepliesLi").find(".pic span").html() + '</b>：' + $.trim(val) + '<p answerid="' + data + '"><span class="del" sub="sub">删除</span><span class="publish">发布</span></p></div>');
+                        } else {
+                            //_this.parent().after('<div class="replay"><b>' + userData.Name + '</b>回复了<b>' + _this.parents(".AskAndRepliesLi").find(".pic span").html() + '</b>：' + $.trim(val) + '<p answerid="' + data + '"><span class="del" sub="sub">删除</span><span class="publish">发布</span></p></div>');
+                        };
+                    }).fail(function (data) {
+                        Dialogue.Error(data);
+                    })
+                } else {
+                    Dialogue.Msg("请输入回复内容");
+                };
+            })
+
+            //回车-回复问答二级
+            $(".leftB_ul2").on("keyup", ".reply", function () {
+                if (event.keyCode == '13') {
+                    $(this).siblings("p").find(".reply_sub").click();
+                }
+            });
+
+            //回复评论
+            $(".leftB_ul3").on("click", ".rep", function () {
+                var _this = $(this);
+                _this.hide();
+                _this.siblings(".reply_sub").show();
+                _this.parent().siblings(".reply").show();
+            })
+            //回复评论二级
+            $(".leftB_ul3").on("click", ".reply_sub", function () {
+                var _this = $(this);
+                var commentsid = $(this).parent().attr("commentsid");
+                var val = _this.parent().siblings(".reply").val();
+                if ($.trim(val).length > 0) {
+                    Ajax.ajax({
+                        url: AjaxUrls.LiveInfo.AddTextCommentReply,
+                        data: { LiveID: LiveID, CommentID: commentsid, CreatorName: userData.Name, Content: $.trim(val) }
+                    }).done(function (data) {
+                        _this.parent().siblings(".reply").val("");
+                        Dialogue.Success("回复成功");
+                        _this.parent().siblings(".reply").hide();
+                        _this.hide();
+                        _this.siblings(".rep").show();
+
+                        if (_this.parent().siblings(".replay").length > 0) {
+                            // _this.parent().siblings(".replay").eq(_this.parent().siblings(".replay").length - 1).after('<div class="replay"><b>' + userData.Name + '</b>回复了<b>' + _this.parents(".CommentListLi").find(".pic span").html() + '</b>：' + $.trim(val) + '<p commentsid="' + data + '"><span class="del" sub="sub">删除</span></p></div>');
+                        } else {
+                            // _this.parent().after('<div class="replay"><b>' + userData.Name + '</b>回复了<b>' + _this.parents(".CommentListLi").find(".pic span").html() + '</b>：' + $.trim(val) + '<p commentsid="' + data + '"><span class="del" sub="sub">删除</span></p></div>');
+                        };
+                    }).fail(function (data) {
+                        Dialogue.Error(data);
+                    })
+                } else {
+                    Dialogue.Msg("请输入回复内容");
+                };
+            })
+
+            //回车-回复评论二级
+            $(".leftB_ul3").on("keyup", ".reply", function () {
+                if (event.keyCode == '13') {
+                    $(this).siblings("p").find(".reply_sub").click();
+                }
+            });
+
+            //禁言区tab切换
+            $(".leftB_ul4 .tab").click(function () {
+                var index = $(this).attr("tabindex");
+                $(this).addClass("haschoose").siblings().removeClass("haschoose");
+                $(".leftB_ul4 .recover_wrap").eq(index).show().siblings().hide();
+            })
+            //文档上传
+            $("#DocumentAdd").click(function () {
+
+                var docfileObj = document.getElementById("UploadFiles").value,
+                    filenameArr,
+                    fileName,
+                    extension;
+                if ($("#textfield").val() == '') {
+                    Dialogue.Msg("请选择需要上传的文档");
+                    return false;
+                };
+                var extensionArr = ["ppt", "pptx", "PPT", "PPTX", "mp4", "MP4", "jpg", "JPG", "JPEG", "jpeg", "png", "PNG", "bmp", "BMP", "txt", "TXT", "txt", "doc", "DOC", "docx", "DOCX", "zip", "ZIP", "rar", "RAR"];
+                if (docfileObj) {
+                    filenameArr = docfileObj.split("\\");
+                    fileName = filenameArr[filenameArr.length - 1].split(".");
+                    extension = fileName[fileName.length - 1];
+                    $("input[name='Extension']").val("." + extension);
+                };
+                if ($.inArray(extension, extensionArr) == -1) {
+                    Dialogue.Msg("请上传后缀名为PPT,PPTX,MP4,JPG,JPEG,PNG,BMP,TXT,DOC,DOCX,ZIP,RAR的文档!");
+                    return false;
+                }
+                $("input[name='LiveID']").val(LiveID);
+                $("input[name='Title']").val(fileName[0] + "." + fileName[1]);
+                $("input[name='AuthorName']").val(teaList);
+                DocumentAddForm = InitializeValidatedForm(AjaxUrls.LiveInfo.DocumentAdd);
+                DocumentAddForm.Submit({
+                    OnSuccess: function (data) {
+                        if (data.Success) {
+                            Dialogue.Success('上传成功');
+                            document.forms[0].reset();
+                        } else {
+                            Dialogue.Error(data.Message);
+                        };
+                    }
+                });
+            });
+            //批量下发测验-全选
+            $("input[name=all]").click(function () {
+                if (this.checked) {
+                    $("input[name='mulSue']").prop("checked", true);
+                } else {
+                    $("input[name='mulSue']").prop("checked", false);
+                }
+            });
+            //检查是否全选
+            $("body").on("click", "input[name='mulSue']", function () {
+                var count = $("input[name='mulSue']:checkbox:checked").length;
+                if (count == $("input[name='mulSue']:checkbox").length) {
+                    $("#selectAll").prop("checked", true);
+                } else {
+                    $("#selectAll").prop("checked", false);
+                }
+            });
+            //批量提交测验-全选
+            $("input[name=allSubmit]").click(function () {
+                if (this.checked) {
+                    $("input[name='mulSubmit']").prop("checked", true);
+                } else {
+                    $("input[name='mulSubmit']").prop("checked", false);
+                }
+            });
+            //检查提交测试-是否全选
+            $("body").on("click", "input[name='mulSubmit']", function () {
+                var count = $("input[name='mulSubmit']:checkbox:checked").length;
+                if (count == $("input[name='mulSubmit']:checkbox").length) {
+                    $("#selectAllSubmit").prop("checked", true);
+                } else {
+                    $("#selectAllSubmit").prop("checked", false);
+                }
+            });
+            //批量下发测验题目
+            $("body").on("click", "#mulSue", function () {
+                var mulSueArr = new Array();
+                //var obj = document.getElementsByName("mulSue");
+                //for (k in obj) {
+                //    if (obj[k].checked)
+                //        mulSueArr.push(obj[k].id.split("_")[1]);
+                //}
+                //var IsSueStr = mulSueArr.join(",");
+                $('.aa input[type="checkbox"]:checked').each(function () {
+                    mulSueArr.push(this.id.split("_")[1]); //push 进数组
+                });
+                var IsSueStr = mulSueArr.join(",");
+                var Duration = $(".mulDuration").val() * 60;
+                if (!isNaN(Duration) && parseInt(Duration) != 0) {
+                    if (mulSueArr.length == 0) {
+                        Dialogue.Error("请至少选择一道测验题目");
+                        return false;
+                    }
+                    $(this).attr('disabled', "true");
+                    Ajax.ajax({
+                        url: AjaxUrls.TestUrl.IsSue,
+                        data: { QuestionID: IsSueStr, ScheduleID: ScheduleID, Duration: Duration },
+                        notloadingImg: true
+                    }).done(function (data) {
+                        Dialogue.Success("下发成功!");
+                        $("#mulSue").removeAttr("disabled");
+                        $(".mulDuration").val("");
+                        //$(".aa").remove();
+                        $("#selectAll").prop("checked", false);
+                    }).fail(function (data) {
+                        $("#mulSue").removeAttr("disabled");
+                        Dialogue.Error(data);
+                    });
+                } else {
+                    Dialogue.Error("请输入测验总时长");
+                }
+            });
+            //设置是否可以问答
+            $("body").on("click", "input[name='SetIsEnableAsk']", function () {
+                var setIsEnableAsk = $("input[name='SetIsEnableAsk']:checked").val();
+                Ajax.ajax({
+                    url: AjaxUrls.LiveInfo.SetIsEnableAsk,
+                    data: { LiveID: LiveID, IsEnable: setIsEnableAsk }
+                }).done(function (data) {
+                    Dialogue.Success("设置成功!");
+                }).fail(function (data) {
+                    Dialogue.Error(data);
+                });
+            });
+            //设置是否可以评论
+            $("body").on("click", "input[name='SetIsEnableComment']", function () {
+                var setIsEnableComment = $("input[name='SetIsEnableComment']:checked").val();
+                Ajax.ajax({
+                    url: AjaxUrls.LiveInfo.SetIsEnableComment,
+                    data: { LiveID: LiveID, IsEnableComment: setIsEnableComment }
+                }).done(function (data) {
+                    Dialogue.Success("设置成功!");
+                }).fail(function (data) {
+                    Dialogue.Error(data);
+                });
+            });
+
+            //设置评论是否人工审核
+            $("body").on("click", "input[name='SetManualCheckComment']", function () {
+                var SetManualCheckComment = $("input[name='SetManualCheckComment']:checked").val();
+                Ajax.ajax({
+                    url: AjaxUrls.LiveInfo.SetIsAutoPublicComment,
+                    data: { LiveID: LiveID, IsPublic: SetManualCheckComment }
+                }).done(function (data) {
+                    Dialogue.Success("设置成功!");
+                }).fail(function (data) {
+                    Dialogue.Error(data);
+                });
+            });
+            //设置问答是否人工审核
+            $("body").on("click", "input[name='SetManualCheck']", function () {
+                var SetManualCheckAsk = $("input[name='SetManualCheck']:checked").val();
+                Ajax.ajax({
+                    url: AjaxUrls.LiveInfo.SetIsAutoPublicAsk,
+                    data: { LiveID: LiveID, IsPublic: SetManualCheckAsk }
+                }).done(function (data) {
+                    Dialogue.Success("设置成功!");
+                }).fail(function (data) {
+                    Dialogue.Error(data);
+                });
+            });
+
+            //查看更多问答
+            $("body").on("click", ".AskShowMore", function () {
+                if (webMaxAskTime) {
+                    GetHisAskAndReplies(webMaxAskTime);
+                } else {
+                    GetHisAskAndReplies(MaxAskTime);
+                }
+            });
+            //查看更多评论
+            $("body").on("click", ".CommentShowMore", function () {
+                if (webMaxCommentTime) {
+                    getHisVideoComments(webMaxCommentTime);
+                } else {
+                    getHisVideoComments(MaxCommentsTime);
+                }
+            });
+
+            //关闭图片预览
+            $("body").on("click", ".test_imgs_wrap", function () {
+                $(".closeBtn").css({ "display": "inline-block", "z-index": "100000" });
+            });
+            $(".closeBtn").click(function () {
+                $(".viewer-container").addClass("viewer-hide").removeClass("viewer-in");
+                $(this).css({ "display": "none", "z-index": "-10000" });
+                $("body").removeClass("viewer-open");
+            });
+            //双击关闭图片预览
+            $("body").on("dblclick", ".viewer-canvas img", function () {
+                $(".viewer-container").addClass("viewer-hide").removeClass("viewer-in");
+                $(".closeBtn").css({ "display": "none", "z-index": "-10000" });
+                $("body").removeClass("viewer-open");
+            });
+            //切换静音
+            $("body").on("click", "#LiveB_c_control_setMute", function () {
+                if ($(this).hasClass("LiveB_c_control_setMute")) {
+                    $(this).removeClass("LiveB_c_control_setMute").addClass("LiveB_c_control_setNoMute").attr({"title":"取消静音"});
+                    SetVolume(0);
+                } else {
+                    $(this).removeClass("LiveB_c_control_setNoMute").addClass("LiveB_c_control_setMute").attr({"title":"设置静音"});
+                    var valueNum = $(".LiveB_c_control_voiceNum").html();
+                    var voiceNum = parseFloat(valueNum / 100).toFixed(2);
+                    SetVolume(voiceNum * 100);
+                }
+            });
+            //切换纯音频
+            var PureAudioFlag = 0;
+            $(".video1_bar").on("click", "#PureAudioBtn", function () {
+                if (PureAudioFlag == 0) {
+                    //$(".video1").find(".object1").hide().siblings("div").show();
+                    $(".video1").find(".object1").siblings("div").show();
+                    $("#PureAudioBtn img").attr({ "src": "images/icon2Close.png", "title": "点击显示画面" });
+                    PureAudioFlag = 1;
+                } else {
+                    //$(".video1").find("#PureAudio").hide().siblings("div").show();
+                    $(".video1").find(".object1").siblings("div").hide();
+                    $("#PureAudioBtn img").attr({ "src": "images/icon2.png", "title": "点击切换纯音频" });
+                    PureAudioFlag = 0;
+                }
+            });
+        });
+        
+        var switchVideoFlag = 0;
+        $(function () {
+            var Timer;
+            clearTimeout(Timer);
+            arrStreams = arrStreams1;
+            Timer = setTimeout(function () {
+                PlayUrl(arrStreams[0], arrStreams[1]);
+            }, 5000);
+            //显示-切换清晰度
+            $(".sharpnessFlag").hover(function () {
+                $(".switchSharpness").show();
+            }, function () {
+                $(".switchSharpness").hide();
+            });
+
+            var SharpnessTimer;//切换清晰度用到的定时器名称
+            //切换清晰度
+            $(".switchSharpness li").click(function () {
+                //var NowActIndex = $(this).index();
+                $(this).addClass("NowAct").siblings().removeClass("NowAct");
+                $(".sharpnessFlag b").html($(this).html());
+                $(this).html() == "流畅" ? (arrStreams = arrStreams1) : (arrStreams = arrStreams0);
+                //switchVideoFlag == 0 ? (arrStreams = arrStreams) : (arrStreams = arrStreams.reverse());
+                SharpnessTimer = setTimeout(function () {
+                    PlayUrl1(arrStreams[0], arrStreams[1]);
+                }, 500);
+            });
+
+            //切换视频源
+            //$("#switchVideo").click(function () {
+            //    switchVideoFlag == 0 ? switchVideoFlag = 1 : switchVideoFlag = 0;
+            //    arrStreams.reverse();
+            //    var play1Timer = setTimeout(function () {
+            //        PlayUrl1(arrStreams[0], arrStreams[1]);
+            //    }, 500);
+            //});
+
+            $("#sider1").val("50");
+            //视频全屏
+            //var viewFullScreen = document.getElementById("fullScreen");
+            //if (viewFullScreen) {
+            //    viewFullScreen.addEventListener("click", function () {
+            //        //if (switchVideoFlag == 0 || switchVideoFlag == 2) {
+            //            var docElm = document.getElementById("div2");
+            //        //    $(".LiveB_center .LiveB_center_video2").height("100%");
+            //        //} else {
+            //        //    var docElm = document.getElementById("div1");
+            //        //    $(".video1").height("100%").width("100%");
+            //        //    $(".object1").height("100%").width("100%").css({"margin-left":"0"});
+            //        //}
+            //        if (docElm.requestFullscreen) {
+            //            docElm.requestFullscreen();
+            //        }
+            //        else if (docElm.msRequestFullscreen) {
+            //            docElm.msRequestFullscreen();
+            //        }
+            //        else if (docElm.mozRequestFullScreen) {
+            //            docElm.mozRequestFullScreen();
+            //        }
+            //        else if (docElm.webkitRequestFullScreen) {
+            //            docElm.webkitRequestFullScreen();
+            //        } else {
+            //            alert("当前浏览器不支持全屏化操作！");
+            //        }
+            //    }, false);
+            //}
+
+            //esc退出全屏
+            $(document).keydown(function (event) {
+                if (event.keyCode == 27) {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    }
+                    else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    }
+                    else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    }
+                    else if (document.webkitCancelFullScreen) {
+                        document.webkitCancelFullScreen();
+                    } else {
+                        alert("当前浏览器不支持全屏化操作！");
+                    }
+                }
+            });
+            //音量条设置
+            $("#ex6").slider();
+            $("#ex6").on('slide', function (slideEvt) {
+                $("#LiveB_c_control_setMute").removeClass("LiveB_c_control_setNoMute").addClass("LiveB_c_control_setMute");
+                if (slideEvt.value == 0) {
+                    $("#LiveB_c_control_setMute").removeClass("LiveB_c_control_setMute").addClass("LiveB_c_control_setNoMute").attr({ "title": "取消静音" });
+                }
+                $(".LiveB_c_control_voiceNum").text(slideEvt.value);
+                SetVolume(slideEvt.value);
+            }).on('change', function (e) {
+                $("#LiveB_c_control_setMute").removeClass("LiveB_c_control_setNoMute").addClass("LiveB_c_control_setMute");
+                $(".LiveB_c_control_voiceNum").text(e.value.newValue);
+                if (slideEvt.value == 0) {
+                    $("#LiveB_c_control_setMute").removeClass("LiveB_c_control_setMute").addClass("LiveB_c_control_setNoMute").attr({ "title": "取消静音" });
+                }
+                SetVolume(e.value.newValue);
+            });
+        });
+
+        //播放视频
+        function PlayUrl(obj, obj1) {
+            //var smallObj = swfobject.getObjectById("LivePlayer");//小视频
+            //var bigObj = swfobject.getObjectById("LivePlayer1");//大视频
+
+            bgjudeTrue(obj, obj1);
+            smjudeTrue(obj, obj1);
+        }
+
+        //切换调用
+        function PlayUrl1(obj, obj1) {
+            var smallObj = swfobject.getObjectById("LivePlayer");//小视频
+            var bigObj = swfobject.getObjectById("LivePlayer1");//大视频
+            var valueNum = $(".LiveB_c_control_voiceNum").html();
+            var voiceNum = parseFloat(valueNum / 100).toFixed(2);
+            setTimeout(function () {
+                if (bigObj && typeof bigObj.PlayUrl != "undefined") {
+                    bigObj.PlayUrl(obj + ";0");
+                }
+                if (smallObj && typeof smallObj.PlayUrl != "undefined") {
+                    smallObj.PlayUrl(obj1 + ";" + voiceNum);
+                }
+            }, 0)
+        }
+
+        var bgSwfTimer;
+        function bgjudeTrue(obj, obj1) {
+            var bigObj = swfobject.getObjectById("LivePlayer1");//大视频
+            if (bigObj && typeof bigObj.PlayUrl != "undefined") {
+                bigObj.PlayUrl(obj + ";0");
+            } else {
+                bgSwfTimer = setTimeout(function () {
+                    bgjudeTrue(arrStreams[0], arrStreams[1]);
+                }, 1000);
+            }
+        }
+
+        var smSwfTimer;
+        function smjudeTrue(obj, obj1) {
+            var smallObj = swfobject.getObjectById("LivePlayer");//小视频
+            var valueNum = $(".LiveB_c_control_voiceNum").html();
+            var voiceNum = parseFloat(valueNum / 100).toFixed(2);
+            if (smallObj && typeof smallObj.PlayUrl != "undefined") {
+                smallObj.PlayUrl(obj1 + ";" + voiceNum);
+            } else {
+                smSwfTimer = setTimeout(function () {
+                    smjudeTrue(arrStreams[0], arrStreams[1]);
+                }, 1000);
+            }
+        }
+
+        //视频恢复
+        function Resume() {
+            var voiceNum = $(".LiveB_c_control_voiceNum").html();
+            var smallObj = swfobject.getObjectById("LivePlayer");//小视频
+            var bigObj = swfobject.getObjectById("LivePlayer1");//大视频
+            if (bigObj && typeof bigObj.Resume != "undefined") {
+                bigObj.Resume();
+            }
+            if (smallObj && typeof smallObj.Resume != "undefined") {
+                smallObj.Resume();
+            }
+        }
+
+        //视频暂停
+        function Pause() {
+            var smallObj = swfobject.getObjectById("LivePlayer");//小视频
+            var bigObj = swfobject.getObjectById("LivePlayer1");//大视频
+            if (bigObj && typeof bigObj.Pause != "undefined") {
+                bigObj.Pause();
+            }
+            if (smallObj && typeof smallObj.Pause != "undefined") {
+                smallObj.Pause();
+            }
+        }
+
+        //视频停止
+        function Stop() {
+            var smallObj = swfobject.getObjectById("LivePlayer");//小视频
+            var bigObj = swfobject.getObjectById("LivePlayer1");//大视频
+            if (smallObj && typeof smallObj.Stop != "undefined") {
+                smallObj.Stop();
+            }
+            if (bigObj && typeof bigObj.Stop != "undefined") {
+                bigObj.Stop();
+            }
+        }
+
+        //设置音量
+        function SetVolume(value) {
+            var smallObj = swfobject.getObjectById("LivePlayer");//小视频
+            var bigObj = swfobject.getObjectById("LivePlayer1");//大视频
+            var voiceNum = parseFloat(value / 100).toFixed(2);
+            //console.log(voiceNum);
+            if (bigObj && typeof bigObj.SetVolume != "undefined") {
+                bigObj.SetVolume(0);
+            }
+            if (smallObj && typeof smallObj.SetVolume != "undefined") {
+                smallObj.SetVolume(voiceNum);
+            }
+        }
+
+        var TestArr = [{ "item": "A" }, { "item": "B" }, { "item": "C" }, { "item": "D" }, { "item": "E" }, { "item": "F" }, { "item": "G" }, { "item": "H" }];//选项Title
+        //选项个数onchange
+        function changeItemNum(obj) {
+            num = obj.value;//数组长度
+            // alert(1);
+            var beforeHtml = "<div class='label'>设置选项题干：</div>";
+            var afterHtml = "";
+            var Html = "";
+            var sHtml = "";
+            var mHtml = "";
+            for (var i = 0; i < num; i++) {
+                Html += "<input type='radio' name='single' value='" + TestArr[i].item + "'/>" + TestArr[i].item;
+                mHtml += "<input type='checkbox' name='multi' value='" + TestArr[i].item + "'/>" + TestArr[i].item;
+                sHtml += "<p class='new-setting'><label class='label'>" + TestArr[i].item + "：</label><input type='text' id='item" + (i + 1) + "' style='width:232px; height:27px; border:1px solid #bfbfbf; font-size:12px;'/></p>";
+            }
+            $("#single").html(Html);
+            $("#multi").html(mHtml);
+            $(".itemABCD").html(beforeHtml + sHtml);
+        }
+        
+        //获取图片格式
+        function imagesFormatting(imagesData) {
+            Ajax.Post({
+                url: AjaxUrls.ImageUpload.GetSupportedExtensions,
+                success: function (data) {
+                    data = JSON.parse(data).join("|");
+                    data = data.replace(/\./g, "");
+                    $(".picBox").uploadImg({
+                        "picNum": 1,
+                        "width": 100,
+                        "height": 100,
+                        "name": "ImageFilePath",
+                        "format": data,
+                        "initialImages": imagesData
+                    });
+                }
+            })
+        }
+        
+        //老师端下发测验
+        function IsSue(obj, obj2, obj3) {
+            Ajax.ajax({
+                url: AjaxUrls.TestUrl.IsSue,
+                data: { QuestionID: obj, ScheduleID: obj2 },
+                notloadingImg: true
+            }).done(function (data) {
+                Dialogue.Success("下发成功!");
+                //$(".aa").remove();
+                //$(obj3).parent().remove();
+            }).fail(function (data) {
+                Dialogue.Error(data);
+            });
+        }
+
+        //老师端删除测验
+        function QuestionDel(obj, ScheduleID, obj1) {
+            Ajax.ajax({
+                url: AjaxUrls.TestUrl.QuestionDel,
+                data: { QuestionID: obj, ScheduleID: ScheduleID }
+            }).done(function (data) {
+                $(obj1).parent("p").parent("li").remove();
+                Dialogue.Success("删除成功!");
+            }).fail(function (data) {
+                Dialogue.Error(data);
+            });
+        }
+        
+        //学生端提交答案
+        function StudentSubmit(obj, obj2) {//obj 题目id  obj2  index
+            layer.close(popStuTestLayer);
+            $(this).removeAttr("onclick");
+            var ItemID, arr = [];
+            $("input[name='item" + obj + "']:checked").each(function (d, item) {
+                arr.push($(item).val())
+            });
+            if (arr.length > 0) {
+                Ajax.ajax({
+                    url: AjaxUrls.TestUrl.StudentSubmit,
+                    data: { ScheduleID: ScheduleID, StudentID: ID, TestID: obj, ItemID: arr.join(",") }
+                }).done(function (data) {
+                    //StuTestHisIDArr = [];
+                    //$(".sQuestionLi").remove();
+                    var StudentSubmitMsgTimer = setTimeout(function () {
+                        Dialogue.Success("提交成功！")
+                    }, 2000);
+                }).fail(function (data) {
+                    Dialogue.Error(data);
+                });
+            } else {
+                Dialogue.Error("请选择答案！");
+
+            };
+        }
+        //学生端批量提交
+        $("#mulSubmit").click(function () {
+            var Content = [];// = [{ "TestID": "11", "ItemID": "10,11,12" }, { "TestID": "12", "ItemID": "10,11,12" }];
+            var mulSubmitArr = [], mulSubmitSelectArr = [];//mulSubmitArr  存放选中的测验题目TestID    mulSubmitSelectArr  存放选中的测验题目的选项id
+            $('.s_new_test input[name="mulSubmit"]:checked').each(function () {
+                mulSubmitArr.push(this.id.split("_")[1]); //push 进数组
+            });
+            for (i = 0; i < mulSubmitArr.length; i++) {
+                if ($("input[name='item" + mulSubmitArr[i] + "']:checked").length > 0) {
+                    $("input[name='item" + mulSubmitArr[i] + "']:checked").each(function (d, item) {
+                        mulSubmitSelectArr.push({
+                            a: mulSubmitArr[i],
+                            b: $(item).val()
+                        });
+                    });
+                } else {
+                    Dialogue.Error($("#mulSubmit_" + mulSubmitArr[i]).siblings("span").html() + ",未作答!!!");
+                    return false;
+                }
+            }
+            //将id值相同的项的value合并---开始
+            var tempMap = {};
+            for (var i = 0; i < mulSubmitSelectArr.length; i++) {
+                var obj = mulSubmitSelectArr[i];
+                var key = obj["a"];
+                if (tempMap[key] != 0 && !tempMap[key]) {
+                    tempMap[key] = obj["b"];
+                } else {
+                    tempMap[key] = tempMap[key] + "," + obj["b"];
+                }
+            }
+            var arrM = [], arrContent = [];
+            for (key in tempMap) {
+                arrM.push({ a: key, b: tempMap[key + ''] });
+            }
+            for (i = 0; i < arrM.length; i++) {
+                arrContent.push({ "TestID": arrM[i]['a'], "ItemID": arrM[i]['b'] });
+            }
+            //将id值相同的项的value合并---结束
+            Content = JSON.stringify(arrContent);//arrContent是结果数组
+            if (arrContent.length > 0) {
+                Ajax.ajax({
+                    url: AjaxUrls.TestUrl.StudentSubmits,
+                    data: { ScheduleID: ScheduleID, StudentID: ID, Content: Content }
+                }).done(function (data) {
+                    //StuTestHisIDArr = [];
+                    //$(".sQuestionLi").remove();
+                    var StudentSubmitMsgTimer = setTimeout(function () {
+                        Dialogue.Success("提交成功！");
+                        $("#selectAllSubmit").prop("checked", false);
+                    }, 2000);
+                }).fail(function (data) {
+                    Dialogue.Error(data);
+                });
+            } else {
+                Dialogue.Error("请勾选您要提交的测验题目前的复选框，或勾选全选框！");
+            }
+        });
+
+
+        //获取录播状态
+        var IsMute, GetLiveAndRecordStateTimer;//IsMute 是否静音  
+        function GetLiveAndRecordState() {
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: "http://" + ipUrl + "/GetLiveAndRecordState",
+                success: function (request) {
+                    var data = request.Value;
+                    if (data.IsLiving == true && data.IsLiveRunning == true) {//直播开始-停止，暂停可点
+                        $("#StartLive").removeClass("start").addClass("startNo").removeAttr("onclick").html("开始");
+                        $("#PauseLive").removeClass("teaSetSuspendNo").addClass("teaSetSuspend").attr({ "onclick": "PauseLive()" });
+                        $("#StopLive").removeClass("teaSetStopNo").addClass("teaSetStop").attr({ "onclick": "StopLive()" });
+                    } else if (data.IsLiving == true && data.IsLiveRunning == false) {//直播开始，不运行(暂停状态)   恢复，停止可点
+                        $("#StartLive").removeClass("startNo").addClass("start").attr({ "onclick": "ResumeLive()" }).html("恢复");
+                        $("#PauseLive").removeClass("teaSetSuspend").addClass("teaSetSuspendNo").removeAttr("onclick");
+                        $("#StopLive").removeClass("teaSetStopNo").addClass("teaSetStop").attr({ "onclick": "StopLive()" });
+                    } else if (data.IsLiving == false && data.IsLiveRunning == false) {//直播未开始，不运行   开始可点
+                        $("#StartLive").removeClass("startNo").addClass("start").attr({ "onclick": "StartLive()" }).html("开始");
+                        $("#PauseLive").removeClass("teaSetSuspend").addClass("teaSetSuspendNo").removeAttr("onclick");
+                        $("#StopLive").removeClass("teaSetStop").addClass("teaSetStopNo").removeAttr("onclick");
+                    }
+                    if (data.IsRecording == true && data.IsRecordRunning == true) {//录制开始-停止，暂停可点
+                        $("#StartRecord").removeClass("start").addClass("startNo").removeAttr("onclick").html("开始");
+                        $("#PauseRecord").removeClass("teaSetSuspendNo").addClass("teaSetSuspend").attr({ "onclick": "PauseRecord()" });
+                        $("#StopRecord").removeClass("teaSetStopNo").addClass("teaSetStop").attr({ "onclick": "StopRecord()" });
+                    } else if (data.IsRecording == true && data.IsRecordRunning == false) {//录制开始，不运行   开始，停止可点
+                        $("#StartRecord").removeClass("startNo").addClass("start").attr({ "onclick": "ResumeRecord()" }).html("恢复");
+                        $("#PauseRecord").removeClass("teaSetSuspend").addClass("teaSetSuspendNo").removeAttr("onclick");
+                        $("#StopRecord").removeClass("teaSetStopNo").addClass("teaSetStop").attr({ "onclick": "StopRecord()" });
+                    } else if (data.IsRecording == false && data.IsRecordRunning == false) {//录制未开始，不运行   开始可点
+                        $("#StartRecord").removeClass("startNo").addClass("start").attr({ "onclick": "StartRecord()" }).html("开始");
+                        $("#PauseRecord").removeClass("teaSetSuspend").addClass("teaSetSuspendNo").removeAttr("onclick");
+                        $("#StopRecord").removeClass("teaSetStop").addClass("teaSetStopNo").removeAttr("onclick");
+                    }
+                    IsMute = data.IsMute;
+                    if (data.ScreenVideos != null) {//演示文稿
+                        //data.ScreenVideos.reverse();
+                        var ScreenVideosLength = $("#ScreenVideos option").length;
+                        for (var i = ScreenVideosLength; i < data.ScreenVideos.length; i++) {
+                            $("#ScreenVideos").append("<option value='" + data.ScreenVideos[i].ID + "' selected='" + data.ScreenVideos[i].IsActive + "'>" + data.ScreenVideos[i].Name + "</option>");
+                        }
+                        for (var i = 0; i < data.ScreenVideos.length; i++) {
+                            $("#ScreenVideos").find("option").eq(i).selected = data.ScreenVideos[i].IsActive;
+                        }
+                    }
+                    if (data.StreamVideos != null) {//暖场视频
+                        //data.StreamVideos.reverse();
+                        var StreamVideosLength = $("#StreamVideos option").length;
+                        for (var i = StreamVideosLength; i < data.StreamVideos.length; i++) {
+                            $("#StreamVideos").append("<option value='" + data.StreamVideos[i].ID + "' selected='" + data.StreamVideos[i].IsRunning + "'>" + data.StreamVideos[i].Name + "</option>");
+                        }
+                        for (var i = 0; i < data.StreamVideos.length; i++) {
+                            $("#ScreenVideos").find("option").eq(i).selected = data.StreamVideos[i].IsRunning;
+                        }
+                    }
+                    if (data.CameraVideos != null) {//外接设备
+                        //data.CameraVideos.reverse();
+                        var CameraVideosLength = $("#CameraVideos option").length;
+                        for (var i = CameraVideosLength; i < data.CameraVideos.length; i++) {
+                            $("#CameraVideos").append("<option value='" + data.CameraVideos[i].ID + "' selected='" + data.CameraVideos[i].IsActive + "'>" + data.CameraVideos[i].Name + "</option>");
+                        }
+                        for (var i = 0; i < data.CameraVideos.length; i++) {
+                            $("#ScreenVideos").find("option").eq(i).selected = data.CameraVideos[i].IsActive;
+                        }
+                    }
+                    clearTimeout(GetLiveAndRecordStateTimer);
+                    GetLiveAndRecordStateTimer = setTimeout(function () {
+                        GetLiveAndRecordState();
+                    }, 1000)
+                },
+                error: function () {
+                    clearTimeout(GetLiveAndRecordStateTimer);
+                    GetLiveAndRecordStateTimer = setTimeout(function () {
+                        GetLiveAndRecordState();
+                    }, 1000)
+                }
+            });
+        }
+        
+        //开始直播
+        function StartLive() {
+            Ajax.ajax({
+                type: "get",
+                url: "http://" + ipUrl + "/StartLive"
+            }).done(function (data) {
+                Dialogue.Success("开启直播成功");
+            }).fail(function (data) {
+                Dialogue.Error(data);
+            })
+        }
+
+        //暂停直播
+        function PauseLive() {
+            Ajax.ajax({
+                type: "get",
+                url: "http://" + ipUrl + "/PauseLive"
+            }).done(function (data) {
+                Dialogue.Success("暂停直播成功");
+                var playTimer = setTimeout(function () {
+                    pause();
+                }, 500);
+            }).fail(function (data) {
+                Dialogue.Error(data);
+            })
+        }
+
+        //恢复直播
+        function ResumeLive() {
+            Ajax.ajax({
+                type: "get",
+                url: "http://" + ipUrl + "/ResumeLive"
+            }).done(function (data) {
+                Dialogue.Success("恢复直播成功");
+                var playTimer = setTimeout(function () {
+                    Resume();
+                }, 500);
+            }).fail(function (data) {
+                Dialogue.Error(data.Message);
+            })
+        }
+
+        //停止直播
+        function StopLive() {
+            Dialogue.Layer({
+                title: '停止直播',
+                btn: ['确定', '取消'],
+                btnAlign: 'c',
+                content: '确定停止直播吗？',
+                yes: function () {
+                    layer.closeAll();
+                    Ajax.ajax({
+                        type: "get",
+                        url: "http://" + ipUrl + "/StopLive",
+                    }).done(function (data) {
+                        layer.closeAll();
+                        Dialogue.Success("停止直播成功");
+                    }).fail(function (data) {
+                        Dialogue.Error(data);
+                    })
+                }
+            })
+        }
+
+        //开始录制
+        function StartRecord() {
+            Ajax.ajax({
+                type: "get",
+                url: "http://" + ipUrl + "/StartRecord"
+            }).done(function (data) {
+                Dialogue.Success("开始录制成功");
+            }).fail(function (data) {
+                Dialogue.Error(data);
+            })
+        }
+
+        //暂停录制
+        function PauseRecord() {
+            Ajax.ajax({
+                type: "get",
+                url: "http://" + ipUrl + "/PauseRecord"
+            }).done(function (data) {
+                Dialogue.Success("暂停录制成功");
+            }).fail(function (data) {
+                Dialogue.Error(data);
+            })
+        }
+
+        //恢复录制
+        function ResumeRecord() {
+            Ajax.ajax({
+                type: "get",
+                url: "http://" + ipUrl + "/ResumeRecord"
+            }).done(function (data) {
+                Dialogue.Success("恢复录制成功");
+            }).fail(function (data) {
+                Dialogue.Error(data);
+            })
+        }
+
+        //停止录制
+        function StopRecord() {
+            Ajax.ajax({
+                type: "get",
+                url: "http://" + ipUrl + "/StopRecord"
+            }).done(function (data) {
+                Dialogue.Success("停止录制成功");
+            }).fail(function (data) {
+                Dialogue.Error(data);
+            })
+        }
+
+        //切换客户端上的视频源
+        function switchVideo(obj) {
+            var ScreenVideos = $("#ScreenVideos").val();//演示文稿
+            var StreamVideos = $("#StreamVideos").val();//暖场视频
+            var CameraVideos = $("#CameraVideos").val();//外接设备
+            var url = "";
+            if (obj == 1) {
+                url = "http://" + ipUrl + "/PlayScreenVideo?sourceID=" + ScreenVideos;
+            } else if (obj == 2) {
+                url = "http://" + ipUrl + "/PlayStreamVideo?sourceID=" + StreamVideos;
+            } else if (obj == 3) {
+                url = "http://" + ipUrl + "/PlayCameraVideo?sourceID=" + CameraVideos;
+            }
+            Ajax.ajax({
+                type: "get",
+                url: url
+            }).done(function (data) {
+                Dialogue.Success("切换视频源成功");
+            }).fail(function (data) {
+                Dialogue.Error(data);
+            })
+        }
+        
+        //删除文档
+        function DocumentDel(obj, obj1) {
+            Ajax.ajax({
+                url: AjaxUrls.LiveInfo.DocumentDel,
+                data: { LiveID: LiveID, DocumentID: obj }
+            }).done(function (data) {
+                Dialogue.Success("删除成功!");
+                $(obj1).parent("span").parent("li").remove();
+            }).fail(function (data) {
+                Dialogue.Error(data);
+            });
+        }
+        
+        //增加观看记录-调起页面定时器
+        function AddViewRecord() {
+            Ajax.ajax({
+                url: AjaxUrls.LiveInfo.AddViewRecord,
+                data: { LiveID: LiveID, Name: userData.Name },
+            }).done(function (data) {//data:RecordID
+                //TimerResult(data, -1, 0, -1, -1, 0);
+                TimerResult(data, MaxAskTime, MaxCommentsTime, -1, -1, 0);
+            }).fail(function (data) {
+                if (isTeacherOrStudents()) {
+                    TimerResult(0, MaxAskTime, MaxCommentsTime, -1, -1, 0);
+                }
+            });
+        }
+
+        /*签到倒计时代码*/
+        var cutDownTimer;
+        function cutDownTime(obj, dom) {
+            var day = 0,
+            hour = 0,
+            minute = 0,
+            second = 0; //时间默认值		
+            if (obj > 0) {
+                hour = Math.floor(obj / (60 * 60)) - (day * 24);
+                minute = Math.floor(obj / 60) - (day * 24 * 60) - (hour * 60);
+                second = Math.floor(obj) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+            }
+            if (hour <= 9) hour = '0' + hour;
+            if (minute <= 9) minute = '0' + minute;
+            if (second <= 9) second = '0' + second;
+            $(dom).html(hour + ":" + minute + ":" + second);
+            obj--;
+            if (obj == 0) {
+                return;
+            }
+            clearTimeout(cutDownTimer);
+            cutDownTimer = setTimeout(function () {
+                cutDownTime(obj, dom);
+            }, 1000);
+        }
+
+        /*老师测验倒计时代码*/
+        function teaTestCutDownTime(timerID, obj, dom) {
+            if (timerID) {
+                window.clearTimeout(timerID);
+            }
+            var day = 0,
+            hour = 0,
+            minute = 0,
+            second = 0; //时间默认值		
+            if (obj > 0) {
+                hour = Math.floor(obj / (60 * 60)) - (day * 24);
+                minute = Math.floor(obj / 60) - (day * 24 * 60) - (hour * 60);
+                second = Math.floor(obj) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+            }
+            if (hour <= 9) hour = '0' + hour;
+            if (minute <= 9) minute = '0' + minute;
+            if (second <= 9) second = '0' + second;
+            obj--;
+            $(dom).html("<b style='color:red;'>作答状态：" + hour + ":" + minute + ":" + second + "</b>");
+            if (obj == 0) {
+                window.clearTimeout(timerID);
+                return;
+            }
+            //clearTimeout(teaTestCutDownTimer);
+            var nextTimerID = setTimeout(function () {
+                teaTestCutDownTime(nextTimerID, obj, dom);
+            }, 1000);
+        }
+
+        /*学生测验倒计时代码*/
+        function stuTestCutDownTime(stutimerID, obj, dom) {
+            if (stutimerID) {
+                window.clearTimeout(stutimerID);
+            }
+
+            var day = 0,
+            hour = 0,
+            minute = 0,
+            second = 0; //时间默认值		
+            if (obj > 0) {
+                hour = Math.floor(obj / (60 * 60)) - (day * 24);
+                minute = Math.floor(obj / 60) - (day * 24 * 60) - (hour * 60);
+                second = Math.floor(obj) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+            }
+            if (hour <= 9) hour = '0' + hour;
+            if (minute <= 9) minute = '0' + minute;
+            if (second <= 9) second = '0' + second;
+            obj--;
+            if (obj == 0) {
+                clearTimeout(stutimerID);
+                return;
+            }
+            $(dom).html(hour + ":" + minute + ":" + second);
+            var nextStuTimerID = setTimeout(function () {
+                stuTestCutDownTime(nextStuTimerID, obj, dom);
+            }, 1000);
+        }
+
+    
