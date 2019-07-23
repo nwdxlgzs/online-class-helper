@@ -1,7 +1,8 @@
 <版本名>2.4</版本名>
 <版本>4</版本>
 <内容>
-软件基本完成。
+1，软件基本完工。
+2，这是蓝奏云线路，比github线路快点。
 </内容>
 <原生内核链接>https://www.lanzous.com/tp/i54kdhe</原生内核链接>
 <X5内核链接>https://www.lanzous.com/tp/i54kdcj</X5内核链接>
