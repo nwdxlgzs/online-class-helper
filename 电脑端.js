@@ -1,3 +1,4 @@
+
 function auto_click() {
     var date = new Date()
     var h = date.getHours();
@@ -20,6 +21,17 @@ function auto_click() {
             //debug.log("程序进行自动点击签到。  时间戳：" + h + "点" + m + "分" + s + "秒");
             log.i("程序进行自动点击签到。  时间戳：" + h + "点" + m + "分" + s + "秒");
         };
+        if (spanbtn.innerHTML == "请完成测验") {
+            //spanbtn.click();
+            //debug.log("于是决定不点击，等待用户反应。  时间戳：" + h + "点" + m + "分" + s + "秒");
+            log.l("于是决定不点击，等待用户反应。  时间戳：" + h + "点" + m + "分" + s + "秒");
+        };
+        if (spanbtn.innerHTML == "我知道了") {
+            //spanbtn.click();
+            //debug.log("是问题需要回复，于是决定不点击，等待用户反应。  时间戳：" + h + "点" + m + "分" + s + "秒");
+            log.l("是问题需要回复，于是决定不点击，等待用户反应。  时间戳：" + h + "点" + m + "分" + s + "秒");
+        };
+    
     };
     click_btn = setTimeout(auto_click, 30000);
 };
