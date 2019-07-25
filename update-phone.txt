@@ -1,10 +1,11 @@
-<版本名>2.4</版本名>
-<版本>4</版本>
+<版本名>2.6</版本名>
+<版本>6</版本>
 <内容>
-1，软件基本完工。
-2，此为github线路。网速不咋地，建议去用蓝奏云线路更新。
+1，如果直播课堂不改动，程序将不去更新了。
+2，软件最后把内置浏览器写完了，基本完工了。对于函数控制台，我能做到了就是这么多了。
+3，此为github线路。网速不咋地，建议去用蓝奏云线路更新。
 </内容>
-<原生内核链接>https://github.com/nwdxlgzs/online-class-helper/raw/update/phone_webview/密云直播课堂助手_2.4_原生内核.apk</原生内核链接>
-<X5内核链接>https://github.com/nwdxlgzs/online-class-helper/raw/update/phone_X5/密云直播课堂助手_2.4_X5内核.apk</X5内核链接>
+<原生内核链接>https://github.com/nwdxlgzs/online-class-helper/raw/update/phone_webview/密云直播课堂助手_2.6_原生内核.apk</原生内核链接>
+<X5内核链接>https://github.com/nwdxlgzs/online-class-helper/raw/update/phone_X5/密云直播课堂助手_2.6_X5内核.apk</X5内核链接>
 <兼容链接>null</兼容链接>
 链接说明:当兼容链接是null时，原生内核链接和X5内核链接才有效，这是为了准备兼容FA2.0。
