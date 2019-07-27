@@ -1,7 +1,7 @@
 /*
 此页面控制PC端电脑能否使用软件。
 */
-
+alert("qwq")
 
 //重定向
 //window.location.href="https://github.com/nwdxlgzs/online-class-helper"; 
