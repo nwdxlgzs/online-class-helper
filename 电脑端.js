@@ -16,6 +16,11 @@ function auto_click() {
         var spanbtn = getFirstChildNode(aEle);
         //debug.log("程序发现<" + spanbtn.innerHTML + ">按钮。  时间戳：" + h + "点" + m + "分" + s + "秒");
         log.i("程序发现<" + spanbtn.innerHTML + ">按钮。  时间戳：" + h + "点" + m + "分" + s + "秒");
+        var secondbtn=aEle.getElementsByTagName("span")[1]; 
+       if (secondbtn != null || secondbtn != undefined) {
+              //debug.log("程序发现<" + secondbtn.innerHTML + ">按钮。  时间戳：" + h + "点" + m + "分" + s + "秒");
+              log.i("程序发现<" + secondbtn.innerHTML + ">按钮。  时间戳：" + h + "点" + m + "分" + s + "秒");
+       };
         if (spanbtn.innerHTML == "请完成签到") {
             spanbtn.click();
             //debug.log("程序进行自动点击签到。  时间戳：" + h + "点" + m + "分" + s + "秒");
