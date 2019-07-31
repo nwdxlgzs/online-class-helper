@@ -5,6 +5,18 @@
     var s = date.getSeconds();
     debug.log("运行中。  时间戳：" + h + "点" + m + "分" + s + "秒");
     var aEle = document.getElementsByClassName('layui-m-layerbtn')[0];
+    var btn_a = document.querySelectorAll('span[type]')[0];
+    if (btn_a != null || btn_a != undefined) {
+        debug.log("程序发现<" + btn_a.innerHTML + ">按钮。  时间戳：" + h + "点" + m + "分" + s + "秒");
+        var btn_b = document.querySelectorAll('span[type]')[1];
+        if (btn_b != null || btn_b != undefined) {
+            debug.log("程序发现<" + btn_b.innerHTML + ">按钮。  时间戳：" + h + "点" + m + "分" + s + "秒");
+        };
+        if (btn_a.innerHTML == "签到") {
+            btn_a.click();
+            debug.log("程序进行自动点击签到。  时间戳：" + h + "点" + m + "分" + s + "秒");
+        };
+    };
     if (aEle != null || aEle != undefined) {
         var spanbtn = getFirstChildNode(aEle);
         debug.log("程序发现<" + spanbtn.innerHTML + ">按钮。  时间戳：" + h + "点" + m + "分" + s + "秒");
