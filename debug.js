@@ -8,7 +8,7 @@ var DebugJS = DebugJS || function() {
   this.v = '201907120035';
 
   this.DEFAULT_OPTIONS = {
-    visible: false,
+    visible: true,
     keyAssign: {
       key: 113,
       shift: undefined,
