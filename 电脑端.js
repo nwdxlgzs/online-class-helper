@@ -1,4 +1,3 @@
-
 function auto_click() {
     var date = new Date()
     var h = date.getHours();
@@ -7,20 +6,36 @@ function auto_click() {
     //debug.log("运行中。  时间戳：" + h + "点" + m + "分" + s + "秒");
     log.i("运行中。  时间戳：" + h + "点" + m + "分" + s + "秒");
     var aEle = document.getElementsByClassName('layui-layer-btn0')[0];
+    var btn_a = document.querySelectorAll('span[type]')[0];
+    if (btn_a != null || btn_a != undefined) {
+        //debug.log("程序发现<" + btn_a.innerHTML + ">按钮。  时间戳：" + h + "点" + m + "分" + s + "秒");
+        log.i("程序发现<" + btn_a.innerHTML + ">按钮。  时间戳：" + h + "点" + m + "分" + s + "秒");
+        var btn_b = document.querySelectorAll('span[type]')[1];
+        if (btn_b != null || btn_b != undefined) {
+            //debug.log("程序发现<" + btn_b.innerHTML + ">按钮。  时间戳：" + h + "点" + m + "分" + s + "秒");
+            log.i("程序发现<" + btn_b.innerHTML + ">按钮。  时间戳：" + h + "点" + m + "分" + s + "秒");
+        };
+        if (btn_a.innerHTML == "请完成签到") {
+            btn_a.click();
+            //debug.log("程序进行自动点击签到。  时间戳：" + h + "点" + m + "分" + s + "秒");
+            log.i("程序进行自动点击签到。  时间戳：" + h + "点" + m + "分" + s + "秒");
+        };
+        if (btn_a.innerHTML == "请完成测验") {
+            //btn_a.click();
+            //debug.log("程序进行发现测验按钮，于是决定不点击，等待用户反应。  时间戳：" + h + "点" + m + "分" + s + "秒");
+            log.i("程序进行发现测验按钮，于是决定不点击，等待用户反应。  时间戳：" + h + "点" + m + "分" + s + "秒");
+        };
+
+    };
     if (aEle != null || aEle != undefined) {
-        /*
-        //老版本模拟点击方案（class）
-        document.getElementsByClassName('blinkBg')[0].click();
-        document.getElementsByClassName('blinkBg')[1].click();
-        */
         var spanbtn = getFirstChildNode(aEle);
         //debug.log("程序发现<" + spanbtn.innerHTML + ">按钮。  时间戳：" + h + "点" + m + "分" + s + "秒");
         log.i("程序发现<" + spanbtn.innerHTML + ">按钮。  时间戳：" + h + "点" + m + "分" + s + "秒");
-        var secondbtn=aEle.getElementsByTagName("span")[1]; 
-       if (secondbtn != null || secondbtn != undefined) {
-              //debug.log("程序发现<" + secondbtn.innerHTML + ">按钮。  时间戳：" + h + "点" + m + "分" + s + "秒");
-              log.i("程序发现<" + secondbtn.innerHTML + ">按钮。  时间戳：" + h + "点" + m + "分" + s + "秒");
-       };
+        var secondbtn = aEle.getElementsByTagName("span")[1];
+        if (secondbtn != null || secondbtn != undefined) {
+            //debug.log("程序发现<" + secondbtn.innerHTML + ">按钮。  时间戳：" + h + "点" + m + "分" + s + "秒");
+            log.i("程序发现<" + secondbtn.innerHTML + ">按钮。  时间戳：" + h + "点" + m + "分" + s + "秒");
+        };
         if (spanbtn.innerHTML == "请完成签到") {
             spanbtn.click();
             //debug.log("程序进行自动点击签到。  时间戳：" + h + "点" + m + "分" + s + "秒");
@@ -28,22 +43,21 @@ function auto_click() {
         };
         if (spanbtn.innerHTML == "请完成测验") {
             //spanbtn.click();
-            //debug.log("于是决定不点击，等待用户反应。  时间戳：" + h + "点" + m + "分" + s + "秒");
-            log.l("于是决定不点击，等待用户反应。  时间戳：" + h + "点" + m + "分" + s + "秒");
+            //debug.log("程序进行发现测验按钮，于是决定不点击，等待用户反应。  时间戳：" + h + "点" + m + "分" + s + "秒");
+            log.i("程序进行发现测验按钮，于是决定不点击，等待用户反应。  时间戳：" + h + "点" + m + "分" + s + "秒");
         };
-        if (spanbtn.innerHTML == "我知道了") {
-            //spanbtn.click();
-            //debug.log("是问题需要回复，于是决定不点击，等待用户反应。  时间戳：" + h + "点" + m + "分" + s + "秒");
-            log.l("是问题需要回复，于是决定不点击，等待用户反应。  时间戳：" + h + "点" + m + "分" + s + "秒");
-        };
-    
+
+        //老版本模拟点击方案（class）
+        document.getElementsByClassName('blinkBg')[0].click();
+        document.getElementsByClassName('blinkBg')[1].click();
+
     };
     click_btn = setTimeout(auto_click, 30000);
 };
 window.onload = function () {
     auto_click();
     //debug.success("函数正在执行，30秒一次！由于采用注入JS，debug.js不能完整运行，而且为了调起你所看见的这个控制台，模拟按了F2来启动这个页面，但是这个函数也有问题…控制台会拦截原生控制台消息，脚本错误也有可能是直播课堂那一方的…但是放心，模拟点击函数没有错误哦（当有运行中的提示时有签到弹窗，程序没有点击，而是报错才是出错（注意时间戳）。可以等30秒看看是不是还在打印运行中确定函数是不是还在运行。）。debug.js的弹窗有问题，碰到按钮提示报错，这个无关紧要。");
-    log.w("函数正在执行，30秒一次！由于采用注入JS，debug.js不能完整运行，而且为了调起你所看见的这个控制台，模拟按了F2来启动这个页面，但是这个函数也有问题…控制台会拦截原生控制台消息，脚本错误也有可能是直播课堂那一方的…但是放心，模拟点击函数没有错误哦（当有运行中的提示时有签到弹窗，程序没有点击，而是报错才是出错（注意时间戳）。可以等30秒看看是不是还在打印运行中确定函数是不是还在运行。）。debug.js的弹窗有问题，碰到按钮提示报错，这个无关紧要。"); 
+    log.w("函数正在执行，30秒一次！由于采用注入JS，debug.js不能完整运行，而且为了调起你所看见的这个控制台，模拟按了F2来启动这个页面，但是这个函数也有问题…控制台会拦截原生控制台消息，脚本错误也有可能是直播课堂那一方的…但是放心，模拟点击函数没有错误哦（当有运行中的提示时有签到弹窗，程序没有点击，而是报错才是出错（注意时间戳）。可以等30秒看看是不是还在打印运行中确定函数是不是还在运行。）。debug.js的弹窗有问题，碰到按钮提示报错，这个无关紧要。");
 };
 
 function getFirstChildNode(box) {
