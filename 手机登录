@@ -1,0 +1,4 @@
+//手机登录
+//账户=""
+//密码=""
+//javascript:$(".userLogin .username").val(账户); $(".userLogin .password").val(密码);var btn_a = document.querySelectorAll('span[type]')[0];if (btn_a != null || btn_a != undefined) {  var btn_b = document.querySelectorAll('span[type]')[1];btn_a.click();};
