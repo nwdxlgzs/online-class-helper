@@ -2,3 +2,7 @@
 //账户=""
 //密码=""
 //javascript:$(".userLogin .username").val(账户); $(".userLogin .password").val(密码);var btn_a = document.querySelectorAll('span[type]')[0];if (btn_a != null || btn_a != undefined) {  var btn_b = document.querySelectorAll('span[type]')[1];btn_a.click();};
+
+
+
+<div class="layui-m-layersection"><div class="layui-m-layerchild  layui-m-anim-up"><h3 style="background-color:#25dba1; color:#fff;">用户登陆</h3><div class="layui-m-layercont"><ul class="userLogin"><li><input type="text" class="username" placeholder="用户名"></li><li style="margin-bottom: 20px;"><input type="password" class="password" placeholder="密码"></li></ul></div><div class="layui-m-layerbtn"><span yes="" type="1">确认</span></div></div></div>
