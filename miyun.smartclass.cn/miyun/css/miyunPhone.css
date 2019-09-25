@@ -1,0 +1,495 @@
+﻿* {
+    outline: none;
+}
+
+body {
+    position: relative;
+}
+
+.top_position {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: #e5e5e5;
+}
+
+.big_title {
+    height: 0.6rem;
+    background: #25dba1;
+    text-align: center;
+    color: #fff;
+    font-size: 0.24rem;
+    line-height: 0.6rem;
+    position:relative;
+}
+
+.small_title {
+    height: 0.5rem;
+    background: #fff;
+    color: #333333;
+    padding: 0 10px;
+    line-height: 0.5rem;
+    overflow: hidden;
+}
+
+    .small_title span {
+        font-size: 0.2rem;
+    }
+
+    /*.small_title i {
+                line-height: 0.4rem;
+            }*/
+    .small_title .share {
+        float: right;
+        width: 0.19rem;
+        height: 0.18rem;
+        background: url("/images/phone/share-btn.png") no-repeat 0 0;
+        background-size: cover;
+        margin-top: 0.1rem;
+    }
+
+.video_wrap {
+    width: 100%;
+    height: 3.6rem;
+    overflow: hidden;
+}
+
+.video {
+    width: 100%;
+    height: 3.6rem;
+    background: url("/images/phone/video-bg.png") no-repeat 0 0;
+    background-size: contain;
+    object-fit: fill;
+}
+
+.control_bar {
+    height: 0.4rem;
+    background: #fff;
+    line-height: 0.4rem;
+    padding-right: 0.08rem;
+}
+
+    .control_bar .item {
+        padding: 0 0.12rem 0 0.14rem;
+    }
+
+        .control_bar .item i {
+            display: inline-block;
+            color: #999;
+            margin-right: 0.05rem;
+            width: 0.26rem;
+            height: 0.19rem;
+            vertical-align: middle;
+        }
+
+        .control_bar .item .eye {
+            background: url("/images/phone/eye-btn.png") no-repeat 0 0;
+            background-size: cover;
+        }
+
+        .control_bar .item .commenting {
+            background: url("/images/phone/comment-btn.png") no-repeat 0 0;
+            background-size: cover;
+        }
+
+        .control_bar .item span {
+            color: #666;
+            font-size: 0.2rem;
+            display: inline-block;
+            vertical-align: middle;
+            margin-top: 0px;
+        }
+
+    .control_bar .btn {
+        height: 0.25rem;
+        border: 1px solid #25dba1;
+        border-radius: 5px;
+        line-height: 0.25rem;
+        text-align: center;
+        padding: 0 0.12rem;
+        color: #25dba1;
+        font-size: 12px;
+        margin: 0.05rem 0 0 0.1rem;
+    }
+
+.tab {
+    margin: 0.1rem 0;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    background: #FFF;
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+    /*display: flex;
+
+            align-items: center;*/
+}
+
+    .tab li {
+        color: #666;
+        /*width: 33.0%;*/
+        text-align: center;
+        color: #666;
+        -webkit-flex: 1;
+        flex: 1;
+        font-size: 0.24rem;
+    }
+
+    .tab .has_choose {
+        color: #25dba1;
+        position: relative;
+    }
+
+        .tab .has_choose:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            height: 2px;
+            width: 42.2%;
+            background: #25dba1;
+            left: 28.9%;
+        }
+
+.summery_wrap img, .company_wrap img {
+    width: 100%;
+}
+
+.comments_wrap, .askAndAnswer_wrap, .material_wrap, .summery_wrap {
+    background: #fff;
+    padding: 0 0.25rem 0.6rem;
+    min-height: 6.3rem;
+}
+
+    .comments_wrap li, .askAndAnswer_wrap li {
+        border-bottom: 1px solid #e5e5e5;
+        padding: 0.25rem 0 0.2rem;
+    }
+
+        .comments_wrap li .user_head_img, .askAndAnswer_wrap li .user_head_img {
+            width: 0.6rem;
+            height: 0.6rem;
+        }
+
+        .comments_wrap li .comment_middle, .askAndAnswer_wrap li .comment_middle {
+            padding: 0.03rem 0 0 0.2rem;
+            width: 60%;
+        }
+
+        .comments_wrap li .user_head_img img, .askAndAnswer_wrap li .user_head_img img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .comments_wrap li .comment_middle .user_name, .askAndAnswer_wrap li .comment_middle .user_name {
+            color: #666;
+            font-size: 0.2rem;
+        }
+
+        .comments_wrap li .comment_middle .comment_area, .askAndAnswer_wrap li .comment_middle .comment_area {
+            line-height: 0.33rem;
+            color: #666;
+            font-size: 0.18rem;
+        }
+
+        .comments_wrap li .comment_date, .askAndAnswer_wrap li .comment_date {
+            color: #999;
+            font-size: 0.15rem;
+            height: 0.36rem;
+            line-height: 0.36rem;
+        }
+
+.comment_input_area {
+    position: fixed;
+    bottom: 0;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    background: #fff;
+    padding: 0 0.3rem;
+}
+
+    .comment_input_area input {
+        width: 5rem;
+        height: 0.5rem;
+        line-height: 0.5rem;
+        font-size: 16px;
+        border: none;
+        border-bottom: 1px solid #999;
+        background: #fff;
+    }
+
+.layui-m-layerchild, .layui-m-layerchild {
+    background-color: none !important;
+}
+
+.comment_input_area span {
+    display: inline-block;
+    width: 0.7rem;
+    height: 0.5rem;
+    line-height: 0.5rem;
+    text-align: center;
+    background: #25dba1;
+    color: #fff;
+    font-size: 16px;
+    margin-left: 5px;
+    border-radius: 5px;
+}
+
+.layui-m-layer0 .layui-m-layerchild {
+    /*width:50% !important;*/
+    width: auto !important;
+    /*max-width:640px !important;*/
+}
+
+.nocomments {
+    background: url("/images/phone/nocomments.png") no-repeat 50% 1rem;
+    background-color: #fff;
+}
+
+.noaskAndAnswer {
+    background: url("/images/phone/noAskAnswer.png") no-repeat 50% 1rem;
+    background-color: #fff;
+}
+
+.nomaterial_wrap {
+    background: url("/images/phone/noResource.png") no-repeat 50% 1rem;
+    background-color: #fff;
+}
+
+.nosummary {
+    background: url("/images/phone/noSummary.png") no-repeat 50% 1rem;
+    background-color: #fff;
+}
+
+.bottom_wrap {
+    overflow-y: scroll;
+}
+
+.material_wrap li {
+    font-size: 14px;
+    color: #333;
+    line-height: 0.55rem;
+    height: 0.55rem;
+    width: 100%;
+}
+
+    .material_wrap li:nth-child(2n+1) {
+        background: rgba(37,219,161,0.3);
+    }
+
+    .material_wrap li p {
+        width: 70%;
+        float: left;
+        font-size: 0.15rem;
+        height: 0.55rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding-left: 5px;
+    }
+
+    .material_wrap li a {
+        color: #333;
+        font-size: 0.15rem;
+    }
+
+    .material_wrap li span {
+        display: inline-block;
+        padding-left: 30px;
+        padding-right: 5px;
+        float: right;
+    }
+
+.userLogin input {
+    width: 100%;
+    height: 0.5rem;
+    margin-top: 0.15rem;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.layui-m-layerbtn span[yes] {
+    color: #40AFFE;
+}
+
+.smallVideoWrap {
+    position: fixed;
+    width: 150px;
+    height: 75px;
+    left: 10px;
+    bottom: 10px;
+    z-index: 999;
+}
+
+    .smallVideoWrap video {
+        width: 100%;
+        height: 100%;
+        background: url("/images/phone/video-bg.png") no-repeat;
+        background-size: cover;
+    }
+        .forbidBodyScroll{
+            overflow:hidden !important;
+        }
+
+span {
+    display:inline-block;
+}
+.reply{
+    border:1px solid #ccc;
+    height: 25px;
+    margin-top: 5px;
+    width: 100%;
+    display:none;
+}
+        /*直播页面左下-问答区*/
+.comments_wrap li {
+    border-bottom:1px solid #e5e5e5;
+    width:100%;
+    padding:10px 0 20px 0;
+}
+.comments_wrap .pic {
+    margin-top:15px;
+    height:35px;
+    /*width:38px;
+    height:38px;*/
+}
+.comments_wrap .pic img {
+   float:left;   
+   height:38px; 
+   width:38px;
+}
+.comments_wrap .pic span{
+    line-height:20px;
+    display:inline-block;
+    float:left;
+    font-size:12px;
+    color:#666;
+    padding-left:10px;
+}
+.comments_wrap .questionIcon,.askAndAnswer_wrap .questionIcon  {
+    clear:both;
+    text-align:center; 
+    cursor:pointer;
+}
+.comments_wrap .questionIcon :hover {
+    color:#15c288;    
+}
+.comments_wrap .questionIcon b,.askAndAnswer_wrap .questionIcon b {
+    font-weight:normal;
+    font-size:14px;
+    color:#666;
+}
+.comments_wrap .questionNei input {
+    width:80%;
+    height:30px;
+    border:1px solid #cccccc;
+    margin-left:48px;
+}
+.comments_wrap p {
+    overflow:hidden;
+    margin-top:5px;
+}
+.comments_wrap p span{
+    /*display:inline-block;*/
+    padding:0 6px;
+    color:#666;
+    font-size:12px;
+    float:right;
+    cursor:pointer;
+}
+.comments_wrap p span:hover {
+    color:#15c288;
+    cursor:pointer;
+}
+.comments_wrap .leftB_ul3_issue {
+    font-size:14px;
+    color:#333;
+    padding-left:48px;
+    margin:-10px 0 30px 0;
+}
+.comments_wrap .leftB_ul3_date {
+    color:#666;
+    font-size:12px;
+    padding-left:48px;
+}
+.comments_wrap .replay,.askAndAnswer_wrap .replay {
+   color:#666;
+    font-size:12px;
+    /*padding-left:48px;*/
+    padding-top:10px;
+}
+.comments_wrap .replay b,.askAndAnswer_wrap .replay b{
+    color:#15c288;
+    font-size:12px;
+    padding:0 2px;
+    font-weight:normal;
+}
+/*直播页面左下-评论区*/
+.askAndAnswer_wrap li {
+    border-bottom:1px solid #e5e5e5;
+    width:100%;
+    padding:10px 0 20px 0;
+}
+.askAndAnswer_wrap .pic {
+    margin-top:15px;
+    height:35px;
+    /*width:38px;*/
+}
+.askAndAnswer_wrap .pic img {
+   float:left;   
+   height:38px; 
+   width:38px;
+}
+.askAndAnswer_wrap .pic span{
+    line-height:20px;
+    display:inline-block;
+    float:left;
+    font-size:12px;
+    color:#666;
+    padding-left:10px;
+}
+ .questionNei{
+     display:none;
+ }
+.askAndAnswer_wrap .questionNei input {
+    width:80%;
+    height:30px;
+    border:1px solid #cccccc;
+    margin-left:48px;
+}
+.askAndAnswer_wrap .questionNei div,.comments_wrap .questionNei div {
+    color:#333;
+    font-size:14px;
+    padding-left:48px;
+    margin-bottom:15px;
+}
+.askAndAnswer_wrap p {
+    overflow:hidden;
+    margin-top:5px;
+}
+.askAndAnswer_wrap p span{
+    display:inline-block;
+    padding:0 6px;
+    color:#666;
+    font-size:12px;
+    float:right;
+      cursor:pointer;
+}
+    .askAndAnswer_wrap p .reply_sub  {
+        display:none;
+    }
+.askAndAnswer_wrap .questionNei p span:hover {
+    color:#15c288;
+    cursor:pointer;
+}
+.askAndAnswer_wrap .leftB_ul2_issue {
+    font-size:14px;
+    color:#333;
+    padding-left:48px;
+    margin:-10px 0 30px 0;
+}
+.askAndAnswer_wrap .leftB_ul2_date {
+    color:#666;
+    font-size:12px;
+    padding-left:48px;
+}

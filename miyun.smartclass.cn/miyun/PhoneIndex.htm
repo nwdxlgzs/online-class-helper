@@ -1,0 +1,331 @@
+
+
+<!DOCTYPE html>
+
+<html>
+<head><meta charset="UTF-8" /><meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" /><title>
+	密云直播课堂
+</title><link href="/Css/phoneBroadCast.css" rel="stylesheet" /><link href="/js/plug-in/layer_mobile/need/layer.css" rel="stylesheet" /><link rel="stylesheet" href="/Js/plug-in/share_to_society/share.min.css" /><link href="/Css/font-awesome.min.css" rel="stylesheet" /><link href="css/miyunPhone.css" rel="stylesheet" />
+    <script src="/js/jquery-1.11.2.js"></script>
+    <script src="/Js/mainFunction.js"></script>
+    <script type="text/javascript" src="/Js/AjaxUrl.js"></script>
+    <script src="/js/phoneBroadCast.js"></script>
+    <script src="/js/MobilePhone.js"></script>
+    <script>
+        $(function () {
+            var gumpUrl = window.location.href;
+            $.ajax({
+                url: AjaxUrls.PublicOperation.LoginState,
+                type: "post",
+                async: false,
+                success: function (data) {
+                    if (data.Value == true) {//已登录
+                        $(".login_wrap").show();
+                    } else {
+                        //需要登陆
+                        layer.open({
+                            title: [
+                              '用户登陆',
+                              'background-color:#25dba1; color:#fff;'
+                            ],
+                            shadeClose: false
+                              , anim: 'up'
+                              , content: '<ul class="userLogin"><li><input type="text" class="username" placeholder="用户名"/></li><li style="margin-bottom: 20px;"><input type="password" class="password" placeholder="密码"/></li></ul>'
+                            , btn: ['确认'],
+                            yes: function () {
+                                var username = $(".userLogin .username").val();
+                                var password = $(".userLogin .password").val();
+                                $.ajax({
+                                    url: AjaxUrls.PublicOperation.Login + "?UserName=" + encodeURIComponent(username) + "&PassWord=" + password + "&isRember=" + true,
+                                    type: "post",
+                                    async: false,
+                                    success: function (data) {
+                                        if (data.Success) {
+                                            window.location.href = gumpUrl;
+                                            userName = userInfo.Name;
+                                            userId = userInfo.ID;
+                                            $(".login_wrap").show();
+                                        } else {
+                                            window.location.href = gumpUrl;
+                                            //alert(data.Message);
+                                            alertMsg(data.Message);
+                                        }
+                                    }
+                                });
+                            }
+                        })
+                    }
+                }
+            });
+            //退出页面
+            $(".login_wrap").click(function () {
+                $.ajax({
+                    url: AjaxUrls.PublicOperation.Logout,
+                    type: "post",
+                    success: function (data) {
+                        data = data.Value;
+                        window.location.href = gumpUrl;
+                    }
+                })
+            });
+        });
+        //提示消息
+        function alertMsg(val) {
+            layer.open({
+                content: val
+                     , skin: 'msg'
+                     , time: 3 //2秒后自动关闭
+            });
+        }
+    </script>
+    <style>
+        .login_wrap {
+            position:absolute;right:0px;width:50px; color:#666; font-size:14px; line-height:52px; text-align:center;
+        }
+        .search_area {
+            width:90%;
+            margin:10px 5%;
+        }
+    </style>
+    
+</head>
+<body class="mobile_phone" style="position:relative;">
+    <form method="post" action="./PhoneIndex.aspx" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTY1NDU2MTA1MmRkXXN99h4uk4tIRrFab29+Do1VFndAVZFd90Kxs38qYQQ=" />
+</div>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="21D7FF57" />
+</div>
+        <div class="header_bar" style="position:fixed;z-index:9;left:0;top:0;width:100%;">
+            <div class="phone_header clearfix">
+                <a href="/MiYun/PhoneIndex.aspx">
+                    <img src="/images/miyun/miyunlogo.png" class="fl" />
+                </a>
+                <span class="login_wrap hide">退出</span>
+            </div>
+            <div class="search_area">
+                <input type="text" placeholder="标题" /><i class="fa fa-search"></i>
+            </div>
+        </div>
+        <div class="middle_content" style="min-height: 550px;padding-top:52px; margin-top:50px;">
+            
+    <style>
+        .index_video_list_wrap {
+            margin: 10px 0;
+            background: #ffffff;
+        }
+        .index_video_list_wrap h1 {
+            height: 20px;
+            padding: 20px 0 10px 10px;
+            font: bold 16px/20px "微软雅黑";
+            /*color:#25dba1;*/
+        }
+        .index_video_list_wrap ul {
+            padding: 10px 0 10px 10px;
+        }
+        .index_video_list_wrap ul li {
+            float: left;
+            width: calc(50% - 10px);
+            margin: 0 10px 10px 0;
+        }
+        .index_video_list_wrap ul li img {
+            width: 100%;
+            height: 2.15rem;
+        }
+        .index_video_list_wrap ul li p {
+            width: 100%;
+            height: 30px;
+            font: 14px/30px "微软雅黑";
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .index_video_list_wrap .more {
+            margin: 25px 10px 0;
+            font-size: 11px;
+            color: #25dba1;
+        }
+        .index_video_list_wrap .more i {
+            margin-left: 5px;
+        }
+        .carousel_wrap_img img {
+            float: left;
+            width: 100%;
+            height: 3.5rem;
+        }
+        .carousel_wrap {
+            position: relative;
+            height: 3.5rem;
+            overflow: hidden;
+        }
+        .carousel_wrap .pots {
+            width: 40px;
+            position: absolute;
+            bottom: 10px;
+            left: calc(50% - 23px);
+        }
+        .carousel_wrap .pots li {
+            width: 8px;
+            height: 8px;
+            float: left;
+            margin-left: 5px;
+            border-radius: 50%;
+            background: #fff;
+        }
+        .carousel_wrap .pots .focus {
+            background: #ff6a00;
+        }
+        .layui-m-layer0 .layui-m-layerchild {
+            width: 60%;
+            max-width: 640px;
+        }
+        .layui-m-layersection .layui-m-layerchild h3{
+            height:40px;
+            line-height:40px;
+        }
+        .layui-m-layerchild .layui-m-layercont {
+            padding:10px 30px;
+        }
+        .layui-m-layerchild .layui-m-layerbtn {
+            height:60px;
+            line-height:60px;
+        }
+    </style>
+    <div class="carousel_wrap">
+        <div class=" carousel_wrap_img clearfix">
+            <img src="/Images/phone/banner_one.png" />
+            <img src="/Images/phone/banner_two.png" class="hide" />
+            <img src="/Images/phone/banner_three.png" class="hide" />
+        </div>
+        <ul class="pots clearfix">
+            <li class="focus"></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div class="index_video_list_wrap">
+        <div class="clearfix">
+            <h1 class="fl">直播课堂</h1>
+            <a href="/MiYun/PhoneLiveList.aspx" class="more fr">更多<i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+        <ul class="clearfix "></ul>
+    </div>
+    <div class="index_video_list_wrap">
+        <div class="clearfix">
+            <h1 class="fl">课程回放</h1>
+            <a href="/MiYun/PhoneVideoList.aspx" class="more fr">更多<i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+        <ul class="clearfix"></ul>
+    </div>
+    <script>
+        $(function () {
+	    $(".search_area").hide();
+            $(".middle_content").css({"margin-top":"0"});
+            var i = 0;
+            var timerrr = setInterval(function () {
+                $(".pots  li").eq(i).addClass("focus").siblings().removeClass("focus");
+                $(".carousel_wrap_img  img").eq(i).slideDown().siblings().slideUp();
+                i++;
+                if (i > 2) { i = 0; }
+            }, 3000);
+
+            getVideoList("ViewTimes", 1);
+            getLiveList("ViewTimes", 1);
+        })
+        //获取点播列表
+        function getVideoList(Sort, Order) {
+            $(".phone_is_loading").show();
+            $.ajax({
+                url: AjaxUrls.MiYun.VideoQuery,
+                data: { PageSize: 4, PageNumber: 1, IsDeleted: false, Sort: 'StartTime', IsPublish: true, Order: 1 },
+                success: function (data) {
+                    var html = "";
+                    if (data.Success) {
+                        var data = data.Value.Data;
+                    } else {
+                        layer.open({
+                            content: data.Message,
+                            skin: 'msg',
+                            time: 2
+                        });
+                        return;
+                    };
+                    if (data.length != 0) {
+                        for (var m = 0; m < data.length; m++) {
+                            var item = data[m];
+                            //课程图片的地址
+                            var PicCourse = item.PicUrl || item.CoursePicPath || "/images/indexImg/indexCourse2.jpg";
+
+                            var enterUrl = "/MiYun/PhoneVideoMiYun.aspx?VideoID=" + item.VideoID + "";
+                            var nofindPic = "'/images/indexImg/indexCourse2.jpg'";
+
+                            html += '<li>' +
+                                        '<a href="' + enterUrl + '">' +
+                                        '<img src="' + PicCourse + '" onerror="nofindPic(' + nofindPic + ')" /></a>' +
+                                        '<p>' +
+                                            '<nobr>' + (item.Title || "暂无标题") + '</nobr>' +
+                                        '</p>' +
+                                    '</li>';
+                        };
+                        $(".index_video_list_wrap").eq(1).find("ul").empty().append(html);
+                    };
+                }
+            })
+        }
+
+        //获取直播列表
+        function getLiveList(Sort, Order) {
+            $(".phone_is_loading").show();
+            $.ajax({
+                url: AjaxUrls.MiYun.LiveQuery,
+                data: { PageSize: 4, PageNumber: 1, IsCompleted: false, Sort: 'StartTime', Order: 1, IsLiving: true },
+                success: function (data) {
+                    var html = "";
+                    if (data.Success) {
+                        var data = data.Value.Data;
+                    } else {
+                        layer.open({
+                            content: data.Message,
+                            skin: 'msg',
+                            time: 2
+                        });
+                        return;
+                    };
+                    if (data.length != 0) {
+                        for (var m = 0; m < data.length; m++) {
+                            var item = data[m];
+                            //课程图片的地址
+                            var PicCourse = item.PicUrl || item.CoursePicPath || "/images/indexImg/indexCourse2.jpg";
+
+                            var enterUrl = "/MiYun/PhoneLiveMiYun.aspx?LiveID=" + item.LiveID + "";
+                            var nofindPic = "'/images/indexImg/indexCourse2.jpg'";
+
+                            html += '<li>' +
+                                        '<a href="' + enterUrl + '">' +
+                                        '<img src="' + PicCourse + '" onerror="nofindPic(' + nofindPic + ')" /></a>' +
+                                        '<p>' +
+                                            '<nobr>' + (item.Title || "暂无标题") + '</nobr>' +
+                                        '</p>' +
+                                    '</li>';
+                        };
+                        $(".index_video_list_wrap").eq(0).find("ul").empty().append(html);
+                    } else {
+                        $(".index_video_list_wrap").eq(0).find("ul").empty().append("&nbsp;&nbsp;暂无直播数据");
+                    }
+                }
+            })
+        }
+    </script>
+
+        </div>
+        <div class="phone_footer">
+            ©2015-2020 All Rights Reserved 密云教委·版权所有
+        </div>
+    </form>
+</body>
+<script type="text/javascript" src="/js/plug-in/layer_mobile/layer.js"></script>
+<script src="/Js/plug-in/share_to_society/jquery.share.min.js"></script>
+
+</html>
