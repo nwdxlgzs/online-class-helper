@@ -1,0 +1,1043 @@
+
+
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><link rel="icon" href="favicon.ico" type="image/x-icon" /><link rel="shortcut icon" href="favicon.ico" type="image/x-icon" /><link id="gray_css" rel="stylesheet" /><link href="Css/font-awesome.min.css" rel="stylesheet" />
+    <!--[if IE]>
+         <link id="gray_css_IE" rel="stylesheet" />
+        <![endif]-->
+    <title>
+
+</title>
+    
+<link rel="stylesheet" href="Js/plug-in/share_to_society/share.min.css" /><link rel="stylesheet" type="text/css" href="Css/z-treeCss/metroStyle/metroStyle.css" /><link rel="stylesheet" type="text/css" href="Css/basePc.css" /><link rel="stylesheet" type="text/css" href="Css/common.css" /><link rel="stylesheet" type="text/css" href="Css/all.css" /><link rel="stylesheet" type="text/css" href="Css/other.css" /><link rel="stylesheet" type="text/css" href="Css/miyun.css" /><link rel="stylesheet" type="text/css" href="Js/plug-in/jquery-easyui-1.5.1/theme/material/easyui.css" /><link rel="stylesheet" type="text/css" href="Js/plug-in/jquery-easyui-1.5.1/theme/icon.css" /><link rel="stylesheet" type="text/css" href="Js/plug-in/select2/select2.min.css" /><link rel="stylesheet" type="text/css" href="Css/font-awesome.min.css" />
+    <script type="text/javascript" src="Js/xphter.js"></script>
+    <script type="text/javascript" src="Js/jquery-1.11.2.js"></script>
+    <script type="text/javascript" src="Js/plug-in/jquery.tmpl.min.js"></script>
+    <script type="text/javascript" src="Js/AjaxUrl.js"></script>
+    <script type="text/javascript" src="js/plug-in/paging-master/src/query.js"></script>
+    <script type="text/javascript" src="js/plug-in/paging-master/src/paging.js"></script>
+    <script type="text/javascript" src="js/plug-in/layer/layer.js"></script>
+    <script type="text/javascript" src="Js/plug-in/select2/select2.full.js"></script>
+
+    <script type="text/javascript" src="Js/mainFunction.js"></script>
+    <script type="text/javascript" src="Js/popOrganSelect.js"></script>
+    <script type="text/javascript" src="Js/plug-in/jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="Js/plug-in/jquery-easyui-1.5.1/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="Js/My97DatePicker/WdatePicker.js"></script>
+    
+    <script type="text/javascript" src="Js/allCommon.js"></script>
+    <script src="Js/plug-in/share_to_society/jquery.share.min.js"></script>
+    <style>
+        .panel-body {
+            padding: 0 !important;
+        }
+
+        .combo-panel {
+            overflow: hidden;
+        }
+
+        .publicHeader .fheader .personal_info ul {
+            width: 500px;
+        }
+
+        .publicFootInfo li {
+            float: none;
+            text-align: center;
+            color: #fff;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .copyright {
+            display: inline-block;
+            vertical-align: top;
+            color: #fff;
+            margin-left: 5px;
+        }
+
+        .footImg {
+            width: 30px;
+            height: 30px;
+        }
+        .publicHeader .fheader .personal_info .login_area{
+            display:inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div style="height: 86px;">
+        <div class="publicHeader">
+            <div class="fheader ">
+                <div class="content_wrap clearfix">
+                    <div class="company_logo fl">
+                        <a href="miyun/index.htm"><img src="images/miyun/miyunlogo.png" /></a>
+                    </div>
+                    <div class="middle_nav fl">
+                        <ul class="clearfix webNavWrap">
+                            <li class="defaultPage"><a href="miyun/index.htm" class="first_nav webNav webNav_1 ">首页</a></li>
+                            <li class="livePage"><a href="miyun/livelist.htm" class="first_nav webNav webNav_2">直播课堂</a></li>
+                            <li class="videoPage"><a href="miyun/videolist.htm" class="first_nav webNav webNav_3">课程回放</a></li>
+                            <li class="Statistics hidee"><a href="miyun/Statistics.htm" class="first_nav webNav webNav_4">数据统计</a></li>
+                            <li class="personal_space hidee"><a href="miyun/index.htm#" class="first_nav webNav webNav_4" id="self_space_wrap">个人空间
+                            <span class="choose_nav"></span>
+                                <img src="images/broadcastlive_14.png" class="first_nav_img" /></a>
+                                <div class="second_nav">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="personal_info fr">
+                        <ul class="clearfix">
+                            <li class="personal_img hidee">
+                                <a href="miyun/index.htm#">
+                                    <img id="user_images" src="miyun/index.htm" onerror="nofindPic('/images/broadcastlive_06.png',null,event)" /><span id="user_name"></span> </a>
+                                <div class="quit_area self_nav_wrap hidee">
+                                    <a class="editPsw_item">修改密码</a>
+                                    
+                                    <a class="quit_item">退出</a>
+                                </div>
+                            </li>
+                            <li class="login_area">
+                                <a href="miyun/index.htm#"><span>登录</span></a>
+                            </li>
+                            <li class="enter_backstage hidee"><a href="miyun/index.htm#"><span>进入后台</span></a></li>
+                            
+                            <li class="downloadLiveExe"><a href="http://miyun.smartclass.cn/software/liveclient.exe"><i class="fa fa-camera"></i>直播客户端下载</a></li>
+                            <li class="onlinePhone"><b>客服电话</b>
+                                <span class="closeOnlinePhone hidee"></span>
+                                <div class="blackboard hidee">
+                                    <img src="miyun/images/blackboard.png" />
+                                </div>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="selfSpaceHeaderShadow"></div>
+        </div>
+    </div>
+    <div class="middle_content_wrap">
+        <script type="text/javascript">
+            var userInfo = [{"UserID":0}];
+            var strCookie = userInfo[0].UserID;
+
+            $(function () {
+                middleContentHeight();//页面高度计算
+                $(window).resize(function () {//页面窗口变化重新高度计算
+                    middleContentHeight();
+                })
+
+                //固定导航
+                $(window).scroll(function () {
+                    var scrollTop = $(this).scrollTop();//滚动条的偏移量
+                    var scrollHeight = $(document).height();//页面的总高度
+                    var windowHeight = $(this).height();//浏览器可见区域的高度
+                    if (scrollTop > 0) {
+                        $(".publicHeader").css({
+                            "position": "fixed",
+                            "z-index": 99,
+                            "top": 0
+                        })
+                    } else if (scrollTop == 0) {
+                        $(".publicHeader").css({
+                            "position": "static",
+                            "z-index": 99
+                        })
+                    };
+                })
+                //置灰
+                //setGray();
+            })
+        </script>
+        <script type="text/javascript" src="Js/masterPages.js"></script>
+        
+    <style>
+        .search-wrap {
+            width: 260px;
+            height: 33px;
+            border: 1px solid #6ec3ca;
+            border-radius: 2px;
+        }
+
+            .search-wrap input {
+                border: none;
+                height: 30px;
+                background: #fff;
+                width: 205px;
+            }
+
+            .search-wrap span {
+                text-align: center;
+                display: inline-block;
+                height: 33px;
+                line-height: 33px;
+                width: 53px;
+                position: relative;
+                cursor: pointer;
+            }
+
+                .search-wrap span:before {
+                    content: "";
+                    width: 1px;
+                    height: 24px;
+                    background: #6ec3ca;
+                    position: absolute;
+                    left: 0px;
+                    top: 4px;
+                }
+
+        .videoClassSelectTop {
+            text-align: center;
+        }
+
+            .videoClassSelectTop .color-default {
+                margin-right: 30px;
+            }
+
+            .videoClassSelectTop li, .videoClassSelectBtm li {
+                float: none;
+                display: inline;
+            }
+
+            .videoClassSelectTop label {
+                margin-bottom: 0 !important;
+            }
+
+        .validatebox-text {
+            color: #333;
+        }
+
+        /*.videoClassSelectTop .gradeListWrap, .videoClassSelectTop .courseListWrap {
+            display: none;
+        }*/
+        .listTeachWrap  {
+            margin-top: 3px;
+        }
+      /*.videoClassSelectTop  .schoolListWrap,.videoClassSelectTop  .gradeListWrap{
+          display:none;
+      }*/
+    </style>
+    <div class="container-fluid banner">
+        <img src="images/miyun/banner.jpg" />
+    </div>
+    <div class="container">
+        <div class="teacher_wrap">
+            <h3 class="center-title">名师风采</h3>
+            <div class="subject">
+                <a class="btn all color-default " href="javascript:;" role="button">全部</a>
+            </div>
+            <ul class="videoClassSelectTop">
+                <li class="btn color-default" href="javascript:;" role="button">搜索</li>
+                <li class="vClassSelectTopItem schoolListWrap">
+                    <label for="schoolSelect" class="Vmiddle"><span>学校：</span></label>
+                    <div class="inlineBlock schoolSelectWrap selectDiv">
+                        <div class="combogride_wrap">
+                            <input id="schoolSelect" />
+                        </div>
+                        <input type="hidden" id="schoolSelectKey" />
+                    </div>
+                </li>
+                <li class="vClassSelectTopItem gradeListWrap">
+                    <label for="gradeSelect" class="Vmiddle"><span>年级：</span></label>
+                    <div class="inlineBlock gradeSelectWrap selectDiv">
+                        <div class="combogride_wrap">
+                            <input id="gradeList" editable="false"/>
+                        </div>
+                        <input type="hidden" id="gradeSelectKey" />
+                    </div>
+                </li>
+                <li class="vClassSelectTopItem">
+                    <label for="listTeach" class="Vmiddle"><span>姓名：</span></label>
+                    <div class="inlineBlock listTeachWrap selectDiv">
+                        <div class="combogride_wrap">
+                            <input id="listTeach" type="text" />
+                        </div>
+                        <input type="hidden" id="listTeachKey" />
+                    </div>
+                </li>
+                <li class="vClassSelectTopItem selectMenuWrap courseListWrap">
+                    <label for="videoCourse" class="Vmiddle"><span>课程：</span></label>
+                    <div class="inlineBlock videoCourseWrap selectDiv">
+                        <div class="combogride_wrap">
+                            <input id="videoCourse" />
+                        </div>
+                        <input type="hidden" id="courseKeyword" />
+                    </div>
+                </li>
+            </ul>
+            <div class="teacher-cards">
+                <div class="row">              
+                </div>
+            </div>
+        </div>
+        <script>
+            var CurrentSchoolID;
+            //var PhaseList = [];
+            //if (userInfo[0].SchoolID && typeof userInfo[0].SchoolID != 'undefined') {
+            //    Ajax.ajax({
+            //        url: AjaxUrls.SchoolUrl.QuerySchool,
+            //        data: { SchoolID: userInfo[0].SchoolID },
+            //        async: false
+            //    }).done(function (data) {
+            //        PhaseList = data.PhaseList;
+            //    })
+            //};
+            $(function () {
+                //if (strCookie && (strCookie != 0)) {
+                    //$(".teacher_wrap").show();
+                    CurrentSchoolID = userInfo[0].SchoolID
+                    if (userInfo[0].UserType == 1 || userInfo[0].UserType == 0) {
+                        $(".schoolListWrap").css("display", "inline");
+                        $(".gradeListWrap").css("display", "inline");
+                        //初始化学校
+                        MiyunSchoolSearchListAndGradeSelect("schoolSelect", "schoolSelectKey", { 'SchoolID': userInfo[0].SchoolID, 'SchoolName': userInfo[0].SchoolName }, true);
+                        //selectSchoolGrade("gradeList", PhaseList);
+                    } else {
+                        $(".courseListWrap").css("display", "inline");
+                        MiyunCourseListSelect("videoCourse", "courseKeyword", "", userInfo[0].SchoolID);
+                    };
+                    //查询学科
+                    Ajax.ajax({
+                        url: AjaxUrls.MiYun.SubjectQuery,
+                        data: { PageSize: 8, PageNumber: 1 }
+                    }).done(function (data) {
+                        var html = "";
+                        if (data.Data.length > 0) {//如果存在数据
+                            for (var i = 0; i < data.Data.length; i++) {
+                                var item = data.Data[i];
+                                html += '<a class="btn" href="javascript:;" role="button" subid="' + item.ID + '">' + item.Name + '</a>'
+                            };
+                            $(".subject").show();
+                            $(".subject .all").after(html);
+                        } else {
+                            $(".subject").hide();
+                        };
+                    })
+                //getIndexTeacher(CurrentSchoolID, "", "", "", 1, 8);
+                    getIndexTeacher("", "", "", "", 1, 8);//默认不传学校id
+                //}
+
+                $(".videoClassSelectTop .btn").click(function () {
+                    var schoolVal = "", gradeVal = "", courseVal = "", subjectVal = "";
+                    if (!$("#schoolSelect").is(":visible")) {
+                        //学校
+                        schoolVal = parseInt($("#schoolSelect").combogrid("getValues")[0]);
+                        if ((schoolVal + '') == "NaN" && $.trim($("#schoolSelect").combogrid("getValue")).length != 0) {
+                            Dialogue.Msg("请选择列表中的学校");
+                            return;
+                        } else if ((schoolVal + '') == "NaN" && $.trim($("#schoolSelect").combogrid("getValue")).length == 0) {
+                            schoolVal = '';
+                        };
+                        //年级
+                        if (!$(".gradeListWrap").is(":hidden")) {
+                            gradeVal = parseInt($("#gradeList").combogrid("getValues")[0]);
+                            if ((gradeVal + '') == "NaN" && $.trim($("#gradeList").combogrid("getValue")).length != 0) {
+                                Dialogue.Msg("请选择列表中的年级");
+                                return;
+                            } else if ((gradeVal + '') == "NaN" && $.trim($("#gradeList").combogrid("getValue")).length == 0) {
+                                gradeVal = '';
+                            };
+                        };
+                    } else {
+                        schoolVal = "";
+                        gradeVal = "";
+                    }
+
+                    //课程
+                    if (!$(".courseListWrap").is(":hidden")) {
+                        courseVal = parseInt($("#videoCourse").combogrid("getValues")[0]);
+                        if ((courseVal + '') == "NaN" && $.trim($("#videoCourse").combogrid("getValue")).length != 0) {
+                            Dialogue.Msg("请选择列表中的课程");
+                            return;
+                        } else if ((courseVal + '') == "NaN" && $.trim($("#videoCourse").combogrid("getValue")).length == 0) {
+                            courseVal = '';
+                        };
+                    };
+                    var subId = $(".subjects .color-default").attr("subid");
+                    if (typeof subId == 'undefined') {
+                        subId = '';
+                    }
+                    getIndexTeacher(schoolVal || "", gradeVal, courseVal, subId, 1, 8);
+                })
+
+                $(".subjects").on("click", "a", function () {
+                    $(this).addClass("color-default").siblings("a").removeClass("color-default");
+                    var subId = $(this).attr("subid");
+                    $(".videoClassSelectTop .btn").click();
+                })
+            });
+            function getIndexTeacher(schoolVal, gradeVal, courseVal, subject, pageNum, pageSize) {//schoolVal:SchoolID
+                Ajax.ajax({
+                    url: AjaxUrls.MiYun.TeacherQuery,
+                    data: { PageNumber: pageNum, PageSize: pageSize, SchoolID: schoolVal, QueryCondition: $("#listTeach").val(), GradeList: gradeVal, CourseList: courseVal, SubjectList: subject, SortRule: "TotalLiveViewTimes", Order: 1 }
+                }).done(function (data) {
+                    if (data.Data.length > 0) {
+                        var html = '';
+                        for (var i = 0; i < data.Data.length; i++) {
+                            var item = data.Data[i], subHtml = '', subArr = [];
+                            if (item.SubjectList.length > 0) {
+                                subHtml += item.SubjectList[0].SubjectName;
+                            } else if (item.CourseList.length > 0) {
+                                subHtml += item.CourseList[0].CourseName;
+                            }
+                           
+                            if (item.ImageFileUri) {
+                                var img = item.ImageFileUri;
+                            } else {
+                                var img = item.Sex ? "/Images/miyun/timg_man.png" : "/Images/miyun/timg_woman.png";
+                            }
+                            var videoHref = item.VideoID ? '<a class="btn color-default btn-block" target="_blank" href="http://miyun.smartclass.cn/MiYun/Video.aspx?VideoID='%20+%20item.VideoID%20+%20'" role="button">立即学习</a>' : '<a class="btn color-default btn-block" role="button">暂无视频</a>';
+                            html += '<div class="teacher-piece">' +
+                                                '<img src="http://miyun.smartclass.cn/miyun/'%20+%20img%20+%20'" class="img-circle" />' +
+                                                '<div class="broadcast-info">' +
+                                                '<p>直播' + item.TotalLiveCount + '次</p>' +
+                                                '<p>回放' + item.TotalVideoCount + '次</p>' +
+                                                '</div>' +
+                                                '<p class="name">' + item.TeacherName + ' &nbsp;&nbsp;&nbsp;&nbsp;' + subHtml + '</p>' +
+                                                '<p class="school">' + item.SchoolName + '</p>' +
+                                       videoHref +
+                                    '</div>';
+                            $(".teacher-cards .row").empty().append(html);
+                        };
+                    } else {
+                        $(".teacher-cards .row").empty().append("<p style='text-align:center;'>无相关数据</p>");
+                    }
+                })
+            }
+        </script>
+        <h3 class="center-title notic-title">公告展示</h3>
+        <div class="notic clearfix">
+            <div class="row more">
+                <a class="col-md-12 right-link" href="UserSpace/NewsList.htm" target="_blank">更多>></a>
+            </div>
+        </div>
+        <script>
+            $(function () {
+                Ajax.ajax({
+                    url: AjaxUrls.MiYun.NewsQuery,
+                    data: { PageSize: 10, PageNumber: 1, IsPublic: true, IsShow: true }
+                }).done(function (data) {
+                    var html = "";
+                    if (data.Data.length > 0) {//如果存在数据
+                        for (var i = 0; i < data.Data.length; i++) {
+                            var item = data.Data[i];
+                            var times = item.PublicTime.split(" ");
+                            var months = times[0].split("-");
+                            var hours = times[1].split(":");
+                            html += ' <div class="row notic-piece">' +
+                                        '<p class="col-md-8 title">' + (i + 1) + '.' + (item.Title || "") + '</p>' +
+                                        '<div class="col-md-2 date">' + times[0] + '&nbsp;&nbsp;&nbsp;&nbsp;' + times[1] + '</div>' +
+                                        '<a class="col-md-2 more" href="UserSpace/Article.htm"  target="_blank">详情>></a>' +
+                                    '</div>'
+                        };
+                        $(".notic .more").after(html);
+                    } else {
+                        $(".notic").html("暂无公告数据");
+                        //$(".notic").hide();
+                        //$(".notic-title").hide();
+                    };
+                })
+
+            });
+        </script>
+        <style>
+            .resourceCtrlTitleList {
+                width: 343px;
+            }
+
+            .newsHeader h1 {
+                width: 115px;
+            }
+
+            table {
+                table-layout: fixed;
+            }
+
+            .statistic_content_wrap {
+                width: 1200px;
+                margin: 35px auto;
+            }
+            /*前三行颜色*/
+            .js-italic-style p {
+                font-weight: bold;
+            }
+
+            .js-red-row p, .js-red-row a {
+                color: #f83434;
+            }
+
+            .js-blue-row p, .js-blue-row a {
+                color: #f56a4d;
+            }
+
+            .js-orange-row p, .js-orange-row a {
+                color: #fdae24;
+            }
+
+            .fixed-table-container tbody td {
+                border: none;
+            }
+
+            .fixed-table-container thead th {
+                border: none;
+            }
+
+            table p {
+                height: 40px;
+                line-height: 40px;
+                margin: 0;
+                padding-left: 8px;
+            }
+
+            .ellipsis_img {
+                width: 36px;
+                height: 36px;
+                overflow: hidden;
+                border-radius: 50%;
+            }
+
+                .ellipsis_img img {
+                    width: 100%;
+                    height: 100%;
+                }
+
+            .padding-50 {
+                margin-left: 70px;
+            }
+
+            .padding-15 {
+                margin-left: 15px;
+            }
+
+            .fixed-table-container tbody td, .fixed-table-container thead th {
+                border-left: none !important;
+            }
+
+            .table_container {
+                width: 370px;
+                margin-right: 20px;
+            }
+
+            .sSpaceResourceCtrlTitle {
+                margin: 10px 0 30px;
+            }
+        </style>
+        <link href="Content/bootstrap.min.css" rel="stylesheet" />
+        <link href="Content/bootstrap-table.min.css" rel="stylesheet" />
+        <script src="Scripts/bootstrap.min.js"></script>
+        <script src="Scripts/bootstrap-table.min.js"></script>
+        <script src="Scripts/bootstrap-table-zh-CN.min.js"></script>
+        <script src="http://miyun.smartclass.cn/Js/PowerCreator.js"></script>
+        <script src="Js/PowerCreator.jtable.js"></script>
+        <script>
+            //相同配置
+            var commonParams = {
+                classes: 'table-hover table-no-bordered',
+                search: false,
+                strictSearch: false,
+                showColumns: false,
+                showRefresh: false,
+                queryParams: function (params) {
+                    return {
+                        limit: params.limit, //页面大小
+                        offset: params.offset, //页码
+                        SchoolID: userInfo[0].SchoolID,
+                        Count: 10
+                    }
+                },
+                responseHandler: function (res) {
+                    if (res.Value) {
+                        return {
+                            "total": res.Value.TotalCount,//总页数
+                            "rows": res.Value.Data   //数据
+                        };
+                    } else {
+                        return {
+                            "total": 0,//总页数
+                            "rows": {}   //数据
+                        };
+                    };
+                },
+                rowStyle: function (row, index) {
+                    if (index == 0) {
+                        return { classes: "js-red-row js-italic-style" };
+                    } else if (index == 1) {
+                        return { classes: "js-blue-row js-italic-style" };
+                    } else if (index == 2) {
+                        return { classes: "js-orange-row js-italic-style" };
+                    } else {
+                        return {}
+                    };
+                },
+            }
+        </script>
+        <div class="statistic_content_wrap hidee">
+            <h3 class="center-title">排行榜</h3>
+            <div class="sSpaceResourceCtrlTitle">
+                <div class="resourceCtrlTitleList">
+                    <b></b>
+                    <a href="javascript:;" class="resourceCtrlTitleMy">点击量排行</a>
+                    <b></b>
+                    <a href="javascript:;" class="resourceCtrlTitleMy">视频量排行</a>
+                    <b></b>
+                    <a href="javascript:;" class="resourceCtrlTitleMy">学习时长排行</a>
+                    <b></b>
+                </div>
+            </div>
+
+            <div class="clearfix ">
+                <div class="table_container  fl">
+                    <table class="record_ranking" id="record_ranking">
+                    </table>
+                </div>
+                <div class="table_container  fl">
+                    <table class="video_record_ranking" id="video_record_ranking">
+                    </table>
+                </div>
+                <div class="table_container  fl">
+                    <table class="live_record_ranking" id="live_record_ranking">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            if (strCookie && (strCookie != 0) && (userInfo[0].UserType != 0)) {
+                //$(".statistic_content_wrap").show();
+                //first();  //20180928hide
+            };
+            //直播课堂高亮显示
+            $(".webNavWrap .defaultPage").addClass("choose_nav").siblings("li").removeClass("choose_nav");
+
+            $(".resourceCtrlTitleList a").each(function (index) {
+                $(this).click(function () {
+                    $("#record_ranking").bootstrapTable('destroy');
+                    $("#video_record_ranking").bootstrapTable('destroy');
+                    $("#live_record_ranking").bootstrapTable('destroy');
+                    if (index == 0) {
+                        //first();//20180928hide
+                    } else if (index == 1) {
+                        //second();//20180928hide
+                    } else if (index == 2) {
+                        //third();//20180928hide
+                    };
+                })
+            })
+        })
+        function first() {
+            //总排行的参数
+            var totalRankingOpts = {
+                url: AjaxUrls.Statistics.StatisticsRecordLive,
+                pagination: false,
+                columns: [{
+                    field: 'Title',
+                    title: '总排行',
+                    width: 200,
+                    formatter: function (r, row, index) {
+                        return "<p class='ellipsis'><span class='index_css'>" + (index + 1) + ".</span>&nbsp;&nbsp;" + (r || "") + "</p>"
+                    }
+                }, {
+                    field: 'VideoViewTimes',
+                    title: '次数',
+                    width: 100,
+                    formatter: function (r, rows) {
+                        return "<p class='ellipsis'>" + (rows.VideoViewTimes + rows.LiveViewTimes) + "</p>"
+                    }
+                }, {
+                    field: 'ID',
+                    title: '<a href="http://miyun.smartclass.cn/SystemSpace/SystemStatistics/TotalWatchRankingDetail.aspx">更多></a>',
+                    formatter: function (v, rows) {
+                        if (!rows.IsLiveCompleted && rows.IsLiving) {
+                            return "<p class='ellipsis'><a href='http://miyun.smartclass.cn/PlayPages/Live.aspx?LiveID=%22%20+%20rows.LiveID%20+%20%22' target='_blank'>观看</a></p>";
+                        } else if (!rows.IsRecording && rows.IsRecordCompleted) {
+                            if (rows.VideoID == 0) {
+                                return "<p class='ellipsis'>-</p>";
+                            };
+                            return "<p class='ellipsis'><a href='http://miyun.smartclass.cn/PlayPages/Video.aspx?VideoID=%22%20+%20rows.VideoID%20+%20%22' target='_blank'>观看</a></p>";
+                        } else {
+                            return "<p class='ellipsis'>-</p>";
+                        };
+                    },
+                    width: 50
+                }]
+            };
+            //点播排行参数
+            var videoRankingOpts = {
+                url: AjaxUrls.Statistics.StatisticsVideo,
+                pagination: false,
+                columns: [{
+                    field: 'Title',
+                    title: '点播排行',
+                    width: 200,
+                    formatter: function (r, row, index) {
+                        return "<p class='ellipsis'><span class='index_css'>" + (index + 1) + ".</span>&nbsp;&nbsp;" + (r || "") + "</p>"
+                    }
+                }, {
+                    field: 'ViewTimes',
+                    title: '次数',
+                    width: 100,
+                    formatter: function (r) {
+                        return "<p class='ellipsis'>" + r + "</p>"
+                    }
+                }, {
+                    field: 'ID',
+                    title: '操作 ',
+                    formatter: function (v) {
+                        return "<p class='ellipsis'><a href='http://miyun.smartclass.cn/PlayPages/Video.aspx?VideoID=%22%20+%20v%20+%20%22' target='_blank'>观看</a></p>";
+                    },
+                    width: 50
+                }]
+            };
+            //直播观看参数
+            var liveRankingOpts = {
+                url: AjaxUrls.Statistics.StatisticsLive,
+                pagination: false,
+                columns: [{
+                    field: 'Title',
+                    title: '直播排行',
+                    width: 200,
+                    formatter: function (r, row, index) {
+                        return "<p class='ellipsis'><span class='index_css'>" + (index + 1) + ".</span>&nbsp;&nbsp;" + (r || "") + "</p>"
+                    }
+                }, {
+                    field: 'ViewTimes',
+                    title: '次数',
+                    width: 100,
+                    formatter: function (r) {
+                        return "<p class='ellipsis'>" + r + "</p>"
+                    }
+                }, {
+                    field: 'ID',
+                    title: '操作 ',
+                    formatter: function (v, rows) {
+                        if (!rows.IsLiveCompleted && rows.IsLiving) {
+                            return "<p class='ellipsis'><a href='http://miyun.smartclass.cn/PlayPages/Live.aspx?LiveID=%22%20+%20v%20+%20%22' target='_blank'>观看</a></p>";
+                        } else {
+                            if (!rows.VideoID == 0) {
+                                return "<p class='ellipsis'><a href='http://miyun.smartclass.cn/PlayPages/Video.aspx?VideoID=%22%20+%20rows.VideoID%20+%20%22' target='_blank'>观看</a></p>";
+                            } else {
+                                return "<p class='ellipsis'>-</p>";
+                            };
+                        };
+                    },
+                    width: 50
+                }]
+            };
+            //总排行
+            powerCreator.datatable(
+                "record_ranking",
+                $.extend({}, commonParams, totalRankingOpts)
+                )
+
+            //点播排行
+            powerCreator.datatable(
+                "video_record_ranking",
+                  $.extend({}, commonParams, videoRankingOpts)
+                )
+
+            //直播排行
+            powerCreator.datatable(
+                "live_record_ranking",
+                $.extend({}, commonParams, liveRankingOpts)
+                )
+        }
+        function second() {
+            //总排行的参数
+            var totalRankingOpts = {
+                url: AjaxUrls.Statistics.StatisticsRecordLiveTeacher,
+                pagination: false,
+                columns: [
+                    {
+                        field: 'Name',
+                        title: '总排行',
+                        width: 200,
+                        formatter: function (r, row, index) {
+                            return "<p  class='ellipsis'  style='display:inline-block;'><span class='index_css'>" + (index + 1) + ".</span>&nbsp;&nbsp; </p><div class='ellipsis_img' style='display:inline-block;'><img src='http://miyun.smartclass.cn/miyun/%22%20+%20(row.ImageUrl%20%7C%7C%20%22/images/broadcastlive_06.png%22)%20+%20%22' /></div><p class='ellipsis' style='display:inline-block;'>" + (r || "") + "</p>"
+                        }
+                    }, {
+                        field: 'TotalCount',
+                        title: '数量',
+                        width: 100,
+                        formatter: function (r) {
+                            return "<p class='ellipsis'>" + r + "</p>"
+                        }
+                    }, {
+                        field: 'ID',
+                        title: '<a href="http://miyun.smartclass.cn/SystemSpace/SystemStatistics/RecordRankingDetail.aspx">更多></a>',
+                        formatter: function (v) {
+                            //return "<p class='ellipsis'><a href='http://miyun.smartclass.cn/PlayPages/Video.aspx?VideoID=%22%20+%20v%20+%20%22' target='_blank'>观看</a></p>";
+                            return "-";
+                        },
+                        width: 50
+                    }]
+            };
+            //教师观看时间排行参数
+            var videoRankingOpts = {
+                url: AjaxUrls.Statistics.StatisticsRecordTeacher,
+                pagination: false,
+                columns: [{
+                    field: 'Name',
+                    title: '点播排行',
+                    width: 200,
+                    formatter: function (r, row, index) {
+                        return "<p  class='ellipsis'  style='display:inline-block;'><span class='index_css'>" + (index + 1) + ".</span>&nbsp;&nbsp; </p><div class='ellipsis_img' style='display:inline-block;'><img src='http://miyun.smartclass.cn/miyun/%22%20+%20(row.ImageUrl%20%7C%7C%20%22/images/broadcastlive_06.png%22)%20+%20%22' /></div><p class='ellipsis' style='display:inline-block;'>" + (r || "") + "</p>"
+                    }
+                }, {
+                    field: 'RecordCount',
+                    title: '数量',
+                    width: 100,
+                    formatter: function (r) {
+                        return "<p class='ellipsis'>" + r + "</p>"
+                    }
+                }, {
+                    field: 'ID',
+                    title: '操作',
+                    formatter: function (v) {
+                        return "-";
+                    },
+                    width: 50
+                }]
+            };
+            //学生观看时间排行参数
+            var liveRankingOpts = {
+                url: AjaxUrls.Statistics.StatisticsLiveTeacher,
+                pagination: false,
+                columns: [{
+                    field: 'Name',
+                    title: '直播排行',
+                    width: 200,
+                    formatter: function (r, row, index) {
+                        return "<p  class='ellipsis'  style='display:inline-block;'><span class='index_css'>" + (index + 1) + ".</span>&nbsp;&nbsp; </p><div class='ellipsis_img' style='display:inline-block;'><img src='http://miyun.smartclass.cn/miyun/%22%20+%20(row.ImageUrl%20%7C%7C%20%22/images/broadcastlive_06.png%22)%20+%20%22' /></div><p class='ellipsis' style='display:inline-block;'>" + (r || "") + "</p>"
+                    }
+                }, {
+                    field: 'LiveCount',
+                    title: '数量',
+                    width: 100,
+                    formatter: function (r) {
+                        return "<p class='ellipsis'>" + r + "</p>"
+                    }
+                }, {
+                    field: 'ID',
+                    title: '操作',
+                    formatter: function (v) {
+                        return "-";
+                    },
+                    width: 50
+                }]
+            };
+
+            //总排行
+            powerCreator.datatable(
+                "record_ranking",
+                $.extend({}, commonParams, totalRankingOpts)
+                )
+
+            //点播排行
+            powerCreator.datatable(
+                "video_record_ranking",
+                  $.extend({}, commonParams, videoRankingOpts)
+                )
+
+            //直播排行
+            powerCreator.datatable(
+                "live_record_ranking",
+                $.extend({}, commonParams, liveRankingOpts)
+                )
+        }
+        function third() {
+            //总排行的参数
+            var totalRankingOpts = {
+                url: AjaxUrls.Statistics.GetStatisticsUserStudyTime,
+                pagination: false,
+                search: false,
+                method: 'get',
+                queryParams: function (params) {
+                    var newParams = {
+                        limit: 10, //页面大小
+                        offset: 1, //页码
+                        SchoolID: userInfo[0].SchoolID,
+                        PageSize: 10,
+                        PageNumber: 1,
+                    }
+                    return newParams;
+                },
+                columns: [{
+                    field: 'Name',
+                    title: '总排行',
+                    width: 200,
+                    formatter: function (r, rows, index) {
+                        return "<p  class='ellipsis'  style='display:inline-block;'><span class='index_css'>" + (index + 1) + ".</span>&nbsp;&nbsp; </p><div class='ellipsis_img' style='display:inline-block;'><img src='http://miyun.smartclass.cn/miyun/%22%20+%20(rows.ImageUrl%20%7C%7C%20%22/images/broadcastlive_06.png%22)%20+%20%22' /></div><p class='ellipsis' style='display:inline-block;'>" + (r || "") + "</p>"
+                    }
+                }, {
+                    field: 'VideoDuration',
+                    title: '时长',
+                    width: 100,
+                    formatter: function (r, row) {
+                        return "<p class='ellipsis'>" + changeTime(row.LiveDuration + row.VideoDuration) + "</p>"
+                    }
+                }, {
+                    field: 'ID',
+                    title: '<a href="http://miyun.smartclass.cn/SystemSpace/SystemStatistics/StudyRankingDetail.aspx">更多></a>',
+                    formatter: function (v) {
+                        return "-";
+                    },
+                    width: 50
+                }]
+            };
+            //教师观看时间排行参数
+            var videoRankingOpts = {
+                url: AjaxUrls.Statistics.GetStatisticsTeacherStudyTime,
+                pagination: false,
+                queryParams: function (params) {
+                    var newParams = {
+                        limit: 10, //页面大小
+                        offset: 1, //页码
+                        SchoolID: userInfo[0].SchoolID,
+                        PageSize: 10,
+                        PageNumber: 1,
+                    }
+                    return newParams;
+                },
+                columns: [{
+                    field: 'Name',
+                    title: '教师排行',
+                    width: 200,
+                    formatter: function (r, rows, index) {
+                        return "<p  class='ellipsis'  style='display:inline-block;'><span class='index_css'>" + (index + 1) + ".</span>&nbsp;&nbsp; </p><div class='ellipsis_img' style='display:inline-block;'><img src='http://miyun.smartclass.cn/miyun/%22%20+%20(rows.ImageUrl%20%7C%7C%20%22/images/broadcastlive_06.png%22)%20+%20%22' /></div><p class='ellipsis' style='display:inline-block;'>" + (r || "") + "</p>"
+                    }
+                }, {
+                    field: 'ViewCount',
+                    title: '时长',
+                    width: 100,
+                    formatter: function (r, row) {
+                        return "<p class='ellipsis'>" + changeTime(row.LiveDuration + row.VideoDuration) + "</p>"
+                    }
+                }, {
+                    field: 'ID',
+                    title: '操作',
+                    formatter: function (v) {
+                        return "-";
+                    },
+                    width: 50
+                }]
+            };
+            //学生观看时间排行参数
+            var liveRankingOpts = {
+                url: AjaxUrls.Statistics.GetStatisticsStudentStudyTime,
+                pagination: false,
+                queryParams: function (params) {
+                    var newParams = {
+                        limit: 10, //页面大小
+                        offset: 1, //页码
+                        SchoolID: userInfo[0].SchoolID,
+                        PageSize: 10,
+                        PageNumber: 1,
+                    }
+                    return newParams;
+                },
+                columns: [{
+                    field: 'Name',
+                    title: '学生排行',
+                    width: 200,
+                    formatter: function (r, rows, index) {
+                        return "<p  class='ellipsis'  style='display:inline-block;'><span class='index_css'>" + (index + 1) + ".</span>&nbsp;&nbsp; </p><div class='ellipsis_img' style='display:inline-block;'><img src='http://miyun.smartclass.cn/miyun/%22%20+%20(rows.ImageUrl%20%7C%7C%20%22/images/broadcastlive_06.png%22)%20+%20%22' /></div><p class='ellipsis' style='display:inline-block;'>" + (r || "") + "</p>"
+                    }
+                }, {
+                    field: 'ViewCount',
+                    title: '时长',
+                    width: 100,
+                    formatter: function (r, row) {
+                        return "<p class='ellipsis'>" + changeTime(row.LiveDuration + row.VideoDuration) + "</p>"
+                    }
+                }, {
+                    field: 'ID',
+                    title: '操作',
+                    formatter: function (v) {
+                        return "-";
+                    },
+                    width: 50
+                }]
+            };
+
+            //总排行
+            powerCreator.datatable(
+                "record_ranking",
+                $.extend({}, commonParams, totalRankingOpts)
+                )
+
+            //点播排行
+            powerCreator.datatable(
+                "video_record_ranking",
+                  $.extend({}, commonParams, videoRankingOpts)
+                )
+
+            //直播排行
+            powerCreator.datatable(
+                "live_record_ranking",
+                $.extend({}, commonParams, liveRankingOpts)
+                )
+
+        }
+    </script>
+
+        <script>
+            $(function () {
+                if (strCookie && (strCookie != 0) && (userInfo[0].UserType == 1)) {
+                    //secondNav();//二级菜单赋值
+                    $(".webNavWrap .Statistics").show();
+                    $(".first_nav_img").show();
+                    $(".fheader  .personal_space").show();
+                    $(".enter_backstage").show();
+                } else if (strCookie && (strCookie != 0) && (userInfo[0].UserType == 0)) {
+                    $(".webNavWrap .Statistics").show();
+                    $(".enter_backstage").show();
+                } else {
+                    $(".webNavWrap .Statistics").hide();
+                    $(".fheader  .personal_space").hide();
+                    $(".enter_backstage").hide();
+                };
+            })
+        </script>
+    </div>
+    <div class="publicFooter">
+        <div class="publicContainer">
+            <ul class="publicFootInfo clearfix">
+                <li>
+                    <img src="http://miyun.smartclass.cn/Images/miyun/miyun_logo.png" class="footImg" /><span class="copyright">©2015-2020 All Rights Reserved 密云教委·版权所有</span></li>
+                <li>地址：北京市密云区新南路103号 密云区教育委员会 　邮编：101500</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            var i = 0;
+            setInterval(function () {
+                i++;
+                if (i % 4 == 1) {
+                    $('.blackboard').css({
+                        "transform": "rotate(10deg)",
+                        "transition": "2s ease-in-out"
+                    });
+                } else if (i % 4 == 3) {
+                    $('.blackboard').css({
+                        "transform": "rotate(-10deg)",
+                        "transition": "2s ease-in-out"
+                    });
+                }
+            }, 1000);
+            $(".onlinePhone b").click(function () {
+                $(".closeOnlinePhone").show();
+                $(".blackboard").show();
+            });
+            $(".closeOnlinePhone").click(function () {
+                $(this).hide();
+                $(".blackboard").hide();
+            });
+        });
+    </script>
+</body>
+</html>

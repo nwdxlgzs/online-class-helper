@@ -1,0 +1,3642 @@
+﻿/*easyui样式*/
+.selectDiv .combogride_wrap .combo, .selectDiv .combogride_wrap .textbox-text {
+    height: 21px !important;
+    width: 104px !important;
+}
+
+.selectDiv .combogride_wrap .combo-arrow {
+    height: 21px !important;
+}
+
+/*课表弹窗样式*/
+.baseInfoBody .inlineBlock .combogride_wrap .combo, .baseInfoBody .inlineBlock .combogride_wrap .textbox-text {
+    height: 30px !important;
+    width: 239px !important;
+    margin-right: 0 !important;
+    padding: 0;
+}
+
+.baseInfoBody .inlineBlock .combogride_wrap .combo-arrow {
+    height: 30px !important;
+}
+
+
+/*课表弹窗easyui时间日期样式*/
+#pop_wrap .selectDiv.dtWrap .combogride_wrap .combo, #pop_wrap .selectDiv.dtWrap .combogride_wrap .textbox-text {
+    height: 24px !important;
+    line-height: 24px !important;
+    width: 150px !important;
+}
+
+#pop_wrap .pop_input .selectDiv.dtWrap .datebox .combo-arrow {
+    width: 30px !important;
+    height: 24px !important;
+    background-image: url('/Images/publicImg/icon0.png');
+    background-position: right center;
+}
+
+
+.dateDiv .Wdate {
+    border-radius: 4px;
+    height: 21px;
+}
+
+.popLabel {
+    margin-right: 14px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.baseInfoBody .pop_input .StudentWrap,
+.baseInfoBody .pop_input .ClassWrap,
+.baseInfoBody .pop_input .RoomWrap {
+    width: 645px;
+}
+
+.scheduleListTable .sSpaceTableCheckBox {
+    width: 30px;
+}
+
+.left_tree_wrap.scheduleTree {
+    width: 175px;
+}
+/*首页 index.css*/
+.bannerWrap {
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.indexBannerWrap {
+    width: 1204px;
+    height: 370px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.indexBannerNav {
+    height: 100%;
+    width: 430px;
+    box-sizing: border-box;
+    border-left: 1px solid #E5E5E5;
+    border-right: 1px solid #E5E5E5;
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/*图片轮播效果----暂放*/
+/*左右箭头设置*/
+.indexBannerImg {
+    width: 100%;
+    height: 100%;
+    background-color: #ccc;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+    .indexBannerImg > p {
+        width: 42px;
+        height: 80px;
+        position: absolute;
+        top: 145px;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    .indexBannerImg .indexLeftArrow {
+        left: 30px;
+        background: url("/images/indexImg/bannerArrow.png") no-repeat -96px -10px;
+    }
+
+    .indexBannerImg .indexRightArrow {
+        right: 30px;
+        background: url("/images/indexImg/bannerArrow.png") no-repeat -16px -10px;
+    }
+
+
+    /*图片轮播效果----暂放  indexBannerBox轮播图显示框*/
+    .indexBannerImg .indexBannerBox {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: absolute;
+    }
+
+        .indexBannerImg .indexBannerBox .indexBannerImages {
+            /*width: 300%;*/
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+            .indexBannerImg .indexBannerBox .indexBannerImages img {
+                width: 1204px;
+                height: 370px;
+                float: left;
+            }
+
+.indexBannerCode {
+    width: 100%;
+    padding-bottom: 40px;
+    font-size: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+}
+
+    .indexBannerCode > b {
+        width: 12px;
+        height: 12px;
+        margin-right: 18px;
+        background: url("/images/publicImg/selfSpacespirit_2222.png") no-repeat -272px -356px;
+    }
+
+    .indexBannerCode .iBannerCurrentDot {
+        background: url("/images/publicImg/selfSpacespirit_2222.png") no-repeat -272px -311px;
+    }
+
+
+/*banner图 侧边栏的虚线背景*/
+.indexBannerNavCxt {
+    width: 374px;
+    margin: 0 auto;
+    background: url("/images/indexImg/indexBannerBg.png") no-repeat 16px 244px,url("/images/indexImg/indexBannerBg.png") no-repeat 16px 76px;
+}
+
+@media \0screen {
+    .indexBanNavCxtTop {
+        background: url("/images/indexImg/indexBannerBg.png") no-repeat 16px 30px;
+    }
+
+    .indexBanNavCxtBtm {
+        background: url("/images/indexImg/indexBannerBg.png") no-repeat 16px 30px;
+    }
+}
+
+.indexBanNavTitle {
+    height: 46px;
+    border-bottom: 2px solid #E5E5E5;
+    padding: 18px 8px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+    .indexBanNavTitle h4 {
+        float: left;
+        color: #ff6e6e;
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    .indexBanNavTitle a {
+        float: right;
+    }
+
+.indexBanNavInfo {
+    padding-top: 17px;
+    padding-left: 22px;
+}
+
+    .indexBanNavInfo h4 {
+        width: 62px;
+        height: 34px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        padding-top: 6px;
+        color: #fff;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 400;
+        margin-bottom: 10px;
+    }
+
+.indexBanNavCxtTop h4 {
+    background: url("/images/indexImg/index.jpg") no-repeat -10px -8px;
+}
+
+.indexBanNavCxtBtm h4 {
+    background: url("/images/indexImg/index.jpg") no-repeat -10px -48px;
+}
+
+.indexBanNavInfo p {
+    margin-top: 10px;
+}
+
+    .indexBanNavInfo p span {
+        display: inline-block;
+        margin-left: 20px;
+        margin-right: 28px;
+    }
+
+    .indexBanNavInfo p span, .indexBanNavInfo p a {
+        font-size: 14px;
+    }
+
+.indexBanNavCxtTop span, .indexBanNavCxtTop a {
+    color: #ff6e6e;
+}
+
+.indexBanNavCxtBtm span, .indexBanNavCxtBtm a {
+    color: #fdae24;
+}
+
+/*主体内容区域*/
+.indexWrapCxt {
+    padding-top: 30px;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+}
+
+.indexWrapSection {
+    width: 896px;
+    float: left;
+}
+
+.indexWrapAside {
+    width: 308px;
+    float: right;
+}
+
+.indexWrapSecTitle {
+    width: 896px;
+    height: 80px;
+    box-sizing: border-box;
+    padding: 20px 10px 30px 0;
+    background-color: #ffffff;
+    display: none;
+}
+
+.indexNewCourse .indexWrapSecTitle {
+    width: 896px;
+    height: 80px;
+    box-sizing: border-box;
+    padding: 20px 10px 20px 0;
+}
+/*最新录播 标题图片*/
+.indexWrapSecTitleImg1 {
+    height: 30px;
+    width: 296px;
+    clear: both;
+    background: url("/images/indexImg/newVideos.png") no-repeat 0 0;
+    position: relative;
+    top: 0;
+    left: 50%;
+    margin-left: -148px;
+}
+/*精品课程 标题图片*/
+.indexWrapSecTitleImg2 {
+    height: 40px;
+    width: 332px;
+    clear: both;
+    background: url("/images/indexImg/qualityCourse.png") no-repeat 0 0;
+    position: relative;
+    top: 0;
+    left: 50%;
+    margin-left: -166px;
+}
+
+.indexWrapSecTitleImg3 {
+    height: 30px;
+    width: 322px;
+    clear: both;
+    background: url("/images/indexImg/index_live.png") no-repeat 0 0;
+    position: relative;
+    top: 0;
+    left: 50%;
+    margin-left: -161px;
+}
+
+.indexWrapSecTitle a {
+    float: right;
+    color: #999;
+    font-family: "YouYuan",sans-serif;
+    padding-top: 16px;
+}
+
+.indexWrapSecInfo li {
+    float: left;
+    width: 214px;
+    height: 200px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+    .indexWrapSecInfo li img {
+        width: 214px;
+        height: 134px;
+        overflow: hidden;
+    }
+
+.indexWrapDescribe span {
+    display: inline-block;
+    float: left;
+    margin-top: 4px;
+    height: 16px;
+    overflow: hidden;
+    line-height: 16px;
+}
+
+.indexWrapDescribe .indexWrapSpanRight {
+    text-align: right;
+    width: 80px;
+    height: 14px;
+    overflow: hidden;
+}
+
+.indexWrapDescribe .indexWrapSpanLeft {
+    width: 134px;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+}
+
+.indexSecInfoNum b {
+    width: 16px;
+    height: 12px;
+    background: url("/images/indexImg/index.jpg") no-repeat -208px -8px;
+}
+
+.indexWrapBody .indexWrapSecInfo .indexWrapDescribe span {
+    font-family:"微软雅黑";
+    color: #999999;
+}
+
+.indexWrapDescribe .indexSecInfoTitle a {
+    font-family:"微软雅黑";
+}
+
+    .indexWrapDescribe .indexSecInfoTitle a:hover {
+        color: #6ec3ca;
+    }
+
+.indexWrapSecInfo .indexWrapOpacity {
+    height: 26px;
+    width: 214px;
+    background-color: #666;
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+    -moz-opacity: 0.5;
+    -khtml-opacity: 0.5;
+    position: absolute;
+    top: 109px;
+}
+
+.indexWrapSecInfo .indexWrapOpacityTxt {
+    position: absolute;
+    top: 109px;
+    color: #fff;
+    height: 26px;
+    line-height: 26px;
+    font-family:"微软雅黑";
+}
+
+/*主体内容侧边栏区域<!--最新公告 最新排行 内容区域-->*/
+.IndexWrapAsideCxt {
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 18px;
+}
+    /*最新公告模块*/
+    .IndexWrapAsideCxt.iAsideNewNotice {
+        display: none;
+    }
+
+/*标题图片部分*/
+.indexAsideCxtTitle {
+    height: 82px;
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 2px solid #E5E5E5;
+}
+/*最新公告 标题图片部分*/
+.IndexWrapAsideCxt .indexAsideCxtTitle {
+    padding: 15px 0 15px 12px;
+}
+/*最新排行 标题图片部分*/
+.indexPlayOrderTitle.indexAsideCxtTitle {
+    padding: 14px 0 14px 12px;
+}
+
+.rankingList {
+    display: none;
+}
+/*最新公告标题图片*/
+.iAsideCxtTitleImg1 {
+    height: 50px;
+    width: 154px;
+    background: url("/images/indexImg/newNotices.png") no-repeat 0 0;
+}
+/*最新排行标题图片*/
+.iAsideCxtTitleImg2 {
+    height: 52px;
+    width: 156px;
+    background: url("/images/indexImg/newRanking.png") no-repeat 0 0;
+}
+
+.IndexWrapAsideCxt .indexAsideCxtTitle h4 {
+    float: left;
+    color: #333333;
+    font-size: 14px;
+    font-family:"微软雅黑";
+}
+
+.IndexWrapAsideCxt .indexAsideCxtTitle a {
+    float: right;
+    font-family:"微软雅黑";
+    margin-top: 36px;
+    color: #999999;
+}
+/*最新公告内容的背景*/
+.indexAsideCxtBg {
+    background-color: #F9F9F9;
+    padding: 24px 0 24px 6px;
+    margin-bottom: 50px;
+}
+
+.indexPlayOrderBg {
+    margin-bottom: 0;
+}
+
+.IndexWrapAsideCxt .indexAsideCxtInfo {
+    width: 284px;
+    margin-bottom: 18px;
+}
+
+    .IndexWrapAsideCxt .indexAsideCxtInfo a {
+        width: 74%;
+        font-family:"微软雅黑";
+        overflow: hidden;
+        height: 14px;
+        vertical-align: middle;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .IndexWrapAsideCxt .indexAsideCxtInfo b {
+        width: 26%;
+        font-family:"微软雅黑";
+        vertical-align: middle;
+    }
+
+.indexPlayOrderInfo b {
+    color: #fff;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    line-height: 16px;
+    margin-right: 10px;
+    font-family:"微软雅黑";
+}
+/*排行前三的数字样式*/
+.indexPlayOrderInfo .indexPlayOrderTop {
+    color: #ff0000;
+    box-sizing: border-box;
+    border: 1px solid #ff0000;
+    background-color: #fff;
+}
+
+.indexPlayOrderInfo .indexPlayOrderNum {
+    background-color: #D99A4D;
+}
+/*鼠标悬停在排行内容上 字体变红*/
+.indexPlayOrderInfo:hover a, .indexPlayOrderInfo:hover span, .indexAsideCxtInfo:hover a, .indexAsideCxtInfo:hover b {
+    color: #ff0000;
+}
+
+.IndexWrapPlayOrder p {
+    margin-bottom: 14px;
+}
+
+.indexPlayOrderInfo a {
+    width: 225px;
+    font-family:"微软雅黑";
+    overflow: hidden;
+    height: 14px;
+    vertical-align: middle;
+}
+
+.indexPlayOrderInfo span {
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    font-family:"微软雅黑";
+    vertical-align: middle;
+}
+
+
+
+/*直播课堂 live.css*/
+
+.videoClassWrap {
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+}
+
+    .videoClassWrap > .publicContainer {
+        background-color: #fff;
+        box-sizing: border-box;
+    }
+/*页面内容一：标题导航部分*/
+.videoClassTitle {
+    width: 100%;
+    height: 40px;
+    background-color: #F9F9F9;
+}
+
+.vClassTitleItem {
+    display: inline-block;
+    width: 96px;
+    height: 40px;
+    color: #7e7e7e;
+    background-color: #F7F7F7;
+    line-height: 40px;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+}
+
+.border_left {
+    border-left: 1px solid #DDDDDD;
+}
+
+.videoClassTitleCxt .vClassTitleItemActive {
+    color: #fff;
+    background-color: #6EC3CA;
+}
+/*<!--主体内容二：用户选择项-->*/
+.videoClassSelect {
+    box-sizing: border-box;
+    height: 130px;
+    padding: 14px 2px 0;
+}
+
+.vClassSelectTopItem input {
+    height: 23px;
+    width: 104px;
+    line-height: 20px;
+    box-sizing: border-box;
+    padding-left: 2px;
+    outline: none;
+    border: 1px solid #C0C0C0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.inlineBlock.videoThemeWrap {
+    padding-top: 2px;
+}
+
+/*直播课堂 主体内容一：标题  新增样式*/
+.vClassSelectTopTime {
+    position: relative;
+    width: 80px;
+    margin-left: 5px;
+}
+
+.vClassSelectTopItem.liveClassSelectItemRoom {
+    margin-right: 0;
+}
+
+.vClassSelectTopTime.liveClass_timeChange .vClassSelectTopTimeBox {
+    width: 80px;
+    height: 22px;
+    box-sizing: border-box;
+    padding-right: 18px;
+    line-height: 20px;
+    border: 1px solid #C0C0C0;
+    border-radius: 2px;
+    position: relative;
+    left: 0;
+    top: 18px;
+    top: 16px\9;
+    overflow: hidden;
+    color: #000000;
+}
+
+.liveClass_timeChange .vClassSelectTopTimeArrow {
+    height: 20px;
+    width: 18px;
+    background-color: #F3F3F3;
+    position: absolute;
+    right: 1px;
+    top: 19px;
+    top: 17px\9;
+}
+
+.TimeArrowTop, .TimeArrowBtm {
+    cursor: pointer;
+    width: 100%;
+    height: 10px;
+    position: absolute;
+    left: 0;
+}
+
+.TimeArrowTop {
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat -4px -27px;
+    top: 0;
+}
+
+.TimeArrowBtm {
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat -4px -51px;
+    bottom: 0;
+}
+
+.videoClassSelect.liveClassSelect .videoClassSelectTop li {
+    margin-right: 4px;
+}
+
+.vClassSelectTopItem {
+    margin-right: 4px;
+}
+
+/*.videoClassSelect.liveClassSelect .vClassSelectTopBtn {
+    margin-left: 0;
+}*/
+
+.videoClassSelectBtm li a {
+    color: #7e7e7e;
+}
+/*观看人数箭头朝上*/
+.vClassSeeNumTop {
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat -300px -346px;
+}
+/*观看人数箭头朝下*/
+.vClassSeeNumBtm {
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat -434px -346px;
+}
+/*开始时间*/
+.vClassSeeTimeBtm {
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat -434px -346px;
+}
+
+.vClassSeeTimeTop {
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat -300px -346px;
+}
+/*时间*/
+.vClassSelectBtmItem {
+    margin-right: 54px;
+}
+
+.videoClassSelectBtm li .vClassSelectBtmActive {
+    color: #99c6f5;
+}
+
+.vClassSelectBtmOrderCxt > a {
+    padding-right: 18px;
+}
+
+/*<!--主体内容三：课程显示区域-->*/
+.videoClassSection {
+    width: 100%;
+    height: 182px;
+    box-sizing: border-box;
+    border: 1px solid #EBEBEB;
+    margin-bottom: 34px;
+    overflow: hidden;
+}
+
+    .videoClassSection > div {
+        float: left;
+    }
+/*课程显示区域:左边*/
+.vClassSectionLeft {
+    width: 320px;
+    height: 100%;
+}
+
+.vClassLeftOpacity {
+    width: 80px;
+    height: 70px;
+    position: relative;
+    left: 8px;
+    top: -78px;
+}
+
+.vClassLeftOpacityBg, .vClassLeftOpacityCxt {
+    width: 80px;
+    height: 70px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+    .vClassLeftOpacityBg > p {
+        width: 100%;
+        height: 50%;
+        filter: alpha(opacity=80);
+        opacity: 0.8;
+        -moz-opacity: 0.8;
+        -khtml-opacity: 0.8;
+    }
+
+.vClassLeftOpacityBgTop {
+    background-color: #DF4B2F;
+}
+
+.vClassLeftOpacityBgBtm {
+    background-color: #FFF;
+}
+
+.vClassLeftOpacityCxt > h4 {
+    font-size: 14px;
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.vClassLeftOpacityCxtTop {
+    color: #fff;
+}
+
+.vClassLeftOpacityCxtBtm {
+    color: #333333;
+    font-weight: 600;
+}
+
+/*课程显示区域:中间*/
+.vClassSectionCenter > h4 {
+    font-size: 16px;
+    color: #4b4b4b;
+    height: 26px;
+    cursor: pointer;
+}
+
+.vClassSectionCenter h4:hover {
+    color: #99C6F5;
+}
+
+.vClassSectionTimeDate, .lClassSectionAddrArea {
+    padding-left: 24px;
+}
+
+.vClassSectionTimeDate {
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat -70px -81px;
+}
+
+.lClassSectionAddrArea {
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat -68px -120px;
+}
+
+.vClassSectionShareArrow {
+    width: 10px;
+    height: 10px;
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat -216px -61px;
+    position: relative;
+    top: 0;
+    left: 4px;
+}
+
+.vClassSectionCenter .vClassSectionOutData .vClassSectionActiveData,
+.vClassSectionCenter .vClassSectionData .vClassSectionActiveData {
+    color: #99C6F5;
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat -72px -147px;
+}
+
+    .vClassSectionCenter .vClassSectionOutData .vClassSectionActiveData span,
+    .vClassSectionCenter .vClassSectionData .vClassSectionActiveData span {
+        color: #99C6F5;
+    }
+
+/*右边*/
+.liveClass_Article .vClassSectionRight {
+    width: 292px;
+    height: 100%;
+    box-sizing: border-box;
+    padding-top: 54px;
+    padding-bottom: 20px;
+}
+
+.liveClass_Article .lClassSectionStartTime {
+    height: 52px;
+    width: 166px;
+    box-sizing: border-box;
+    padding-left: 10px;
+    padding-top: 26px;
+}
+
+    .liveClass_Article .lClassSectionStartTime > span {
+        float: left;
+        font-size: 24px;
+        color: #999999;
+    }
+
+.liveClass_Article .vClassSectionRightSecret {
+    float: right;
+    color: #999999;
+    padding-left: 22px;
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat -216px -1px;
+    padding-top: 8px;
+}
+.liveClass_Article .vClassSectionRightSecretNo {
+    float: right;
+    color: #999999;
+    padding-left: 22px;
+    background: url("/images/liveClassImg/liveSpirit_unlock.png") no-repeat 0 6px;
+    padding-top: 8px;
+}
+
+.liveClass_Article .lClassSectionIsStart div {
+    margin-left: 10px;
+    width: 160px;
+    height: 52px;
+    font-size: 16px;
+    color: #07AB81;
+    line-height: 52px;
+    box-sizing: border-box;
+    padding-left: 58px;
+    cursor: pointer;
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat -320px -4px;
+}
+/*直播正在进行*/
+.liveClass_Article .lClassSectionIsStart .see_living_stream {
+    background: url("/images/liveClassImg/broadcast_run.gif") no-repeat 0 0;
+}
+/*直播过期或结束*/
+.liveClass_Article .lClassSectionIsStart .living_end_overdate {
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat -320px -62px;
+    color: #777777;
+}
+
+/*直播未开始*/
+.liveClass_Article .lClassSectionIsStart .lClassSectionStartTimeNo {
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat -320px -217px;
+    color: #777777;
+}
+
+.liveClass_Article .lClassSectionQRcode {
+    padding-left: 10px;
+    margin-top: -24px;
+}
+
+    .liveClass_Article .lClassSectionQRcode > p {
+        height: 26px;
+        line-height: 26px;
+        color: #6ec3ca;
+        width: 100px;
+        text-align: center;
+    }
+
+    .liveClass_Article .lClassSectionQRcode > img {
+        width: 100px;
+        height: 100px;
+    }
+
+.liveClass_Article .lClassSectionPlayInfo > li {
+    float: left;
+}
+
+.courselist_ClassSectionQRcode {
+    float: right;
+    margin-top: -15px;
+    margin-right: -20px;
+}
+
+    .courselist_ClassSectionQRcode p {
+        height: 26px;
+        line-height: 26px;
+        color: #6ec3ca;
+        width: 100px;
+        text-align: center;
+    }
+
+.lClassSectionPlayInfo .liveStateA {
+    display: block;
+}
+
+
+/*个人空间  selfSpace.css*/
+
+.selfSpaceWrap .publicContainer {
+    overflow: hidden;
+}
+
+.selfSpaceBody {
+    padding: 55px 0 0 94px;
+    width: 1135px;
+}
+/*每个菜单项*/
+.selfSpaceMenu {
+    width: 107px;
+    height: 152px;
+    padding-bottom: 40px;
+    padding-right: 120px;
+    float: left;
+}
+/*菜单图标*/
+.sSpaceMenuIcon img {
+    width: 107px;
+    height: 107px;
+    border-radius: 10px;
+}
+/*菜单文字*/
+.sSpaceMenuTxt {
+    width: 107px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    color: #222222;
+    font-size: 16px;
+    font-family: "微软雅黑";
+}
+
+/*个人空间 自动策略 selfSpaceAutoStrategy.css*/
+
+/*主体内容顶部：面包屑导航*/
+/*<!--面包屑导航栏+头部下边框阴影背景-->*/
+.selfSpaceHeaderShadow {
+    height: 20px;
+    padding-top: 6px;
+    background: url("/images/publicImg/headerShadowBg.png") repeat-x 0 0;
+}
+
+.selfPageHeaderShadow {
+    height: 40px;
+    padding-top: 6px;
+    background: url("/images/publicImg/headerShadowBg.png") repeat-x 0 -86px;
+}
+
+.systemHeadShadow {
+    background: url("/images/publicImg/headerShadowBg.png") repeat-x 0 -86px;
+}
+
+.selfSpaceWrapNav {
+    width: 100%;
+    height: 34px;
+    line-height: 34px;
+}
+
+.selfSpaceWrapNavCxt span, .selfSpaceWrapNavCxt a, .selfSpaceWrapNavCxt b {
+    font-family: "微软雅黑";
+    color: #434141;
+    padding-right: 4px;
+}
+
+/*<!--页面主体内容-->*/
+.autoStrategyWrap {
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+}
+
+.autoStrategyBody {
+    width: 1090px;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+    /*<!--主体内容一：用户选择项 上面内容-->*/
+    .autoStrategyBody .videoClassSelectWrap {
+        height: 74px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .autoStrategyBody .videoClassSelectTop li {
+        height: 74px;
+        line-height: 74px;
+        float: left;
+        margin-right: 14px;
+    }
+
+        .autoStrategyBody .videoClassSelectTop li span {
+            font-size: 12px;
+            color: #bfbfbf;
+        }
+
+/*查询按钮 和 日历控件 之间的间隔*/
+.sSRecycleSelectTopGap {
+    width: 20px;
+}
+
+.autoStrategyBody .videoClassSelectTop .vClassSelectTopBtn {
+    margin-left: 8px;
+    margin-right: 0;
+}
+/*<!--主体内容二：自动删除-->*/
+.autoStrategyAutoList {
+    margin-bottom: 10px;
+}
+
+.autoDelTitle {
+    color: #7e7e7e;
+    font-weight: 400;
+    font-size: 15px;
+    height: 48px;
+    line-height: 48px;
+}
+
+.autoDelList {
+    height: 265px;
+    background-color: #F9F8F9;
+    box-sizing: border-box;
+    padding-top: 35px;
+    padding-left: 25px;
+}
+
+    .autoDelList > .autoDelListItem {
+        float: left;
+        padding-left: 105px;
+        width: 190px;
+        height: 195px;
+        background: url("/images/selfSpace/selfSpacespirit_2.png") no-repeat 97px -8px;
+    }
+
+.autoDelListItem > h4 {
+    height: 60px;
+    width: 100%;
+    box-sizing: border-box;
+    padding-top: 22px;
+    font-size: 15px;
+    text-align: center;
+    color: #fff;
+}
+
+.autoDelInfoImg {
+    height: 106px;
+    width: 100%;
+    border-bottom: 1px solid #EFEDED;
+}
+
+    .autoDelInfoImg img {
+        padding: 6px 64px 6px;
+    }
+
+    .autoDelInfoImg p {
+        text-align: center;
+        position: relative;
+    }
+
+        .autoDelInfoImg p > a {
+            color: #929292;
+            padding-top: 5px;
+        }
+
+        .autoDelInfoImg p > b {
+            width: 20px;
+            height: 20px;
+            background: url("/images/selfSpace/selfSpaceSpirit.png") no-repeat -8px -264px;
+            position: absolute;
+            top: 0;
+            right: 20px;
+            cursor: pointer;
+        }
+
+.autoDelInfoBtn {
+    height: 28px;
+    font-size: 0;
+}
+
+    .autoDelInfoBtn > b {
+        width: 1px;
+        height: 100%;
+        overflow: hidden;
+        background-color: #EFEDED;
+        vertical-align: middle;
+        margin-top: -10px;
+    }
+    /*按钮*/
+    .autoDelInfoBtn > a {
+        width: 94px;
+        height: 28px;
+        line-height: 28px;
+        color: #929292;
+        box-sizing: border-box;
+    }
+
+.autoDelBtnStart {
+    padding: 0 18px 0 28px;
+    background-image: url("/images/selfSpace/selfSpacespirit_2.png");
+    background-repeat: no-repeat;
+    background-position: -43px -363px;
+    cursor: pointer;
+}
+
+.autoDelBtnEnd {
+    padding: 0 28px 0 18px;
+    background-image: url("/images/selfSpace/selfSpacespirit_2.png");
+    background-repeat: no-repeat;
+    background-position: -60px -265px;
+    cursor: pointer;
+}
+
+
+/*<!--主体内容三：自动考试录像-->*/
+.autoTestList {
+    height: 201px;
+    box-sizing: border-box;
+    background-color: #F9F8F9;
+    padding-top: 35px;
+    padding-left: 25px;
+}
+
+.autoTestListItem {
+    padding-left: 56px;
+}
+
+
+/*个人空间 公告管理 selfSpaceNoticeCtrl.css*/
+
+/*<!--页面主体内容-->*/
+.noticeCtrlWrap > .publicContainer {
+    border: 1px solid #D3D3D3;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+}
+/*<!--主体内容一：标题 公告展示-->*/
+.noticeCtrlTitle {
+    height: 54px;
+    border-bottom: 1px solid #EAEAEA;
+    box-sizing: border-box;
+    padding-left: 28px;
+    line-height: 53px;
+    color: #434141;
+    font-size: 14px;
+    font-family: "微软雅黑";
+    font-weight: 400;
+    background-color: #F9F9F9;
+}
+/*<!--主体内容二：按钮和选择项-->*/
+.noticeCtrlSelect {
+    padding: 28px 0 22px 70px;
+}
+
+.nCtrlSelectBtn {
+    width: 104px;
+    height: 30px;
+    line-height: 30px;
+    box-sizing: border-box;
+    padding-left: 36px;
+    background: url("/images/selfSpace/selfSpacespirit_2.png") no-repeat -8px -445px;
+    color: #fff;
+    font-size: 14px;
+    font-family: "微软雅黑";
+    font-weight: 900;
+    vertical-align: bottom;
+}
+
+.nCtrlSelectCategory {
+    color: #CCCCCC;
+    padding-left: 12px;
+    vertical-align: bottom;
+}
+
+    .nCtrlSelectCategory a {
+        color: #7e7e7e;
+        padding: 0 4px;
+    }
+
+    .nCtrlSelectCategory .nCtrlSelectActive {
+        color: #99c6f5;
+    }
+/*<!--主体内容三：课程公告内容列表-->*/
+.noticeCtrlBody {
+    padding-left: 70px;
+}
+/*<!--第一个公告内容-->*/
+.noticeCtrlInfo {
+    width: 1046px;
+    height: 182px;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+    border: 1px solid #EBEBEB;
+}
+
+.noticeCtrlImg, .noticeCtrlContent {
+    float: left;
+}
+
+.noticeCtrlLink {
+    float: right;
+}
+
+.noticeCtrlImg {
+    padding-right: 34px;
+}
+
+    .noticeCtrlImg img {
+        width: 320px;
+        height: 180px;
+    }
+/*<!--第一个公告内容:中间部分-->*/
+.noticeCtrlContent {
+    width: 400px;
+}
+
+.noticeCtrlCxtTitle {
+    color: #4b4b4b;
+    font-size: 16px;
+    height: 56px;
+    line-height: 56px;
+    cursor: pointer;
+}
+
+    .noticeCtrlCxtTitle:hover {
+        color: #99c6f5;
+    }
+
+.nCtrlEmergent {
+    width: 62px;
+    height: 20px;
+    background-color: #FF4F4F;
+    color: #fff;
+    line-height: 20px;
+    text-align: center;
+    position: relative;
+    top: 5px;
+    left: 5px;
+}
+
+.nCtrlCxtList span {
+    height: 22px;
+    line-height: 22px;
+    color: #999999;
+    font-family: "微软雅黑";
+}
+
+.noticeCtrlCxt_3.nCtrlCxtList span {
+    color: #333333;
+}
+
+.noticeCtrlCxt_3 .nCtrlCxtMemo {
+    float: left;
+    width: 60px;
+}
+
+.noticeCtrlCxt_3 .nCtrlCxtMemoCxt {
+    float: right;
+    width: 340px;
+    height: auto;
+}
+/*最右边链接*/
+.noticeCtrlLink {
+    width: 100px;
+    height: 100%;
+    position: relative;
+}
+
+    .noticeCtrlLink a {
+        color: #6ec3ca;
+        position: absolute;
+        right: 18px;
+        bottom: 10px;
+    }
+
+.noticeCtrlPage {
+    width: 100%;
+    padding-top: 20px;
+    height: 68px;
+}
+
+
+
+/*个人空间  回收站 selfSpaceRecycle.css  1214--1420*/
+
+/*<!--页面主体内容-->*/
+.selfSpaceRecycleWrap {
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+}
+
+.sSpaceRecycleBody {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #DDDDDD;
+}
+
+    /*<!--主体内容一：用户选择项 上面内容-->*/
+    .sSpaceRecycleBody .videoClassSelectWrap {
+        height: 113px;
+        width: 100%;
+        border-bottom: 1px solid #DDDDDD;
+    }
+
+    .sSpaceRecycleBody .videoClassSelectTop li span {
+        font-size: 12px;
+    }
+
+
+/*<!--主体内容右侧一：用户选择项 下面内容-->*/
+.recycle_wrap .selfSpaceSelectBtm li {
+    height: 26px;
+    line-height: 26px;
+}
+
+.recycle_wrap .selfSpaceSelectBtm {
+    height: 26px;
+    width: 1046px;
+    margin-left: 20px;
+}
+
+.recycle_wrap .videoClassSelectTop {
+    margin-left: 5px;
+}
+
+.selfSpaceSelectBtm .sSpaceSelectBtmfl {
+    float: left;
+}
+
+    .selfSpaceSelectBtm .sSpaceSelectBtmfl > li {
+        float: left;
+    }
+
+.vClassSelectTopItem span, .videoClassSelectBtm li {
+    color: #BFBFBF;
+}
+
+.sSpaceSelectBtmfl .vClassSelectBtmItem {
+    margin-right: 48px;
+}
+
+.selfSpaceSelectBtm .vClassSelectBtmOrderCxt > a {
+    padding-right: 20px;
+}
+
+
+/*<!--主体内容二：还原按钮-->*/
+.sSRecycleBackWrap {
+    width: 100%;
+    height: 54px;
+    box-sizing: border-box;
+    padding-left: 54px;
+    padding-top: 14px;
+}
+
+.recycleBackCheck {
+    width: 16px;
+    height: 16px;
+}
+
+.recycleBackBtn, .recycleDelBtn {
+    width: 66px;
+    height: 24px;
+    background: url("/images/selfSpace/selfSpaceSpirit.png") no-repeat -8px -70px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+    font-family: "微软雅黑";
+}
+
+.recycleBackCheck, .recycleBackBtn, .recycleDelBtn {
+    vertical-align: middle;
+    margin-right: 12px;
+}
+
+/*<!--主体内容三：课程信息-->*/
+.sSRecycleCourseBox {
+    width: 100%;
+    height: 112px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #DDDDDD;
+    padding-top: 12px;
+    padding-left: 54px;
+}
+
+    .sSRecycleCourseBox li {
+        float: left;
+    }
+
+.recycleCourseFile,
+.recycleCourseTheme {
+    width: 400px;
+}
+
+    .recycleCourseTheme p {
+        width: 380px;
+        overflow: hidden;
+    }
+
+.sSRecycleCourseBox li p span {
+    white-space: nowrap;
+}
+
+.recycleCourseCheck {
+    height: 82px;
+    width: 23px;
+    box-sizing: border-box;
+    padding-top: 33px;
+}
+
+    .recycleCourseCheck > input {
+        width: 16px;
+        height: 16px;
+    }
+
+.recycleCourseImg {
+    width: 145px;
+    height: 82px;
+    position: relative;
+}
+
+    .recycleCourseImg img {
+        width: 130px;
+        height: 82px;
+    }
+
+    .recycleCourseImg .state_picture {
+        position: absolute;
+        top: -20px;
+        left: -75px;
+        width: 111px;
+        height: 51px;
+        z-index:5;
+    }
+
+.sSRecycleCourseBox li p span {
+    color: #333333;
+    font-family: "微软雅黑";
+}
+
+.sSRecycleCourseBox li p {
+    padding-bottom: 6px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.sSRecycleCourseBox li .recycleCourseTopicP:hover span {
+    color: #ff0000;
+}
+
+.recycleCourseTheme .recycleCourseTopicP span {
+    color: #818181;
+}
+
+.recycleCourseStateCxt, .recycleCourseCategoryCxt, .recycleCourseFileLengthCxt, .recycleCourseCourseLengthCxt {
+    margin-right: 25px;
+}
+
+.sSRecycleCourseBox li .recycleCourseActive {
+    color: #A0BBF2;
+}
+
+
+
+/*<!--页面主体内容 顶部标题-->*/
+.sSpaceResourceCtrlTitle {
+    height: 42px;
+    width: 100%;
+    background-color: #F9F9F9;
+}
+
+.calendarWrap .laydate-icon {
+    width: 94px;
+}
+
+.videoPlanDate .laydate-icon {
+    width: 82px;
+}
+
+.calendarWrap.videoPlanDate .laydate-icon {
+    width: 146px;
+    height: 23px;
+    box-sizing: border-box;
+    padding-left: 5px;
+    cursor: pointer;
+}
+
+.Schedule_contents .calendarWrap.videoPlanDate .laydate-icon {
+    width: 120px;
+}
+
+.calendarWrap.videoPlanDate .listDataWrap {
+    padding-top: 1px;
+}
+
+.resourceCtrlTitleList {
+    width: 300px;
+    margin: 0 auto;
+    font-size: 0;
+}
+
+    .resourceCtrlTitleList a {
+        height: 42px;
+        width: 98px;
+        background-color: #F7F7F7;
+        color: #7e7e7e;
+        text-align: center;
+        line-height: 42px;
+        vertical-align: middle;
+    }
+
+    .resourceCtrlTitleList b {
+        width: 1px;
+        height: 42px;
+        overflow: hidden;
+        background-color: #ECECEC;
+        vertical-align: middle;
+    }
+
+    .resourceCtrlTitleList .resourceCtrlTitleActive {
+        color: #fff;
+        background-color: #6EC3CA;
+    }
+/*<!--页面主体内容-->*/
+.selfSpaceRecycleWrap.sSpaceResourceCtrlWrap {
+    height: auto;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+}
+
+.sSpaceRecycleBody.sSpaceResourceCtrlBody {
+    height: auto;
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+}
+
+/*<!--主体内容一：用户选择项 上面内容-->*/
+.sSpaceResourceCtrlWrap .sSpaceRecycleBody .videoClassSelectWrap.resourceCtrl_select {
+    height: 114px;
+    width: 100%;
+    border: none;
+}
+
+.sSpaceRecycleBody .videoClassSelectTop li {
+    height: 72px;
+    line-height: 72px;
+    margin-bottom: 4px;
+    float: left;
+    margin-right: 14px;
+    margin-right: 10px\9;
+}
+
+    .sSpaceRecycleBody .videoClassSelectTop li span {
+        font-size: 12px;
+    }
+
+
+
+
+/*<!--主体内容右侧一：用户选择项 下面内容-->*/
+.resourceCtrl_select .selfSpaceSelectBtm li {
+    height: 26px;
+    line-height: 26px;
+}
+
+.selfSpaceSelectBtm.resourceCtrlSelectBtm {
+    height: 26px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.videoClassSelectBtm .vClassSelectBtmOrder, .videoClassSelectBtm li a {
+    color: #7e7e7e;
+}
+
+.sSpaceSelectBtmfl .vClassSelectBtmItem {
+    margin-right: 68px;
+}
+
+/*<!--主体内容二：系列按钮和资源管理课程信息-->*/
+.resourceCtrlInfo {
+    width: 100%;
+    height: auto;
+    border: 1px solid #DDDDDD;
+    box-sizing: border-box;
+}
+
+/*<!--主体内容二上面：按钮-->*/
+.resourceCtrlBtnWrap {
+    width: 100%;
+    height: 54px;
+    box-sizing: border-box;
+    padding-left: 54px;
+    padding-top: 14px;
+}
+
+    .resourceCtrlBtnWrap > li {
+        float: left;
+        margin-right: 10px;
+    }
+
+        .resourceCtrlBtnWrap > li > .reCtrlBtnCheck {
+            width: 16px;
+            height: 16px;
+            margin-top: 4px;
+        }
+
+        .resourceCtrlBtnWrap > li > input {
+            width: 66px;
+            height: 24px;
+            background: url("/images/selfSpace/selfSpaceSpirit.png") no-repeat -8px -70px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            color: #fff;
+    font-family: "微软雅黑";
+        }
+        /*修改状态按钮*/
+        .resourceCtrlBtnWrap > li > .reCtrlBtnState {
+            background: url("/images/selfSpace/selfSpaceSpirit.png") no-repeat -333px -215px;
+            text-align: left;
+            box-sizing: border-box;
+            padding-left: 5px;
+        }
+
+.reCtrlBtnStateLi {
+    position: relative;
+}
+
+    .reCtrlBtnStateLi:hover .reCtrlBtnStateSelect {
+        display: block;
+    }
+/*修改状态按钮 子菜单*/
+.reCtrlBtnStateSelect {
+    position: absolute;
+    top: 24px;
+    left: 0;
+    display: none;
+    padding-top: 2px;
+    background: #fff;
+}
+
+    .reCtrlBtnStateSelect li {
+        padding-bottom: 1px;
+    }
+
+    .reCtrlBtnStateSelect a {
+        width: 66px;
+        height: 23px;
+        background-color: #8BCFD5;
+        color: #fff;
+        font-family:"微软雅黑";
+        line-height: 23px;
+        text-align: center;
+    }
+
+/*<!--主体内容二主体：资源管理课程信息-->*/
+.resourceCtrlCourseBox {
+    width: 100%;
+    height: 132px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #DDDDDD;
+    padding-top: 22px;
+    padding-left: 54px;
+}
+
+    .resourceCtrlCourseBox li {
+        float: left;
+    }
+
+.recycleCourseCheck {
+    height: 82px;
+    width: 23px;
+    box-sizing: border-box;
+    padding-top: 33px;
+}
+
+    .recycleCourseCheck > input {
+        width: 16px;
+        height: 16px;
+    }
+
+.resourceCtrlCourseBox li p span {
+    color: #333333;
+    font-family:"微软雅黑";
+    white-space: nowrap;
+}
+
+.resourceCtrlCourseBox li p {
+    padding-bottom: 6px;
+}
+
+    .resourceCtrlCourseBox li p:hover .recycleCourseTopicCxt a {
+        color: #ff0000;
+    }
+
+.resourceCtrlCourseBox .recycleCourseTheme {
+    width: 400px;
+}
+
+    .resourceCtrlCourseBox .recycleCourseTheme p {
+        width: 380px;
+        overflow: hidden;
+    }
+
+        .resourceCtrlCourseBox .recycleCourseTheme p a {
+            display: inline;
+        }
+
+.recycleCourseTheme .recycleCourseTopicP span {
+    color: #818181;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.recycleCourseTheme .recycleCourseTopicP:hover .reCtrlCourseCategory,
+.recycleCourseTopicP:hover .recycleCourseTopic, .recycleCourseTopicP:hover .recycleCourseTopicCxt {
+    color: #ff0000;
+}
+
+.recycleCourseTheme .recycleCourseTopicP .reCtrlCourseCategory {
+    color: #818181;
+}
+
+.recycleCourseStateCxt, .recycleCourseCategoryCxt, .recycleCourseFileLengthCxt, .recycleCourseCourseLengthCxt {
+    margin-right: 25px;
+}
+
+.reCtrlCourseOfficeCxt {
+    margin-right: 15px;
+}
+
+.resourceCtrlCourseBox li .recycleCourseActive {
+    color: #A0BBF2;
+}
+
+.resourceCtrlCourseBox .recycleCourseFile {
+    width: 400px;
+    margin-right: 30px;
+}
+
+    .resourceCtrlCourseBox .recycleCourseFile p {
+        width: 380px;
+        overflow: hidden;
+    }
+
+.reCtrlCourseBtn {
+    padding-top: -5px;
+}
+    /*资源管理课程信息最右侧 三个按钮*/
+    .reCtrlCourseBtn a {
+        width: 68px;
+        height: 22px;
+        text-align: center;
+        line-height: 22px;
+        background: url("/images/selfSpace/selfSpaceSpirit.png") no-repeat -331px -339px;
+        color: #6ec3ca;
+        font-family:"微软雅黑";
+    }
+
+        .reCtrlCourseBtn a:hover {
+            background-position: -331px -364px;
+            color: #fff;
+        }
+
+.downloadMore, .editVideoMore {
+    position: relative;
+}
+
+.downloadLink_wrap, .piece_wrap {
+    position: absolute;
+    z-index: 90;
+    display: none;
+}
+
+    .downloadLink_wrap a, .piece_wrap a {
+        display: block;
+    }
+/*个人空间  教学督导  selfSpaceTeachCtrl.css  1753-1999*/
+
+/*<!--页面主体内容-->*/
+.selfSpaceTeachCtrlWrap.teachCtrl_wrap {
+    background-color: #FFFFFF;
+}
+
+.sSpaceTeachCtrlBody {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #DDDDDD;
+}
+
+    .sSpaceTeachCtrlBody .pageGap {
+        margin-bottom: 40px;
+    }
+    /*<!--主体内容一：用户选择项 上面内容-->*/
+    .sSpaceTeachCtrlBody .videoClassSelectWrap {
+        height: 90px;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 5px;
+    }
+
+    .sSpaceTeachCtrlBody .videoClassSelectTop li {
+        height: 72px;
+        line-height: 72px;
+        margin-bottom: 4px;
+        float: left;
+        margin-right: 7px;
+    }
+
+        .sSpaceTeachCtrlBody .videoClassSelectTop li span {
+            font-size: 12px;
+        }
+
+    /*<!--主体内容右侧一：用户选择项 下面内容-->*/
+
+    .sSpaceTeachCtrlBody .selfSpaceSelectBtm {
+        height: 26px;
+        width: 1110px;
+    }
+
+.teachCtrl_wrap .selfSpaceSelectBtm li {
+    height: 26px;
+    line-height: 26px;
+}
+
+
+.tCtrlSelectBtmfr {
+    float: right;
+}
+
+    .tCtrlSelectBtmfr li, .videoClassSelectBtm .vClassSelectBtmOrder, .vClassSelectTopItem span, .videoClassSelectBtm li {
+        color: #BFBFBF;
+        vertical-align:middle;
+    }
+
+.teachCtrl_wrap .sSpaceSelectBtmfl .vClassSelectBtmItem {
+    margin-right: 48px;
+}
+
+.teachCtrl_wrap .selfSpaceSelectBtm .vClassSelectBtmOrder {
+    margin-right: 12px;
+}
+
+.tCtrlSelectBtmfr .vClassSelectBtmActive {
+    color: #99c6f5;
+}
+
+.teachCtrl_wrap .selfSpaceSelectBtm .vClassSelectBtmOrderCxt > a {
+    padding-right: 20px;
+}
+
+.tCtrlSelectBtmView a {
+    padding-left: 26px;
+}
+
+.tCtrlSelectBtmListView {
+    padding-right: 8px;
+    background: url("/images/selfSpace/selfSpaceSpirit.png") no-repeat -126px -160px;
+}
+
+.tCtrlSelectBtmReportView {
+    padding-right: 8px;
+    background: url("/images/selfSpace/selfSpaceSpirit.png") no-repeat -129px -244px;
+}
+/*<!--主体内容二：教学楼导航和出勤率列表信息-->*/
+.sSTeachCtrlBox {
+    width: 100%;
+    /*height:1148px;*/
+    overflow: hidden;
+}
+
+/*<!--主体内容 左侧 侧边栏 教学楼导航栏-->*/
+.sSTeachCtrlAside {
+    width: 176px;
+    height: 100%;
+    border-right: 1px solid #DDDDDD;
+    box-sizing: border-box;
+    float: left;
+}
+    /*<!--左侧 侧边栏 标题 教学楼-->*/
+    .sSTeachCtrlAside .selfSpaceAsideTitle {
+        width: 100%;
+        height: 40px;
+        font-size: 14px;
+        text-align: center;
+        line-height: 40px;
+        color: #fff;
+        background-color: #6EC3CA;
+        font-family:"微软雅黑";
+    }
+
+
+/*<!--主体内容 中心：出勤率列表-->*/
+.sSTeachCtrlContent {
+    width: 1026px;
+    /*height:100%;*/
+    float: right;
+    box-sizing: border-box;
+}
+/*<!--主体内容 中心：出勤率列表表格内容-->*/
+.sSTeachCtrlInfoTable {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 1026px;
+}
+
+    .sSTeachCtrlInfoTable tr {
+        height: 40px;
+    }
+
+.sSTeachCtrlInfoCxt tr {
+    border-bottom: 1px solid #F0ECED;
+}
+
+.classAttendance_tree .ztree {
+    border: none;
+}
+
+.sSTeachCtrlInfoTitle th {
+    font-size: 14px;
+    color: #fff;
+    background-color: #6EC3CA;
+    font-family:"微软雅黑";
+}
+
+.sSTeachCtrlInfoCxt td {
+    color: #404145;
+    font-family:"微软雅黑";
+    line-height: 40px;
+    text-align: center;
+}
+
+
+.teachCtrlPhotoCxt {
+    position: relative;
+}
+
+.showSmallImg img {
+    width: 100%;
+    height: 100%;
+}
+
+.showSmallImg {
+    width: 72px;
+    height: 34px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+}
+/*个人空间  录播管理 selfSpaceVideoCtrl.css*/
+
+/*<!--页面主体内容-->*/
+.selfSpaceTeachCtrlWrap {
+    background-color: #FFFFFF;
+}
+
+.sSVideoCtrlBox {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #DDDDDD;
+}
+
+    .videoPlanTableWrap .ztree,
+    .videoPlanWrap .ztree,
+    .sSVideoCtrlBox .ztree {
+        border: none;
+    }
+    /*<!--主体内容 左侧 侧边栏 教学楼导航栏-->*/
+    .sSVideoCtrlBox .sSTeachCtrlAside {
+        width: 220px;
+        height: 100%;
+        border-right: 1px solid #DDDDDD;
+        box-sizing: border-box;
+        float: left;
+    }
+/*<!--左侧 侧边栏 标题 教学楼-->*/
+.sSTeachCtrlAside .selfSpaceAsideTitle {
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    background-color: #6EC3CA;
+    font-family:"微软雅黑";
+}
+
+
+/*<!--主体内容 右侧中心内容：录播管理列表-->*/
+.sSVideoCtrlContent {
+    width: 982px;
+    height: 100%;
+    float: right;
+    box-sizing: border-box;
+}
+/*<!--主体内容 中心一：用户选择项内容-->*/
+.videoCtrlSelect {
+    width: 100%;
+    height: 96px;
+    box-sizing: border-box;
+    padding-top: 24px;
+    padding-left: 20px;
+}
+/*<!--主体内容 中心一：用户选择项内容 上面部分-->*/
+.videoCtrlSelectTop {
+    width: 100%;
+    height: 40px;
+}
+
+.vCtrlSelectTopFl, .vCtrlSelectTopFl li {
+    float: left;
+}
+
+.vCtrlSelectTopFr {
+    float: right;
+}
+
+.vCtrlSelectTopFl .spanFont {
+    font-size: 14px;
+    color: #bfbfbf;
+}
+
+.vCtrlSelectTopFl li {
+    padding-right: 10px;
+}
+
+.vCtrlSelectTopFl input {
+    width: 106px;
+    height: 22px;
+    line-height: 22px;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    padding-left: 2px;
+    color: #bfbfbf;
+}
+
+.vCtrlSelectTopIT {
+    background: url("/images/selfSpace/selfSpaceSpirit.png") no-repeat -136px -376px;
+}
+
+.vCtrlSelectTopFr {
+    padding-right: 8px;
+    position: relative;
+}
+
+.vCtrlSelectTopSearch {
+    height: 23px;
+    width: 173px;
+    line-height: 23px;
+    box-sizing: border-box;
+    /*color:#c2c2c2;*/
+    color: #444;
+    padding-left: 10px;
+    padding-right: 24px;
+    border: none;
+    outline: none;
+    background: url("/images/selfSpace/selfSpaceSpirit.png") no-repeat -227px -61px;
+}
+
+.vCtrlSelectTopSearchIcon {
+    width: 21px;
+    height: 21px;
+    position: absolute;
+    right: 10px;
+    top: 1px;
+    cursor: pointer;
+}
+
+/*<!--主体内容 中心一：用户选择项内容 下面部分 批量录制按钮-->*/
+.vCtrlSelectBtmBtn {
+    width: 61px;
+    height: 23px;
+    color: #fff;
+    background: url("/images/selfSpace/selfSpaceSpirit.png") no-repeat -337px -134px;
+    border: none;
+    outline: none;
+    margin-right: 16px;
+    cursor: pointer;
+}
+/*<!--主体内容 中心二：录播管理表格内容-->*/
+.sSVideoCtrlInfoTable {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 12px;
+}
+
+    .sSVideoCtrlInfoTable tr {
+        height: 40px;
+    }
+
+.sSVideoCtrlInfoCxt tr {
+    border-bottom: 1px solid #F0ECED;
+}
+
+    .sSVideoCtrlInfoCxt tr:hover {
+        background-color: #ade4e9;
+    }
+
+.sSVideoCtrlInfoTitle th {
+    font-size: 14px;
+    color: #fff;
+    background-color: #6EC3CA;
+    font-family:"微软雅黑";
+}
+
+.sSVideoCtrlInfoCxt td {
+    color: #404145;
+    font-family:"微软雅黑";
+    line-height: 40px;
+    text-align: center;
+}
+
+    .sSVideoCtrlInfoCxt td a {
+        color: #404145;
+        font-family:"微软雅黑";
+        line-height: 40px;
+        text-align: center;
+    }
+
+        .sSVideoCtrlInfoCxt td a.enterVCtrl {
+            color: #99c6f5;
+        }
+
+            .sSVideoCtrlInfoCxt td a.enterVCtrl:hover {
+                /*color:#404145;*/
+                color: #fff;
+                text-decoration: underline;
+            }
+
+.vCtrlCheckBox {
+    width: 16px;
+    height: 16px;
+}
+
+/*<!--主体内容 中心底部：页码区域-->*/
+.sSVideoCtrlContent .videoClassPage {
+    width: 745px;
+    height: 62px;
+    padding-top: 30px;
+    margin: 0 auto;
+}
+
+.videoClassPageData > li {
+    float: left;
+    padding-right: 7px;
+}
+
+.videoClassPageData li a, .videoClassPageData li span {
+    display: inline-block;
+    font-size: 14px;
+    padding-left: 8px;
+    padding-right: 8px;
+    color: #666666;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 4px;
+}
+
+.videoClassPageData .videoClassPageTop > a {
+    color: #dedede;
+    background-color: #F6F6F6;
+    border: 1px solid #F6F6F6;
+}
+
+.videoClassPage .videoClassPageNum .videoClassPageActive {
+    color: #fff;
+    background-color: #6EC3CA;
+    border: 1px solid #6EC3CA;
+}
+
+.videoClassPageData .videoClassPageNum a {
+    border: 1px solid #DADADA;
+}
+
+.videoClassPageData .videoClassPageNum input {
+    outline: none;
+    height: 24px;
+    line-height: 24px;
+    width: 24px;
+    text-align: center;
+    border: 1px solid #DADADA;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+
+
+/*个人空间 录像计划 课程表  selfSpaceVideoPlanCourseTable.css  2239-2619*/
+
+
+/*<!--页面主体内容-->*/
+.selfSpaceWrap.videoPlanTableWrap {
+    height: auto;
+    min-height: 960px;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+}
+
+/*<!--主体内容-->*/
+.videoPlanTableWrap .selfSpaceBody {
+    padding: 0;
+    width: 1204px;
+    height: auto;
+    min-height: 930px;
+    background-color: #fff;
+    box-sizing: border-box;
+    border: 1px solid #CCCCCC;
+}
+/*<!--左侧 侧边栏 教学楼导航栏-->*/
+.videoPlanTableWrap .selfSpaceAside {
+    width: 146px;
+    height: auto;
+    min-height: 928px;
+    border-right: 1px solid #DDDDDD;
+    box-sizing: border-box;
+    float: left;
+}
+/*<!--左侧 侧边栏 标题 教学楼-->*/
+.videoPlanTableWrap .selfSpaceAsideTitle {
+    width: 100%;
+    height: 38px;
+    border-bottom: 1px solid #CCCCCC;
+    font-size: 14px;
+    text-align: center;
+    line-height: 38px;
+    color: #fff;
+    background-color: #6EC3CA;
+}
+
+/*<!--右侧 主体内容 -->*/
+.videoPlanTableWrap .selfSpaceContent {
+    width: 1056px;
+    height: auto;
+    min-height: 928px;
+    float: right;
+}
+
+/*<!--主体内容右侧一：用户选择项 上面内容-->*/
+.selfSpaceContent .videoClassSelectWrap {
+    height: 108px;
+    width: 100%;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.videoPlanTableWrap .selfSpaceContent .videoClassSelectTop li {
+    height: 72px;
+    line-height: 72px;
+    margin-bottom: 4px;
+    float: left;
+    margin-left: 10px;
+    margin-right: 0;
+}
+
+    .videoPlanTableWrap .selfSpaceContent .videoClassSelectTop li span {
+        font-size: 14px;
+    }
+
+/*.vClassSelectTopItem input {
+    height:22px;
+    width:104px;
+    line-height:20px;
+    box-sizing: border-box;
+    outline:none;
+    border:1px solid #C0C0C0;
+    border-radius: 2px;
+    padding-left:2px;
+}*/
+
+/*.vClassSelectTopItem .vClassSelectTopItemArrow {
+    padding-right:20px;
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat 78px -1px;
+}*/
+
+/*时间控件 上下箭头*/
+/*.vClassSelectTopTime {
+    position:relative;
+    width:80px;
+    margin-left:5px;
+}*/
+
+.vClassSelectTopTime .vClassSelectTopTimeBox {
+    width: 80px;
+    height: 22px;
+    box-sizing: border-box;
+    padding-right: 18px;
+    line-height: 20px;
+    border: 1px solid #C0C0C0;
+    border-radius: 2px;
+    position: relative;
+    left: 0;
+    top: 25px;
+    overflow: hidden;
+    color: #000000;
+    padding-left: 2px;
+}
+/*时间控件 上下箭头的设置*/
+.vClassSelectTopTimeArrow {
+    height: 20px;
+    width: 18px;
+    background-color: #F3F3F3;
+    position: absolute;
+    right: 1px;
+    top: 26px;
+}
+
+.TimeArrowTop, .TimeArrowBtm {
+    cursor: pointer;
+    width: 100%;
+    height: 10px;
+    position: absolute;
+    left: 0;
+}
+
+.TimeArrowTop {
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat -4px -27px;
+    top: 0;
+}
+
+.TimeArrowBtm {
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat -4px -51px;
+    bottom: 0;
+}
+
+/*查询 重置按钮  导入 导出按钮 的 设置*/
+.vClassSelectBtmBtn input {
+    height: 22px;
+    width: 62px;
+    line-height: 22px;
+    outline: none;
+    border: none;
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat -72px -8px;
+    color: #fff;
+    cursor: pointer;
+}
+/*.vClassSelectTopBtn {
+    margin-left:8px;
+}*/
+
+/*<!--主体内容右侧一：用户选择项 下面内容-->*/
+.videoPlanTableWrap .selfSpaceSelectBtm li {
+    height: 26px;
+    line-height: 26px;
+}
+
+.videoPlanTableWrap .selfSpaceSelectBtm {
+    padding-left: 10px;
+    height: 26px;
+    width: 1046px;
+}
+
+.selfSpaceSelectBtm .sSpaceSelectBtmfr {
+    float: right;
+}
+
+.videoPlanTableWrap .sSpaceSelectBtmfr > .vClassSelectBtmCategory.vClassSelectBtmItem {
+    margin-right: 48px;
+}
+
+.videoPlanTableWrap .sSpaceSelectBtmfr > .vClassSelectBtmBtn {
+    margin-right: 12px;
+}
+.sSpaceSelectBtmfl .vClassSelectBtmItem {
+    margin-right: 48px;
+}
+
+/*<!--右侧二：课程表-->*/
+.courseTableBox {
+    width: 1057px;
+    height: auto;
+    min-height: 400px;
+    box-sizing: border-box;
+    padding-top: 8px;
+    padding-left: 36px;
+    padding-bottom: 20px;
+    border: 1px solid #ddd;
+    border-top: none;
+    margin-left: -1px;
+}
+/*<!--课程表标题-->*/
+.courseTableWeek {
+    width: 975px;
+    height: 36px;
+    padding-right: 10px;
+    text-align: right;
+    font-size: 0;
+}
+
+    .courseTableWeek span {
+        display: inline-block;
+        height: 34px;
+        line-height: 34px;
+        padding: 0 20px;
+        border-bottom: 2px solid transparent;
+        font-family:"微软雅黑";
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+        .courseTableWeek span:hover {
+            border-bottom: 2px solid #6EC3CA;
+        }
+/*<!--课程表内容信息-->*/
+.courseTableInfo {
+    border-collapse: collapse;
+}
+
+    .courseTableInfo, .courseTableInfo tr, .courseTableInfo th, .courseTableInfo td {
+        border: 1px solid #C0C0C0;
+        border-top: 1px solid transparent;
+    }
+
+        .courseTableInfo tr td.courseTableColFirst {
+            width: 80px;
+        }
+
+        .courseTableInfo tr td {
+            width: 128px;
+            box-sizing: border-box;
+            height: auto;
+            min-height: 68px;
+            cursor: pointer;
+        }
+
+/*横向标题设置*/
+th.courseTableTitle p {
+    font-family:"微软雅黑";
+    font-weight: 400;
+}
+/*纵向标题设置*/
+td.courseTableTitle {
+    height: auto;
+    min-height: 68px;
+    line-height: 68px;
+    text-align: center;
+    font-family:"微软雅黑";
+}
+/*普通单元格设置*/
+.courseTableContent {
+    position: relative;
+    color: #353535;
+    font-family:"微软雅黑";
+    width: 122px;
+    padding-left: 6px;
+    line-height: 18px;
+}
+
+    .courseTableContent p {
+        color: #353535;
+        font-family:"微软雅黑";
+    }
+/*单元格中右上新增图标 右下编辑图标*/
+.courseTableAddImg, .courseTableEditImg {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    position: absolute;
+    right: 2px;
+    display: none;
+}
+
+.courseTableAddImg {
+    top: 2px;
+    background: url("/images/selfSpace/selfSpaceSpirit.png") no-repeat -8px -335px;
+}
+
+.courseTableEditImg {
+    bottom: 2px;
+    background: url("/images/selfSpace/selfSpaceSpirit.png") no-repeat -8px -264px;
+}
+
+/*鼠标悬停在单元格上 图标出现*/
+.courseTableContent:hover .courseTableAddImg,
+.courseTableContent:hover .courseTableEditImg {
+    display: block;
+}
+
+/*表格日期联动插件样式部分*/
+
+/*外层大盒子*/
+.weekWrap {
+    width: 977px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+/*<!-- 周一到周日 -->*/
+.monitor {
+    /*width:977px;*/
+    /*box-sizing: border-box;*/
+    height: 48px;
+    overflow: hidden;
+    border: 2px solid #f0f0f0;
+}
+
+    .monitor .li {
+        width: 128px;
+        /*height:48px;*/
+        /*box-sizing:border-box;*/
+        border-left: 2px solid #f0f0f0;
+        cursor: pointer;
+    }
+
+    .monitor .div {
+        width: 80px;
+    }
+
+    .monitor .li > a, .monitor .li > span {
+        display: block;
+        text-align: center;
+        height: 23px;
+        line-height: 23px;
+        font-family:"微软雅黑";
+        font-size: 12px;
+        color: #666666;
+    }
+
+    .monitor .weekActive {
+        background-color: #6EC3CA;
+    }
+
+        .monitor .weekActive > a, .monitor .weekActive > span {
+            color: #fff;
+        }
+/*<!-- 上周本周下周 -->*/
+.weekBox > li {
+    float: right;
+    padding: 16px 20px;
+    border-bottom: 3px solid transparent;
+    margin-bottom: 1px;
+    font-size: 14px;
+    font-family: "NSimSun", serif;
+    cursor: pointer;
+    color: #666666;
+    font-weight: bold;
+}
+
+.weekBox .changActive {
+    border-bottom: 3px solid #6EC3CA;
+    color: #6EC3CA;
+}
+
+
+/*个人空间  录像计划 列表 selfSpaceVideoPlanList.css 2688--3081*/
+/*<!--页面主体内容-->*/
+.selfSpaceWrap.videoPlanWrap {
+    /*height:960px;*/
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+}
+
+/*<!--主体内容-->*/
+.videoPlanWrap .selfSpaceBody {
+    width: 1204px;
+    /*height:930px;*/
+    min-height: 760px;
+    background-color: #fff;
+    box-sizing: border-box;
+    border: 1px solid #CCCCCC;
+    padding: 0;
+}
+/*<!--左侧 侧边栏 教学楼导航栏-->*/
+.videoPlanWrap .selfSpaceAside {
+    width: 146px;
+    /*height:100%;*/
+    min-height: 760px;
+    border-right: 1px solid #DDDDDD;
+    box-sizing: border-box;
+    float: left;
+}
+/*<!--左侧 侧边栏 标题 教学楼-->*/
+.videoPlanWrap .selfSpaceAsideTitle {
+    width: 100%;
+    height: 38px;
+    border-bottom: 1px solid #CCCCCC;
+    font-size: 14px;
+    text-align: center;
+    line-height: 38px;
+    color: #fff;
+    background-color: #6EC3CA;
+}
+/*树形菜单插件*/
+/*.tree {*/
+/*color:#6EC3CA;*/
+/*padding-top:8px;*/
+/*width:100%;*/
+/*}*/
+/*.tree li > a,*/
+/*.tree li > span{*/
+/*font-size:12px;*/
+/*height:24px;*/
+/*line-height: 24px;*/
+/*color:#6EC3CA;*/
+/*}*/
+/*.tree .treeTopMenu {*/
+/*padding-left:8px;*/
+/*}*/
+/*.tree ul li {*/
+/*padding-left:14px;*/
+/*}*/
+/*.tree li a {*/
+/*text-decoration: none;*/
+/*padding:2px;*/
+/*}*/
+
+/*.tree li a:hover {*/
+/*color: #fff;*/
+/*background-color: #6EC3CA;;*/
+/*}*/
+
+
+
+/*<!--右侧 主体内容 -->*/
+.videoPlanWrap .selfSpaceContent {
+    width: 1027px;
+    height: 100%;
+    float: right;
+    box-sizing: border-box;
+    /*border-bottom:1px solid #dedede;
+    border-right:1px solid #dedede;*/
+}
+
+    /*<!--主体内容右侧一：用户选择项 上面内容-->*/
+    /*.videoPlanWrap .selfSpaceContent .videoClassSelectWrap {
+    height:108px;
+    width:100%;
+    border-bottom:1px solid #DDDDDD;
+}*/
+    /*课表列表查询*/
+    .videoPlanWrap .selfSpaceContent .videoClassSelectTop li {
+        height: 72px;
+        line-height: 72px;
+        margin-bottom: 4px;
+        float: left;
+        margin-left: 4px;
+        margin-right: 0;
+        font-size: 0;
+    }
+
+        .videoPlanWrap .selfSpaceContent .videoClassSelectTop li label span,
+        .videoPlanWrap .selfSpaceContent .videoClassSelectTop li .selectDiv span {
+            font-size: 12px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+/*课程表下拉查询插件样式重复*/
+/*.videoPlanWrap .vClassSelectTopItem input {
+    height:22px;
+    width:104px;
+    line-height:20px;
+    padding-left:2px;
+    box-sizing: border-box;
+    outline:none;
+    border:1px solid #C0C0C0;
+    border-radius: 2px;
+}*/
+
+.videoPlanWrap .vClassSelectTopItem .vClassSelectTopItemArrow {
+    padding-right: 20px;
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat 78px -1px;
+}
+
+/*时间控件 上下箭头*/
+.videoPlanWrap .vClassSelectTopTime {
+    position: relative;
+    width: 80px;
+    margin-left: 5px;
+}
+
+    .videoPlanWrap .vClassSelectTopTime .vClassSelectTopTimeBox {
+        width: 80px;
+        height: 22px;
+        box-sizing: border-box;
+        padding-left: 2px;
+        padding-right: 18px;
+        line-height: 20px;
+        border: 1px solid #C0C0C0;
+        border-radius: 2px;
+        position: relative;
+        left: 0;
+        top: 25px;
+        overflow: hidden;
+        color: #000000;
+    }
+/*时间控件 上下箭头的设置*/
+.videoPlanWrap .vClassSelectTopTimeArrow {
+    height: 20px;
+    width: 18px;
+    background-color: #F3F3F3;
+    position: absolute;
+    right: 1px;
+    top: 26px;
+}
+
+.videoPlanWrap .TimeArrowTop, .videoPlanWrap .TimeArrowBtm {
+    cursor: pointer;
+    width: 100%;
+    height: 10px;
+    position: absolute;
+    left: 0;
+}
+
+.videoPlanWrap .TimeArrowTop {
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat -4px -27px;
+    top: 0;
+}
+
+.videoPlanWrap .TimeArrowBtm {
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat -4px -51px;
+    bottom: 0;
+}
+
+/*查询 重置按钮 的 设置*/
+.videoPlanWrap .vClassSelectTopBtn input {
+    height: 22px;
+    width: 62px;
+    line-height: 22px;
+    outline: none;
+    border: none;
+    background: url("/images/publicImg/btn_bg.png") no-repeat;
+    color: #fff;
+    cursor: pointer;
+}
+
+.videoPlanWrap .vClassSelectTopBtn {
+    margin-left: 8px;
+}
+
+/*<!--主体内容右侧一：用户选择项 下面内容-->*/
+.videoPlanWrap .selfSpaceSelectBtm li {
+    height: 26px;
+    line-height: 26px;
+}
+
+.videoPlanWrap .selfSpaceSelectBtm {
+    padding-left: 10px;
+    height: 26px;
+    width: 1046px;
+}
+
+
+
+    .videoPlanWrap .selfSpaceSelectBtm .sSpaceSelectBtmfr {
+        float: right;
+        margin-right: 12px;
+    }
+
+
+
+.videoPlanWrap .videoClassSelectBtm li a {
+    color: #7e7e7e;
+}
+.videoPlanWrap .sSpaceSelectBtmfl .vClassSelectBtmItem {
+    margin-right: 48px;
+}
+
+.videoPlanWrap .selfSpaceSelectBtm .vClassSelectBtmOrder {
+    margin-right: 12px;
+}
+
+.videoPlanWrap .videoClassSelectBtm li .vClassSelectBtmActive {
+    color: #99c6f5;
+}
+
+.videoPlanWrap .selfSpaceSelectBtm .vClassSelectBtmOrderCxt > a {
+    padding-right: 20px;
+}
+
+/*<!--右侧二：复选框 批量编辑 批量删除-->*/
+.videoPlanWrap .selfSpaceContent .selfSpaceCheck {
+    /*width:100%;
+    height:48px;
+    box-sizing:border-box;*/
+    padding-left: 10px;
+    /*padding-top:16px;*/
+}
+
+.videoPlanWrap .sSpaceCheckItem {
+    margin-right: 10px;
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.selfSpaceCheck .sSpaceCheckEdit, .selfSpaceCheck .sSpaceCheckDelete, .selfSpaceCheck .sSpaceCheckCreate {
+    height: 24px;
+    width: 66px;
+    line-height: 24px;
+    text-align: center;
+    color: #fff;
+    font-family:"微软雅黑";
+    /*background-color: lightblue;*/
+    background: url("/images/selfSpace/selfSpaceSpirit.png") no-repeat -8px -70px;
+}
+
+.selfSpaceCheck .sSpaceCheckSelect {
+    width: 16px;
+    height: 16px;
+    /*background-color: lightpink !important;*/
+}
+/*<!--右侧三：表格 课程信息相关操作 编辑 删除-->*/
+.selfSpaceContent .selfSpaceTable {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.sSpaceTableBox th, .sSpaceTableBox td {
+    text-align: center;
+}
+
+.sSpaceTableBox th, .selfSpaceTable .sSpaceTableBox a {
+    font-family:"微软雅黑";
+    color: #404145;
+}
+
+.selfSpaceTable .sSpaceTableBox {
+    border-collapse: collapse;
+    border: 0;
+    width: 1056px;
+}
+
+.selfSpaceTable.scheduleListTable .sSpaceTableBox {
+    border-collapse: collapse;
+    border: 0;
+    width: 1027px;
+}
+
+.scheduleListBody tr:hover {
+    background-color: #ade4e9;
+}
+
+
+.scheduleListBody a {
+    display: block;
+    height: 40px;
+}
+
+.scheduleListBody .sSpaceTableOperate a {
+    display: inline-block;
+}
+
+.sSpaceTable a {
+    width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.scheduleListBody a {
+    height: 38px;
+}
+
+.sSpaceTableTheme a {
+    width: 165px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sSpaceTableDate a {
+    width: 146px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sSpaceTableCourse a {
+    width: 65px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sSpaceTableController a {
+    width: 96px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sSpaceTableSpeaker a {
+    width: 96px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sSpaceTableRoom a {
+    width: 104px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sSpaceTableChapter a {
+    width: 74px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sSpaceTableBox .sSpaceTableCaption th {
+    height: 40px;
+    background-color: #6EC3CA;
+    color: #fff;
+    font-size: 14px;
+}
+
+.sSpaceTableBox .sSpaceTableCheckBox input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+}
+
+.sSpaceTableContent td {
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #F0ECED;
+}
+
+.sSpaceTableBox .sSpaceTableContent .sSpaceTableOperate > a {
+    color: #7E7E7E;
+}
+
+    .sSpaceTableBox .sSpaceTableContent .sSpaceTableOperate > a:hover {
+        color: #fff;
+    }
+
+
+/*录播课堂 videoClass.css*/
+
+/*页面内容一：标题导航部分*/
+.videoClassTitle {
+    width: 100%;
+    height: 40px;
+    background-color: #F9F9F9;
+}
+
+.videoClassTitleCxt {
+    width: 294px;
+    margin: 0 auto;
+    font-size: 0;
+}
+
+    .videoClassTitleCxt b {
+        width: 1px;
+        height: 40px;
+        overflow: hidden;
+        background-color: #DDDDDD;
+        vertical-align: middle;
+    }
+
+/*<!--主体内容二：用户选择项-->*/
+.videoClassSelectTop li, .videoClassSelectBtm li {
+    float: left;
+    height: 58px;
+    line-height: 58px;
+}
+.vClassSelectTopItem .vClassSelectTopItemArrow {
+    padding-right: 20px;
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat 78px -1px;
+}
+.vClassSelectTopBtn input {
+    height: 22px;
+    width: 62px;
+    outline: none;
+    border: none;
+    line-height: 22px;
+    background: url("/images/publicImg/btn_bg.png") no-repeat;
+    color: #fff;
+    cursor: pointer;
+    position: relative;
+    top: 0;
+    left: 0;
+    top: -4px\9;
+}
+
+
+.videoClassSelectBtm .vClassSelectBtmOrder, .vClassSelectTopItem span, .videoClassSelectBtm li {
+    color: #7e7e7e;
+    font-weight: normal;
+    font-family: '微软雅黑';
+}
+
+.vClassSelectBtmItem {
+    margin-right: 54px;
+}
+
+.videoClassSelectBtm .vClassSelectBtmOrder {
+    margin-right: 8px;
+}
+/*<!--主体内容三：课程显示区域-->*/
+.videoClassBody {
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 2px;
+    padding-right: 2px;
+    /*height:1084px;*/
+    overflow: hidden;
+    padding-top: 10px;
+}
+
+.vClassLeftOpacity {
+    width: 80px;
+    height: 70px;
+    position: relative;
+    left: 8px;
+    top: -78px;
+}
+
+.vClassLeftOpacityBg, .vClassLeftOpacityCxt {
+    width: 80px;
+    height: 70px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+    .vClassLeftOpacityBg > p {
+        width: 100%;
+        height: 50%;
+        filter: alpha(opacity=80);
+        opacity: 0.8;
+        -moz-opacity: 0.8;
+        -khtml-opacity: 0.8;
+    }
+
+.vClassLeftOpacityBgTop {
+    background-color: #DF4B2F;
+}
+
+.vClassLeftOpacityBgBtm {
+    background-color: #FFF;
+}
+
+.vClassLeftOpacityCxt > h4 {
+    font-size: 14px;
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+}
+
+.vClassLeftOpacityCxtTop {
+    color: #fff;
+}
+
+.vClassLeftOpacityCxtBtm {
+    color: #333333;
+    font-weight: 600;
+}
+
+/*课程显示区域:中间*/
+.vClassSectionCenter {
+    width: 586px;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 20px 0 0 40px;
+}
+
+    .vClassSectionCenter span, .vClassSectionCenter a {
+        color: #999999;
+        font-family:"微软雅黑";
+    }
+
+        .vClassSectionCenter a h4 {
+            font-size: 16px;
+            color: #4b4b4b;
+            height: 26px;
+            line-height: 26px;
+            cursor: pointer;
+            width: 540px;
+            overflow: hidden;
+        }
+
+    .vClassSectionCenter > h4:hover {
+        color: #99C6F5;
+    }
+
+.vClassSectionCenterHot {
+    width: 30px;
+    height: 12px;
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat -216px -108px;
+    position: relative;
+    top: 2px;
+    left: 0;
+}
+
+.vClassSectionContent {
+    width: 505px;
+    height: 96px;
+}
+
+    .vClassSectionContent > li {
+        float: left;
+        height: 100%;
+    }
+
+        .vClassSectionContent > li p {
+            width: 450px;
+            height: 24px;
+            overflow: hidden;
+        }
+
+.vClassSectionPhoto {
+    width: 55px;
+    text-align: center;
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat 0 -118px;
+}
+
+.vClassSectionInfo {
+    width: 450px;
+}
+
+    .vClassSectionInfo p span {
+        display: inline-block;
+        height: 24px;
+        line-height: 24px;
+        margin-right: 18px;
+        vertical-align: middle;
+    }
+
+.vClassSectionCollegeInfo .vClassSectionCollegeName {
+    display: inline-block;
+    /*padding-left: 22px;*/
+}
+
+.vClassSectionCollegeName .organizationIcon {
+    width: 22px;
+    height: 23px;
+    margin-right: 0;
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat -72px -46px;
+}
+
+.vClassSectionCollegeInfo .classroomList {
+    display: inline;
+}
+
+.vClassSectionInfo .vClassSectionMemoInfo > span {
+    float: left;
+    height: 48px;
+    margin-right: 0;
+}
+
+.vClassSectionMemoName {
+    width: 36px;
+}
+
+.vClassSectionMemoCxt {
+    width: 410px;
+}
+
+.vClassSectionOutData,
+.vClassSectionData {
+    height: 38px;
+    line-height: 38px;
+    color: #CCCCCC;
+}
+
+    .vClassSectionOutData > a,
+    .vClassSectionData > a {
+        padding-left: 22px;
+    }
+
+.vClassSectionShareArrow {
+    width: 10px;
+    height: 10px;
+    background: url("/images/liveClassImg/liveSpirit.png") no-repeat -216px -61px;
+    position: relative;
+    top: 0;
+    left: 4px;
+}
+
+.vClassSectionRight {
+    width: 258px;
+    height: 100%;
+}
+
+.vClassEnterA {
+    display: block;
+    position: relative;
+    top: 112px;
+    left: 2px;
+}
+
+.vClassSectionRightEnter {
+    width: 156px;
+    height: 46px;
+    box-sizing: border-box;
+    padding-left: 43px;
+    font-size: 18px;
+    line-height: 46px;
+    color: #07AB81;
+    background: url("/images/liveClassImg/courseBtn.png") no-repeat center;
+    cursor: pointer;
+}
+
+.position_wrap {
+    display: inline-block;
+    position: relative;
+}
+
+    .position_wrap .position_wrap_box {
+        position: absolute;
+        top: 24px;
+        left: 0;
+        display: none;
+        z-index: 99;
+    }
+
+        .position_wrap .position_wrap_box li {
+            width: 80px;
+            height: 22px;
+            line-height: 22px;
+            color: #fff;
+            text-align: center;
+            background: #8BCFD5;
+            margin-bottom: 1px;
+            cursor: pointer;
+        }
+
+            .position_wrap .position_wrap_box li:hover {
+                background: #99c6f5;
+            }
+
+.reverse_position {
+    width: 500px;
+    text-align: center;
+}
+
+    .reverse_position .progress_bar_big_picture {
+        width: 250px;
+        height: 30px;
+        background: #3edf19;
+        position: relative;
+        display: inline-block;
+    }
+
+    .reverse_position .progress_bar_small_wrap {
+        width: 74px;
+        height: 30px;
+        position: absolute;
+        top: 0;
+        left: -76px;
+        background: #ffd800;
+        overflow: visible !important;
+    }
+
+    .reverse_position .progress_bar_small_picture {
+        width: 74px;
+        height: 46px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 9999;
+    }
+
+.progress_percent {
+    height: 30px;
+    font: bold 14px/30px "微软雅黑";
+    color: #808080;
+    text-align: center;
+}
+
+.left_mask {
+    width: 76px;
+    height: 30px;
+    z-index: 8888;
+    background: #fff;
+    position: absolute;
+}
+
+.show_error_detial_wrap {
+    border: 1px solid #ccc;
+    margin: 30px 0 0 30px;
+}
+
+.show_error_detial td {
+    width: 144px;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+}
+
+.show_error_detial_wrap th,.show_error_detial_wrap tr{
+    text-align: center;
+    font-size: 14px;
+    height: 40px;
+}
+
+.show_error_detial p {
+    width: 144px;
+    height: 24px;
+    overflow: hidden;
+}
+
+/*VideoOperation.html 录制操作页面*/
+.bottom_part .broad_cast_live_right .tree .treeTopMenu span, .bottom_part .broad_cast_live_right .tree .treeTopMenu a {
+    font-size: 14px;
+}
+
+.courseContainer {
+    width: 1200px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.courseHeaderBg {
+    background-color: #f9f9f9;
+}
+/*<!--直播课堂 分享链接弹出层-->*/
+
+/*<!--复制链接的框-->*/
+.popTop {
+    width: 478px;
+    height: 40px;
+    box-sizing: border-box;
+    border: 1px solid #CFCFCF;
+    margin-bottom: 36px;
+    overflow:hidden;
+}
+
+    .popTop > input {
+        outline: none;
+        border: none;
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .popTop .popTbtn {
+        width: 70px;
+        background-color: #6EC3CA;
+        cursor: pointer;
+        color: #fff;
+    }
+
+    .popTop .popTtxt {
+        width: 406px;
+        box-sizing: border-box;
+        padding: 0 5px;
+    }
+/*<!--设置分享权限部分-->*/
+.popCenter > p {
+    color: #333333;
+    font-family: "NSimSun", serif;
+}
+
+.popCenter > ul {
+    padding-top: 20px;
+    padding-left: 6px;
+}
+
+    .popCenter > ul li {
+        font-family: "NSimSun", serif;
+        margin-right: 10px;
+    }
+
+.popCenter ul li input, .popCenter ul li label {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.popCenter ul li label {
+    margin-right: 40px;
+}
+
+.popCenter ul li input {
+    margin-right: 12px;
+}
+
+.popCenter .shareAddr li input[type="button"] {
+    width: 32px;
+    height: 32px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+
+/*<!--直播课堂 分享链接弹出层样式-->*/
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+/*<!--弹出层遮罩-->*/
+#popMask {
+    background-color: #000;
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    -webkit-opacity: 0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+    width: 100%;
+    height: 1000px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9000;
+    display: none;
+}
+/*<!--弹出层内容框-->*/
+
+/*<!--1、直播课堂 分享链接弹出层-->*/
+.popWrap {
+    left: 30%;
+    top: 10%;
+    z-index: 9001;
+    display: none;
+}
+
+.popContainer {
+    background-color: #fff;
+    position: relative;
+}
+/*<!--头部-->*/
+.popHead {
+    height: 40px;
+    width: 520px;
+    box-sizing: border-box;
+    padding: 12px 12px 0 30px;
+    background-color: #6EC3CA;
+}
+
+    .popHead > p.fl {
+        color: #fff;
+        font-family: "微软雅黑",sans-serif;
+        font-size: 14px;
+        font-weight: 900;
+    }
+
+    .popHead > p.fr {
+        width: 15px;
+        height: 15px;
+        cursor: pointer;
+        background: url("/images/indexImg/selfSpacespirit_2.png") no-repeat -7px -747px;
+    }
+/*<!--主体内容-->*/
+.popBody {
+    padding: 30px 48px 0;
+}
+
+/*<!--复制链接的框-->*/
+.popTop {
+    width: 424px;
+    height: 40px;
+    box-sizing: border-box;
+    border: 1px solid #CFCFCF;
+    margin-bottom: 36px;
+    font-size: 0;
+}
+
+    .popTop > input {
+        outline: none;
+        border: none;
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .popTop .popTbtn {
+        width: 70px;
+        background-color: #6EC3CA;
+        cursor: pointer;
+        color: #fff;
+    }
+
+    .popTop .popTtxt {
+        width: 352px;
+        box-sizing: border-box;
+        padding: 0 10px;
+    }
+/*<!--设置分享权限部分-->*/
+.popCenter > p {
+    color: #333333;
+    font-family: "NSimSun", serif;
+}
+/*.popCenter>ul {
+    padding-top:30px;
+}*/
+.popCenter > ul li {
+    font-family: "NSimSun", serif;
+    margin-right: 10px;
+}
+
+.popCenter ul li input, .popCenter ul li label {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.popCenter ul li label {
+    margin-right: 40px;
+}
+
+.popCenter ul li input {
+    margin-right: 12px;
+}
+
+.popCenter .shareAddr li input[type="button"] {
+    width: 32px;
+    height: 32px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+#shareWeibo {
+    background: url("/images/publicImg/popSpirit.png") no-repeat -4px -4px;
+}
+
+#shareWeiXin {
+    background: url("/images/publicImg/popSpirit.png") no-repeat -4px -138px;
+}
+
+#shareQQ {
+    background: url("/images/publicImg/popSpirit.png") no-repeat -4px -282px;
+}
+
+/*化工大学8间教室*/
+.CTRooms_head {
+    min-width: 1300px;
+    height: 164px;
+    overflow: hidden;
+    background-color: #278ADD;
+    position: relative;
+}
+
+.CTRooms_head_left {
+    width: 320px;
+    height: 164px;
+    float: left;
+    background: url("/images/publicImg/CTRooms_headfl.png") no-repeat center;
+}
+
+.CTRooms_head_right {
+    width: 214px;
+    height: 164px;
+    float: right;
+    background: url("/images/publicImg/CTRooms_headfr.png") no-repeat center;
+}
+
+.CTRooms_head_center {
+    width: 1300px;
+    height: 164px;
+    padding-right: 100px;
+    box-sizing: border-box;
+    position: absolute;
+    left: 50%;
+    margin-left: -650px;
+    background: url("/images/publicImg/CTRooms_headIcon.png") no-repeat left center;
+    text-align: right;
+    line-height: 164px;
+}
+
+    .CTRooms_head_center a {
+        color: #fff;
+    }
+
+        .CTRooms_head_center a:hover {
+            color: orange;
+        }
+
+.CTRooms_body_title {
+    height: 100px;
+    box-sizing: border-box;
+    padding-top: 44px;
+    padding-left: 10px;
+}
+
+.CTRooms_body_wrap {
+    padding-left: 22px;
+    margin-bottom: 70px;
+}
+
+.CTRooms_body_list li {
+    float: left;
+    height: 242px;
+    width: 295px;
+    box-sizing: border-box;
+    padding-right: 20px;
+}
+
+.CTRooms_list_item {
+    width: 275px;
+    height: 156px;
+    overflow: hidden;
+}
+
+    .CTRooms_list_item img {
+        width: 275px;
+        height: 156px;
+    }
+
+.CTRooms_list_info {
+    height: 32px;
+    line-height: 32px;
+    width: 275px;
+    box-sizing: border-box;
+    padding-left: 10px;
+    font-size: 14px;
+    background-color: #F2FCFF;
+}
+
+.publicFooter.CTRooms_foot {
+    background-color: #2687D8;
+    height: 144px;
+}
+
+    .publicFooter.CTRooms_foot .publicFootAbout p {
+        background: url("/images/publicImg/CTRooms_footIcon.png") no-repeat center;
+    }
+
+    .publicFooter.CTRooms_foot .publicFootAbout div a {
+        margin-left: 11px;
+    }
+
+.CTRooms_list_item > a > img:hover {
+    animation: move 1s linear;
+    -webkit-animation: move 1s linear;
+}

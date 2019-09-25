@@ -1,0 +1,340 @@
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><link rel="icon" href="../favicon.ico" type="image/x-icon" /><link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" /><link id="gray_css" rel="stylesheet" />
+    <!--[if IE]>
+         <link id="gray_css_IE" rel="stylesheet" />
+        <![endif]-->
+    <title>
+	新闻列表
+</title>
+<link rel="stylesheet" href="../Js/plug-in/share_to_society/share.min.css" /><link rel="stylesheet" type="text/css" href="../Css/z-treeCss/metroStyle/metroStyle.css" /><link rel="stylesheet" type="text/css" href="../Css/basePc.css" /><link rel="stylesheet" type="text/css" href="../Css/common.css" /><link rel="stylesheet" type="text/css" href="../Css/all.css" /><link rel="stylesheet" type="text/css" href="../Css/other.css" /><link rel="stylesheet" type="text/css" href="../Js/plug-in/jquery-easyui-1.5.1/theme/material/easyui.css" /><link rel="stylesheet" type="text/css" href="../Js/plug-in/jquery-easyui-1.5.1/theme/icon.css" /><link rel="stylesheet" type="text/css" href="../Js/plug-in/select2/select2.min.css" /><link rel="stylesheet" type="text/css" href="../Css/font-awesome.min.css" />
+    <style>
+        .publicFootInfo li {
+            float: none;
+            text-align: center;
+            color: #fff;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .copyright {
+            display: inline-block;
+            vertical-align: top;
+            color: #fff;
+            margin-left: 5px;
+        }
+
+        .footImg {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+    <script type="text/javascript" src="../Js/xphter.js"></script>
+    <script type="text/javascript" src="../Js/jquery-1.11.2.js"></script>
+    <script type="text/javascript" src="../Js/plug-in/jquery.tmpl.min.js"></script>
+    <script type="text/javascript" src="../Js/AjaxUrl.js"></script>
+    <script type="text/javascript" src="../js/plug-in/paging-master/src/query.js"></script>
+    <script type="text/javascript" src="../js/plug-in/paging-master/src/paging.js"></script>
+    <script type="text/javascript" src="../js/plug-in/layer/layer.js"></script>
+    <script type="text/javascript" src="http://miyun.smartclass.cn/Js/plug-in/ztree.3.5.26/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="http://miyun.smartclass.cn/Js/plug-in/ztree.3.5.26/jquery.ztree.excheck.js"></script>
+    <script type="text/javascript" src="http://miyun.smartclass.cn/Js/plug-in/ztree.3.5.26/jquery.ztree.exedit.js"></script>
+    
+    <script type="text/javascript" src="../Js/plug-in/select2/select2.full.js"></script>
+
+    <script type="text/javascript" src="../Js/mainFunction.js"></script>
+    <script type="text/javascript" src="../Js/popOrganSelect.js"></script>
+    <script type="text/javascript" src="../Js/plug-in/jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
+    
+    <script type="text/javascript" src="../Js/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="http://miyun.smartclass.cn/Js/plug-in/ueditor1_4_3_3/ueditor.config.js"></script>
+    <script type="text/javascript" src="http://miyun.smartclass.cn/Js/plug-in/ueditor1_4_3_3/ueditor.all.js"></script>
+    <script type="text/javascript" charset="utf-8" src="http://miyun.smartclass.cn/Js/plug-in/ueditor1_4_3_3/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" src="../Js/allCommon.js"></script>
+    <script src="../Js/plug-in/share_to_society/jquery.share.min.js"></script>
+    <style>
+        .publicHeader .fheader .personal_info .login_area{
+            display:inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div style="height: 86px;">
+        <div class="publicHeader">
+            <div class="fheader ">
+                <div class="content_wrap clearfix">
+                    <div class="company_logo fl">
+                        <a href="http://miyun.smartclass.cn/Default.aspx">
+                            <img src="http://miyun.smartclass.cn/images/publicImg/hanboerYun_logo_03.png" /></a>
+                    </div>
+                    <div class="middle_nav fl">
+                        <ul class="clearfix webNavWrap">
+                            <li class="defaultPage"><a href="../miyun/index.htm" class="first_nav webNav webNav_1 ">首页</a></li>
+                            <li class="livePage"><a href="../miyun/livelist.htm" class="first_nav webNav webNav_2">直播课堂</a></li>
+                            <li class="videoPage"><a href="../miyun/videolist.htm" class="first_nav webNav webNav_3">课程回放</a></li>
+                            <li class="Statistics hidee"><a href="../miyun/Statistics.htm" class="first_nav webNav webNav_4">数据统计</a></li>
+                            <li class="personal_space hidee"><a href="NewsList.htm#" class="first_nav webNav webNav_4" id="self_space_wrap">个人空间
+                            <span class="choose_nav"></span>
+                                <img src="../images/broadcastlive_14.png" class="first_nav_img" /></a>
+                                <div class="second_nav">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="personal_info fr">
+                        <ul class="clearfix">
+                            <li class="personal_img hidee">
+                                <a href="NewsList.htm#">
+                                    <img id="user_images" src="NewsList.htm" onerror="nofindPic('/images/broadcastlive_06.png',null,event)" /><span id="user_name"></span> </a>
+                                <div class="quit_area self_nav_wrap hidee">
+                                    <a class="editPsw_item">修改密码</a>
+                                    
+                                    <a class="quit_item">退出</a>
+                                </div>
+                            </li>
+                            <li class="login_area">
+                                <a href="NewsList.htm#"><span>登录</span></a>
+                            </li>
+                            <li class="enter_backstage"><a href="NewsList.htm#"><span>进入后台</span></a></li>
+                            
+                            <li class="downloadLiveExe"><a href="http://miyun.smartclass.cn/software/liveclient.exe"><i class="fa fa-camera"></i>直播客户端下载</a></li>
+                            <li class="onlinePhone"><b>客服电话</b>
+                                <span class="closeOnlinePhone hidee"></span>
+                                <div class="blackboard hidee">
+                                    <img src="http://miyun.smartclass.cn/MiYun/images/blackboard.png" />
+                                </div>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="selfSpaceHeaderShadow"></div>
+        </div>
+    </div>
+    <div class="middle_content_wrap">
+        <script type="text/javascript">
+            var userInfo = [{"UserID":0}];
+            var strCookie = userInfo[0].UserID;
+
+            $(function () {
+                middleContentHeight();//页面高度计算
+                $(window).resize(function () {//页面窗口变化重新高度计算
+                    middleContentHeight();
+                })
+
+                //固定导航
+                $(window).scroll(function () {
+                    var scrollTop = $(this).scrollTop();//滚动条的偏移量
+                    var scrollHeight = $(document).height();//页面的总高度
+                    var windowHeight = $(this).height();//浏览器可见区域的高度
+                    if (scrollTop > 0) {
+                        $(".publicHeader").css({
+                            "position": "fixed",
+                            "z-index": 99,
+                            "top": 0
+                        })
+                    } else if (scrollTop == 0) {
+                        $(".publicHeader").css({
+                            "position": "static",
+                            "z-index": 99
+                        })
+                    };
+                })
+                //置灰
+                //setGray();
+                if (strCookie && (strCookie != 0) && (userInfo[0].UserType == 1)) {
+                    secondNav();//二级菜单赋值
+                    $(".webNavWrap .Statistics").show();
+                    $(".first_nav_img").show();
+                    $(".fheader  .personal_space").show();
+                    $(".enter_backstage").show();
+                } else if (strCookie && (strCookie != 0) && (userInfo[0].UserType == 0)) {
+                    $(".webNavWrap .Statistics").show();
+                    $(".enter_backstage").show();
+                } else {
+                    $(".webNavWrap .Statistics").hide();
+                    $(".fheader  .personal_space").hide();
+                    $(".enter_backstage").hide();
+                };
+            })
+        </script>
+        <script type="text/javascript" src="../Js/masterPages.js"></script>
+        
+    <style>
+        .middle_content_wrap {
+            padding-top: 15px;
+        }
+        .publicContainer {
+    position: static;
+}
+        .middle_content_wrap {
+    padding-top: 15px;
+}
+    </style>
+    <div class="newsHeader">
+        <h1>新闻资讯</h1>
+    </div>
+    <script id="sometmpl" type="text/x-jquery-tmpl">
+        <li class="bast_course_child  clearfix">
+            <div class="score_img fl">
+                <a href="http://miyun.smartclass.cn/UserSpace/Article.aspx?ID=$%7BID%7D"><img src="http://miyun.smartclass.cn/UserSpace/$%7BImageFilePath%7D" onerror="nofindPic('/images/news_default.png',null,event)" /></a>
+            </div>
+            <div class="score_info fl">
+                <a href="http://miyun.smartclass.cn/UserSpace/Article.aspx?ID=$%7BID%7D">
+                    <p class="score_title">${Title} </p>
+                </a>
+                <div class="score_explain clearfix">
+                    <span class="fl">新闻类型：</span>
+                    <p class="fl" style="margin-right: 30px;">${TypeName}</p>
+                    <span class="fl">发布日期：</span>
+                    <p class="fl">${PublicTime}</p>
+                </div>
+                <div class="showLittle">
+                    {{html Content}}
+                </div>
+            </div>
+        </li>
+    </script>
+    <div class="publicContainer content_wrap_width ">
+        <ul class="clearfix">
+            <li class="vClassSelectTopItem fl">
+                <label for="videoTheme" class="Vmiddle"><span>标题：</span></label>
+                <div class="inlineBlock">
+                    <input name="videoTheme" class="search_text" type="text" />
+                </div>
+            </li>
+            <li class="vClassSelectTopBtn fl">
+                <div class="inlineBlock" style="position: relative; top: 1px;">
+                    <input type="button" value="查询" class="search_button" style="margin-right:5px;" />
+                    <input type="button" value="重置" class="reset_btn" />
+                </div>
+            </li>
+        </ul>
+        <ul class="bast_course_wrap">
+        </ul>
+        <div id="pageToolbar" class="pageGap"></div>
+        <div id="tips"></div>
+    </div>
+    <script>
+        var nowPageNumber = 1;
+        $(function () {
+            //录播课堂高亮显示
+            $(".webNavWrap .videoPage").addClass("choose_nav").siblings("li").removeClass("choose_nav");
+
+            showNewsList(10, 1, Pagination);
+
+            $(".search_button").click(function () {
+                showNewsList(10, 1, Pagination);
+            });
+            $(".search_text").keyup(function (event) {
+                if (event.keyCode == "13") {
+                    $(".search_button").click();
+                };
+            });
+            $(".search_text").blur(function (event) {
+                var $val = $(".search_text").val();
+                if ($.trim($val) == "") {
+                    showNewsList(10, 1, Pagination);
+                };
+            });
+            $(".reset_btn").click(function () {
+                $(".search_text").val("");
+                $(".search_button").click();
+            })
+        })
+        function showNewsList(PageSize, PageNum, loadPagination) {
+            if (window.location.href.indexOf("#page=") != -1) { //记录当前页码
+                PageNum = window.location.href.split("#page=")[1];
+            } else {
+                PageNum = nowPageNumber;
+            };
+            if (window.sessionStorage.getItem("cloudSystemNowPageSize")) {//记录当前页大小
+                PageSize = window.sessionStorage.getItem("cloudSystemNowPageSize");
+            };
+            Ajax.ajax({
+                url: AjaxUrls.NewsPublic.NewsList,
+                data: { contentType: '', Title: $(".search_text").val(), PageSize: PageSize, PageNumber: PageNum, IsPublic: true, IsShow: true }
+            }).done(function (data) {
+                if (data.Data.length == 0 && data.TotalCount > 0) {
+                    PageNum = Math.ceil(data.TotalCount / PageSize);
+                    nowPageNumber = PageNum;
+                    Query.setHash({
+                        page: PageNum
+                    });
+                    showNewsList(PageSize, PageNum, loadPagination);
+                    return;
+                };
+                var html = "";
+                if (data.TotalCount > 0) {//如果存在数据
+                    $(".bast_course_wrap").empty();
+                    $("#sometmpl").tmpl(data.Data).appendTo(".bast_course_wrap");
+                    $(".iAsideNewNotice").show();
+                } else {
+                    $(".bast_course_wrap").empty();
+                    $("#tips").empty().append("暂无数据").css({ "text-align": "center", "margin-top": "100px" });
+                    $("#pageToolbar").empty();
+                };;
+                if (typeof loadPagination == "function") {
+                    loadPagination(data.TotalCount, PageSize, PageNum, showNewsList)
+                };
+            })
+        }
+        function Pagination(TotalCount, pagesize, pagenumber, callback) {
+            $("#pageToolbar").empty();
+            if (TotalCount != 0) {
+                $('#pageToolbar').Paging({
+                    current: pagenumber, pagesize: pagesize, count: TotalCount, toolbar: true, callback: function (page, size, count) {
+                        if (typeof callback == "function") {
+                            if (page > Math.ceil(TotalCount / size)) {
+                                callback(size, Math.ceil(TotalCount / size), Pagination)
+                            } else {
+                                callback(size, page, Pagination);
+                            }
+                        };
+                    }
+                });
+            };
+        };
+    </script>
+
+    </div>
+    <div class="publicFooter">
+        <div class="publicContainer">
+            <ul class="publicFootInfo clearfix">
+                <li> <img src="http://miyun.smartclass.cn/Images/miyun/miyun_logo.png" class="footImg"/><span class="copyright">©2015-2020 All Rights Reserved 密云教委·版权所有</span></li>
+                <li>地址：北京市密云区新南路103号 密云区教育委员会 　邮编：101500</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            var i = 0;
+            setInterval(function () {
+                i++;
+                if (i % 4 == 1) {
+                    $('.blackboard').css({
+                        "transform": "rotate(10deg)",
+                        "transition": "2s ease-in-out"
+                    });
+                } else if (i % 4 == 3) {
+                    $('.blackboard').css({
+                        "transform": "rotate(-10deg)",
+                        "transition": "2s ease-in-out"
+                    });
+                }
+            }, 1000);
+            $(".onlinePhone b").click(function () {
+                $(".closeOnlinePhone").show();
+                $(".blackboard").show();
+            });
+            $(".closeOnlinePhone").click(function () {
+                $(this).hide();
+                $(".blackboard").hide();
+            });
+        });
+    </script>
+</body>
+</html>

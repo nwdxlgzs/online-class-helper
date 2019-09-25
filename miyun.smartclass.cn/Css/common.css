@@ -1,0 +1,642 @@
+﻿body,div,p,h1,h2,h3,h4,h5,h6,ul,li,ol,dl,dt,dd,span,b,i,a,form,input,textarea,table,tr,th,td,thead,tbody,tfoot,select,option {
+    margin:0;
+    padding:0;
+    font-family:"Microsoft YaHei",Arial,sans-serif;
+    font-size:12px;
+    color:#666;
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+}
+b {
+    display: inline-block;
+    font-weight: 400;
+}
+ul,ol,li {
+    list-style: none;
+}
+img {
+    margin:0;
+    padding:0;
+    border:none;
+}
+.clearFloat {
+    *zoom:1;
+}
+.clearFloat:after{
+    content:"clear";
+    height:0;
+    display:block;
+    clear: both;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+/*页面交互效果  首页课程*/
+.indexWrapSecInfo>li:hover{
+    outline:1px solid #FE8503;
+}
+/*页面交互效果  首页图片放大*/
+.indexWrapSecInfo li>a {
+    width:214px;
+    height:134px;
+    overflow: hidden;
+}
+.indexWrapSecInfo li>a img:hover{
+    animation:move 1s linear;
+    -webkit-animation:move 1s linear;
+}
+.parents_position{position:relative;}
+.children_position{position:absolute;width:55px;height:55px;background:url("/images/cornerMark.png") no-repeat 0 0;z-index:1;}
+.children_isLiving{background-position:0 0;}
+.children_hufanging{background-position:-55px 0;}
+.children_notstart{background-position:-110px 0;}
+.children_hufangprepare{background-position:-165px 0;cursor:default;}
+.children_overdate{background-position:-220px 0;}
+.children_noplay{background-position:-500px -500px;}
+
+/*页面交互效果  直播课堂 录播课堂课程*/
+.videoClassSection:hover {
+    /*outline:1px solid #6EC3CA;*/
+    outline:1px solid #07AB81;
+}
+
+
+
+/*页面交互效果  直播课堂 录播课堂课程 图片放大*/
+.vClassSectionLeft>a,.vClassSectionLeft>a>img{
+    overflow: hidden;
+    width:320px;
+    height:180px;
+}
+@keyframes move {
+    0% {
+        transform: scale(1.0);
+    }
+    50%{
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1.0);
+    }
+}
+@-webkit-keyframes move {
+    0% {
+        transform: scale(1.0);
+    }
+    50%{
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1.0);
+    }
+}
+.vClassSectionLeft>a>img:hover{
+   animation:move 1s linear;
+   -webkit-animation:move 1s linear;
+}
+
+.sSTeachCtrlInfoCxt>tr {
+    cursor: pointer;
+}
+
+.sSTeachCtrlInfoCxt tr:hover {
+    /*color:#99c6f5;*/
+    background-color: #ade4e9;
+}
+.videoCtrlOperateCxt a:hover,
+.sSpaceMenuTxt:hover {
+    color:#6ec3ca;
+}
+    /*页面公共样式*/
+
+.publicHeader {
+    height:86px;
+    background-color:#FFFFFF;
+}
+/*当前页面文字高亮*/
+.publicNav .publicNavActive {
+    color:#6ec3ca;
+}
+/*<!--头部到主体内容的间距-->*/
+.headerGap {
+    height:38px;
+}
+.publicContainer {
+    width:1204px;
+    margin: 0 auto;
+}
+
+
+/*页面底部内容*/
+.publicFooter {
+    height:140px;
+    background-color:#404145;
+    margin-top:15px;
+}
+.publicFootInfo {
+    padding-top:40px;
+    margin:0 auto;
+    width:606px;
+}
+.publicFootInfo li {
+    float:left;
+}
+.publicFootInfo li p,.publicFootInfo li a {
+    color:#fff;
+}
+.publicFootLine {
+    width:1px;
+    height:62px;
+    overflow: hidden;
+    background-color: #fff;
+    margin:0 18px 0 34px;
+}
+.publicFootAbout p {
+    width:248px;
+    height:40px;
+    background: url("/images/publicImg/f_footInfo.jpg") no-repeat center;
+}
+.publicFootAbout div {
+    text-align: right;
+}
+.publicFootAbout div a {
+    margin-left:10px;
+}
+.publicFootPower p{
+    margin-top:12px;
+}
+.pop_checkbox_css{
+    width:18px;
+    height:18px;
+    vertical-align:middle;
+    margin-right:2px;
+}
+/*个人空间 录像计划 操作人输入框的右边界*/
+.videoPlanOperate {
+    margin-right:10px;
+}
+/*录像计划开始日期和结束日期插件 ie8 输入框往上跑*/
+.videoPlanDate.calendarWrap>input{
+    position: relative;
+    top:0;
+    top:2px\9;
+    left:0;
+}
+.vClassSelectTopItem input,
+.calendarWrap>input{
+    cursor: pointer;
+}
+
+
+
+
+/*直播和录播课堂*/
+/*已观看 收藏 评论 分享 数据背景图*/
+
+.vClassSectionData .vClassSectionSeeData {
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat -72px -177px;
+}
+.vClassSectionOutData .vClassSectionLikeData,
+.vClassSectionData .vClassSectionLikeData {
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat -72px -208px;
+}
+.vClassSectionData .vClassSectionCommentData {
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat -72px -241px;
+}
+.vClassSectionOutData .vClassSectionShareData,
+.vClassSectionData .vClassSectionShareData {
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat -72px -320px;
+}
+
+.no_thumbup{
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat -70px -362px;
+}
+.thumbup_wrap:hover{
+     color:#99C6F5 !important;
+         background:url("/images/liveClassImg/liveSpirit.png") no-repeat -216px -237px;
+}
+.has_thumbup{
+    color:#99C6F5 !important;
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat -216px -237px;
+}
+.thumbup_wrap:hover span{
+     color:#99C6F5;
+}
+.has_thumbup span{
+     color:#99C6F5 !important;
+}
+
+/*鼠标悬停 已观看 收藏 评论 分享 数据背景图*/
+.vClassSectionData .vClassSectionSeeData:hover {
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat -217px -280px;
+    color:#99C6F5;
+}
+.vClassSectionOutData .vClassSectionLikeData:hover,
+.vClassSectionData .vClassSectionLikeData:hover {
+    color:#99C6F5;
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat -72px -147px;
+}
+
+.vClassSectionOutData .vClassSectionLikeData:hover span,
+.vClassSectionData .vClassSectionLikeData:hover span {
+    color:#99C6F5;
+}
+
+.vClassSectionData .vClassSectionCommentData:hover {
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat -219px -343px;
+    color:#99C6F5;
+}
+.vClassSectionOutData .vClassSectionShareData:hover,
+.vClassSectionData .vClassSectionShareData:hover {
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat -72px -280px;
+    color:#99C6F5;
+}
+
+/*个人空间 资源管理/回收站 选择部分 排序 各项 箭头的切换*/
+/*时间   大小  时长*/
+.resourceLengthBtm,
+.resourceSizeBtm{
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat -18px -74px;
+}
+
+.resourceSeeTimeBtm {
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat -433px -362px;
+}
+
+.resourceLengthTop,
+.resourceSizeTop{
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat -324px -362px;
+}
+.resourceSeeTimeTop{
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat -300px -362px;
+}
+/*点击量    下载量*/
+.resourceDownloadTop,
+.resourceClickTop{
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat 32px -74px;
+}
+.resourceDownloadBtm,
+.resourceClickBtm{
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat -445px -362px;
+}
+/*个人空间录像计划箭头切换*/
+
+/*观看人数箭头朝上*/
+
+.vPlanSeeNumBtm {
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat -433px -362px;
+}
+
+/*时间*/
+.arrowDescending  {
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat -18px -74px;
+}
+.arrowAscending{
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat 20px -74px;
+}
+
+/*个人空间 教学督导 出勤率 节次 箭头切换*/
+.weekPercentTop{
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat 32px -74px;
+}
+.weekPercentBtm{
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat -445px -362px;
+}
+/*节次*/
+.weekNumTop {
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat 20px -74px;
+}
+.weekNumBtm {
+    background:url("/images/liveClassImg/liveSpirit.png") no-repeat -18px -74px;
+}
+/***********分页插件样式代码******************/
+.pageGap {
+    padding:40px 0;
+}
+.ui-paging-container{
+    width:100%;}
+.ui-paging-container li,.ui-paging-container a,.ui-paging-container input,.ui-paging-container select{
+    font-size:14px;
+    font-family: "Microsoft Yahei",sans-serif;
+    color:#666666;
+}
+.ui-paging-container ul{
+    overflow: hidden;
+    text-align: center;}
+.ui-paging-container ul,.ui-paging-container li{list-style: none;}
+.ui-paging-container li{
+    display:inline-block;
+    margin-left:5px;
+}
+.ui-paging-container ul li.ui-pager,.ui-paging-container ul .ui-pager-total{
+
+    border:1px solid #ddd;
+    border-radius: 2px;
+    padding:0 8px;
+    height:22px;
+    line-height:22px;}
+.ui-paging-container li.focus {
+    background-color:#6EC3CA;
+    color:#FFFFFF;
+    border:1px solid transparent;
+}
+.ui-paging-container ul li.ui-pager{cursor: pointer;}
+.ui-paging-container li.ui-paging-ellipse{border:none;}
+.ui-paging-container li.ui-paging-toolbar{font-size:0;}
+.ui-paging-container li.ui-paging-toolbar select{
+    height:24px;
+    line-height:24px;
+    border:1px solid #ddd;
+    color: #666;
+    outline:none;}
+.ui-paging-container ul li.ui-paging-toolbar input{
+    height:24px;
+    box-sizing:border-box;
+    line-height:24px;
+    border:1px solid #ddd;
+    text-align: center;
+    width:40px;
+    margin-left:5px;
+    outline:none;
+    vertical-align:top;
+}
+.ui-paging-container li.ui-paging-toolbar a{
+    display:inline-block;
+    height:24px;
+    width:40px;
+    box-sizing:border-box;
+    line-height:24px;
+    text-align:center;
+    text-decoration:none;
+    border:1px solid #ddd;
+    vertical-align:top;
+    border-radius:2px;
+    margin-left:5px;
+}
+.ui-paging-container ul li.ui-pager-disabled{
+    background-color: #f6f6f6;
+    cursor: default;
+    border:1px solid #f6f6f6;
+    color:#ddd;}
+
+
+/*********直播课堂等下拉菜单插件样式***********8*/
+
+/*************下拉菜单**************/
+.selectMenu {
+    width:400px;
+    height:auto;
+    box-sizing: border-box;
+    border:1px solid #D3D3D3;
+    background-color: #ffffff;
+}
+.selectTableBox,.table_body {
+    width:100%;
+    background-color:#FFFFFF;
+}
+
+.selectMenu .table_body .re {
+    font-size:12px;
+    color:#333333;
+    font-family: "Microsoft YaHei",sans-serif;
+    width:100%;
+    box-sizing: border-box;
+    outline: none;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.table_body th,.table_body td {
+    border-bottom: 1px solid #DDDDDD;
+}
+.selectMenu .table_body .re th{
+    font-weight: 400;
+}
+
+.re th,.re td{
+    height: 26px;
+    line-height: 26px;
+    padding: 0 4px;
+}
+
+/*分页*/
+.selectPageBox {
+    width:100%;
+    height:44px;
+    overflow:hidden;
+    margin-top:26px;
+    background-color: #FAFAFA;
+}
+.selectPageBox .page_navigation{
+    width:100%;
+    height:44px;
+    padding-top:8px;
+    box-sizing: border-box;
+    border-top:1px solid #DDDDDD;
+}
+.previous_link span,.next_link span,.page_navigation span{
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    background: url("/plug-in/jQuerySelectTable/image/pagination_icons.png") no-repeat;
+}
+.page_navigation span{
+    background: none;
+    padding:3px;
+    margin:2px 3px;
+    font-family: "Microsoft YaHei",Arial,sans-serif;
+    font-size:12px;
+}
+.page_navigation span:first-of-type:before{
+    content: "";
+    padding: 0 5px;
+    border-left: 1px solid #CCCCCC;
+}
+.page_navigation span:last-of-type:after{
+    content: "";
+    padding: 0 5px;
+    border-right: 1px solid #CCCCCC;
+}
+.page_navigation a{
+    padding:3px;
+    margin:2px;
+    color:black;
+    text-decoration:none;
+    box-sizing: border-box;
+}
+.page_navigation a,.page_navigation span,.page_navigation input{
+    height:22px;
+    line-height:22px;
+    display: inline-block;
+    text-align: center;
+}
+.page_navigation a,.page_navigation span,.page_navigation input{
+    vertical-align:top;
+}
+.selectMenu .selectPageBox .page_navigation input{
+    width:32px;
+    margin-top:4px;
+}
+.page_navigation span{
+    width:auto;
+}
+.page_navigation a {
+    width:22px;
+}
+.active_page{
+    background:#1395ed;
+    color:white !important;
+}
+/*页码*/
+.num_box{
+    height: 17px;width: 30px;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid #CCCCCC;
+    padding: 1px 0 2px 0;
+    margin: -1px 3px 0 3px ;
+    border-radius: 0;
+}
+/*设置定位和消失出现  直播课堂院系菜单*/
+.selectMenuWrap {
+    position: relative;
+}
+/*下拉菜单盒子的位置和隐藏*/
+#allVideo_majorMenu,
+#allVideo_collegeMenu,
+#allVideo_termMenu,
+#allLive_roomMenu,
+#allLive_collegeMenu,
+#allLive_courseMenu {
+    position: absolute;
+    left:0;
+    top:42px;
+    display: none;
+    z-index: 500;
+}
+.selectMenuWrap:hover #allVideo_majorMenu,
+.selectMenuWrap:hover #allVideo_collegeMenu,
+.selectMenuWrap:hover #allVideo_termMenu,
+.selectMenuWrap:hover #allLive_roomMenu,
+.selectMenuWrap:hover #allLive_courseMenu,
+.selectMenuWrap:hover #allLive_collegeMenu{
+    display: block;
+}
+.Bradius {border-radius:4px;}
+.Vmiddle {
+    display: inline-block;
+    vertical-align: middle;
+}
+/*教室管理--设置文字强制换行 显示录制直播服务器--最大136px*/
+.list_child .RecordServerTD{
+    width: 100px;
+}
+.list_child .RecordServerTD p {
+    height: 40px;
+    width: 100px;
+    color:#666;
+}
+/*班级管理表格宽度*/
+.MSC_p1 {width:91px;}
+.MSC_p2 {width:90px;}
+.MSC_p3 {width:135px;}
+.MSC_p4 {width:80px;}
+.MSC_p5 {width:130px;}
+.MSC_p6 {width:80px;}
+.MSC_p7 {width:135px;}
+
+/*服务器管理表格宽度*/
+.MSSr_p1 {width:116px;}
+.MSSr_p2 {width:172px;}
+.MSSr_p3 {width:100px;}
+.MSSr_p4 {width:100px;}
+.MSSr_p5 {width:60px;}
+.MSSr_p6 {width:50px;}
+.MSSr_p7 {width:177px;}
+.MSSr_p8 {width:86px;}
+
+/*教材管理表格宽度*/
+.MT_p1 {width:200px;}
+.MT_p2 {width:472px;}
+.MT_p3 {width:160px;}
+
+/*组织机构管理表格宽度*/
+.MSO_p1 {width:200px;}
+.MSO_p2 {width:288px;}
+.MSO_p3 {width:160px;}
+
+/*系统日志管理表格宽度*/
+.QL_p1 {width:90px;}
+.QL_p2 {width:100px;}
+.QL_p3 {width:100px;}
+.QL_p4 {width:100px;}
+.QL_p5 {width:602px;}
+.QL_p6 {width:60px;}
+
+/*学生管理表格宽度*/
+.MSS_p1 {width:88px;}
+.MSS_p2 {width:90px;}
+.MSS_p3 {width:122px;}
+.MSS_p4 {width:34px;}
+.MSS_p5 {width:240px;}
+.MSS_p6 {width:248px;}
+.MSS_p7 {width:100px;}
+
+/*教室管理表格宽度*/
+.MSCR_p1 {width:84px;}
+.MSCR_p2 {width:60px;}
+.MSCR_p3 {width:28px;}
+.MSCR_p4 {width:88px;}
+.MSCR_p5 {width:64px;}
+
+/*教师管理表格宽度*/
+.MST_p1 {width:70px;}
+.MST_p2 {width:70px;}
+.MST_p3 {width:100px;}
+.MST_p4 {width:70px;}
+.MST_p5 {width:28px;}
+.MST_p6 {width:80px;}
+.MST_p7 {width:124px;}
+.MST_p8 {width:80px;}
+.MST_p9 {width:110px;}
+.MST_p10 {width:100px;}
+.MST_p11 {width:110px;}
+
+/*存储空间表格宽度*/
+.MSSg_p1 {width:160px;}
+.MSSg_p2 {width:206px;}
+.MSSg_p3 {width:180px;}
+.MSSg_p4 {width:110px;}
+.MSSg_p5 {width:74px;}
+.MSSg_p6 {width:88px;}
+
+/*节次管理表格宽度*/
+.MSCT_p1 {width:160px;}
+.MSCT_p2 {width:100px;}
+.MSCT_p3 {width:100px;}
+.MSCT_p4 {width:432px;}
+.MSCT_p5 {width:100px;}
+
+/*用户管理表格宽度*/
+.MU_p1 {width:200px;}
+.MU_p2 {width:150px;}
+.MU_p3 {width:150px;}
+.MU_p4 {width:50px;}
+.MU_p5 {width:282px;}
+
+/*设备管理表格宽度*/
+.MSDD_p1 {width:180px;}
+.MSDD_p2 {width:180px;}
+.MSDD_p3 {width:222px;}
+.MSDD_p4 {width:120px;}
+
+/*教室管理表格宽度*/
+.MSA_p1 {width:150px;}
+.MSA_p2 {width:90px;}
+.MSA_p3 {width:200px;}
+.MSA_p4 {width:76px;}
+.MSA_p5 {width:90px;}
+.MSA_p6 {width:112px;}
+

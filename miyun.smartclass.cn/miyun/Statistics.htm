@@ -1,0 +1,3048 @@
+
+
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><link rel="icon" href="../favicon.ico" type="image/x-icon" /><link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" /><link id="gray_css" rel="stylesheet" /><link href="../Css/font-awesome.min.css" rel="stylesheet" />
+    <!--[if IE]>
+         <link id="gray_css_IE" rel="stylesheet" />
+        <![endif]-->
+    <title>
+
+</title>
+<link rel="stylesheet" href="../Js/plug-in/share_to_society/share.min.css" /><link rel="stylesheet" type="text/css" href="../Css/z-treeCss/metroStyle/metroStyle.css" /><link rel="stylesheet" type="text/css" href="../Css/basePc.css" /><link rel="stylesheet" type="text/css" href="../Css/common.css" /><link rel="stylesheet" type="text/css" href="../Css/all.css" /><link rel="stylesheet" type="text/css" href="../Css/other.css" /><link rel="stylesheet" type="text/css" href="../Css/miyun.css" /><link rel="stylesheet" type="text/css" href="../Js/plug-in/jquery-easyui-1.5.1/theme/material/easyui.css" /><link rel="stylesheet" type="text/css" href="../Js/plug-in/jquery-easyui-1.5.1/theme/icon.css" /><link rel="stylesheet" type="text/css" href="../Js/plug-in/select2/select2.min.css" /><link rel="stylesheet" type="text/css" href="../Css/font-awesome.min.css" />
+    <script type="text/javascript" src="../Js/xphter.js"></script>
+    <script type="text/javascript" src="../Js/jquery-1.11.2.js"></script>
+    <script type="text/javascript" src="../Js/plug-in/jquery.tmpl.min.js"></script>
+    <script type="text/javascript" src="../Js/AjaxUrl.js"></script>
+    <script type="text/javascript" src="../js/plug-in/paging-master/src/query.js"></script>
+    <script type="text/javascript" src="../js/plug-in/paging-master/src/paging.js"></script>
+    <script type="text/javascript" src="../js/plug-in/layer/layer.js"></script>
+    <script type="text/javascript" src="../Js/plug-in/select2/select2.full.js"></script>
+
+    <script type="text/javascript" src="../Js/mainFunction.js"></script>
+    <script type="text/javascript" src="../Js/popOrganSelect.js"></script>
+    <script type="text/javascript" src="../Js/plug-in/jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../Js/plug-in/jquery-easyui-1.5.1/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../Js/My97DatePicker/WdatePicker.js"></script>
+    
+    <script type="text/javascript" src="../Js/allCommon.js"></script>
+    <script src="../Js/plug-in/share_to_society/jquery.share.min.js"></script>
+    <style>
+        .panel-body {
+            padding: 0 !important;
+        }
+
+        .combo-panel {
+            overflow: hidden;
+        }
+
+        .publicHeader .fheader .personal_info ul {
+            width: 500px;
+        }
+
+        .publicFootInfo li {
+            float: none;
+            text-align: center;
+            color: #fff;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .copyright {
+            display: inline-block;
+            vertical-align: top;
+            color: #fff;
+            margin-left: 5px;
+        }
+
+        .footImg {
+            width: 30px;
+            height: 30px;
+        }
+        .publicHeader .fheader .personal_info .login_area{
+            display:inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div style="height: 86px;">
+        <div class="publicHeader">
+            <div class="fheader ">
+                <div class="content_wrap clearfix">
+                    <div class="company_logo fl">
+                        <a href="index.htm"><img src="../images/miyun/miyunlogo.png" /></a>
+                    </div>
+                    <div class="middle_nav fl">
+                        <ul class="clearfix webNavWrap">
+                            <li class="defaultPage"><a href="index.htm" class="first_nav webNav webNav_1 ">首页</a></li>
+                            <li class="livePage"><a href="livelist.htm" class="first_nav webNav webNav_2">直播课堂</a></li>
+                            <li class="videoPage"><a href="videolist.htm" class="first_nav webNav webNav_3">课程回放</a></li>
+                            <li class="Statistics hidee"><a href="Statistics.htm" class="first_nav webNav webNav_4">数据统计</a></li>
+                            <li class="personal_space hidee"><a href="Statistics.htm#" class="first_nav webNav webNav_4" id="self_space_wrap">个人空间
+                            <span class="choose_nav"></span>
+                                <img src="../images/broadcastlive_14.png" class="first_nav_img" /></a>
+                                <div class="second_nav">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="personal_info fr">
+                        <ul class="clearfix">
+                            <li class="personal_img hidee">
+                                <a href="Statistics.htm#">
+                                    <img id="user_images" src="Statistics.htm" onerror="nofindPic('/images/broadcastlive_06.png',null,event)" /><span id="user_name"></span> </a>
+                                <div class="quit_area self_nav_wrap hidee">
+                                    <a class="editPsw_item">修改密码</a>
+                                    
+                                    <a class="quit_item">退出</a>
+                                </div>
+                            </li>
+                            <li class="login_area">
+                                <a href="Statistics.htm#"><span>登录</span></a>
+                            </li>
+                            <li class="enter_backstage hidee"><a href="Statistics.htm#"><span>进入后台</span></a></li>
+                            
+                            <li class="downloadLiveExe"><a href="http://miyun.smartclass.cn/software/liveclient.exe"><i class="fa fa-camera"></i>直播客户端下载</a></li>
+                            <li class="onlinePhone"><b>客服电话</b>
+                                <span class="closeOnlinePhone hidee"></span>
+                                <div class="blackboard hidee">
+                                    <img src="images/blackboard.png" />
+                                </div>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="selfSpaceHeaderShadow"></div>
+        </div>
+    </div>
+    <div class="middle_content_wrap">
+        <script type="text/javascript">
+            var userInfo = [{"UserID":0}];
+            var strCookie = userInfo[0].UserID;
+
+            $(function () {
+                middleContentHeight();//页面高度计算
+                $(window).resize(function () {//页面窗口变化重新高度计算
+                    middleContentHeight();
+                })
+
+                //固定导航
+                $(window).scroll(function () {
+                    var scrollTop = $(this).scrollTop();//滚动条的偏移量
+                    var scrollHeight = $(document).height();//页面的总高度
+                    var windowHeight = $(this).height();//浏览器可见区域的高度
+                    if (scrollTop > 0) {
+                        $(".publicHeader").css({
+                            "position": "fixed",
+                            "z-index": 99,
+                            "top": 0
+                        })
+                    } else if (scrollTop == 0) {
+                        $(".publicHeader").css({
+                            "position": "static",
+                            "z-index": 99
+                        })
+                    };
+                })
+                //置灰
+                //setGray();
+            })
+        </script>
+        <script type="text/javascript" src="../Js/masterPages.js"></script>
+        
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="../Scripts/bootstrap.min.js"></script>
+    <link href="../Content/bootstrap-table.min.css" rel="stylesheet" />
+    <link href="http://miyun.smartclass.cn/Js/plug-in/viewer-picture/viewer.min.css" rel="stylesheet" />
+    <script src="../Scripts/bootstrap-table.min.js"></script>
+    <script src="../Scripts/bootstrap-table-zh-CN.min.js"></script>
+    <script src="http://miyun.smartclass.cn/Js/PowerCreator.js"></script>
+    <script src="../Js/PowerCreator.jtable.js"></script>
+    <script src="http://miyun.smartclass.cn/Js/plug-in/echarts.js"></script>
+    <style>
+        .videoClassSelectBtm .my-btmClick {
+            float: right;
+        }
+
+        .head_title p, .active_lists p, .ellipsis {
+            margin: 0;
+        }
+
+        .head_title p, .head_title th {
+            text-align: center;
+        }
+
+        .login_img {
+            margin-top: 90px;
+            min-height: 400px;
+        }
+
+        /*.inlineBlock {
+            line-height: 5px;
+        }*/
+
+        .see_detial {
+            cursor: pointer;
+        }
+
+        .videoClassSelect {
+            height: auto;
+        }
+
+        .textDetial {
+            cursor: pointer;
+        }
+
+        #pop_wrap p {
+            margin: 0;
+        }
+
+        .previewInfo {
+            margin-top: 10px;
+            height: auto;
+        }
+
+        .videoClassSelectTop label {
+            margin-bottom: 0;
+        }
+
+        .publicContainer .export_data_wrap {
+            float: right;
+        }
+
+        .export_data_wrap div {
+            margin: 11px 0 0 0;
+            width: 100px;
+            height: 30px;
+            background: #24bbed;
+            color: #fff;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 15px;
+            float: right;
+            cursor: pointer;
+        }
+
+        .card-wrap {
+            height: 180px;
+            width: 98%;
+            background-color: #fff;
+            border-radius: 5px;
+            margin: 1% 2%;
+            position: relative;
+            padding-top: 17px;
+            padding-left: 10px;
+            font-size: 14px;
+        }
+
+        .board-bg {
+            background-color: #fff;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .box-shadow {
+            -moz-box-shadow: 3px 2px 11px #D4D4D4;
+            -webkit-box-shadow: 3px 2px 11px #D4D4D4;
+            box-shadow: 3px 2px 11px #D4D4D4;
+        }
+
+        .vertical-line {
+            position: relative;
+            font-size: 14px;
+        }
+
+            .card-wrap:before, .vertical-line:before {
+                content: '';
+                width: 3px;
+                height: 16px;
+                background: #c4ad85;
+                position: absolute;
+                left: 0;
+                top: 20px;
+            }
+
+        .card-wrap h1 {
+            text-align: center;
+            margin-top: 33px;
+        }
+
+        .card-wrap small {
+            font-size: 30%;
+        }
+
+        .tab-bar {
+            margin-top: 20px;
+        }
+
+            .tab-bar .left-bar {
+                padding-right: 0;
+            }
+
+            .tab-bar .right-bar {
+                padding-left: 0;
+            }
+
+            .tab-bar .tab-bar-item {
+                height: 50px;
+                background-color: #fff;
+                line-height: 50px;
+                text-align: center;
+                font-size: 18px;
+                cursor: pointer;
+            }
+
+        body .container .js-choose-item {
+            color: #fff;
+            background-color: #24bbed;
+        }
+
+        #query_btn, #reset_btn {
+            border-radius: 5px;
+            background: #24bbed;
+        }
+
+        .checkwrap {
+            height: 50px;
+            line-height: 50px;
+            padding-left: 20px;
+            margin-bottom: 4px;
+        }
+
+            .checkwrap ul {
+                margin-bottom: 0;
+            }
+
+            .checkwrap li {
+                margin-right: 20px;
+            }
+
+            .checkwrap span {
+                color: #666;
+                font-family: "微软雅黑";
+                vertical-align: middle;
+            }
+
+        .charts-wrap {
+            margin-top: -2px;
+        }
+
+            .charts-wrap .charts {
+                height: 360px;
+            }
+
+        .container .vertical-line {
+            left: 14px;
+            padding-top: 17px;
+        }
+
+        #pie-chart {
+            margin-top: -17px;
+        }
+
+        .gray-bar {
+            height: 40px;
+            background: #f2f2f2;
+            color: #333;
+            line-height: 40px;
+            padding-left: 16px;
+            margin: 15px 13px;
+            border-radius: 0 20px;
+        }
+        /*没有边框的表格*/
+        table {
+            table-layout: fixed;
+        }
+
+        /*前三行颜色*/
+        .js-italic-style p {
+            font-weight: bold;
+        }
+
+        .js-red-row p, .js-red-row a {
+            color: #f83434;
+        }
+
+        .js-blue-row p, .js-blue-row a {
+            color: #f56a4d;
+        }
+
+        .js-orange-row p, .js-orange-row a {
+            color: #fdae24;
+        }
+
+        .noborder-table {
+            padding-bottom: 20px;
+            min-height: 300px;
+        }
+
+            .noborder-table .fixed-table-container tbody td {
+                border: none;
+            }
+
+            .noborder-table .fixed-table-container thead th {
+                border: none;
+            }
+
+            .noborder-table .bootstrap-table .table > thead > tr > th, .noborder-table .bootstrap-table .table {
+                border: none;
+            }
+
+            .noborder-table .fixed-table-container {
+                border: none;
+            }
+
+        .statistics-part {
+            margin-top: -2px;
+        }
+
+            .statistics-part table {
+                margin-left: 13px;
+                overflow: hidden;
+                width: 100%;
+                padding-bottom: 20px;
+            }
+
+        .fixed-table-body {
+            overflow: hidden;
+        }
+
+        .noborder-table tr {
+            border-bottom: 1px dashed #f1f1f1;
+        }
+
+        #live-trend-line,#part3_live-trend-line{
+            height: 300px;
+            width: 100%;
+        }
+
+        .js-lists-item {
+            margin-top: -9px;
+        }
+
+        .statistics-part3 .noborder-table .col-md-8 {
+            margin-bottom: 35px;
+        }
+
+        #loginPiechart {
+            width: 100%;
+            height: 300px;
+        }
+
+        .school-card {
+            background: url('/images/miyun/school-card.png') no-repeat 0 0/cover;
+        }
+
+        .register-card {
+            background: url('/images/miyun/register-card.png') no-repeat 0 0/cover;
+        }
+
+        .visit-card {
+            background: url('/images/miyun/visit-card.png') no-repeat 0 0/cover;
+        }
+
+        .videoClassSelectBtm li a {
+            cursor: pointer;
+        }
+
+        .attendance_trend_chart {
+            height: 350px;
+        }
+
+        .ellipsis {
+            width: 100% !important;
+        }
+
+        .videoClassSelectBtm .vClassSelectBtmOrder, .vClassSelectTopItem span, .videoClassSelectBtm li {
+            color: #666;
+        }
+        .videoClassSelect, #studentSignWrap, #askAndQuestion, #tests, #online {
+            padding:10px 14px;
+        }
+        .grade_select_wrap {
+            width:70px;
+        }
+    </style>
+    <div class="container">
+        <div class="three_card_statistics">
+            <div class="row">
+                <div class="col-md-4 ">
+                    <div class="card-wrap box-shadow school-card">
+                        当前平台学校数量
+                        <h1 id="schoolTotalNum">106<small>所</small></h1>
+                    </div>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="card-wrap box-shadow register-card">
+                        当前平台注册人数
+                         <h1 id="userRegisterNum"></h1>
+                    </div>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="card-wrap box-shadow visit-card">
+                        当前平台总访问量
+                         <h1 id="totalLoginCount"></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(function () {
+                //当前平台学校总数
+                Ajax.ajax({
+                    url: AjaxUrls.SchoolUrl.SchoolCount
+                }).done(function (data) {
+                    $("#schoolTotalNum").html(data + '<small>所</small>');
+                }).fail(function (data) {
+                    Dialogue.Error(data);
+                })
+                //当前平台注册人数
+                Ajax.ajax({
+                    url: AjaxUrls.Statistics.GetUserCount
+                }).done(function (data) {
+                    $("#userRegisterNum").html(data + '<small>人</small>');
+                }).fail(function (data) {
+                    Dialogue.Error(data);
+                })
+                //当前平台总访问量
+                Ajax.ajax({
+                    url: AjaxUrls.Statistics.GetLoginCount
+                }).done(function (data) {
+                    $("#totalLoginCount").html(data + '<small>次</small>');
+                }).fail(function (data) {
+                    Dialogue.Error(data);
+                })
+            })
+        </script>
+        <div class="tab-bar">
+            <div class="row">
+                <div class="col-md-6 left-bar">
+                    <div class="tab-bar-item box-shadow js-choose-item">
+                        直播数据
+                    </div>
+                </div>
+                <div class="col-md-6 right-bar">
+                    <div class="tab-bar-item box-shadow">
+                        点播数据
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="checkwrap board-bg box-shadow">
+            <ul class="clearfix">
+                <li class="inline calendarWrap videoPlanDate fl" style="position: relative; top: 1px;">
+                    <span>选择日期：</span>
+                    <div class="inlineBlock dateDiv">
+                        <input id="startDT1" class="Wdate" type="text" style="width: 120px;" onclick="WdatePicker({ el: this, dateFmt: 'yyyy-MM-dd' })" />
+                    </div>
+                    <span>-</span>
+                    <div class="inlineBlock dateDiv">
+                        <input id="endDT1" class="Wdate" type="text" style="width: 120px;" onclick="WdatePicker({ el: this, dateFmt: 'yyyy-MM-dd' })" />
+                    </div>
+                </li>
+                <li class="vClassSelectTopItem selectMenuWrap gradeListWrap fl">
+                    <span>学期：</span>
+                    <div class="inlineBlock selectDiv">
+                        <div class="combogride_wrap">
+                            <input id="semesterList" />
+                        </div>
+                        <input type="hidden" id="semesterListKeyword" />
+                    </div>
+                </li>
+                <li class="fr export_data_wrap">
+                    <div id="part_one_search">查询</div>
+                </li>
+            </ul>
+        </div>
+        <div class="charts-wrap board-bg box-shadow">
+            <div class="row">
+                <div class="col-md-4 vertical-line">
+                    <span id="class_hours_total_num">直播课时总数</span><div class="classHoursTotal">200(节)</div>
+                    <div class="charts " id="pie-chart"></div>
+                </div>
+                <div class="col-md-4 vertical-line">
+                    <span id="attendant__people_num">直播总参与人次</span><div class="attendancePeopleCount">200(人次)</div>
+                    <div class="charts" id="sideling-bar-chart"></div>
+                </div>
+                <div class="col-md-4 vertical-line">
+                    <span id="online__hours_total">直播在线总时长</span><div class="onlineTotalHours">50(h)</div>
+                    <div class="charts" id="bar-chart"></div>
+                </div>
+            </div>
+        </div>
+        <script>
+            //直播课时总数饼状图
+            function classHourspiechartOption(url) {
+                Ajax.ajax({
+                    url: url || AjaxUrls.Statistics.LiveStatisticCountGroupByGrades,
+                    data: { SchoolID: userInfo[0].SchoolID || null, StartTime: $("#startDT1").val(), StopTime: $("#endDT1").val() }
+                }).done(function (data) {
+                    $(".classHoursTotal").html(data.TotalCount + '(节)');
+                    var gradeArr = [];
+                    var totalDataArr = [];
+                    var colorArr = ['#f3c17f', '#7bcfbb', '#b39ed8', '#fc8870', '#9dc3e6', '#a2ce74', '#c3c6c6'];
+                    totalDataArr = $.map(data.Data, function (obj, index) {
+                        obj.GradeID == 0 ? gradeArr.push('其他') : gradeArr.push(obj.GradeName);
+                        obj.value = obj.Count;
+                        obj.name = obj.GradeID == 0 ? '其他' : obj.GradeName;
+                        obj.itemStyle = { color: colorArr[(index % colorArr.length)] }
+                        return obj;
+                    })
+                    var title = url ? '录播数据占比' : '直播数据占比';
+                    var piechartOption = {
+                        title: {
+                            text: title,
+                            x: 'center',
+                            y: '165px',
+                            textStyle: {
+                                color: '#828890',
+                                fontSize: 14,
+                            }
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{b} : {c}节 <br/> (占比 : {d}%)"
+                        },
+                        legend: {
+                            orient: 'horizontal',
+                            x: 'center',
+                            y: 'bottom',
+                            data: gradeArr
+                        },
+                        calculable: true,
+                        color: colorArr,
+                        series: [
+                            {
+                                type: 'pie',
+                                radius: ['35%', '50%'],
+                                itemStyle: {
+                                    emphasis: {
+                                        label: {
+                                            show: true,
+                                            position: 'center',
+                                            textStyle: {
+                                                fontSize: '30',
+                                                fontWeight: 'bold'
+                                            }
+                                        }
+                                    }
+                                },
+                                data: totalDataArr
+                            }
+                        ]
+                    };
+                    var myChartPie = echarts.init(document.getElementById('pie-chart'));
+                    myChartPie.setOption(piechartOption);
+
+                }).fail(function (data) {
+                    Dialogue.Error(data);
+                })
+            }
+            //直播总参与人次&直播在线总时长
+            function attendancePeopleCountAndHours(url) {
+                Ajax.ajax({
+                    url: url || AjaxUrls.Statistics.LiveStatisticStudentsGroupByGrades,
+                    data: { SchoolID: userInfo[0].SchoolID || null, StartTime: $("#startDT1").val(), StopTime: $("#endDT1").val() }
+                }).done(function (data) {
+                    $(".attendancePeopleCount").html(data.TotalViewTimes + '(人次)');
+                    $(".onlineTotalHours").html((data.TotalViewDuration / 3600).toFixed(2) + '(h)');
+
+                    var gradeArr = [];
+                    var totalDataArrViewTimes = [], totalDataArrViewDuration = [];
+                    var colorArr = ['#f3c17f', '#7bcfbb', '#b39ed8', '#fc8870', '#9dc3e6', '#a2ce74', '#c3c6c6'];
+                    totalDataArrViewTimes = $.map(data.Data, function (obj, index) {
+                        obj.GradeID == 0 ? gradeArr.push('其他') : gradeArr.push(obj.GradeName);
+                        obj.name = obj.GradeID == 0 ? '其他' : obj.GradeName;
+                        totalDataArrViewDuration.push($.extend({}, { "value": (obj.ViewDuration / 3600).toFixed(2) }));
+                        obj.value = obj.ViewTimes;
+                        return obj;
+                    })
+
+                    //在线总时长
+                    var barChartOption = {
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        legend: {
+                            orient: 'horizontal',
+                            x: 'center',
+                            y: 'bottom',
+                            data: gradeArr
+                        },
+                        calculable: true,
+                        color: ['#f3c17f', '#7bcfbb', '#9babda', '#fc8870', '#9dc3e6', '#a2ce74'],
+                        xAxis: [
+                            {
+                                type: 'category',
+                                data: gradeArr
+                            }
+                        ],
+                        yAxis: [
+                            {
+                                type: 'value'
+                            }
+                        ],
+                        series: [
+                    {
+                        type: 'bar',
+                        barWidth: 25,//柱图宽度
+                        itemStyle: {
+                            normal: {
+                                // 定制显示（按顺序）
+                                color: function (params) {
+                                    var colorList = ['#f3c17f', '#7bcfbb', '#b39ed8', '#fc8870', '#9dc3e6', '#a2ce74'];
+                                    return colorList[params.dataIndex]
+                                }
+                            },
+                        },
+                        data: totalDataArrViewDuration
+                    }]
+                    };
+                    //总参与人次
+                    var SidelingBarOption = {
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        legend: {
+                            orient: 'horizontal',
+                            x: 'center',
+                            y: 'bottom',
+                            data: gradeArr
+                        },
+                        calculable: true,
+                        color: ['#f3c17f', '#7bcfbb', '#b39ed8', '#fc8870', '#9dc3e6', '#a2ce74'],
+                        xAxis: [
+                            {
+                                type: 'value',
+                                boundaryGap: [0, 0.01]
+                            }
+                        ],
+                        yAxis: [
+                            {
+                                type: 'category',
+                                data: gradeArr
+                            }
+                        ],
+                        series: [
+                    {
+                        type: 'bar',
+                        barWidth: 25,//柱图宽度
+                        itemStyle: {
+                            normal: {
+                                // 定制显示（按顺序）
+                                color: function (params) {
+                                    var colorList = ['#f3c17f', '#7bcfbb', '#b39ed8', '#fc8870', '#9dc3e6', '#a2ce74'];
+                                    return colorList[params.dataIndex]
+                                }
+                            },
+                        },
+                        data: totalDataArrViewTimes
+                    }]
+                    };
+                    var myChartBar = echarts.init(document.getElementById('bar-chart'));
+                    myChartBar.setOption(barChartOption);
+
+                    var myChartSidelingBar = echarts.init(document.getElementById('sideling-bar-chart'));
+                    myChartSidelingBar.setOption(SidelingBarOption);
+                })
+            }
+
+            var tabBarFlag = true;
+            $(function () {
+
+                //日期首次加载一周
+                $dp.$("startDT1").value = getDay(-7);
+                $dp.$("endDT1").value = getNowDate(null, true);
+
+                SemesterSelectList("semesterList", "semesterListKeyword", userInfo[0].SchoolID, "startDT1", "endDT1");
+
+                classHourspiechartOption();//直播课时总数
+                attendancePeopleCountAndHours();//直播总参与人次&直播在线总时长
+                //第一部分查询
+                $("#part_one_search").click(function () {
+                    if (tabBarFlag) {
+                        classHourspiechartOption();
+                        attendancePeopleCountAndHours();
+                    } else {
+                        classHourspiechartOption(AjaxUrls.Statistics.VideoStatisticCountGroupByGrades);
+                        attendancePeopleCountAndHours(AjaxUrls.Statistics.VideoStatisticStudentsGroupByGrades);
+                    };
+                })
+                //直播&&点播数据切换
+                $(".tab-bar .col-md-6").click(function () {
+                    $(this).find(".tab-bar-item").addClass("js-choose-item");
+                    $(this).siblings().find(".tab-bar-item").removeClass("js-choose-item");
+                    if ($(this).hasClass("left-bar")) {
+                        tabBarFlag = true;
+                        //第一部分切换
+                        $("#class_hours_total_num").html("直播课时总数");
+                        $("#attendant__people_num").html("直播总参与人次");
+                        $("#online__hours_total").html("直播在线总时长");
+                        //第二部分切换(显示)
+                        $(".statistics-part2 ").show();
+                        $(".part2_checkwrap").show();
+                        //第三部分切换
+                        $("#students_online_hours_see_video_time").html("学生直播学习时长排行榜");
+                        $(".statistics-part3 .attendance_trend_chart").hide();
+                    } else {
+                        tabBarFlag = false;
+                        //第一部分切换
+                        $("#class_hours_total_num").html("年级点播课时数");
+                        $("#attendant__people_num").html("点播总参与人次");
+                        $("#online__hours_total").html("点播在线总时长");
+                        //第二部分切换
+                        $(".statistics-part2").hide();
+                        $(".part2_checkwrap").hide();
+                        //第三部分切换
+                        $("#students_online_hours_see_video_time").html("学生点播学习时长排行榜");
+                        $(".statistics-part3 .attendance_trend_chart").show();
+                    };
+                    //第一部分加载
+                    $("#part_one_search").click();
+                    //第三部分加载
+                    $("#part_three_search").click();
+
+                })
+            })
+        </script>
+        <div class="checkwrap board-bg box-shadow part2_checkwrap">
+            <ul class="clearfix">
+                <li class="inline calendarWrap videoPlanDate fl" style="position: relative; top: 1px;">
+                    <span>选择日期：</span>
+                    <div class="inlineBlock dateDiv">
+                        <input id="startDT2" class="Wdate" type="text" style="width: 120px;" onclick="WdatePicker({ el: this, dateFmt: 'yyyy-MM-dd' })" />
+                    </div>
+                    <span>-</span>
+                    <div class="inlineBlock dateDiv">
+                        <input id="endDT2" class="Wdate" type="text" style="width: 120px;" onclick="WdatePicker({ el: this, dateFmt: 'yyyy-MM-dd' })" />
+                    </div>
+                </li>
+                <li class="vClassSelectTopItem selectMenuWrap gradeListWrap fl">
+                    <span>学期：</span>
+                    <div class="inlineBlock selectDiv">
+                        <div class="combogride_wrap">
+                            <input id="semesterList2" />
+                        </div>
+                        <input type="hidden" id="semesterListKeyword2" />
+                    </div>
+                </li>
+                <li class="vClassSelectTopItem selectMenuWrap gradeListWrap fl">
+                    <span>学段：</span>
+                    <div class="inlineBlock selectDiv">
+                        <div class="combogride_wrap">
+                            <input id="phaseList" />
+                        </div>
+                        <input type="hidden" id="phaseListKeyword" />
+                    </div>
+                </li>
+                <li class="fr export_data_wrap">
+                    <div id="part_two_search">查询</div>
+                </li>
+                <li class="fr export_data_wrap">
+                    <div id="part_two_export">导出数据</div>
+                </li>
+            </ul>
+        </div>
+        <div class="statistics-part statistics-part2 board-bg box-shadow">
+            <div class="row  noborder-table">
+                <div class="col-md-12 vertical-line">
+                    <span id="attendace_rate_ranking">直播参与率排行榜</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;显示：<select id="changeNum">
+                        <option value="5">前五名</option>
+                        <option value="10">前十名</option>
+                        <option value="15">前十五名</option>
+                        <option value="20">前二十名</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <div class="gray-bar" id="school_attendance_ranking">学校参与率排行</div>
+                    <table>
+                        <thead>
+                            <tr style="border: none;">
+                                <td style="padding-left: 15px;">学校</td>
+                                <td>平均参与率</td>
+                            </tr>
+                        </thead>
+                    </table>
+                    <table id="schoolParticipationRate"></table>
+                </div>
+                <div class="col-md-4">
+                    <div class="gray-bar" id="grade_attendance_ranking">年级参与率排行</div>
+                    <table>
+                        <thead>
+                            <tr style="border: none;">
+                                <td style="padding-left: 15px;">学校</td>
+                                <td>
+                                    <select class="grade_select_wrap" id="grade_attence_rate">
+                                    </select></td>
+                                <td>平均参与率</td>
+                            </tr>
+                        </thead>
+                    </table>
+                    <table id="gradeParticipationRate"></table>
+                </div>
+                <div class="col-md-5">
+                    <div class="gray-bar" id="class_attendance_ranking">班级参与率排行</div>
+                    <table>
+                        <thead>
+                            <tr style="border: none;">
+                                <td style="padding-left: 15px;">学校</td>
+                                <td>
+                                    <select class="grade_select_wrap" id="classes_attence_rate">
+                                    </select></td>
+                                <td>班级</td>
+                                <td>平均参与率</td>
+                            </tr>
+                        </thead>
+                    </table>
+                    <table id="classesParticipationRate"></table>
+                </div>
+            </div>
+            <div class="row attendance_trend_chart">
+                <div class="col-md-12 vertical-line" id="attendance_trend_chart">直播参与率总趋势图</div>
+                <div id="live-trend-line"></div>
+            </div>
+        </div>
+        <script>
+            $(function () {
+                //日期首次加载一周
+                $dp.$("startDT2").value = getDay(-7);
+                $dp.$("endDT2").value = getNowDate(null, true);
+                SemesterSelectList("semesterList2", "semesterListKeyword2", userInfo[0].SchoolID, "startDT2", "endDT2");
+                SemesterPhaseList("phaseList");
+                //年级
+                Ajax.ajax({
+                    url: AjaxUrls.GradeUrls.GetGrades
+                }).done(function (data) {
+                    var html = '<option>初一</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        var item = data[i];
+                        html += '<option value="' + item.GradeID + '">' + item.GradeName + '</option>';
+                    };
+                    $(".grade_select_wrap").html(html);
+                })
+
+                getSchoolParticipationRate(null, 5);
+                getGradeParticipationRate(null, 5);
+                getClassesParticipationRate(null, 5);
+                getLiveTrendLine(null, 5);
+                //点击查询
+                $("#part_two_search").click(function () {
+                    var pagesize = $("#changeNum").val()
+                    var phaseVal = '';
+                    if ($("#phaseList").val() == '') {
+                        phaseVal = '';
+                    } else {
+                        phaseVal = parseInt($("#phaseList").combogrid("getValues")[0]);
+                        if ((phaseVal + '') == "NaN" && $.trim($("#phaseList").combogrid("getValue")).length != 0) {
+                            Dialogue.Msg("请选择列表中的学段");
+                            return;
+                        };
+                    };
+                    $("#schoolParticipationRate").bootstrapTable('destroy');
+                    $("#gradeParticipationRate").bootstrapTable('destroy');
+                    $("#classesParticipationRate").bootstrapTable('destroy');
+
+                    getSchoolParticipationRate(phaseVal, pagesize);
+                    getGradeParticipationRate(phaseVal, pagesize, $("#grade_attence_rate").val());
+                    getClassesParticipationRate(phaseVal, pagesize, $("#classes_attence_rate").val());
+                    getLiveTrendLine(phaseVal, pagesize);
+                })
+
+                $("#part_two_export").click(function () {
+                    var phaseVal;
+                    if ($("#phaseList").val() != "") {
+                        phaseVal = parseInt($("#phaseList").combogrid("getValues")[0]);
+                        if ((phaseVal + '') == "NaN" && $.trim($("#phaseList").combogrid("getValue")).length != 0) {
+                            Dialogue.Msg("请选择列表中的学段");
+                            return;
+                        };
+                    }
+
+                    var url = AjaxUrls.Statistics.ExportStudentLiveJoinRateByGrade;
+                    var data = {
+                        StartTime: $("#startDT2").val(),
+                        StopTime: $("#endDT2").val(),
+                        StageID: phaseVal
+                    };
+
+                    var keyVal = [];
+                    for (key in data) {
+                        keyVal.push(key + '=' + data[key]);
+                    };
+                    window.location.href = url + "?" + keyVal.join("&");
+                })
+
+                //前十名
+                $("#changeNum").change(function () {
+                    $("#part_two_search").click();
+                })
+                //年级参与率排行--年级
+                $("#grade_attence_rate").change(function () {
+                    var gradeId = $(this).val();
+                    var pagesize = $("#changeNum").val()
+                    var phaseVal = '';
+                    if ($("#phaseList").val() == '') {
+                        phaseVal = '';
+                    } else {
+                        phaseVal = parseInt($("#phaseList").combogrid("getValues")[0]);
+                        if ((phaseVal + '') == "NaN" && $.trim($("#phaseList").combogrid("getValue")).length != 0) {
+                            Dialogue.Msg("请选择列表中的学段");
+                            return;
+                        };
+                    };
+                    $("#gradeParticipationRate").bootstrapTable('destroy');
+                    getGradeParticipationRate(phaseVal, pagesize, gradeId);
+                })
+                //班级参与率排行--年级
+                $("#classes_attence_rate").change(function () {
+                    var gradeId = $(this).val();
+                    var pagesize = $("#changeNum").val()
+                    var phaseVal = '';
+                    if ($("#phaseList").val() == '') {
+                        phaseVal = '';
+                    } else {
+                        phaseVal = parseInt($("#phaseList").combogrid("getValues")[0]);
+                        if ((phaseVal + '') == "NaN" && $.trim($("#phaseList").combogrid("getValue")).length != 0) {
+                            Dialogue.Msg("请选择列表中的学段");
+                            return;
+                        };
+                    };
+                    $("#classesParticipationRate").bootstrapTable('destroy');
+                    getClassesParticipationRate(phaseVal, pagesize, gradeId);
+                })
+            })
+            //直播总趋势图
+            function getLiveTrendLine(StageID) {
+                Ajax.ajax({
+                    url: AjaxUrls.Statistics.StatisticsStudentLiveJoinRateByDate,
+                    data: { StartTime: $("#startDT2").val(), StopTime: $("#endDT2").val(), SchoolID: userInfo[0].SchoolID, StageID: StageID }
+                }).done(function (data) {
+                    var DateArr = [], rateArr = [];
+                    rateArr = $.map(data, function (obj, index) {
+                        var rate = obj.ExpectedCount == 0 ? "0" : ((obj.ActualCount / obj.ExpectedCount) * 100).toFixed(2);
+                        obj.value = rate;
+                        return obj;
+                    })
+                    rateArr = bubbleSort(rateArr, "value");
+
+                    $.each(rateArr, function (index, obj) {
+                        DateArr.push(obj.Date.split(" ")[0]);
+                    })
+
+
+                    var liveTrendOption = {
+                        tooltip: {
+                            trigger: 'axis',
+                            formatter: function (params) {
+                                var rate = params[0].data.ExpectedCount == 0 ? "-" : (params[0].data.ActualCount / params[0].data.ExpectedCount) * 100
+                                var tiphtml = '<p style="color:#fff;">应到人数：' + params[0].data.ExpectedCount + '人</p>' +
+                                              '<p style="color:#fff;">实到人数：' + params[0].data.ActualCount + '人</p>' +
+                                               '<p style="color:#fff;">直播出勤率：' + params[0].data.value + '%</p>'
+                                return tiphtml;
+                            }
+                        },
+                        dataZoom: {
+                            show: true,
+                            realtime: true,
+                            y: 270,
+                            handleSize: 40,
+                            handleColor: "#5adad5",
+                            height: 20,
+                            start: 40,
+                            end: 60
+                        },
+                        xAxis: [
+                            {
+                                type: 'category',
+                                boundaryGap: false,
+                                data: DateArr
+                            }
+                        ],
+                        yAxis: [
+                            {
+                                type: 'value'
+                            }
+                        ],
+                        series: [
+                            {
+                                name: '参与率',
+                                type: 'line',
+                                itemStyle: {
+                                    normal: {
+                                        color: 'rgba(11,209,202,1)',
+                                        areaStyle: {
+                                            color: 'rgba(11,209,202,0.3)'
+                                        },
+                                        lineStyle: {
+                                            color: 'rgba(11,209,202,0.3)'
+                                        }
+                                    }
+                                },
+                                smooth: true,
+                                data: rateArr
+                            }
+                        ],
+                        calculable: false
+                    };
+                    var liveTrendChart = echarts.init(document.getElementById('live-trend-line'));
+                    liveTrendChart.setOption(liveTrendOption);
+                })
+            }
+
+            //学校参与率排行
+            function getSchoolParticipationRate(StageID, pageSize) {
+                Ajax.ajax({
+                    url: AjaxUrls.Statistics.StatisticsStudentLiveJoinRateBySchool,
+                    data: { StartTime: $("#startDT2").val(), StopTime: $("#endDT2").val(), SchoolID: userInfo[0].SchoolID, StageID: StageID }
+                }).done(function (data) {
+                    var rateArr = [];
+                    rateArr = $.map(data, function (obj, index) {
+                        var rate = obj.ExpectedCount == 0 ? "0" : parseFloat((obj.ActualCount / obj.ExpectedCount) * 100).toFixed(2); //parseFloat(value / 100).toFixed(2);
+                        obj.value = rate;
+                        return obj;
+                    })
+                    rateArr = bubbleSort(rateArr, "value", pageSize);
+                    var schoolParticipationRate = {
+                        data: rateArr,
+                        search: false,
+                        showRefresh: false,
+                        striped: false,
+                        showColumns: false,
+                        pagination: false,
+                        rowStyle: function (row, index) {
+                            if (index == 0) {
+                                return { classes: "js-red-row js-italic-style" };
+                            } else if (index == 1) {
+                                return { classes: "js-blue-row js-italic-style" };
+                            } else if (index == 2) {
+                                return { classes: "js-orange-row js-italic-style" };
+                            } else {
+                                return {}
+                            };
+                        },
+                        columns: [
+                             {
+                                 field: 'SchoolName',
+                                 title: '',
+                                 width: 100,
+                                 formatter: function (r) {
+                                     return "<p class='ellipsis' style='width:150px;'>" + r + "</p>"
+                                 }
+                             },
+                             {
+                                 field: 'ActualCount',
+                                 title: '',
+                                 width: 100,
+                                 formatter: function (r, rows) {
+                                     if (rows.ExpectedCount == 0) {
+                                         return "<p class='ellipsis' style='width:50px;'>--</p>"
+                                     } else {
+                                         return "<p class='ellipsis' style='width:50px;'>" + parseFloat((r / rows.ExpectedCount) * 100).toFixed(2) + "%</p>"
+                                     };
+
+                                 }
+                             }
+                        ]
+                    };
+                    //提问统计
+                    powerCreator.datatable(
+                        "schoolParticipationRate",
+                         $.extend({}, schoolParticipationRate)
+                        )
+                })
+
+            }
+            //年级参与率排行
+            function getGradeParticipationRate(StageID, pageSize, gradeid) {
+                Ajax.ajax({
+                    url: AjaxUrls.Statistics.StatisticsStudentLiveJoinRateByGrade,
+                    data: { StartTime: $("#startDT2").val(), StopTime: $("#endDT2").val(), SchoolID: userInfo[0].SchoolID, StageID: StageID }
+                }).done(function (data) {
+                    var rateArr = [];
+                    rateArr = $.map(data, function (obj, index) {
+                        if (gradeid && $.trim(gradeid) != "年级") {
+                            if (gradeid == obj.GradeID) {
+                                var rate = obj.ExpectedCount == 0 ? "0" : parseFloat((obj.ActualCount / obj.ExpectedCount) * 100).toFixed(2);//parseFloat(value / 100).toFixed(2);
+                                obj.value = rate;
+                                return obj;
+                            };
+                        } else {
+                            var rate = obj.ExpectedCount == 0 ? "0" : parseFloat((obj.ActualCount / obj.ExpectedCount) * 100).toFixed(2);
+                            obj.value = rate;
+                            return obj;
+                        };
+                    })
+                    rateArr = bubbleSort(rateArr, "value", pageSize);
+
+                    var gradeParticipationRate = {
+                        data: rateArr,
+                        search: false,
+                        showRefresh: false,
+                        striped: false,
+                        showColumns: false,
+                        pagination: false,
+                        rowStyle: function (row, index) {
+                            if (index == 0) {
+                                return { classes: "js-red-row js-italic-style" };
+                            } else if (index == 1) {
+                                return { classes: "js-blue-row js-italic-style" };
+                            } else if (index == 2) {
+                                return { classes: "js-orange-row js-italic-style" };
+                            } else {
+                                return {}
+                            };
+                        },
+                        columns: [
+                             {
+                                 field: 'SchoolName',
+                                 title: '',
+                                 width: 100,
+                                 formatter: function (r) {
+                                     return "<p class='ellipsis' style='width:100px;'>" + r + "</p>"
+                                 }
+                             },
+                             {
+                                 field: 'GradeName',
+                                 title: '',
+                                 width: 100,
+                                 formatter: function (r) {
+                                     return "<p class='ellipsis' style='width:100px;'>" + r + "</p>"
+                                 }
+                             },
+                             {
+                                 field: 'ActualCount',
+                                 title: '',
+                                 width: 100,
+                                 formatter: function (r, rows) {
+                                     if (rows.ExpectedCount == 0) {
+                                         return "<p class='ellipsis' style='width:50px;'>--</p>"
+                                     } else {
+                                         return "<p class='ellipsis' style='width:50px;'>" + parseFloat((r / rows.ExpectedCount) * 100).toFixed(2) + "%</p>"
+                                     };
+                                 }
+                             }
+                        ]
+                    };
+                    //提问统计
+                    powerCreator.datatable(
+                        "gradeParticipationRate",
+                         $.extend({}, gradeParticipationRate)
+                        )
+                })
+            }
+            //班级参与率排行
+            function getClassesParticipationRate(StageID, pageSize, gradeid) {
+                Ajax.ajax({
+                    url: AjaxUrls.Statistics.StatisticsStudentLiveJoinRateByClass,
+                    data: { StartTime: $("#startDT2").val(), StopTime: $("#endDT2").val(), SchoolID: userInfo[0].SchoolID, StageID: StageID }
+                }).done(function (data) {
+                    var rateArr = [];
+                    rateArr = $.map(data, function (obj, index) {
+                        if (gradeid && $.trim(gradeid) != "年级") {
+                            if (gradeid == obj.GradeID) {
+                                var rate = obj.ExpectedCount == 0 ? "0" : parseFloat((obj.ActualCount / obj.ExpectedCount) * 100).toFixed(2)
+                                obj.value = rate;
+                                return obj;
+                            };
+                        } else {
+                            var rate = obj.ExpectedCount == 0 ? "0" : parseFloat((obj.ActualCount / obj.ExpectedCount) * 100).toFixed(2)
+                            obj.value = rate;
+                            return obj;
+                        };
+                    })
+                    rateArr = bubbleSort(rateArr, "value", pageSize);
+
+                    var classesParticipationRate = {
+                        data: rateArr,
+                        search: false,
+                        showRefresh: false,
+                        striped: false,
+                        showColumns: false,
+                        pagination: false,
+                        rowStyle: function (row, index) {
+                            if (index == 0) {
+                                return { classes: "js-red-row js-italic-style" };
+                            } else if (index == 1) {
+                                return { classes: "js-blue-row js-italic-style" };
+                            } else if (index == 2) {
+                                return { classes: "js-orange-row js-italic-style" };
+                            } else {
+                                return {}
+                            };
+                        },
+                        columns: [
+                             {
+                                 field: 'SchoolName',
+                                 title: '',
+                                 width: 100,
+                                 formatter: function (r) {
+                                     return "<p class='ellipsis' style='width:100px;'>" + r + "</p>"
+                                 }
+                             },
+                             {
+                                 field: 'GradeName',
+                                 title: '',
+                                 width: 100,
+                                 formatter: function (r) {
+                                     return "<p class='ellipsis' style='width:100px;'>" + (r||"") + "</p>"
+                                 }
+                             },
+                              {
+                                  field: 'ClassName',
+                                  title: '',
+                                  width: 100,
+                                  formatter: function (r) {
+                                      return "<p class='ellipsis' style='width:100px;'>" + (r || "") + "</p>"
+                                  }
+                              },
+                             {
+                                 field: 'ActualCount',
+                                 title: '',
+                                 width: 100,
+                                 formatter: function (r, rows) {
+                                     if (rows.ExpectedCount == 0) {
+                                         return "<p class='ellipsis' style='width:50px;'>--</p>"
+                                     } else {
+                                         return "<p class='ellipsis' style='width:50px;'>" + parseFloat((r / rows.ExpectedCount) * 100).toFixed(2) + "%</p>"
+                                     };
+                                 }
+                             }
+                        ]
+                    };
+                    //提问统计
+                    powerCreator.datatable(
+                        "classesParticipationRate",
+                         $.extend({}, classesParticipationRate)
+                        )
+                })
+            }
+        </script>
+        <div class="checkwrap board-bg box-shadow">
+            <ul class="clearfix">
+                <li class="inline calendarWrap videoPlanDate fl" style="position: relative; top: 1px;">
+                    <span>选择日期：</span>
+                    <div class="inlineBlock dateDiv">
+                        <input id="startDT3" class="Wdate" type="text" style="width: 120px;" onclick="WdatePicker({ el: this, dateFmt: 'yyyy-MM-dd' })" />
+                    </div>
+                    <span>-</span>
+                    <div class="inlineBlock dateDiv">
+                        <input id="endDT3" class="Wdate" type="text" style="width: 120px;" onclick="WdatePicker({ el: this, dateFmt: 'yyyy-MM-dd' })" />
+                    </div>
+                </li>
+                <li class="vClassSelectTopItem selectMenuWrap gradeListWrap fl">
+                    <span>学期：</span>
+                    <div class="inlineBlock selectDiv">
+                        <div class="combogride_wrap">
+                            <input id="semesterList3" />
+                        </div>
+                        <input type="hidden" id="semesterList3Keyword" />
+                    </div>
+                </li>
+                <li class="fr export_data_wrap">
+                    <div id="part_three_search">查询</div>
+                </li>
+            </ul>
+        </div>
+        <div class="statistics-part statistics-part3 board-bg box-shadow">
+            <div class="row  noborder-table">
+                <div class="col-md-8 vertical-line">
+                    <span id="students_online_hours_see_video_time">学生直播学习时长排行榜</span>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;显示：<select id="part3_select_pagesize">
+                        <option value="5">前五名</option>
+                        <option value="10">前十名</option>
+                        <option value="15">前十五名</option>
+                        <option value="20">前二十名</option>
+                    </select>
+                </div>
+                <div class="col-md-4 vertical-line">
+                    登陆终端统计
+                </div>
+                <div class="col-md-8">
+                    <table>
+                        <thead>
+                            <tr style="border: none;">
+                                <td style="padding-left: 15px;">学校</td>
+                                <td>
+                                    <select class="grade_select_wrap"></select></td>
+                                <td>班级</td>
+                                <td>学习时长（h）</td>
+                            </tr>
+                        </thead>
+                    </table>
+                    <table id="students_online_hours_see_video_time_chart"></table>
+                </div>
+                <div class="col-md-4">
+                    <div id="loginPiechart"></div>
+                </div>
+            </div>
+            <div class="row attendance_trend_chart hidee">
+                <div class="col-md-12 vertical-line" id="part3_attendance_trend_chart">点播观看时长趋势图</div>
+                <div id="part3_live-trend-line"></div>
+            </div>
+        </div>
+        <script>
+            //学生直播观看排行
+            function studentsOnlineLiveHoursSeeVideoTimeChart(pageSize, gradeid) {
+                Ajax.ajax({
+                    url: AjaxUrls.Statistics.StatisticsStudentLiveViewDuration,
+                    data: { StartTime: $("#startDT3").val(), StopTime: $("#endDT3").val(), SchoolID: userInfo[0].SchoolID, GradeID: gradeid, Count: pageSize }
+                }).done(function (data) {
+                    var rateArr = data;
+
+                    var students_online_hours_see_video_time_chart = {
+                        data: data,
+                        search: false,
+                        showRefresh: false,
+                        striped: false,
+                        showColumns: false,
+                        pagination: false,
+                        rowStyle: function (row, index) {
+                            if (index == 0) {
+                                return { classes: "js-red-row js-italic-style" };
+                            } else if (index == 1) {
+                                return { classes: "js-blue-row js-italic-style" };
+                            } else if (index == 2) {
+                                return { classes: "js-orange-row js-italic-style" };
+                            } else {
+                                return {}
+                            };
+                        },
+                        columns: [
+                             {
+                                 field: 'SchoolName',
+                                 title: '',
+                                 width: 100,
+                                 formatter: function (r) {
+                                     return "<p class='ellipsis' style='width:100px;'>" + r + "</p>"
+                                 }
+                             },
+                             {
+                                 field: 'GradeName',
+                                 title: '',
+                                 width: 100,
+                                 formatter: function (r) {
+                                     return "<p class='ellipsis' style='width:100px;'>" + (r || '') + "</p>"
+                                 }
+                             },
+                              {
+                                  field: 'ClassName',
+                                  title: '',
+                                  width: 100,
+                                  formatter: function (r) {
+                                      return "<p class='ellipsis' style='width:100px;'>" + (r || "") + "</p>"
+                                  }
+                              },
+                             {
+                                 field: 'Duration',
+                                 title: '',
+                                 width: 100,
+                                 formatter: function (r) {
+                                     return "<p class='ellipsis' style='width:100px;'>" + (r / 3600).toFixed(2) + "</p>"
+                                 }
+                             }
+                        ]
+                    };
+                    //提问统计
+                    powerCreator.datatable(
+                        "students_online_hours_see_video_time_chart",
+                         $.extend({}, students_online_hours_see_video_time_chart)
+                        )
+                })
+            }
+            //学生点播观看排行
+            function studentsOnlineVideoHoursSeeVideoTimeChart(pageSize, gradeid) {
+                Ajax.ajax({
+                    url: AjaxUrls.Statistics.StatisticsStudentVideoViewDuration,
+                    data: { StartTime: $("#startDT3").val(), StopTime: $("#endDT3").val(), SchoolID: userInfo[0].SchoolID, GradeID: gradeid, Count: pageSize }
+                }).done(function (data) {
+                    var rateArr = data;
+
+                    var students_online_hours_see_video_time_chart = {
+                        data: data,
+                        search: false,
+                        showRefresh: false,
+                        striped: false,
+                        showColumns: false,
+                        pagination: false,
+                        rowStyle: function (row, index) {
+                            if (index == 0) {
+                                return { classes: "js-red-row js-italic-style" };
+                            } else if (index == 1) {
+                                return { classes: "js-blue-row js-italic-style" };
+                            } else if (index == 2) {
+                                return { classes: "js-orange-row js-italic-style" };
+                            } else {
+                                return {}
+                            };
+                        },
+                        columns: [
+                             {
+                                 field: 'SchoolName',
+                                 title: '',
+                                 width: 100,
+                                 formatter: function (r) {
+                                     return "<p class='ellipsis' style='width:100px;'>" + r + "</p>"
+                                 }
+                             },
+                             {
+                                 field: 'GradeName',
+                                 title: '',
+                                 width: 100,
+                                 formatter: function (r) {
+                                     return "<p class='ellipsis' style='width:100px;'>" + (r || '') + "</p>"
+                                 }
+                             },
+                              {
+                                  field: 'ClassName',
+                                  title: '',
+                                  width: 100,
+                                  formatter: function (r) {
+                                      return "<p class='ellipsis' style='width:100px;'>" + (r || "") + "</p>"
+                                  }
+                              },
+                             {
+                                 field: 'Duration',
+                                 title: '',
+                                 width: 100,
+                                 formatter: function (r) {
+                                     return "<p class='ellipsis' style='width:100px;'>" + (r / 3600).toFixed(2) + "</p>"
+                                 }
+                             }
+                        ]
+                    };
+                    //提问统计
+                    powerCreator.datatable(
+                        "students_online_hours_see_video_time_chart",
+                         $.extend({}, students_online_hours_see_video_time_chart)
+                        )
+                })
+            }
+            //直播观看设备
+            function StatisticStudentViewLiveDeviceTypes(gradeid) {
+                Ajax.ajax({
+                    url: AjaxUrls.Statistics.StatisticStudentViewLiveDeviceTypes,
+                    data: { StartDate: $("#startDT3").val(), StopDate: $("#endDT3").val(), GradeID: gradeid }
+                }).done(function (data) {
+                    var rateArr = data;
+                    var AccessTerminalTypeArr = [], dataArr = [];
+                    var colorArr = ['#f3c17f', '#7bcfbb', '#b39ed8', '#fc8870', '#9dc3e6', '#a2ce74', '#c3c6c6'];
+                    for (var i = 0; i < data.length; i++) {
+                        AccessTerminalTypeArr.push(data[i].AccessTerminalType);
+                    }
+                    dataArr = $.map(data, function (obj, index) {
+                        obj.value = obj.Count;
+                        obj.name = obj.AccessTerminalType;
+                        obj.itemStyle = { color: colorArr[(index % colorArr.length)] }
+                        return obj;
+                    })
+                    //登陆终端统计饼状图
+                    var loginPiechartOption = {
+                        title: {
+                            text: '登陆终端统计',
+                            x: 'center',
+                            y: '135px',
+                            textStyle: {
+                                color: '#828890',
+                                fontSize: 14,
+                            }
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{b}终端 : {c} <br/> (占比 : {d}%)"
+                        },
+                        legend: {
+                            orient: 'horizontal',
+                            x: 'center',
+                            y: 'bottom',
+                            data: AccessTerminalTypeArr
+                        },
+                        calculable: true,
+                        series: [
+                            {
+                                type: 'pie',
+                                radius: ['35%', '50%'],
+                                itemStyle: {
+                                    emphasis: {
+                                        label: {
+                                            show: true,
+                                            position: 'center',
+                                            textStyle: {
+                                                fontSize: '30',
+                                                fontWeight: 'bold'
+                                            }
+                                        }
+                                    }
+                                },
+                                data: dataArr
+                            }
+                        ]
+                    };
+                    var loginPieChart = echarts.init(document.getElementById('loginPiechart'));
+                    loginPieChart.setOption(loginPiechartOption);
+                    //
+                });
+            }
+            //点播观看设备
+            function StatisticStudentViewVideoDeviceTypes(gradeid) {
+                Ajax.ajax({
+                    url: AjaxUrls.Statistics.StatisticStudentViewVideoDeviceTypes,
+                    data: { StartDate: $("#startDT3").val(), StopDate: $("#endDT3").val(), GradeID: gradeid }
+                }).done(function (data) {
+                    var rateArr = data;
+                    var AccessTerminalTypeArr = [], dataArr = [];
+                    var colorArr = ['#f3c17f', '#7bcfbb', '#b39ed8', '#fc8870', '#9dc3e6', '#a2ce74', '#c3c6c6'];
+                    for (var i = 0; i < data.length; i++) {
+                        AccessTerminalTypeArr.push(data[i].AccessTerminalType);
+                    }
+                    dataArr = $.map(data, function (obj, index) {
+                        obj.value = obj.Count;
+                        obj.name = obj.AccessTerminalType;
+                        obj.itemStyle = { color: colorArr[(index % colorArr.length)] }
+                        return obj;
+                    })
+                    //登陆终端统计饼状图
+                    var loginPiechartOption = {
+                        title: {
+                            text: '登陆终端统计',
+                            x: 'center',
+                            y: '135px',
+                            textStyle: {
+                                color: '#828890',
+                                fontSize: 14,
+                            }
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{b}终端 : {c} <br/> (占比 : {d}%)"
+                        },
+                        legend: {
+                            orient: 'horizontal',
+                            x: 'center',
+                            y: 'bottom',
+                            data: AccessTerminalTypeArr
+                        },
+                        calculable: true,
+                        series: [
+                            {
+                                type: 'pie',
+                                radius: ['35%', '50%'],
+                                itemStyle: {
+                                    emphasis: {
+                                        label: {
+                                            show: true,
+                                            position: 'center',
+                                            textStyle: {
+                                                fontSize: '30',
+                                                fontWeight: 'bold'
+                                            }
+                                        }
+                                    }
+                                },
+                                data: dataArr
+                            }
+                        ]
+                    };
+                    var loginPieChart = echarts.init(document.getElementById('loginPiechart'));
+                    loginPieChart.setOption(loginPiechartOption);
+                    //
+                });
+            }
+            //点播总趋势图
+            function getVideoTrendLine(gradeid) {
+                Ajax.ajax({
+                    url: AjaxUrls.Statistics.StatisticsStudentVideoViewDurationByDate,
+                    data: { StartTime: $("#startDT3").val(), StopTime: $("#endDT3").val(), SchoolID: userInfo[0].SchoolID, GradeID: gradeid}
+                }).done(function (data) {
+                    var DateArr = [], rateArr = [];
+                    rateArr = $.map(data, function (obj, index) {
+                        //var rate = changeTime(obj.Duration);
+                        var rate = obj.Duration;
+                        obj.value = rate;
+                        return obj;
+                    })
+                    rateArr = bubbleSort(rateArr, "value");
+
+                    $.each(rateArr, function (index, obj) {
+                        DateArr.push(obj.Date.split(" ")[0]);
+                    })
+
+                    var liveTrendOption = {
+                        tooltip: {
+                            trigger: 'axis',
+                            formatter: function (params) {
+                                var rate = params[0].data.Duration
+                                var tiphtml = '<p style="color:#fff;">观看时长：' + params[0].data.Duration + '秒</p>'
+                                return tiphtml;
+                            }
+                        },
+                        dataZoom: {
+                            show: true,
+                            realtime: true,
+                            y: 270,
+                            handleSize: 40,
+                            handleColor: "#5adad5",
+                            height: 20,
+                            start: 40,
+                            end: 60
+                        },
+                        xAxis: [
+                            {
+                                type: 'category',
+                                boundaryGap: false,
+                                data: DateArr
+                            }
+                        ],
+                        yAxis: [
+                            {
+                                type: 'value'
+                            }
+                        ],
+                        series: [
+                            {
+                                name: '参与率',
+                                type: 'line',
+                                itemStyle: {
+                                    normal: {
+                                        color: 'rgba(11,209,202,1)',
+                                        areaStyle: {
+                                            color: 'rgba(11,209,202,0.3)'
+                                        },
+                                        lineStyle: {
+                                            color: 'rgba(11,209,202,0.3)'
+                                        }
+                                    }
+                                },
+                                smooth: true,
+                                data: rateArr//["100"]
+                            }
+                        ],
+                        calculable: false
+                    };
+                    var liveTrendChart1 = echarts.init(document.getElementById('part3_live-trend-line'));
+                    liveTrendChart1.setOption(liveTrendOption);
+                })
+            }
+
+            $(function () {
+                //日期首次加载一周
+                $dp.$("startDT3").value = getDay(-7);
+                $dp.$("endDT3").value = getNowDate(null, true);
+
+                SemesterSelectList("semesterList3", "semesterListKeyword3", userInfo[0].SchoolID, "startDT3", "endDT3");
+                studentsOnlineLiveHoursSeeVideoTimeChart(5);
+                StatisticStudentViewLiveDeviceTypes($(".statistics-part3 .grade_select_wrap").val());
+                //查询
+                $("#part_three_search").click(function () {
+                    if (tabBarFlag) {
+                        $("#students_online_hours_see_video_time_chart").bootstrapTable('destroy');
+                        studentsOnlineLiveHoursSeeVideoTimeChart($("#part3_select_pagesize").val(), $(".statistics-part3 .grade_select_wrap").val());
+                        StatisticStudentViewLiveDeviceTypes($(".statistics-part3  .grade_select_wrap").val());
+                    } else {
+                        $("#students_online_hours_see_video_time_chart").bootstrapTable('destroy');
+                        studentsOnlineVideoHoursSeeVideoTimeChart($("#part3_select_pagesize").val(), $(".statistics-part3  .grade_select_wrap").val());
+                        getVideoTrendLine();//点播趋势图
+                        StatisticStudentViewVideoDeviceTypes($(".statistics-part3  .grade_select_wrap").val());
+                    };
+                })
+                //条数
+                $("#part3_select_pagesize").change(function () {
+                    $("#part_three_search").click();
+                })
+                //年级
+                $(".grade_select_wrap").change(function () {
+                    $("#part_three_search").click();
+                })
+            })
+        </script>
+    </div>
+    <div class="publicContainer container ">
+        <!--主体内容二：用户选择项-->
+        <div class="videoClassSelect liveClassSelect board-bg box-shadow">
+            <div class="videoClassSelectWrap">
+                <ul class="videoClassSelectTop clearFloat">
+                    <li class="vClassSelectTopItem schoolListWrap">
+                        <label for="schoolList" class="Vmiddle"><span>学校：</span></label>
+                        <div class="inlineBlock  selectDiv">
+                            <div class="combogride_wrap">
+                                <input id="schoolList" />
+                            </div>
+                            <input type="hidden" id="schoolListKey" />
+                        </div>
+                    </li>
+                    <li class="vClassSelectTopItem selectMenuWrap gradeListWrap ">
+                        <label for="gradeList" class="Vmiddle"><span>年级：</span></label>
+                        <div class="inlineBlock  selectDiv">
+                            <div class="combogride_wrap">
+                                <input id="gradeList" />
+                            </div>
+                            <input type="hidden" id="gradeListKeyword" />
+                        </div>
+                    </li>
+                    <li class="vClassSelectTopItem selectMenuWrap classesListWrap">
+                        <label for="classesList" class="Vmiddle"><span>班级：</span></label>
+                        <div class="inlineBlock  selectDiv">
+                            <div class="combogride_wrap">
+                                <input id="classesList" />
+                            </div>
+                            <input type="hidden" id="classesListKeyword" />
+                        </div>
+                    </li>
+                    <li class="vClassSelectTopItem selectMenuWrap courseListWrap hidee">
+                        <label for="videoCourse" class="Vmiddle"><span>课程：</span></label>
+                        <div class="inlineBlock videoCourseWrap selectDiv">
+                            <div class="combogride_wrap">
+                                <input id="videoCourse" />
+                            </div>
+                            <input type="hidden" id="courseKeyword" />
+                        </div>
+                    </li>
+                    <!--开始日期和结束日期的插件-->
+                    <li class="inline calendarWrap videoPlanDate" style="position: relative; top: 1px;">
+                        <div class="inlineBlock dateDiv">
+                            <input id="startDT" class="Wdate" type="text" style="width: 120px;" onclick="WdatePicker({ el: this, dateFmt: 'yyyy-MM-dd' })" />
+                        </div>
+                        <span>-</span>
+                        <div class="inlineBlock dateDiv">
+                            <input id="endDT" class="Wdate" type="text" style="width: 120px;" onclick="WdatePicker({ el: this, dateFmt: 'yyyy-MM-dd' })" />
+                        </div>
+                    </li>
+                    <li class="vClassSelectTopBtn">
+                        <div class="inlineBlock" style="position: relative; top: 1px; top: 4px\9">
+                            <input type="button" value="查询" id="query_btn" />
+                            <input type="button" value="重置" id="reset_btn" />
+                        </div>
+                    </li>
+                </ul>
+                <ul class="videoClassSelectBtm clearFloat">
+                    
+                    <li class="vClassSelectBtmTime vClassSelectBtmItem allOpen-btmClick js-page-jump">
+                        <span class="glyphicon glyphicon-align-left"></span>
+                        <a id="live_Ting" class="allSelect vClassSelectBtmActive" index="0">签到统计</a>
+                        |
+                            <a id="live_T" class="allSelect" index="1">提问统计</a>
+                        |
+                            <a id="live_Ted" class="allSelect" index="2">测验统计</a>
+                        |
+                            <a id="live_Tall" class="allSelect " index="3">学习记录</a>
+                    </li>
+
+                    <li class="vClassSelectBtmTime vClassSelectBtmItem allOpen-btmClick timecheck">
+                        <span class="fa fa-calendar"></span>
+                        <a class="allSelect vClassSelectBtmActive" href="javascript:;">近三个月</a>
+                        |
+                            <a href="javascript:;" class="allSelect">近一年</a>
+                        |
+                            <a href="javascript:;" class="allSelect">近两年</a>
+                    </li>
+                    <li class="export_data_wrap" id="exportCount">
+                        <div class="export_data">导出数据</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div id="studentSignWrap" class="js-lists-item board-bg box-shadow">
+            <table class=" select content_list_wrap " id="studentSign"></table>
+        </div>
+
+        
+        <div class="hidee js-lists-item board-bg box-shadow" id="askAndQuestion">
+            <table class="online_users_statistics" id="ask_question_statistics"></table>
+        </div>
+        
+        <div class="hidee js-lists-item board-bg box-shadow" id="tests">
+            <table id="tests_statistics"></table>
+        </div>
+        
+        <div class="hidee js-lists-item board-bg box-shadow" id="online">
+            <table id="online_statistics"></table>
+
+                
+
+        </div>
+        
+    </div>
+    <div id="ask_answer_detial_wrap" class="hidee">
+        <div class="top_infor previewInfo">
+            <div class="pop_input">
+                <span class="attribute_name"><span class="points_bg title_bg"></span><i class="rice"></i>提问内容</span>
+                <div class="inlineBlock ">
+                    <input type="text" disabled="disabled" id="title_view" style="width: 300px;" />
+                </div>
+            </div>
+            <div class="pop_input">
+                <span class="attribute_name"><span class="points_bg course_bg"></span><i class="rice"></i>提问人</span>
+                <div class="inlineBlock ">
+                    <p id="submit_people"></p>
+                </div>
+            </div>
+
+            <div class="pop_input">
+                <span class="attribute_name"><span class="points_bg times_bg"></span><i class="rice"></i>提交时间</span>
+                <div class="inlineBlock ">
+                    <div class="combogride_wrap">
+                        <input type="text" class="laydate-icon" disabled="disabled" id="submit_time" />
+
+                    </div>
+                </div>
+            </div>
+            <div class="pop_input">
+                <span class="attribute_name"><span class="points_bg speak_bg"></span><i class="rice"></i>回复内容</span>
+                <div class="inlineBlock ">
+                    <p id="answer_content"></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="test_detial_wrap" class="hidee">
+        
+        <div class="pop_input">
+            <table class="select content_list_wrap" style="margin-top:20px;">
+                <thead class="head_title">
+                    <tr>
+                        <th style="width: 100px;">姓名</th>
+                        <th style="width: 100px;">学校</th>
+                        <th style="width: 100px;">年级</th>
+                        <th style="width: 100px;">班级</th>
+                        <th style="width: 100px;">测验类型</th>
+                        <th style="width: 100px;">测验问题</th>
+                        <th style="width: 100px;">主讲</th>
+                        <th style="width: 98px;">答题情况</th>
+                    </tr>
+                </thead>
+                <tbody class="active_lists active_lists_pop">
+                </tbody>
+            </table>
+            <div id="pageToolbar_pop" class="pageGap"></div>
+            <div id="tips_pop"></div>
+        </div>
+    </div>
+     <div id="sign_detial_wrap" class="hidee">
+         <div class="pop_input">
+            <table class="select content_list_wrap" style="margin-top:20px;">
+                <thead class="head_title">
+                    <tr>
+                        <th style="width: 100px;">姓名</th>
+                        <th style="width: 100px;">学校</th>
+                        <th style="width: 100px;">年级</th>
+                        <th style="width: 100px;">班级</th>
+                        <th style="width: 100px;">标题</th>
+                        <th style="width: 100px;">主讲</th>
+                        <th style="width: 98px;">签到状态</th>
+                    </tr>
+                </thead>
+                <tbody class="active_lists active_lists_pop">
+                </tbody>
+            </table>
+            <div id="pageToolbar" class="pageGap"></div>
+            <div id="tips"></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var PhaseList = [], nowPageNumber = 1, nowPageSizeNumber = 10;
+        if (userInfo[0].SchoolID && typeof userInfo[0].SchoolID != 'undefined') {
+            Ajax.ajax({
+                url: AjaxUrls.SchoolUrl.QuerySchool,
+                data: { SchoolID: userInfo[0].SchoolID },
+                async: false
+            }).done(function (data) {
+                PhaseList = data.PhaseList;
+            })
+        }
+        //统计列表模块
+        $(function () {
+
+            //日期首次加载一周
+            $dp.$("startDT").value = getDay(-7);
+            $dp.$("endDT").value = getNowDate(null, true);
+
+            $("body").addClass("statistics-bg");//背景换色
+
+            //直播课堂高亮显示
+            $(".webNavWrap .Statistics").addClass("choose_nav").siblings("li").removeClass("choose_nav");
+
+            var signDetialHtml = "<div id='pop_wrap'>" + $("#sign_detial_wrap").html() + "</div>";
+            var testDetialHtml = "<div id='pop_wrap'>" + $("#test_detial_wrap").html() + "</div>";
+            $("#test_detial_wrap").remove()
+
+            var askAnswerDetialHtml = "<div id='pop_wrap'>" + $("#ask_answer_detial_wrap").html() + "</div>";
+            $("#ask_answer_detial_wrap").remove();
+            $("#sign_detial_wrap").remove();
+            //列表视图报表图
+            $("#live_see").click(function () {
+                $(this).addClass("vClassSelectBtmActive");
+                $("#live_have").removeClass("vClassSelectBtmActive");
+                $("#login_img").show();
+                $(".js-lists-item").hide();
+                $(".timecheck").hide();
+            })
+            $("#live_have").click(function () {
+                $(this).addClass("vClassSelectBtmActive");
+                $("#live_see").removeClass("vClassSelectBtmActive");
+                $("#login_img").hide();
+                $(".js-lists-item").eq(3).show().siblings(".js-lists-item").hide();
+                $(".timecheck").show();
+            })
+            //学校初始化联动 ,年级初始化,班级初始化，课程初始化
+            //SchoolSearchListAndGradeSelect("schoolList", "schoolListKey", { 'SchoolID': userInfo[0].SchoolID, 'SchoolName': userInfo[0].SchoolName }, true, null, true, true);
+            SchoolSearchListAndGradeSelect("schoolList", "schoolListKey", { 'SchoolID': userInfo[0].SchoolID, 'SchoolName': userInfo[0].SchoolName }, true, null, true, true);
+            selectSchoolGrade("gradeList", PhaseList);
+            //统计类型跳转
+            $(".js-page-jump a").each(function (index) {
+                $(this).click(function () {
+                    $(this).addClass("vClassSelectBtmActive").siblings().removeClass("vClassSelectBtmActive");
+                    $(".js-lists-item").eq(index).show().siblings(".js-lists-item").hide();
+                    $("#login_img").hide();
+                    if (index == 0) {
+                        $(".videoClassSelectTop").show();
+                        $(".courseListWrap ").hide();
+                        $("#studentSignWrap").show().siblings(".js-lists-item").hide();
+                        //$("#exportCount").hide();
+                    } else if (index == 1) {
+                        $(".courseListWrap").hide();
+                        $(".videoClassSelectTop").show();
+                        $("#askAndQuestion").show().siblings(".js-lists-item").hide();
+                        //$("#exportCount").hide();
+                    } else if (index == 2) {
+                        $(".courseListWrap ").hide();
+                        $(".videoClassSelectTop").show();
+                        $("#tests").show().siblings(".js-lists-item").hide();
+                        //$("#exportCount").hide();
+                    } else if (index == 3) {
+                        $(".see_line_chart").show();
+                        $("#online").show().siblings(".js-lists-item").hide();
+                        $(".timecheck").show();
+                        $("#live_have").addClass("vClassSelectBtmActive");
+                        $("#live_see").removeClass("vClassSelectBtmActive");
+                        //$("#exportCount").show();
+                    };
+                    if (index == 2) {
+                        $(".courseListWrap ").show();
+                    } else {
+                        $(".courseListWrap ").hide();
+                    };
+                    if (index == 3) {
+                        $(".schoolListWrap").hide();
+                        $(".see_line_chart ").show();
+                        $(".my-btmClick").show();
+                    } else {
+                        $(".schoolListWrap").show();
+                        $(".see_line_chart ").hide();
+                        $(".my-btmClick").hide();
+                    };
+                    $("#query_btn").click();
+                })
+            })
+
+            //三个月，一年，两年
+            $(".timecheck a").each(function (index) {
+                $(this).click(function () {
+                    $(this).addClass("vClassSelectBtmActive").siblings().removeClass("vClassSelectBtmActive");
+                    var startTime = "", endTime = "";
+                    endTime = getNowDate();
+                    if (index == 0) {//3个月
+                        startTime = getNowDate(addTime(endTime, -90 * 24 * 60 * 60 * 1000));
+                    } else if (index == 1) {//近一年
+                        startTime = getNowDate(addTime(endTime, -365 * 24 * 60 * 60 * 1000));
+                    } else if (index == 2) {//近两年
+                        startTime = getNowDate(addTime(endTime, -365 * 2 * 24 * 60 * 60 * 1000));
+                    };
+                    $dp.$("startDT").value = startTime.split(" ")[0];
+                    $dp.$("endDT").value = endTime.split(" ")[0];
+                    $("#query_btn").click();
+                })
+            })
+            //导出数据
+            $(".export_data").click(function () {
+                var schoolVal = "", gradeVal = "", classesVal = "", courseVal = "";
+                //学校
+                if ($("#schoolList").val() == '') {
+                    schoolVal = '';
+                } else {
+                    schoolVal = parseInt($("#schoolList").combogrid("getValues")[0]);
+                    if ((schoolVal + '') == "NaN" && $.trim($("#schoolList").combogrid("getValue")).length != 0) {
+                        Dialogue.Msg("请选择列表中的学校");
+                        return;
+                    };
+                };
+
+                //年级
+                if (!$(".gradeListWrap").is(":hidden")) {
+                    if ($("#gradeList").val() == '') {
+                        gradeVal = '';
+                    } else {
+                        gradeVal = parseInt($("#gradeList").combogrid("getValues")[0]);
+                        if ((gradeVal + '') == "NaN" && $.trim($("#gradeList").combogrid("getValue")).length != 0) {
+                            Dialogue.Msg("请选择列表中的年级");
+                            return;
+                        };
+                    };
+                };
+
+                //班级
+                if ($("#classesList").val() == '') {
+                    classesVal = '';
+                } else {
+                    if (!$(".classesListWrap").is(":hidden")) {
+                        classesVal = parseInt($("#classesList").combogrid("getValues")[0]);
+                        if ((classesVal + '') == "NaN" && $.trim($("#classesList").combogrid("getValue")).length != 0) {
+                            Dialogue.Msg("请选择列表中的年级");
+                            return;
+                        };
+                    };
+                };
+
+                //课程
+                if (!$(".courseListWrap ").is(":hidden")) {
+                    if ($("#videoCourse").val() == '') {
+                        courseVal = '';
+                    } else {
+                        courseVal = parseInt($("#videoCourse").combogrid("getValues")[0]);
+                        if ((courseVal + '') == "NaN" && $.trim($("#videoCourse").combogrid("getValue")).length != 0) {
+                            Dialogue.Msg("请选择列表中的课程");
+                            return;
+                        };
+                    };
+                };
+                var startTime = $("#startDT").val();
+                var endTime = $("#endDT").val();
+                var tabIndex = parseInt($(".js-page-jump .vClassSelectBtmActive").attr("index"));
+                var url;
+
+                if (tabIndex == 0) {
+                    url = AjaxUrls.Statistics.ExportStatisticsSign;
+                    data = {
+                        SchoolID: schoolVal,
+                        PageSize: nowPageSizeNumber,
+                        PageNumber: nowPageNumber,
+                        GradeID: gradeVal,
+                        ClassID: classesVal,
+                        StartTime: startTime,
+                        StopTime: endTime
+                    }
+                } else if (tabIndex == 1) {
+                    url = AjaxUrls.Statistics.StatisticsAskInfosExport;
+                    data =
+                        {
+                            SchoolID: schoolVal,
+                            PageSize: nowPageSizeNumber,
+                            PageNumber: nowPageNumber,
+                            GradeID: gradeVal,
+                            ClassID: classesVal,
+                            MinAskDate: startTime,
+                            MaxAskDate: endTime
+                        }
+
+                } else if (tabIndex == 2) {
+                    url = AjaxUrls.TestUrl.ExportStudentTestStatics;
+                    data = {
+                        SchoolID: schoolVal,
+                        PageSize: nowPageSizeNumber,
+                        PageNumber: nowPageNumber,
+                        GradeID: gradeVal,
+                        ClassID: classesVal,
+                        CourseID: courseVal,
+                        StartTime: startTime,
+                        DateTime: endTime
+                    }
+                } else if (tabIndex == 3) {
+                    url = AjaxUrls.Statistics.ExportStudyRecord
+
+                    var  gradeVal, classesVal;
+
+                    //年级
+                    if (!$(".gradeListWrap").is(":hidden")) {
+                        if ($("#gradeList").val() != '') {
+
+                            gradeVal = parseInt($("#gradeList").combogrid("getValues")[0]);
+                            if ((gradeVal + '') == "NaN" && $.trim($("#gradeList").combogrid("getValue")).length != 0) {
+                                Dialogue.Msg("请选择列表中的年级");
+                                return;
+                            };
+                        };
+                    };
+
+                    //班级
+                    if ($("#classesList").val() != '') {
+
+                        if (!$(".classesListWrap").is(":hidden")) {
+                            classesVal = parseInt($("#classesList").combogrid("getValues")[0]);
+                            if ((classesVal + '') == "NaN" && $.trim($("#classesList").combogrid("getValue")).length != 0) {
+                                Dialogue.Msg("请选择列表中的年级");
+                                return;
+                            };
+                        };
+                    };
+
+                    var startTime = $("#startDT").val();
+                    var endTime = $("#endDT").val();
+
+                    data = {
+                        GradeID: gradeVal,
+                        ClassID:classesVal,
+                        StartDate: $("#startDT").val(),
+                        StopDate: $("#endDT").val()
+                    }
+                };
+                var keyVal = [];
+                for (key in data) {
+                    keyVal.push(key + '=' + data[key]);
+                };
+                window.location.href = url + "?" + keyVal.join("&");
+                //$("#export_data").attr("href", url + "?" + keyVal.join("&"))
+                //$("#export_data")[0].click();
+            })
+
+            //查询
+            $("#query_btn").click(function () {
+                var schoolVal = "", gradeVal = "", classesVal = "", courseVal = "";
+                //学校
+                if ($("#schoolList").val() == '') {
+                    schoolVal = '';
+                } else {
+                    schoolVal = parseInt($("#schoolList").combogrid("getValues")[0]);
+                    if ((schoolVal + '') == "NaN" && $.trim($("#schoolList").combogrid("getValue")).length != 0) {
+                        Dialogue.Msg("请选择列表中的学校");
+                        return;
+                    };
+                };
+
+                //年级
+                if (!$(".gradeListWrap").is(":hidden")) {
+                    if ($("#gradeList").val() == '') {
+                        gradeVal = '';
+                    } else {
+                        gradeVal = parseInt($("#gradeList").combogrid("getValues")[0]);
+                        if ((gradeVal + '') == "NaN" && $.trim($("#gradeList").combogrid("getValue")).length != 0) {
+                            Dialogue.Msg("请选择列表中的年级");
+                            return;
+                        };
+                    };
+                };
+
+                //班级
+                if ($("#classesList").val() == '') {
+                    classesVal = '';
+                } else {
+                    if (!$(".classesListWrap").is(":hidden")) {
+                        classesVal = parseInt($("#classesList").combogrid("getValues")[0]);
+                        if ((classesVal + '') == "NaN" && $.trim($("#classesList").combogrid("getValue")).length != 0) {
+                            Dialogue.Msg("请选择列表中的年级");
+                            return;
+                        };
+                    };
+                };
+
+                //课程
+                if (!$(".courseListWrap ").is(":hidden")) {
+                    if ($("#videoCourse").val() == '') {
+                        courseVal = '';
+                    } else {
+                        courseVal = parseInt($("#videoCourse").combogrid("getValues")[0]);
+                        if ((courseVal + '') == "NaN" && $.trim($("#videoCourse").combogrid("getValue")).length != 0) {
+                            Dialogue.Msg("请选择列表中的课程");
+                            return;
+                        };
+                    };
+                };
+
+                var startTime = $("#startDT").val();
+                var endTime = $("#endDT").val();
+
+                var tabIndex = parseInt($(".js-page-jump .vClassSelectBtmActive").attr("index"));
+                if (tabIndex == 0) {
+                    $("#studentSignWrap").show().siblings(".js-lists-item").hide();
+                    $("#studentSign").bootstrapTable('destroy');
+                    getStatiSticsSignList(schoolVal, gradeVal, classesVal, startTime, endTime);
+                } else if (tabIndex == 1) {
+                    $("#askAndQuestion").show().siblings(".js-lists-item").hide();
+                    $("#ask_question_statistics").bootstrapTable('destroy');
+                    getaskAndQuestionList(schoolVal, gradeVal, classesVal, startTime, endTime);
+                } else if (tabIndex == 2) {
+                    $("#tests").show().siblings(".js-lists-item").hide();
+                    $("#tests_statistics").bootstrapTable('destroy');
+                    getTestList(schoolVal, gradeVal, classesVal, startTime, endTime, courseVal);
+                } else if (tabIndex == 3) {
+                    $("#online").show().siblings(".js-lists-item").hide();
+                    $("#online_statistics").bootstrapTable('destroy');
+                    getOnlineList(schoolVal, gradeVal, classesVal, startTime, endTime, courseVal);
+                };
+            })
+            //重置
+            $("#reset_btn").click(function () {
+                $dp.$("startDT").value = "";
+                $dp.$("endDT").value = "";
+
+                //学校
+                $("#schoolList").combogrid("setValue", null);
+                //年级
+                $("#gradeList").combogrid("setValue", null);
+                //班级
+                $("#classesList").combogrid("setValue", null);
+                //课程
+                $("#videoCourse").combogrid("setValue", null);
+                $("#query_btn").click();
+            })
+            getStatiSticsSignList(null, "", "", $("#startDT").val(), $("#endDT").val());//userInfo[0].SchoolID
+            //签到查看详情
+            $("#studentSign").on("click", ".sign_detail", function () {
+                var Id = $(this).attr("signid");
+                var schoolid = $(this).attr("schoolid");
+                var gradeid = $(this).attr("gradeid");
+                var classid = $(this).attr("classid");
+                Dialogue.LayerFullScreen({
+                    title: "签到详情",
+                    area: ['700px', '650px'],
+                    content: signDetialHtml,
+                    success: function () {
+                        //显示签到分页列表
+                        getQuerySignDetial(schoolid, gradeid, classid, Id, 10, 1);
+                    },
+                    cancel: function () {
+                        layer.closeAll();
+                    }
+                });
+            });
+            //问答查看详情
+            $("#ask_question_statistics").on("click", ".see_detial", function () {
+                var liveid = $(this).attr("liveid");
+                var askid = $(this).attr("askid");
+
+                Ajax.ajax({
+                    url: AjaxUrls.LiveInfo.GetAskInfo,
+                    data: { LiveID: liveid, AskID: askid }
+                }).done(function (data) {
+                    Dialogue.LayerFullScreen({
+                        title: "问答详情",
+                        area: ['513px', '330px'],
+                        content: askAnswerDetialHtml,
+                        success: function () {
+                            $("#title_view").val(data.Content);
+                            $("#submit_people").html(data.CreatorName);
+                            $("#submit_time").val(data.CreateTime);
+                            if (data.ChildData.length > 0) {
+                                var contentHtml = '';
+                                for (var i = 0; i < data.ChildData.length; i++) {
+                                    contentHtml += '<p>' + data.ChildData[i].CreatorName + "回复" + data.CreatorName + ":" + data.ChildData[i].Content + '</p>';
+                                };
+                                $("#answer_content").html(contentHtml);
+                            };
+                        },
+                        cancel: function () {
+                            layer.closeAll();
+                        }
+                    })
+                })
+
+            })
+            //测验查看详情
+            $("#tests_statistics").on("click", ".textDetial", function () {
+                var textId = $(this).attr("textid");
+                var schoolid = $(this).attr("schoolid");
+                var gradeid = $(this).attr("gradeid");
+                var classid = $(this).attr("classid");
+                var courseid = $(this).attr("courseid");
+                Dialogue.LayerFullScreen({
+                    title: "测验详情",
+                    area: ['800px', '650px'],
+                    content: testDetialHtml,
+                    success: function () {
+                        //显示测验分页列表
+                        getQueryTestDetial(schoolid, gradeid, classid, courseid, textId, 10, 1);
+                    },
+                    cancel: function () {
+                        layer.closeAll();
+                    }
+                })
+            });
+        });
+
+        //签到详情--分页列表
+        function getQuerySignDetial(schoolid, gradeid, classid, Id, PageSize, PageNumber) {
+            Ajax.ajax({
+                url: AjaxUrls.Statistics.SignInfo,
+                data: { SchoolID: schoolid, GradeID: gradeid, ClassID: classid, SignID: Id, PageSize: PageSize, PageNumber: PageNumber }
+            }).done(function (data) {
+                if (data.TotalCount > 0) {//如果存在数据
+                    $(".active_lists_pop").empty();
+                    var Html = '';
+                    for (var i = 0; i < data.Data.AllStudents.length; i++) {
+                        var item = data.Data.AllStudents[i];
+                        Html += '<tr class="list_child">' +
+                            '<td>' + item.Name + '</td>';
+                        if (item.SchoolName) {
+                            if (item.SchoolName.length > 8) {
+                                Html += '<td title="' + item.SchoolName + '">' + item.SchoolName.slice(0, 8) + '...</td>';
+                            } else {
+                                Html += '<td>' + item.SchoolName + '</td>';
+                            }
+                        } else {
+                            Html += '<td></td>';
+                        }
+                        if (item.GradeName) {
+                            if (item.GradeName.length > 8) {
+                                Html += '<td title="' + item.GradeName + '">' + item.GradeName.slice(0,8) + '...</td>';
+                            } else {
+                                Html += '<td>' + item.GradeName + '</td>';
+                            }
+                        } else {
+                            Html += '<td></td>';
+                        }
+                        if (item.ClassName) {
+                            if (item.ClassName.length > 8) {
+                                Html += '<td title="' + item.ClassName + '">' + item.ClassName.slice(0, 8) + '...</td>';
+                            } else {
+                                Html += '<td>' + item.ClassName + '</td>';
+                            }
+                        } else {
+                            Html += '<td></td>';
+                        }
+                        Html += '<td>' + data.Data.Title + '</td>' +
+                         '<td>' + data.Data.Teachers + '</td>';
+                        if (item.HasSign) {
+                            Html += '<td>已签到</td></tr>';
+                        } else {
+                            Html += '<td>未签到</td></tr>';
+                        }
+                    };
+                    $(".active_lists_pop").empty().append(Html);
+                    $("#tips").empty();
+                    $("#pageToolbar").empty();
+                    $('#pageToolbar').Paging({
+                        current: PageNumber, pagesize: PageSize, count: data.TotalCount, toolbar: true, callback: function (page, size, count) {
+                            getQuerySignDetial(schoolid, gradeid, classid, Id, size, page);
+                        }
+                    });
+
+                } else { //如果一条数据都没有
+                    $("#pageToolbar").empty();
+                    $(".pageToolbar").empty();
+                    $("#tips").empty().append("暂无数据").css("text-align", "center");
+                };
+            })
+        }
+
+        //测验详情--分页列表
+        function getQueryTestDetial(schoolid, gradeid, classid, courseid, textId, PageSize, PageNumber) {
+            Ajax.ajax({
+                url: AjaxUrls.TestUrl.StudentTestInfo,
+                data: { SchoolID: schoolid, GradeID: gradeid, ClassID: classid, CourseID: courseid, TestID: textId, PageSize: PageSize, PageNumber: PageNumber }
+            }).done(function (data) {
+                if (data.TotalCount > 0) {//如果存在数据
+                    $(".active_lists_pop").empty();
+                    var Html = '';
+                    for (var i = 0; i < data.Data.AllStudents.length; i++) {
+                        var item = data.Data.AllStudents[i];
+                        //<td>sy1</td><td>A，B</td></tr>
+                        Html += '<tr class="list_child"><td>' + item.Name + '</td>';
+                        if (item.SchoolName) {
+                            if (item.SchoolName.length > 8) {
+                                Html += '<td title="' + item.SchoolName + '">' + item.SchoolName.slice(0, 8) + '...</td>';
+                            } else {
+                                Html += '<td>' + item.SchoolName + '</td>';
+                            }
+                        } else {
+                            Html += '<td></td>';
+                        }
+                        if (item.GradeName) {
+                            if (item.GradeName.length > 8) {
+                                Html += '<td title="' + item.GradeName + '">' + item.GradeName.slice(0, 8) + '...</td>';
+                            } else {
+                                Html += '<td>' + item.GradeName + '</td>';
+                            }
+                        } else {
+                            Html += '<td></td>';
+                        }
+                        if (item.ClassName) {
+                            if (item.ClassName.length > 8) {
+                                Html += '<td title="' + item.ClassName + '">' + item.ClassName.slice(0, 8) + '...</td>';
+                            } else {
+                                Html += '<td>' + item.ClassName + '</td>';
+                            }
+                        } else {
+                            Html += '<td></td>';
+                        }
+                        Html += '<td>' + data.Data.TestType + '</td>';
+                        if (data.Data.QuestionTitle.length > 8) {
+                            Html += '<td title="' + data.Data.QuestionTitle + '">' + data.Data.QuestionTitle.slice(0, 8) + '...</td>';
+                        } else {
+                            Html += '<td>' + data.Data.QuestionTitle + '</td>';
+                        }
+                        Html += '<td>' + data.Data.TeacherNames + '</td>';
+                        if (item.AnswerStatus == 1) {
+                            Html += '<td>正确</td></tr>';
+                        } else {
+                            Html += '<td>错误</td></tr>';
+                        }
+                    };
+                    $(".active_lists_pop").empty().append(Html);
+                    $("#tips_pop").empty();
+                    $("#pageToolbar_pop").empty();
+                    $('#pageToolbar_pop').Paging({
+                        current: PageNumber, pagesize: PageSize, count: data.TotalCount, toolbar: true, callback: function (page, size, count) {
+                            getQueryTestDetial(schoolid, gradeid, classid, courseid, textId, size, page);
+                        }
+                    });
+
+                } else { //如果一条数据都没有
+                    $("#pageToolbar_pop").empty();
+                    $(".active_lists_pop").empty();
+                    $("#tips_pop").empty().append("暂无数据").css("text-align", "center");
+                };
+            })
+        }
+
+        //签到统计
+        function getStatiSticsSignList(SchoolID, GradeID, ClassID, MinLoginDate, MaxLoginDate) {
+            var newParams1;
+            var statiSticsSignOpts = {
+                url: AjaxUrls.Statistics.StatiSticsSign,
+                method: 'get',
+                search: false,
+                showRefresh: false,
+                showColumns: false,
+                queryParams: function (params) {
+                    newParams1 = {
+                        limit: params.limit, //页面大小
+                        offset: params.offset / params.limit + 1, //页码
+                        SchoolID: SchoolID,
+                        PageSize: params.limit,
+                        PageNumber: params.offset / params.limit + 1,
+                        GradeID: GradeID,
+                        ClassID: ClassID,
+                        StartTime: MinLoginDate,
+                        StopTime: MaxLoginDate
+                    }
+                    nowPageNumber = params.offset / params.limit + 1;
+                    nowPageSizeNumber = params.limit;
+                    return newParams1;
+                },
+                rowStyle: function (row, index) {
+                    return {};
+                },
+                responseHandler: function (res) {
+                    if (res.Value) {
+                        return {
+                            "total": res.Value.TotalCount,//总页数
+                            "rows": res.Value.Data   //数据
+                        };
+                    } else {
+                        return {
+                            "total": 0,//总页数
+                            "rows": {}   //数据
+                        };
+                    };
+                },
+                columns: [
+                    {
+                        field: 'Title',
+                        title: '课程标题',
+                        width: 60,
+                        formatter: function (r, rows, index) {
+                            return "<p class='ellipsis' >" + r + "</p>"
+                        }
+                    },
+                    {
+                        field: 'SignTime',
+                        title: '日期',
+                        width: 100,
+                        formatter: function (r) {
+                            return "<p class='ellipsis' style='width:120px;'>" + r + "</p>"
+                        }
+                    },
+                     {
+                         field: 'Teachers',
+                         title: '主讲（助教）',
+                         width: 100,
+                         formatter: function (r) {
+                             return "<p class='ellipsis' style='width:130px;'>" + r + "</p>"
+                         }
+                     },
+                     {
+                         field: 'GradeNames',
+                         title: '年级',
+                         width: 100,
+                         formatter: function (r) {
+                             return "<p class='ellipsis' style='width:150px;'>" + (r || '') + "</p>"
+                         }
+                     },
+                     {
+                         field: 'TotalStudents',
+                         title: '应到人数',
+                         width: 100,
+                         formatter: function (r) {
+                             return "<p class='ellipsis' style='width:130px;'>" + r + "</p>"
+                         }
+                     }
+                     ,
+                     {
+                         field: 'SignStudent',
+                         title: '在线人数',
+                         width: 100,
+                         formatter: function (r) {
+                             return "<p class='ellipsis' style='width:150px;'>" + r.length + "</p>"
+                         }
+                     },
+                     {
+                         field: 'Percent',
+                         title: '签到率',
+                         width: 100,
+                         formatter: function (r) {
+                             return "<p class='ellipsis' style='width:50px;'>" + r + "%</p>"
+                         }
+                     },
+                     {
+                         field: 'SignStudent',
+                         title: '学生名单',
+                         width: 100,
+                         formatter: function (r,rows) {
+                             return "<p class='ellipsis sign_detail' style='width:50px;cursor:pointer;' signid='" + rows.SignID + "' SchoolID='" + SchoolID + "' GradeID='" + GradeID + "' ClassID='" + ClassID + "'>详情</p>"
+                         }
+                     }
+                ]
+            };
+            //签到统计
+            powerCreator.datatable(
+                "studentSign",
+                 $.extend({}, statiSticsSignOpts)
+                )
+        }
+
+        //提问统计
+        function getaskAndQuestionList(SchoolID, GradeID, ClassID, MinLoginDate, MaxLoginDate) {
+            var askAndQuestionOpts = {
+                url: AjaxUrls.Statistics.StatisticsAskInfos,
+                method: 'get',
+                search: false,
+                showRefresh: false,
+                showColumns: false,
+                queryParams: function (params) {
+                    newParams1 = {
+                        limit: params.limit, //页面大小
+                        offset: params.offset / params.limit + 1, //页码
+                        SchoolID: SchoolID,
+                        PageSize: params.limit,
+                        PageNumber: params.offset / params.limit + 1,
+                        GradeID: GradeID,
+                        ClassID: ClassID,
+                        MinAskDate: MinLoginDate,
+                        MaxAskDate: MaxLoginDate
+                    }
+                    nowPageNumber = params.offset / params.limit + 1;
+                    nowPageSizeNumber = params.limit;
+                    return newParams1;
+                },
+                rowStyle: function (row, index) {
+                    return {};
+                },
+                responseHandler: function (res) {
+                    if (res.Value) {
+                        return {
+                            "total": res.Value.TotalCount,//总页数
+                            "rows": res.Value.Data   //数据
+                        };
+                    } else {
+                        return {
+                            "total": 0,//总页数
+                            "rows": {}   //数据
+                        };
+                    };
+                },
+                columns: [
+                     {
+                         field: 'QuestionContent',
+                         title: '提问内容',
+                         width: 260,
+                         formatter: function (r, row, index) {
+                             return "<p class='ellipsis' style='display:inline-block;width:230px;'>" + r + "</div>"
+                         }
+                     },
+                     {
+                         field: 'CreateTime',
+                         title: '提交时间',
+                         width: 100,
+                         formatter: function (r) {
+                             return "<p class='ellipsis' style='width:135px;'>" + r + "</p>"
+                         }
+                     },
+                    {
+                        field: 'Name',
+                        title: '提问人',
+                        width: 100,
+                        formatter: function (r) {
+                            return "<p class='ellipsis' style='width:100px;'>" + (r || "") + "</p>"
+                        }
+                    },
+                     {
+                         field: 'ReplyInfos',
+                         title: '回复内容',
+                         width: 200,
+                         formatter: function (r) {
+                             var ReplyInfos = '';
+                             $.each(r, function (index, obj) {
+                                 ReplyInfos += (index == r.length - 1) ? obj.Content : obj.Content + ',';
+                             })
+                             return "<p class='ellipsis' style='width:300px;'>" + ReplyInfos + "</p>"
+                         }
+                     }
+                     ,
+                     {
+                         field: 'ReplyInfos',
+                         title: '详情',
+                         width: 200,
+                         formatter: function (r, rows) {
+                             return "<span class='ellipsis see_detial' style='width:70px;' liveid='" + rows.LiveID + "' askid='" + rows.AskID + "' >详情</span>"
+                         }
+                     }
+                ]
+            };
+            //提问统计
+            powerCreator.datatable(
+                "ask_question_statistics",
+                 $.extend({}, askAndQuestionOpts)
+                )
+
+        }
+
+        //测验统计
+        function getTestList(SchoolID, GradeID, ClassID, StartTime, DateTime, CourseID) {
+            var testsOption = {
+                url: AjaxUrls.TestUrl.StudentTestStatics,
+                method: 'get',
+                search: false,
+                showRefresh: false,
+                showColumns: false,
+                queryParams: function (params) {
+                    newParams1 = {
+                        limit: params.limit, //页面大小
+                        offset: params.offset / params.limit + 1, //页码
+                        SchoolID: SchoolID,
+                        PageSize: params.limit,
+                        PageNumber: params.offset / params.limit + 1,
+                        GradeID: GradeID,
+                        ClassID: ClassID,
+                        CourseID: CourseID,
+                        StartTime: StartTime,
+                        DateTime: DateTime
+                    }
+                    nowPageNumber = params.offset / params.limit + 1;
+                    nowPageSizeNumber = params.limit;
+                    return newParams1;
+                },
+                rowStyle: function (row, index) {
+                    return {};
+                },
+                responseHandler: function (res) {
+                    if (res.Value) {
+                        return {
+                            "total": res.Value.TotalCount,//总页数
+                            "rows": res.Value.Data   //数据
+                        };
+                    } else {
+                        return {
+                            "total": 0,//总页数
+                            "rows": {}   //数据
+                        };
+                    };
+                },
+                columns: [
+                      {
+                          field: 'Title',
+                          title: '课程标题',
+                          width: 130,
+                          formatter: function (r, row, index) {
+                              return "<p class='ellipsis' style='width:142px;'>" + r + "</div>"
+                          }
+                      },
+                       {
+                           field: 'TestTime',
+                           title: '日期',
+                           width: 110,
+                           formatter: function (r) {
+                               return "<p class='ellipsis' style='width:125px;'>" + (r || "") + "</p>"
+                           }
+                       },
+                          {
+                              field: 'TeacherNames',
+                              title: '主讲（助教）',
+                              width: 110,
+                              formatter: function (r, row, index) {
+                                  return "<p class='ellipsis' style='width:110px;'>" + (r || "") + "</div>"
+                              }
+                          },
+                            {
+                                field: 'GradeNames',
+                                title: '年级',
+                                width: 110,
+                                formatter: function (r, row, index) {
+                                    return "<p class='ellipsis' style='width:110px;'>" + (r || "") + "</div>"
+                                }
+                            },
+                        {
+                            field: 'TestType',
+                            title: '测验类型',
+                            width: 70,
+                            formatter: function (r) {
+                                return "<p class='ellipsis' style='width:64px;'>" + r + "</p>"
+                            }
+                        },
+                     {
+                         field: 'QuestionTitle',
+                         title: '测验问题',
+                         width: 150,
+                         formatter: function (r, row, index) {
+                             return "<p class='ellipsis' style='width:140px;'>" + r + "</div>"
+                         }
+                     },
+                     {
+                         field: 'AnswerRight',
+                         title: '答对学生',
+                         width: 100,
+                         formatter: function (r) {
+                             var studentName = '';
+                             $.each(r, function (index, obj) {
+                                 studentName += (index == r.length - 1) ? obj.Name : obj.Name + ',';
+                             })
+                             return "<p class='ellipsis' style='width:90px;'>" + studentName + "</p>";
+                         }
+                     },
+                     {
+                         field: 'AnswerError',
+                         title: '答错学生',
+                         width: 100,
+                         formatter: function (r) {
+                             var studentName = '';
+                             $.each(r, function (index, obj) {
+                                 studentName += (index == r.length - 1) ? obj.Name : obj.Name + ',';
+                             })
+                             return "<p class='ellipsis' style='width:90px;'>" + studentName + "</p>"
+                         }
+                     },
+
+                     {
+                         field: 'QuestionAnswer',
+                         title: '答案',
+                         width: 100,
+                         formatter: function (r) {
+                             return "<p class='ellipsis'  style='display:inline-block;width:90px;'>" + r.join(",") + "</p>"
+                         }
+                     },
+
+                     {
+                         field: 'Percent',
+                         title: '正确率',
+                         width: 55,
+                         formatter: function (r) {
+                             return "<p class='ellipsis' style='width:55px;'>" + r + "%</p>"
+                         }
+                     },
+                     {
+                         field: 'name8',
+                         title: '详情',
+                         width: 40,
+                         formatter: function (r, rows) {
+                             return "<p class='ellipsis textDetial' style='width:60px;' schoolid='" + SchoolID + "' GradeID='" + GradeID + "' CourseID='"+CourseID+"' ClassID='" + ClassID + "'textId='" + rows.TestID + "'>详情</p>"
+                         }
+                     }
+                ]
+            };
+            //测验统计
+            powerCreator.datatable(
+                "tests_statistics",
+                 $.extend({}, testsOption)
+                )
+        }
+
+        //学习记录
+        function getOnlineList(SchoolID, GradeID, ClassID, StartTime, DateTime, CourseID) {
+            var onlineOption = {
+                url: AjaxUrls.Statistics.StudyRecord,
+                method: 'get',
+                search: false,
+                showRefresh: false,
+                showColumns: false,
+                queryParams: function (params) {
+                    newParams1 = {
+                        limit: params.limit, //页面大小
+                        offset: params.offset / params.limit + 1, //页码
+                        SchoolID: SchoolID,
+                        GradeID: GradeID,
+                        ClassID:ClassID,
+                        PageSize: params.limit,
+                        PageNumber: params.offset / params.limit + 1,
+                        StartDate: StartTime,
+                        StopDate: DateTime,
+                        CourseID:CourseID
+                    }
+                    nowPageNumber = params.offset / params.limit + 1;
+                    nowPageSizeNumber = params.limit;
+                    return newParams1;
+                },
+                rowStyle: function (row, index) {
+                    return {};
+                },
+                responseHandler: function (res) {
+                    if (res.Value) {
+                        return {
+                            "total": res.Value.TotalCount,//总页数
+                            "rows": res.Value.Data   //数据
+                        };
+                    } else {
+                        return {
+                            "total": 0,//总页数
+                            "rows": {}   //数据
+                        };
+                    };
+                },
+                columns: [
+                     {
+                         field: 'Title',
+                         title: '标题',
+                         width: '10%',
+                         formatter: function (r, row, index) {
+                             return "<p class='ellipsis' style='display:inline-block;width:130px;'>" + r + "</p>"
+                         }
+                     },
+                     {
+                         field: 'SchoolName',
+                         title: '学校',
+                         width: '10%',
+                         formatter: function (r, row, index) {
+                             return "<p class='ellipsis' style='display:inline-block;width:130px;'>" + r + "</p>"
+                         }
+                     },
+                     {
+                         field: 'GradeName',
+                         title: '年级',
+                         width: '10%',
+                         formatter: function (r, row, index) {
+                             return "<p class='ellipsis' style='display:inline-block;width:130px;'>" + (r || "年级未设置") + "</p>"
+                         }
+                     },
+                     {
+                         field: 'ClassName',
+                         title: '班级',
+                         width: '10%',
+                         formatter: function (r, row, index) {
+                             return "<p class='ellipsis' style='display:inline-block;width:130px;'>" + (r || "班级未设置") + "</p>"
+                         }
+                     },
+                     {
+                         field: 'Ip',
+                         title: 'IP',
+                         width: '10%',
+                         formatter: function (r) {
+                             return "<p class='ellipsis'>" + (r || "ip地址未设置") + "</p>"
+                         }
+                     },
+                     {
+                         field: 'Name',
+                         title: '姓名',
+                         width: '10%',
+                         formatter: function (r) {
+                             return "<p class='ellipsis'>" + r + "</p>"
+                         }
+                     },
+                     {
+                         field: 'EnterTime',
+                         title: '加入时间',
+                         width: '10%',
+                         formatter: function (r) {
+                             return "<p class='ellipsis'>" + r + "</p>"
+                         }
+                     },
+                     {
+                         field: 'OutTime',
+                         title: '离开时间',
+                         width: '10%',
+                         formatter: function (r) {
+                             return "<p class='ellipsis'>" + r + "</p>"
+                         }
+                     },
+                    {
+                        field: 'DeviceWay',
+                        title: '终端方式',
+                        width: '10%',
+                        formatter: function (r, rows) {
+                            return "<p class='ellipsis'>" + (r || "未知终端") + "</p>"
+                        }
+                    },
+                    {
+                        field: 'OnlineTime',
+                        title: '在线时长',
+                        width: '10%',
+                        formatter: function (r) {
+                            return "<p class='ellipsis'>" + r + "</p>"
+                        }
+                    },
+                ]
+            };
+            //学习记录
+            powerCreator.datatable(
+                "online_statistics",
+                 $.extend({}, onlineOption)
+                )
+        }
+    </script>
+    <script src="http://miyun.smartclass.cn/Js/plug-in/viewer-picture/viewer-jquery.min.js"></script>
+
+        <script>
+            $(function () {
+                if (strCookie && (strCookie != 0) && (userInfo[0].UserType == 1)) {
+                    //secondNav();//二级菜单赋值
+                    $(".webNavWrap .Statistics").show();
+                    $(".first_nav_img").show();
+                    $(".fheader  .personal_space").show();
+                    $(".enter_backstage").show();
+                } else if (strCookie && (strCookie != 0) && (userInfo[0].UserType == 0)) {
+                    $(".webNavWrap .Statistics").show();
+                    $(".enter_backstage").show();
+                } else {
+                    $(".webNavWrap .Statistics").hide();
+                    $(".fheader  .personal_space").hide();
+                    $(".enter_backstage").hide();
+                };
+            })
+        </script>
+    </div>
+    <div class="publicFooter">
+        <div class="publicContainer">
+            <ul class="publicFootInfo clearfix">
+                <li>
+                    <img src="http://miyun.smartclass.cn/Images/miyun/miyun_logo.png" class="footImg" /><span class="copyright">©2015-2020 All Rights Reserved 密云教委·版权所有</span></li>
+                <li>地址：北京市密云区新南路103号 密云区教育委员会 　邮编：101500</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            var i = 0;
+            setInterval(function () {
+                i++;
+                if (i % 4 == 1) {
+                    $('.blackboard').css({
+                        "transform": "rotate(10deg)",
+                        "transition": "2s ease-in-out"
+                    });
+                } else if (i % 4 == 3) {
+                    $('.blackboard').css({
+                        "transform": "rotate(-10deg)",
+                        "transition": "2s ease-in-out"
+                    });
+                }
+            }, 1000);
+            $(".onlinePhone b").click(function () {
+                $(".closeOnlinePhone").show();
+                $(".blackboard").show();
+            });
+            $(".closeOnlinePhone").click(function () {
+                $(this).hide();
+                $(".blackboard").hide();
+            });
+        });
+    </script>
+</body>
+</html>

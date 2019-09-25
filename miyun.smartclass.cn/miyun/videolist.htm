@@ -1,0 +1,994 @@
+
+
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><link rel="icon" href="../favicon.ico" type="image/x-icon" /><link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" /><link id="gray_css" rel="stylesheet" /><link href="../Css/font-awesome.min.css" rel="stylesheet" />
+    <!--[if IE]>
+         <link id="gray_css_IE" rel="stylesheet" />
+        <![endif]-->
+    <title>
+
+</title>
+<link rel="stylesheet" href="../Js/plug-in/share_to_society/share.min.css" /><link rel="stylesheet" type="text/css" href="../Css/z-treeCss/metroStyle/metroStyle.css" /><link rel="stylesheet" type="text/css" href="../Css/basePc.css" /><link rel="stylesheet" type="text/css" href="../Css/common.css" /><link rel="stylesheet" type="text/css" href="../Css/all.css" /><link rel="stylesheet" type="text/css" href="../Css/other.css" /><link rel="stylesheet" type="text/css" href="../Css/miyun.css" /><link rel="stylesheet" type="text/css" href="../Js/plug-in/jquery-easyui-1.5.1/theme/material/easyui.css" /><link rel="stylesheet" type="text/css" href="../Js/plug-in/jquery-easyui-1.5.1/theme/icon.css" /><link rel="stylesheet" type="text/css" href="../Js/plug-in/select2/select2.min.css" /><link rel="stylesheet" type="text/css" href="../Css/font-awesome.min.css" />
+    <script type="text/javascript" src="../Js/xphter.js"></script>
+    <script type="text/javascript" src="../Js/jquery-1.11.2.js"></script>
+    <script type="text/javascript" src="../Js/plug-in/jquery.tmpl.min.js"></script>
+    <script type="text/javascript" src="../Js/AjaxUrl.js"></script>
+    <script type="text/javascript" src="../js/plug-in/paging-master/src/query.js"></script>
+    <script type="text/javascript" src="../js/plug-in/paging-master/src/paging.js"></script>
+    <script type="text/javascript" src="../js/plug-in/layer/layer.js"></script>
+    <script type="text/javascript" src="../Js/plug-in/select2/select2.full.js"></script>
+
+    <script type="text/javascript" src="../Js/mainFunction.js"></script>
+    <script type="text/javascript" src="../Js/popOrganSelect.js"></script>
+    <script type="text/javascript" src="../Js/plug-in/jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../Js/plug-in/jquery-easyui-1.5.1/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../Js/My97DatePicker/WdatePicker.js"></script>
+    
+    <script type="text/javascript" src="../Js/allCommon.js"></script>
+    <script src="../Js/plug-in/share_to_society/jquery.share.min.js"></script>
+    <style>
+        .panel-body {
+            padding: 0 !important;
+        }
+
+        .combo-panel {
+            overflow: hidden;
+        }
+
+        .publicHeader .fheader .personal_info ul {
+            width: 500px;
+        }
+
+        .publicFootInfo li {
+            float: none;
+            text-align: center;
+            color: #fff;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .copyright {
+            display: inline-block;
+            vertical-align: top;
+            color: #fff;
+            margin-left: 5px;
+        }
+
+        .footImg {
+            width: 30px;
+            height: 30px;
+        }
+        .publicHeader .fheader .personal_info .login_area{
+            display:inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div style="height: 86px;">
+        <div class="publicHeader">
+            <div class="fheader ">
+                <div class="content_wrap clearfix">
+                    <div class="company_logo fl">
+                        <a href="index.htm"><img src="../images/miyun/miyunlogo.png" /></a>
+                    </div>
+                    <div class="middle_nav fl">
+                        <ul class="clearfix webNavWrap">
+                            <li class="defaultPage"><a href="index.htm" class="first_nav webNav webNav_1 ">首页</a></li>
+                            <li class="livePage"><a href="livelist.htm" class="first_nav webNav webNav_2">直播课堂</a></li>
+                            <li class="videoPage"><a href="videolist.htm" class="first_nav webNav webNav_3">课程回放</a></li>
+                            <li class="Statistics hidee"><a href="Statistics.htm" class="first_nav webNav webNav_4">数据统计</a></li>
+                            <li class="personal_space hidee"><a href="videolist.htm#" class="first_nav webNav webNav_4" id="self_space_wrap">个人空间
+                            <span class="choose_nav"></span>
+                                <img src="../images/broadcastlive_14.png" class="first_nav_img" /></a>
+                                <div class="second_nav">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="personal_info fr">
+                        <ul class="clearfix">
+                            <li class="personal_img hidee">
+                                <a href="videolist.htm#">
+                                    <img id="user_images" src="videolist.htm" onerror="nofindPic('/images/broadcastlive_06.png',null,event)" /><span id="user_name"></span> </a>
+                                <div class="quit_area self_nav_wrap hidee">
+                                    <a class="editPsw_item">修改密码</a>
+                                    
+                                    <a class="quit_item">退出</a>
+                                </div>
+                            </li>
+                            <li class="login_area">
+                                <a href="videolist.htm#"><span>登录</span></a>
+                            </li>
+                            <li class="enter_backstage hidee"><a href="videolist.htm#"><span>进入后台</span></a></li>
+                            
+                            <li class="downloadLiveExe"><a href="http://miyun.smartclass.cn/software/liveclient.exe"><i class="fa fa-camera"></i>直播客户端下载</a></li>
+                            <li class="onlinePhone"><b>客服电话</b>
+                                <span class="closeOnlinePhone hidee"></span>
+                                <div class="blackboard hidee">
+                                    <img src="images/blackboard.png" />
+                                </div>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="selfSpaceHeaderShadow"></div>
+        </div>
+    </div>
+    <div class="middle_content_wrap">
+        <script type="text/javascript">
+            var userInfo = [{"UserID":0}];
+            var strCookie = userInfo[0].UserID;
+
+            $(function () {
+                middleContentHeight();//页面高度计算
+                $(window).resize(function () {//页面窗口变化重新高度计算
+                    middleContentHeight();
+                })
+
+                //固定导航
+                $(window).scroll(function () {
+                    var scrollTop = $(this).scrollTop();//滚动条的偏移量
+                    var scrollHeight = $(document).height();//页面的总高度
+                    var windowHeight = $(this).height();//浏览器可见区域的高度
+                    if (scrollTop > 0) {
+                        $(".publicHeader").css({
+                            "position": "fixed",
+                            "z-index": 99,
+                            "top": 0
+                        })
+                    } else if (scrollTop == 0) {
+                        $(".publicHeader").css({
+                            "position": "static",
+                            "z-index": 99
+                        })
+                    };
+                })
+                //置灰
+                //setGray();
+            })
+        </script>
+        <script type="text/javascript" src="../Js/masterPages.js"></script>
+        
+    <style>
+        .middle_content_wrap {
+            padding-top: 15px;
+        }
+
+        .vClassSectionInfo p span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .vClassSelectTopBtn {
+            float: right !important;
+            margin-right: 45px !important;
+        }
+    </style>
+    <div class="videoClassWrap">
+        <div class="videoClassTitle hidee">
+            <p class="videoClassTitleCxt">
+                <b></b>
+                <a id="all-video" href="videolist.htm#" class="vClassTitleItem vClassTitleItemActive">所有视频</a>
+                <b></b>
+                <a id="my-video" href="videolist.htm#" class="vClassTitleItem">与我相关</a>
+                <b></b>
+                <a id="open-video" href="videolist.htm#" class="vClassTitleItem">公开视频</a>
+                <b></b>
+            </p>
+        </div>
+        <div class="publicContainer">
+            <!--主体内容二：用户选择项-->
+            <div class="videoClassSelect">
+                <div class="videoClassSelectWrap">
+                    <ul class="videoClassSelectTop clearFloat">                       
+                        <li class="vClassSelectTopItem">
+                            <label for="videoTheme" class="Vmiddle"><span>标题：</span></label>
+                            <div class="inlineBlock">
+                                <input name="videoTheme" id="videoTheme" type="text" />
+                            </div>
+                        </li>
+                        <li class="vClassSelectTopItem hidee schoolListWrap">
+                            <label for="schoolList" class="Vmiddle"><span>学校：</span></label>
+                            <div class="inlineBlock  selectDiv">
+                                <div class="combogride_wrap">
+                                    <input id="schoolList" />
+                                </div>
+                                <input type="hidden" id="schoolListKey" />
+                            </div>
+                        </li>
+                        <li class="vClassSelectTopItem selectMenuWrap gradeListWrap hidee">
+                            <label for="gradeList" class="Vmiddle"><span>年级：</span></label>
+                            <div class="inlineBlock  selectDiv">
+                                <div class="combogride_wrap">
+                                    <input id="gradeList" editable="false"/>
+                                </div>
+                                <input type="hidden" id="gradeListKeyword" />
+                            </div>
+                        </li>
+                        <li class="vClassSelectTopItem selectMenuWrap ">
+                            <label for="selectSubject" class="Vmiddle"><span>学科：</span></label>
+                            <div class="inlineBlock selectSubjectWrap selectDiv">
+                                <div class="combogride_wrap">
+                                    <input id="selectSubject" />
+                                </div>
+                                <input type="hidden" id="selectSubjectword" />
+                            </div>
+                        </li>
+                        <li class="vClassSelectTopItem selectMenuWrap  courseListWrap">
+                            <label for="videoCourse" class="Vmiddle"><span>课程：</span></label>
+                            <div class="inlineBlock videoCourseWrap selectDiv">
+                                <div class="combogride_wrap">
+                                    <input id="videoCourse" />
+                                </div>
+                                <input type="hidden" id="courseKeyword" />
+                            </div>
+                        </li>
+                        <li class="vClassSelectTopItem teacherWrap ">
+                            <label for="listTeach" class="Vmiddle"><span>主讲：</span></label>
+                            <div class="inlineBlock listTeachWrap selectDiv">
+                                <div class="combogride_wrap">
+                                    <input id="listTeach" />
+                                </div>
+                                <input type="hidden" id="listTeachKey" />
+                            </div>
+                        </li>
+                        <!--开始日期和结束日期的插件-->
+                        <li class="inline calendarWrap videoPlanDate" style="position: relative; top: 1px;">
+                            <div class="inlineBlock dateDiv">
+                                <input id="startDT" class="Wdate" type="text" style="width: 120px;" onclick="WdatePicker({ el: this, dateFmt: 'yyyy-MM-dd', onpicked: startPicked, oncleared: startClear })" />
+                            </div>
+                            <span>-</span>
+                            <div class="inlineBlock dateDiv">
+                                <input id="endDT" class="Wdate" type="text" style="width: 120px;" onclick="WdatePicker({ el: this, dateFmt: 'yyyy-MM-dd', onpicked: endPicked, oncleared: endClear })" />
+                            </div>
+                        </li>
+                        <li class="vClassSelectTopBtn">
+                            <div class="inlineBlock" style="position: relative; top: 1px;">
+                                <input type="button" value="查询" id="query_btn" />
+                                <input type="button" value="重置" id="reset_btn" />
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="videoClassSelectBtm clearFloat">
+                        <li class="vClassSelectBtmOrder">排序：
+                        </li>
+                        <li class="vClassSelectBtmOrderCxt vClassSelectBtmItem">
+                            <a id="vClassSeeNum" class="vClassSeeNumTop" href="videolist.htm#">观看次数</a>
+                            <a id="vClassSeeTime" class="vClassSeeTimeBtm" href="videolist.htm#">开始时间</a>
+                        </li>
+                        <li class="vClassSelectBtmTime vClassSelectBtmItem">
+                            <a id="time-all" class="selectMonth vClassSelectBtmActive" href="videolist.htm#">全部</a>
+                            |
+                        <a id="time-today" href="videolist.htm#" class="selectMonth">今日</a>
+                            |
+                        <a id="time-oneMonth" href="videolist.htm#" class="selectMonth">本月内</a>
+                            |
+                        <a id="time-twoMonth" href="videolist.htm#" class="selectMonth">两月内</a>
+                        </li>
+                        
+                        <li class="vClassSelectBtmItem my-btmClick">
+                        <a id="live_like" href="videolist.htm#" class="mySelect">我的点赞</a>
+                            |
+                        <a id="live_save" href="videolist.htm#" class="mySelect">我的收藏</a>
+                        </li>
+                        <li class="vClassSelectBtmCategory vClassSelectBtmItem hidee">
+                            <a id="need-all" class="selectNeed vClassSelectBtmActive" href="videolist.htm#">全部</a>
+                            |
+                        <a id="need-must" href="videolist.htm#" class="selectNeed">必修</a>
+                            |
+                        <a id="need-select" href="videolist.htm#" class="selectNeed">选修</a>
+                            |
+                        <a id="need-good" href="videolist.htm#" class="selectNeed">精品</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--主体内容三：课程显示区域-->
+            <div class="videoClassBody">
+            </div>
+            <!--增加分页插件-->
+            <div id="pageToolbar" class="pageGap"></div>
+            <div id="tips"></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        //获取当前用户信息
+        var userData = userInfo[0];
+        var UserType = userData.UserType
+        var CurrentSchoolID = userData.SchoolID;
+        var weekName = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+        var $StartTime = "", $StopTime = "";//查询项中的开始时间 结束时间
+        var nowPageNumber = 1;
+        //var PhaseList = [];
+        //if (userInfo[0].SchoolID && typeof userInfo[0].SchoolID != 'undefined') {
+        //    Ajax.ajax({
+        //        url: AjaxUrls.SchoolUrl.QuerySchool,
+        //        data: { SchoolID: userInfo[0].SchoolID },
+        //        async: false
+        //    }).done(function (data) {
+        //        PhaseList = data.PhaseList;
+        //    })
+        //};
+
+        $(function () {
+            //录播课堂高亮显示
+            $(".webNavWrap .videoPage").addClass("choose_nav").siblings("li").removeClass("choose_nav");
+
+            //判断是否登录
+            if (strCookie != 0) {
+                MiyunSubjectSearchListSelect("selectSubject", "selectSubjectword", "");
+                if (UserType == 1 || UserType == 0) {//系统管理员和老师才能创建直播
+                    //学校初始化联动 ,年级初始化,班级初始化，课程初始化
+                    $(".schoolListWrap").show();
+                    $(".gradeListWrap").show();
+                    MiyunSchoolSearchListAndGradeSelect("schoolList", "schoolListKey", { 'SchoolID': userInfo[0].SchoolID, 'SchoolName': userInfo[0].SchoolName }, true, true);
+                    //selectSchoolGrade("gradeList", PhaseList);
+                } else {
+                    //CourseListSelect("videoCourse", "courseKeyword", "", userInfo[0].SchoolID);
+                    CourseListSelect("videoCourse", "courseKeyword", "", "");
+                    MiyunlistTeacherSearch("listTeach", "listTeachKey", "", userInfo[0].SchoolID);
+
+                    $(".schoolListWrap").remove();
+                    $(".gradeListWrap").remove();
+                };
+            } else {//没有登录隐藏导航栏切换和所有查询项
+                $(".videoClassTitle,.videoClassSelect").addClass("hidee");
+            };
+
+            //全部|本月|两月
+            //ActiveStyle(".vClassSelectBtmTime", ".selectMonth", "vClassSelectBtmActive");
+            //全部|必修|精品
+            ActiveStyle(".vClassSelectBtmCategory", ".selectNeed", "vClassSelectBtmActive");
+            //我的班课|我看过的|我的收藏
+            ActiveStyle(".my-btmClick", ".mySelect", "vClassSelectBtmActive");
+
+            //排序：观看人数 时间 箭头切换
+            $("#vClassSeeNum").attr('onclick', 'arrowChange("vClassSeeNum","vClassSeeNumBtm","vClassSeeNumTop")');
+            $("#vClassSeeTime").attr('onclick', 'arrowChange("vClassSeeTime","vClassSeeTimeBtm","vClassSeeTimeTop")');
+
+            //打开页面 显示所有录播  默认开始时间 倒序显示
+            showVideoList("", "", "", "StartTime", "1", "10", "1", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, false, null);
+
+            //查询按钮点击
+            $("#query_btn").click(function () {
+                //获取当前页面标题
+                var pageId = activePage();
+
+                //全部|今日|本月|两月 
+                var videoTid = videoIsTime();
+
+                //开始时间 结束时间
+                startEndTime(videoTid);
+
+                //与我相关（收藏、浏览）
+                var about = liveMyCategory();//我的班课的 我看过的 我的收藏
+
+                //观看时间的正序倒序
+                var seeT = $("#vClassSeeTime").attr("class");
+                var $order = (seeT == "vClassSeeTimeTop") ? 0 : 1;
+
+                //主讲
+                var teachVal = parseInt($("#listTeach").combogrid("getValues")[0]);
+                if ((teachVal + '') == "NaN" && $.trim($("#listTeach").combogrid("getValue")).length != 0) {
+                    Dialogue.Msg("请选择列表中的主讲人");
+                    return;
+                };
+
+                //课程
+                var courseVal = parseInt($("#videoCourse").combogrid("getValues")[0]);
+                if ((courseVal + '') == "NaN" && $.trim($("#videoCourse").combogrid("getValue")).length != 0) {
+                    Dialogue.Msg("请选择列表中的课程");
+                    return;
+                };
+                //学校
+                var schoolVal;
+                if ($(".schoolListWrap").length>0) {
+                    schoolVal = parseInt($("#schoolList").combogrid("getValues")[0]);
+                    if ((schoolVal + '') == "NaN" && $.trim($("#schoolList").combogrid("getValue")).length != 0) {
+                        Dialogue.Msg("请选择列表中的学校");
+                        return;
+                    };
+                }
+
+                //年级
+                if ($(".gradeListWrap").length > 0) {
+                    var gradeVal = parseInt($("#gradeList").combogrid("getValues")[0]);
+                    if ((gradeVal + '') == "NaN" && $.trim($("#gradeList").combogrid("getValue")).length != 0) {
+                        Dialogue.Msg("请选择列表中的年级");
+                        return;
+                    };
+                };
+                //学科
+                var subjectVal = parseInt($("#selectSubject").combogrid("getValues")[0]);
+                if ((subjectVal + '') == "NaN" && $.trim($("#selectSubject").combogrid("getValue")).length != 0) {
+                    Dialogue.Msg("请选择列表中的学科");
+                    return;
+                };
+                refreshPage(pageId, "StartTime", $order, $StartTime, $StopTime, about);
+            });
+            $("#videoTheme").keyup(function (e) {
+                var vals = $(this).val();
+                if (e.keyCode == 13) {
+                    $("#query_btn").click();
+                };
+                if (vals.length == 0) {
+                    $("#query_btn").click();
+                }
+            })
+
+            //重置--将查询数据清空
+            $("#reset_btn").click(function () {
+                $StartTime = ""; $StopTime = "";
+                $dp.$('startDT').value = "";
+                $dp.$('endDT').value = "";
+                $("#time-all").addClass("vClassSelectBtmActive").siblings().removeClass("vClassSelectBtmActive");
+                //主题
+                $("#videoTheme").val("");
+                //主讲
+                $("#listTeach").combogrid("setValue", null);
+                //课程
+                $("#videoCourse").combogrid("setValue", null);
+                if ($("#my-video").hasClass("vClassTitleItemActive")) {
+                    $(".vClassSelectBtmTime").hide();
+                } else {
+                    $(".vClassSelectBtmTime").show();
+                };
+                //学校
+                if ($(".schoolListWrap").length > 0) {
+                    $("#schoolList").combogrid("setValue", null);
+                };
+                //年级
+                if ($(".gradeListWrap").length > 0) {
+                    $("#gradeList").combogrid("setValue", null);
+                };
+                //学科
+                $("#selectSubject").combogrid("setValue", null);
+                $("#query_btn").click();//刷新全校课表数据
+            });
+
+            //排序点击：全部|今日|本月|两月
+            $(".vClassSelectBtmTime a").each(function (index) {
+                $(this).click(function () {
+                    $("#all-video").addClass("vClassTitleItemActive").siblings("a").removeClass("vClassTitleItemActive");
+                    $(this).addClass("vClassSelectBtmActive").siblings("a").removeClass("vClassSelectBtmActive");
+                    $(".my-btmClick a").removeClass("vClassSelectBtmActive");
+
+                    $dp.$('startDT').value = "";
+                    $dp.$('endDT').value = "";
+                    //获取当前页面标题
+                    var pageId = activePage();
+
+                    //全部|今日|本月|两月 
+                    var videoTid = $(this).attr("id");
+
+                    //开始时间 结束时间
+                    startEndTime(videoTid);
+
+                    //观看时间的正序倒序
+                    var seeT = $("#vClassSeeTime").attr("class");
+                    var $order = (seeT == "vClassSeeTimeTop") ? 0 : 1;
+
+                    refreshPage(pageId, "StartTime", $order, $StartTime, $StopTime);
+                })
+            });
+
+            //排序点击：观看次数和开始时间的正序倒序  Order:0正序  1倒序
+            $(".vClassSelectBtmOrderCxt a").click(function () {
+                //获取当前页面标题
+                var pageId = activePage();
+
+                //全部|今日|本月|两月 
+                var videoTid = videoIsTime();
+
+                //开始时间 结束时间
+                startEndTime(videoTid);
+
+                var orderID = $(this).attr("id");
+                var orderClass = $(this).attr("class");
+                var $order = 1;
+                if (orderID == "vClassSeeNum") {//观看次数
+                    $order = (orderClass == "vClassSeeNumTop") ? 0 : $order;
+                    refreshPage(pageId, "ViewTimes", $order, $StartTime, $StopTime);
+                } else {//开始时间vClassSeeTime
+                    $order = (orderClass == "vClassSeeTimeTop") ? 0 : $order;
+                    refreshPage(pageId, "StartTime", $order, $StartTime, $StopTime);
+                };
+            });
+
+            //收藏、浏览
+            $(".my-btmClick a").click(function () {
+                $("#my-video").addClass("vClassTitleItemActive").siblings("a").removeClass("vClassTitleItemActive");
+                $(this).addClass("vClassSelectBtmActive").siblings("a").removeClass("vClassSelectBtmActive");
+                $(".vClassSelectBtmTime a").removeClass("vClassSelectBtmActive");
+
+                //获取当前页面标题
+                var pageId = activePage();
+
+                //全部|今日|本月|两月 
+                var videoTid = videoIsTime();
+
+                //开始时间 结束时间
+                startEndTime(videoTid);
+
+                var orderID = $(this).attr("id");
+
+                //观看时间的正序倒序
+                var seeT = $("#vClassSeeTime").attr("class");
+                var $order = (seeT == "vClassSeeTimeTop") ? 0 : 1;
+
+                refreshPage(pageId, "StartTime", $order, $StartTime, $StopTime, orderID);
+            });
+
+            //分享功能
+            $(".videoClassBody").delegate(".vClassSectionShareData", "click", function () {
+                var $VideoID = $(this).parents(".videoClassSection ").attr("videoid");
+                var $title = $(this).parents(".videoClassSection ").find("h4").text();
+                var urlTxt = window.location.protocol + "//" + window.location.host + "/MiYun/phoneVideoMiYun.aspx?VideoID=" + $VideoID;
+                shareTo({
+                    titles: $title,
+                    urls: urlTxt
+                });
+            });
+
+            //收藏和取消收藏功能     -- 必须是登录用户
+            $(".videoClassBody").delegate(".vClassSectionLikeData", "click", function () {
+                var self = $(this);
+                if (strCookie != 0) {//用户已经登录
+                    self.hasClass("vClassSectionActiveData") ? isNotCollection(self) : isCollection(self);
+                } else {//没有登录跳转到登陆页
+                    window.location.href = "/Login.aspx";
+                };
+            });
+
+            //点赞和取消点赞功能     -- 必须是登录用户
+            $(".videoClassBody").on("click", ".thumbup_wrap", function () {
+                var self = $(this);
+                if (strCookie != 0) {//用户已经登录
+                    self.hasClass("has_thumbup") ? isNotThumbUp(self) : isThumbUp(self);
+                } else {//没有登录跳转到登陆页
+                    window.location.href = "/Login.aspx";
+                };
+            });
+        });
+
+        //取消点赞
+        function isNotThumbUp(self) {
+            var VideoID = self.parents(".vClassSectionCenter").attr("VideoID");
+            var Num = self.find(".CollectedNum").html();
+            var newCount = parseInt(parseInt(Num) - 1);
+
+            Ajax.ajax({
+                url: AjaxUrls.OperateVideo.CancelLikeVideo,
+                data: { VideoID: VideoID },
+            }).done(function (data) {
+                Dialogue.Success("取消成功");
+                self.removeClass("has_thumbup").addClass("no_thumbup");
+                self.find(".CollectedNum").html(newCount);
+            }).fail(function (data) {
+                Dialogue.Error(data);
+            })
+        }
+        //点赞
+        function isThumbUp(self) {
+            var VideoID = self.parents(".vClassSectionCenter").attr("VideoID");
+            var Num = self.find(".CollectedNum").html();
+            var newCount = parseInt(parseInt(Num) + 1);
+
+            Ajax.ajax({
+                url: AjaxUrls.OperateVideo.LikeVideo,
+                data: { VideoID: VideoID },
+            }).done(function (data) {
+                Dialogue.Success("点赞成功");
+                self.removeClass("no_thumbup").addClass("has_thumbup");
+                self.find(".CollectedNum").html(newCount);
+            }).fail(function (data) {
+                Dialogue.Error(data);
+            })
+        }
+
+        //根据页面标题 查询项 排序点击项 刷新页面 
+        function refreshPage(pageId, $Sort, $Order, $startT, $endT, aboutMe) {
+            //主题
+            var themeVal = $("#videoTheme").val();
+            var courseVal = '';
+            //主讲
+            var teachVal = $("#listTeach").combogrid("getValues")[0];
+            //课程
+            if (!$(".courseListWrap").is(":hidden")) {
+                var courseVal = $("#videoCourse").combogrid("getValues")[0];
+            };
+            //院系专业组织机构
+            var organVal = '';
+            //节次
+            var NodeID = '';
+
+            //教室
+            var croomVal = '';
+            //学校
+            if ($(".schoolListWrap").length>0) {
+                var schoolVal = $("#schoolList").combogrid("getValues")[0];
+            };
+            //年级
+            if (!$(".gradeListWrap").is(":hidden") && $(".gradeListWrap").length > 0) {
+                var gradeVal = $("#gradeList").combogrid("getValues")[0];
+            };
+            //学科
+            var subjectVal = $("#selectSubject").combogrid("getValues")[0];
+            if (pageId == "all-video") {//所有课程（视频）
+                showVideoList(schoolVal, gradeVal, subjectVal, $Sort, $Order, "10", "1", themeVal, NodeID, teachVal, null, organVal, courseVal, croomVal, $startT, $endT, null, null, null, null, null, null, false, null);
+            } else if (pageId == "my-video") {//与我相关
+                var hasCollect = null, hasSee = null;
+                if (aboutMe == "live_see") {//浏览过
+                    hasSee = userData.ID;
+                    showVideoList(schoolVal, gradeVal, subjectVal, $Sort, $Order, "10", "1", themeVal, NodeID, null, null, organVal, courseVal, croomVal, $startT, $endT, null, hasSee, hasCollect, null, null, null, false, null);
+                } else if (aboutMe == "live_save") {//收藏
+                    hasCollect = userData.ID;
+                    showVideoList(schoolVal, gradeVal, subjectVal, $Sort, $Order, "10", "1", themeVal, NodeID, null, null, organVal, courseVal, croomVal, $startT, $endT, null, hasSee, hasCollect, null, null, null, false, null);
+                } else if (aboutMe == "live_have") {//班课
+                    //获取用户类型UserType
+                    var uType = userData.UserType;
+                    if (uType == 1) {//教师
+                        //主讲
+                        $("#listTeach").combogrid("setValue", { TeacherID: userData.ID, TeacherName: userData.Name });
+                        showVideoList(schoolVal, gradeVal, subjectVal, $Sort, $Order, "10", "1", themeVal, NodeID, userData.ID, null, organVal, courseVal, croomVal, $startT, $endT, null, hasSee, hasCollect, null, null, null, false, null);
+                    } else if (uType == 2) {//学生
+                        showVideoList(schoolVal, gradeVal, subjectVal, $Sort, $Order, "10", "1", themeVal, NodeID, teachVal, userData.ID, organVal, courseVal, croomVal, $startT, $endT, null, hasSee, hasCollect, null, null, null, false, null);
+                    };
+                } else if (aboutMe == "live_like") {//点赞
+                    showVideoList(schoolVal, gradeVal, subjectVal, $Sort, $Order, "10", "1", themeVal, NodeID, null, null, organVal, courseVal, croomVal, $startT, $endT, null, hasSee, null, null, null, null, false, null, userData.ID);
+                };
+            } else {//专题公开课
+                showVideoList(schoolVal, gradeVal, subjectVal, $Sort, $Order, "10", "1", themeVal, NodeID, teachVal, null, organVal, courseVal, croomVal, $startT, $endT, true, null, null, null, null, null, false, null);
+            }
+        }
+
+        function showVideoList(schoolVal, gradeVal, subjectVal, $Sort, $Order, PageSize, PageNum, txt, NodeID, $TeacherID, $StudentID, $OrganizationID, $CourseID, $ClassroomID, $StartTime, $StopTime, $IsPublic, $ViewerID, $CollectorID, $IsNeedLive, $IsProcessing, $IsProcessSuccess, $IsDeleted, $Source, LikerID) {
+            if (window.location.href.indexOf("#page=") != -1) { //记录当前页码
+                PageNum = window.location.href.split("#page=")[1];
+            } else {
+                PageNum = nowPageNumber;
+            };
+            if (window.sessionStorage.getItem("cloudSystemNowPageSize")) {//记录当前页大小
+                PageSize = window.sessionStorage.getItem("cloudSystemNowPageSize");
+            };
+
+            Ajax.ajax({
+                url: AjaxUrls.MiYun.VideoQuery,//SchoolID: schoolVal || CurrentSchoolID
+                data: { SchoolID: "", SubjectID: subjectVal, GradeID: gradeVal, PageSize: PageSize, PageNumber: PageNum, TitleKey: txt, NodeID: NodeID, TeacherID: $TeacherID, StudentID: $StudentID, OrganizationID: $OrganizationID, CourseID: $CourseID, ClassroomID: $ClassroomID, StartDate: $StartTime, StopDate: $StopTime, IsPublish: true, IsPublic: $IsPublic, ViewerID: $ViewerID, CollectorID: $CollectorID, LikerID: LikerID, IsNeedLive: $IsNeedLive, IsProcessing: $IsProcessing, IsProcessSuccess: $IsProcessSuccess, IsDeleted: false, Source: $Source, Sort: $Sort, Order: $Order },
+            }).done(function (data) {
+                if (data.Data.length == 0 && data.TotalCount > 0) {
+                    PageNum = Math.ceil(data.TotalCount / PageSize);
+                    nowPageNumber = PageNum;
+                    Query.setHash({
+                        page: PageNum
+                    });
+                    showVideoList(schoolVal, gradeVal, subjectVal, $Sort, $Order, PageSize, PageNum, txt, NodeID, $TeacherID, $StudentID, $OrganizationID, $CourseID, $ClassroomID, $StartTime, $StopTime, $IsPublic, $ViewerID, $CollectorID, $IsNeedLive, $IsProcessing, $IsProcessSuccess, $IsDeleted, $Source);
+                    return;
+                };
+
+                if (data.TotalCount > 0) {//如果存在数据
+                    $("#tips").empty();
+                    var html = "";
+                    for (var m = 0; m < data.Data.length; m++) {
+                        var item = data.Data[m];
+                        //开始时间的 日期 星期   StartTime: "2017-08-04 02:08:45"
+                        var Datestart = item.StartTime.split(" ");//["2017-08-04", "00:00:00"]
+                        var startDay = Datestart[0].split("-");
+                        //开始时间的 日期
+                        var start_date = startDay[1] + "." + startDay[2];
+                        //开始的星期
+                        var newStart = new Date(startDay[0], startDay[1] - 1, startDay[2]);
+                        var start_week = weekName[newStart.getDay()];
+
+                        //课程图片的地址
+                        var PicCourse = item.PicUrl || item.CoursePicPath || "/images/videoClassImg/videoCourse_02.png";
+
+                        var IsCollectedClass = "";
+                        IsCollectedClass = (item.IsCollected ? "vClassSectionActiveData" : "");
+
+                        var IsSubupClass = ""
+                        IsSubupClass = (item.IsLiked ? "has_thumbup" : "no_thumbup");
+
+                        //组织机构 院系
+                        //var liveOrganArr = item.OwnerOrganizations, liveOrganHtml = "";
+                        //if (liveOrganArr.length > 0) {
+                        //    for (var i = 0; i < liveOrganArr.length; i++) {
+                        //        liveOrganHtml += liveOrganArr[i].OrganizationName + " ";
+                        //    };
+                        //} else {
+                        //    liveOrganHtml = "暂无院系";
+                        //};
+                        //班级
+                        var liveClassArr = item.OwnerClasses, liveClassHtml = "";
+                        if (liveClassArr.length > 0) {
+                            for (var i = 0; i < liveClassArr.length; i++) {
+                                liveClassHtml += liveClassArr[i].ClassName + " ";
+                            };
+                        };
+
+                        //视频关联了课程并且有查看该课程的权限，则显示“进入课程主页”链接，否则显示“进入点播页面”；
+                        var enterHtml = "", enterUrl = "", teacherIDArr = [];
+                        $(item.TeacherList).each(function (n, obj) {
+                            if (obj.TeacherID) {
+                                teacherIDArr.push(obj.TeacherID);
+                            };
+                        })
+                        //判断是否属于课程
+                        if (item.CanViewCourse) {//属于某课程且有权限观看某课程
+                            enterHtml = "进入课程主页";
+                            enterUrl = "/UserSpace/Course.aspx?CourseID=" + item.CourseID + (teacherIDArr.length > 0 ? ("&SpeakerID=" + teacherIDArr.join("-")) : "");
+                        } else {
+                            enterHtml = "进入点播页面";
+                            enterUrl = "/MiYun/Video.aspx?VideoID=" + item.VideoID;
+                        };
+
+                        var maintTacher = "";
+                        if (item.TeacherList.length == 0) {
+                            maintTacher = "主讲未知";
+                        } else {
+                            $(item.TeacherList).each(function (n, obj) {
+                                n == item.TeacherList.length - 1 ? (maintTacher += obj.TeacherName) : (maintTacher += obj.TeacherName + ',');
+                            })
+                        };
+
+                        var nofindPic = "'/images/videoClassImg/videoCourse_01.png'";
+                        var imagePath = window.location.protocol + "//" + window.location.host + "/MiYun/phoneVideoMiYun.aspx?VideoID=" + item.VideoID;
+                        html += '<div class="videoClassSection clearFloat" CourseID="' + item.CourseID + '" VideoID="' + item.VideoID + '" ClassRoomID="' + item.ClassRoomID + '">' +
+                                '<div class="vClassSectionLeft" VideoID="' + item.VideoID + '">' +
+                                '<a class="imgClick" target="_blank" href="http://miyun.smartclass.cn/MiYun/Video.aspx?VideoID='%20+%20item.VideoID%20+%20'"><img src="http://miyun.smartclass.cn/miyun/'%20+%20PicCourse%20+%20'" onerror="nofindPic(' + nofindPic + ',null,event)" /></a>' +
+                                '<div class="vClassLeftOpacity">' +
+                                '<div class="vClassLeftOpacityBg">' +
+                                '<p class="vClassLeftOpacityBgTop"></p>' +
+                                '<p class="vClassLeftOpacityBgBtm"></p>' +
+                                '</div>' +
+                                '<div class="vClassLeftOpacityCxt">' +
+                                '<h4 class="vClassLeftOpacityCxtTop">' + start_date + '</h4>' +
+                                '<h4 class="vClassLeftOpacityCxtBtm">' + start_week + '</h4>' +
+                                '</div></div></div>' +
+                                '<div class="vClassSectionCenter" VideoID="' + item.VideoID + '">' +
+                                '<a class="h4Click" target="_blank"  href="http://miyun.smartclass.cn/MiYun/Video.aspx?VideoID='%20+%20item.VideoID%20+%20'"><h4>' + (item.Title || "暂无标题") + ' <b class="vClassSectionCenterHot"></b></h4></a>' +
+                                '<ul class="vClassSectionContent clearFloat">' +
+                                '<li class="vClassSectionPhoto"></li>' +
+                                '<li class="vClassSectionInfo">' +
+                                '<p class="vClassSectionUserInfo">' +
+                                '<span>' + maintTacher + '</span>' +
+                                '<span>' + (item.CourseName || "课程名称暂无") + '</span>' +
+                                '</p>' +
+                                '<p class="vClassSectionCollegeInfo">' +
+                                '<span  class="vClassSectionCollegeName"><span class="organizationIcon"></span>' + liveClassHtml + '</span>' +//院系 专业//班级
+                                '</p>' +
+                                '<p class="vClassSectionMemoInfo clearFloat">' +
+                                '<span class="vClassSectionMemoName">简介：</span>' +
+                                '<span class="vClassSectionMemoCxt">“' + (item.Summary || "暂无简介") + '”</span>' +
+                                '</p>' +
+                                '</li></ul>' +
+                                '<div class="vClassSectionData">' +
+                                '<a class="vClassSectionSeeData" href="javascript:void(0)">' + item.ViewTimes + ' 已观看</a>' +
+                                ' | ' +
+                                '<a class="vClassSectionLikeData ' + IsCollectedClass + '" href="javascript:void(0)">收藏（<span class="CollectedNum ">' + item.CollectorsCount + '</span>人）</a>' +
+                                ' | ' +
+                                '<a class="thumbup_wrap ' + IsSubupClass + '" href="javascript:void(0)">点赞（<span class="CollectedNum">' + item.LikersCount + '</span>人）</a>' +//点赞数
+                                ' | ' +
+                                '<a class="vClassSectionCommentData" href="javascript:void(0)">评论（' + item.CommentsCount + '）</a>' +
+                                //' | ' +
+                                //'<a class="vClassSectionShareData" href="javascript:void(0)">分享</a></b>' +
+                                '</div></div>' +
+                                '<div class="vClassSectionRight" VideoID="' + item.VideoID + '" CourseID="' + item.CourseID + '">' +
+                                '<a class="vClassEnterA"  target="_blank"  href='http://miyun.smartclass.cn/miyun/+%20enterUrl%20+'><div class="vClassSectionRightEnter">' + enterHtml + '</div></a>' +
+                                '<div class="courselist_ClassSectionQRcode" style="display:none;">' +
+                                       '<p>扫码观看</p>' +
+                                       '<a href="videolist.htm#"><img src="http://miyun.smartclass.cn/DeliveryClass/GetQrCode?CodeText='%20+%20imagePath%20+%20'" style="width:100px;height:100px;" /></a>' +
+                                       '</div>' +
+                                '</div>' +
+                                '</div>';
+
+                    };
+                    $(".videoClassBody").empty().append(html);
+
+                    //分页处理
+                    if (data.TotalCount > PageSize) {
+                        $("#pageToolbar").empty();
+                        $('#pageToolbar').Paging({
+                            current: PageNum, pagesize: PageSize, count: data.TotalCount, toolbar: true, callback: function (page, size, count) {
+                                showVideoList(schoolVal, gradeVal, subjectVal, $Sort, $Order, size, page, txt, NodeID, $TeacherID, $StudentID, $OrganizationID, $CourseID, $ClassroomID, $StartTime, $StopTime, $IsPublic, $ViewerID, $CollectorID, $IsNeedLive, $IsProcessing, $IsProcessSuccess, $IsDeleted, $Source);
+                            }
+                        });
+                    } else {
+                        $("#pageToolbar").empty();
+                    };
+                } else { //如果一条数据都没有
+                    $("#pageToolbar").empty();
+                    $(".videoClassBody").empty();
+                    $("#tips").empty().append("暂无数据").css("text-align", "center");
+                };
+            })
+        }
+
+        //取消收藏
+        function isNotCollection(self) {
+            var $VideoID = self.parents(".vClassSectionCenter").attr("VideoID");
+            var $CollectedNumStr = self.find(".CollectedNum").html();
+            var $CollectedNum = parseInt(parseInt($CollectedNumStr) - 1);
+
+            Ajax.ajax({
+                url: AjaxUrls.OperateVideo.CanelCollectVideo,
+                data: { VideoID: $VideoID },
+            }).done(function (data) {
+                Dialogue.Success("取消收藏成功");
+                self.removeClass("vClassSectionActiveData");
+                self.find(".CollectedNum").html($CollectedNum);
+            }).fail(function (data) {
+                Dialogue.Error(data);
+            })
+        }
+
+        //收藏
+        function isCollection(self) {
+            var $VideoID = self.parents(".vClassSectionCenter").attr("VideoID");
+            var $CollectedNumStr = self.find(".CollectedNum").html();
+            var $CollectedNum = parseInt(parseInt($CollectedNumStr) + 1);
+
+            Ajax.ajax({
+                url: AjaxUrls.OperateVideo.CollectVideo,
+                data: { VideoID: $VideoID },
+            }).done(function (data) {
+                Dialogue.Success("收藏成功");
+                self.addClass("vClassSectionActiveData");
+                self.find(".CollectedNum").html($CollectedNum);
+            }).fail(function (data) {
+                Dialogue.Error(data);
+            })
+        }
+
+
+        //获取当前选中的页面标题
+        function activePage() {
+            var pageId = "";
+            var $titles = $(".videoClassTitleCxt a");
+            $.each($titles, function (index, ele) {
+                if ($(ele).hasClass("vClassTitleItemActive")) {
+                    pageId = $(ele).attr("id");
+                }
+            });
+            return pageId;
+        }
+        //获取排序筛选 全部|今日|本月|两月 
+        function videoIsTime() {
+            var videoTid = "";
+            var $titles = $(".vClassSelectBtmTime a");
+            $.each($titles, function (index, ele) {
+                if ($(ele).hasClass("vClassSelectBtmActive")) {
+                    videoTid = $(ele).attr("id");
+                }
+            });
+            return videoTid;
+        }
+        //获取排序筛选 全部|必修|选修|精品 
+        function videoIsNeed() {
+            var videoNid = "";
+            var $titles = $(".vClassSelectBtmCategory a");
+            $.each($titles, function (index, ele) {
+                if ($(ele).hasClass("vClassSelectBtmActive")) {
+                    videoNid = $(ele).attr("id");
+                }
+            });
+            return videoNid;
+        }
+
+        //计算 查询的开始时间 和 结束时间  参数：全部|今日|本月|两月的选中id
+        function startEndTime(videoTimeid) {
+            if ($dp.$("startDT").value || $dp.$('endDT').value) {
+                return;
+            };
+
+            var isHidee = $(".vClassSelectBtmTime").hasClass("hidee");
+            var currentDT = getNowTimes();//2017-08-04 16:43:45
+            var currentD = currentDT.split(" ")[0];//2017-08-04
+            var currentY = currentD.split("-")[0];//2017
+            var currentM = currentD.split("-")[1];//08
+
+            if (videoTimeid == "time-all") {
+                $StartTime = "";
+                $StopTime = "";
+            } else if (videoTimeid == "time-today") {
+                $StartTime = currentD;
+                $StopTime = currentD;
+            } else if (videoTimeid == "time-oneMonth") {
+                $StartTime = currentY + "-" + currentM + "-01";
+                $StopTime = currentD;
+            } else {
+                $StopTime = currentD;
+                var twoMonth = new Date(Date.parse(new Date()) - 60 * 24 * 3600 * 1000);
+                $StartTime = twoMonth.getFullYear() + "-" + (twoMonth.getMonth() + 1) + "-" + twoMonth.getDate();
+            };
+            $dp.$("startDT").value = $StartTime
+            $dp.$('endDT').value = $StopTime;
+        }
+        function startPicked() {
+            var startCxt = $dp.$("startDT").value;
+            $StartTime = startCxt;
+        }
+        function endPicked() {
+            var startCxt = $dp.$("endDT").value;
+            $StopTime = startCxt;
+        }
+        function startClear() {
+            $dp.$('startDT').value = "";
+        }
+        function endClear() {
+            $dp.$('endDT').value = "";
+        }
+        //获取排序筛选 我的班课 我看过的 我的收藏
+        function liveMyCategory() {
+            var categoryId = "";
+            var $titles = $(".my-btmClick a");
+            $.each($titles, function (index, ele) {
+                if ($(ele).hasClass("vClassSelectBtmActive")) {
+                    categoryId = $(ele).attr("id");
+                }
+            });
+            return categoryId;
+        }
+    </script>
+
+        <script>
+            $(function () {
+                if (strCookie && (strCookie != 0) && (userInfo[0].UserType == 1)) {
+                    //secondNav();//二级菜单赋值
+                    $(".webNavWrap .Statistics").show();
+                    $(".first_nav_img").show();
+                    $(".fheader  .personal_space").show();
+                    $(".enter_backstage").show();
+                } else if (strCookie && (strCookie != 0) && (userInfo[0].UserType == 0)) {
+                    $(".webNavWrap .Statistics").show();
+                    $(".enter_backstage").show();
+                } else {
+                    $(".webNavWrap .Statistics").hide();
+                    $(".fheader  .personal_space").hide();
+                    $(".enter_backstage").hide();
+                };
+            })
+        </script>
+    </div>
+    <div class="publicFooter">
+        <div class="publicContainer">
+            <ul class="publicFootInfo clearfix">
+                <li>
+                    <img src="http://miyun.smartclass.cn/Images/miyun/miyun_logo.png" class="footImg" /><span class="copyright">©2015-2020 All Rights Reserved 密云教委·版权所有</span></li>
+                <li>地址：北京市密云区新南路103号 密云区教育委员会 　邮编：101500</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            var i = 0;
+            setInterval(function () {
+                i++;
+                if (i % 4 == 1) {
+                    $('.blackboard').css({
+                        "transform": "rotate(10deg)",
+                        "transition": "2s ease-in-out"
+                    });
+                } else if (i % 4 == 3) {
+                    $('.blackboard').css({
+                        "transform": "rotate(-10deg)",
+                        "transition": "2s ease-in-out"
+                    });
+                }
+            }, 1000);
+            $(".onlinePhone b").click(function () {
+                $(".closeOnlinePhone").show();
+                $(".blackboard").show();
+            });
+            $(".closeOnlinePhone").click(function () {
+                $(this).hide();
+                $(".blackboard").hide();
+            });
+        });
+    </script>
+</body>
+</html>
