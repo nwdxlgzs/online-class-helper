@@ -1,0 +1,17 @@
+       function getSign(data) {
+            if (data) {
+                //data = data.Value;
+                if ($.inArray(data.SignID, hasSignArr) == -1) {
+                    isHavingSign.hasSign = false;
+                };
+                if (data.SignID != 0 && !isHavingSign.hasSign) {
+                    if (!isHavingSign.popIsOpen) {
+                        isHavingSign.popWindow(data.SignID);
+                        isHavingSign.popIsOpen = true;
+                    };
+                } else {
+                    layer.close(layerPop);
+                    isHavingSign.popIsOpen = false;
+                };
+            }
+        }
